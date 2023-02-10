@@ -24,9 +24,17 @@
     "prepare": "husky install"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
+    "extends": ["react-app", "shared-config"],
+    "rules": {
+      "additional-rule": "warn"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.ts?(x)"],
+        "rules": {
+          "additional-typescript-only-rule": "warn"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -51,7 +59,7 @@
     "prettier": "2.8.4"
   },
   "lint-staged": {
-    ".{ts,tsx,css,sass}": ["eslint","prettier --write --ignore-unknown"]
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": ["eslint","prettier --write --ignore-unknown"]
   },
   "husky":{
     "hooks":{
