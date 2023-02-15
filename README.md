@@ -3,6 +3,7 @@
 This project is frontend of Gamera Forum.
 
 > node version 18
+> yarn version 2+
 
 ## How to run the project
 
