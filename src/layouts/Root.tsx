@@ -9,7 +9,7 @@ const PageWrapper = styled.div`
 `;
 
 const NavWrapper = styled.div`
-  width: 100px;
+  width: 15%;
   flex: none;
 `;
 
