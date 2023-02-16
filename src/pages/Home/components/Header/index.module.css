@@ -1,7 +1,9 @@
 .container {
-  padding: 0.5rem;
+  padding: 2rem 0 5rem;
   display: flex;
   justify-content: end;
 }
 .headerBtn {
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
+  border-radius: 0 !important;
 }

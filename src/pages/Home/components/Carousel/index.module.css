@@ -26,5 +26,11 @@
 .carouselContent {
 }
 .carouselText {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.carouselBtn {
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
+  border-radius: 0 !important;
 }

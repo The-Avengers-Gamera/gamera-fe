@@ -4,18 +4,23 @@ import React from 'react';
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
 
-const cards = ['card', 'card', 'card', 'card', 'card', 'card'];
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const MostLikes = () => (
   <GeneralContainer
     sx={{ padding: '0.5rem 3rem 3rem' }}
     header={<ContainerHeader title="MOST LIKED" />}
-    padding={3}
     laptop={4}
     mobile={6}
+    divider
   >
     {cards.map((card) => (
       // replace your card here
-      <Card key={uuid()}>CARD SLOT {card}</Card>
+      <Card
+        sx={{ height: 30 }}
+        key={uuid()}
+      >
+        CARD SLOT {card}
+      </Card>
     ))}
   </GeneralContainer>
 );

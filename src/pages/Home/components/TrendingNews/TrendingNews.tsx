@@ -1,12 +1,15 @@
 import { Box, Card, Typography } from '@mui/material';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import theme from '@/styles/theme';
 import GeneralContainer from '../GeneralContainer';
+
 import style from './index.module.css';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3, 4, 5, 6];
 const TrendingNews = () => (
   <GeneralContainer
+    divider={false}
     header={
       <Box
         sx={{ bgcolor: theme.color.bg_light }}
@@ -21,7 +24,12 @@ const TrendingNews = () => (
   >
     {cards.map((card) => (
       // replace your card here
-      <Card>CARD SLOT {card}</Card>
+      <Card
+        sx={{ height: 250 }}
+        key={uuid()}
+      >
+        CARD SLOT {card}
+      </Card>
     ))}
   </GeneralContainer>
 );

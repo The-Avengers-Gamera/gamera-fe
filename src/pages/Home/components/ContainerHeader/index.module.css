@@ -1,5 +1,5 @@
 .containerHeader {
-  padding: 2rem 1.5rem 0;
+  padding: 2rem 3rem 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -12,8 +12,7 @@
 .headerLeftSubtitle {
   padding-left: 1.5rem;
 }
-.headerLink {
-}
+
 .headerLink:hover {
   opacity: 0.6;
 }

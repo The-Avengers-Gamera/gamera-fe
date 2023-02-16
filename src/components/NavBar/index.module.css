@@ -1,6 +1,27 @@
 .navBar {
   height: 100%;
-  width: 100px;
-  position: fixed;
-  border-right: 1px dashed white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navBarTopGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+}
+.navBarBottomGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 30%;
+}
+
+.navItemContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
