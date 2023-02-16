@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import BackAndClose from './component/BackAndClose';
 import Header from './component/Header';
@@ -11,13 +11,26 @@ const RegisterModalContainer = styled.div`
   background-color: black;
 `;
 
-const RegisterModal = () => (
-  <RegisterModalContainer>
-    <BackAndClose />
-    <Header />
-    <RegisterForm />
-    <TermAndPrivacy />
-  </RegisterModalContainer>
-);
+const RegisterModal = () => {
+  const [visibility, setVisibility] = useState(true);
+
+  const changeVisibility = () => {
+    setVisibility(!visibility);
+  };
+
+  return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {visibility && (
+        <RegisterModalContainer>
+          <BackAndClose changeVisibility={changeVisibility} />
+          <Header />
+          <RegisterForm />
+          <TermAndPrivacy />
+        </RegisterModalContainer>
+      )}
+    </>
+  );
+};
 
 export default RegisterModal;

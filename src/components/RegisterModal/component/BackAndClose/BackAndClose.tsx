@@ -28,11 +28,19 @@ const CloseButton = styled.button`
   border: none;
 `;
 
-const BackAndClose = () => (
-  <BackAndCloseButtonContainer>
-    <BackButton>{'<'} Back</BackButton>
-    <CloseButton>X</CloseButton>
-  </BackAndCloseButtonContainer>
-);
+type Props = {
+  changeVisibility: () => void;
+};
+
+const BackAndClose: React.FC<Props> = (props: Props) => {
+  const { changeVisibility } = props;
+
+  return (
+    <BackAndCloseButtonContainer>
+      <BackButton>{'<'} Back</BackButton>
+      <CloseButton onClick={changeVisibility}>X</CloseButton>
+    </BackAndCloseButtonContainer>
+  );
+};
 
 export default BackAndClose;
