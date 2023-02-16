@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.containerContent {
+  overflow: hidden;
+  background: url(https://www.shutterstock.com/image-photo/pinkish-colourful-sunrise-over-sydney-260nw-1094901527.jpg)
+    center/cover;
+  background-repeat: no-repeat;
+  min-width: 1062px;
+  height: 595px;
+}

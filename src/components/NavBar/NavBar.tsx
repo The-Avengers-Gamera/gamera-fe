@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 const Aside = styled.aside`
   background-color: ${({ theme }) => theme.color.bg_light};
   height: 100%;
+  border-right: 1px solid white;
 `;
 
 const Nav = styled.nav`
