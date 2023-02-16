@@ -1,8 +1,7 @@
 .container {
-  border: white 1px solid;
+  padding: 0.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: end;
 }
 .headerBtn {
-  background-color: aliceblue;
 }

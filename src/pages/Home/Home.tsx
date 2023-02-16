@@ -1,20 +1,28 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import Carousel from './components/Carousel';
 import Guide from './components/Guide';
 import Header from './components/Header';
 import PopularReviews from './components/PopularReviews';
-import RecentLikes from './components/RecentLikes';
 import TrendingNews from './components/TrendingNews';
+import theme from '@/styles/theme';
+import Footer from './components/Footer';
+import MostLikes from './components/MostLikes/MostLikes';
 
 const HomePage = () => (
-  <div>
-    <Header />
-    <Carousel />
-    <Guide />
-    <PopularReviews />
-    <RecentLikes />
+  <>
+    <Box sx={{ bgcolor: theme.color.bg_light }}>
+      <Header />
+      <Carousel />
+      <Guide />
+    </Box>
     <TrendingNews />
-  </div>
+    <Box sx={{ bgcolor: theme.color.bg_light }}>
+      <PopularReviews />
+      <MostLikes />
+    </Box>
+    <Footer />
+  </>
 );
 
 export default HomePage;

@@ -20,6 +20,7 @@ const theme: CustomTheme = createTheme({
   color: {
     light: '#191C25',
     bg_light: '#191C25',
+    main: `#6DDB03`,
   },
 });
 

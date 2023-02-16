@@ -6,6 +6,7 @@ declare module '@mui/material/styles' {
     color: {
       light: string;
       bg_light: string;
+      main: string;
     };
   }
   // allow configuration using `createTheme`
@@ -13,6 +14,7 @@ declare module '@mui/material/styles' {
     color?: {
       light?: string;
       bg_light?: string;
+      main: string;
     };
   }
   export function createTheme(options?: CustomThemeOptions): CustomTheme;

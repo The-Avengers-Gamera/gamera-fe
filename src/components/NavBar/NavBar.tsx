@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const Aside = styled.aside`
   background-color: ${({ theme }) => theme.color.bg_light};
   height: 100%;
+  width: 100px;
+  position: fixed;
   border-right: 1px solid white;
 `;
 
