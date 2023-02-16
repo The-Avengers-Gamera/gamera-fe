@@ -6,7 +6,11 @@ import theme from '@/styles/theme';
 const Header = () => (
   <Container>
     <Box className={style.container}>
-      <Button variant="contained" sx={{ bgcolor: theme.color.main }} className={style.headerBtn}>
+      <Button
+        variant="contained"
+        sx={{ bgcolor: theme.color.main }}
+        className={style.headerBtn}
+      >
         LOGIN/SIGNUP
       </Button>
     </Box>

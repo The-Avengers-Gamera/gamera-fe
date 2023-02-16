@@ -10,8 +10,8 @@ const MostLikes = () => (
     sx={{ padding: '0.5rem 3rem 3rem' }}
     header={<ContainerHeader title="MOST LIKED" />}
     padding={3}
-    laptop={3}
-    mobile={4}
+    laptop={4}
+    mobile={6}
   >
     {cards.map((card) => (
       // replace your card here

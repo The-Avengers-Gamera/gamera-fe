@@ -4,7 +4,7 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "extends": ["plugin:react/recommended", "airbnb", "prettier", "plugin:prettier/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -15,17 +15,16 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error"],
     "no-console": "warn",
     "no-restricted-exports": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"] }],
     "import/extensions": [0],
     "import/no-unresolved": 0,
-    "react/function-component-definition": [
-      2,
-      {
-        "namedComponents": "arrow-function"
-      }
-    ]
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "react/require-default-props": "off",
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "multiline" }]
   }
 }

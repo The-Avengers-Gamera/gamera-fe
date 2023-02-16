@@ -4,8 +4,17 @@ import style from './index.module.css';
 import theme from '@/styles/theme';
 
 const Carousel = () => (
-  <Grid sx={{ bgcolor: theme.color.bg_light }} container className={style.container}>
-    <Grid className={style.containerGrid} mobile={10} laptop={10} item>
+  <Grid
+    sx={{ bgcolor: theme.color.bg_light }}
+    container
+    className={style.container}
+  >
+    <Grid
+      className={style.containerGrid}
+      mobile={10}
+      laptop={10}
+      item
+    >
       <Box className={style.gridCarousel}>
         <Container className={style.carouselContent}>
           <Typography className={style.carouselText}>
@@ -16,7 +25,7 @@ const Carousel = () => (
             variant="contained"
             sx={{ bgcolor: theme.color.main }}
           >
-            VIEW MORE➡
+            VIEW MORE
           </Button>
         </Container>
       </Box>

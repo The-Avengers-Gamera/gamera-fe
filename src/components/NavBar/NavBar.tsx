@@ -1,30 +1,45 @@
+import { Drawer, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
 
-const Aside = styled.aside`
-  background-color: ${({ theme }) => theme.color.bg_light};
-  height: 100%;
-  width: 100px;
-  position: fixed;
-  border-right: 1px solid white;
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  flex-direction: column;
-`;
-
+const drawerWidth = '110px';
+const links = [
+  { route: '/', title: 'Home' },
+  { route: '/game', title: 'Game' },
+  { route: '/news', title: 'News' },
+  { route: '/review', title: 'Review' },
+  { route: '/settings', title: 'Settings' },
+  { route: '/post', title: 'Post' },
+];
 const NavBar = () => (
-  <Aside>
-    <Nav>
-      <Link to="/">Home</Link>
-      <Link to="/game">Game</Link>
-      <Link to="/news">News</Link>
-      <Link to="/review">Review</Link>
-      <Link to="/settings">Settings</Link>
-    </Nav>
-  </Aside>
+  <Drawer
+    sx={{
+      width: drawerWidth,
+      flexShrink: 0,
+      '& .MuiDrawer-paper': {
+        width: drawerWidth,
+        boxSizing: 'border-box',
+      },
+    }}
+    variant="permanent"
+    anchor="left"
+  >
+    <List>
+      {links.map(({ route, title }) => (
+        <ListItem
+          key={uuid()}
+          disablePadding
+        >
+          <ListItemButton>
+            <Link to={route}>
+              <ListItemText primary={title} />
+            </Link>
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
+  </Drawer>
 );
 
 export default NavBar;

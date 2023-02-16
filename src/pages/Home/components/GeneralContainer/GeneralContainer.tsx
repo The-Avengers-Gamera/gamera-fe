@@ -13,10 +13,21 @@ const GeneralContainer = ({ header, children, mobile, laptop, sx }: any) => (
       }}
     >
       {header}
-      <Box className={style.container} sx={sx}>
-        <Grid container spacing={2}>
+      <Box
+        className={style.container}
+        sx={sx}
+      >
+        <Grid
+          container
+          spacing={2}
+        >
           {children.map((child: any) => (
-            <Grid key={uuid()} mobile={mobile} laptop={laptop} item>
+            <Grid
+              key={uuid()}
+              mobile={mobile}
+              laptop={laptop}
+              item
+            >
               {/* insert your card here */}
               {child}
             </Grid>

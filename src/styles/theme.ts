@@ -4,6 +4,9 @@ import { createTheme, CustomTheme } from '@mui/material/styles';
 const theme: CustomTheme = createTheme({
   palette: {
     mode: 'dark',
+    gamera: {
+      main: '#6DDB03',
+    },
   },
   breakpoints: {
     values: {
@@ -20,7 +23,6 @@ const theme: CustomTheme = createTheme({
   color: {
     light: '#191C25',
     bg_light: '#191C25',
-    main: `#6DDB03`,
   },
 });
 

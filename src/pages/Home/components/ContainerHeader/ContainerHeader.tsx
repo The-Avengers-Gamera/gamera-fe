@@ -9,11 +9,18 @@ const ContainerHeader = ({ title }: any) => (
     <Box className={style.containerHeader}>
       <Box className={style.headerLeft}>
         <Typography>{title}</Typography>
-        <Typography className={style.headerLeftSubtitle} color={theme.color.main}>
+        <Typography
+          className={style.headerLeftSubtitle}
+          color={theme.color.main}
+        >
           7 DAYS
         </Typography>
       </Box>
-      <Link className={style.headerLink} to="/#" style={{ color: theme.color.main }}>
+      <Link
+        className={style.headerLink}
+        to="/#"
+        style={{ color: theme.color.main }}
+      >
         VIEW ALL
       </Link>
     </Box>
