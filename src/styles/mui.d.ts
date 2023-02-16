@@ -4,6 +4,7 @@ import { Theme, ThemeOptions } from '@mui/material/styles';
 declare module '@mui/material/styles' {
   interface CustomTheme extends Theme {
     color: {
+      main: string;
       light: string;
       bg_light: string;
     };
@@ -11,6 +12,7 @@ declare module '@mui/material/styles' {
   // allow configuration using `createTheme`
   interface CustomThemeOptions extends ThemeOptions {
     color?: {
+      main?: string;
       light?: string;
       bg_light?: string;
     };
@@ -25,5 +27,12 @@ declare module '@mui/material/styles' {
     tablet: true;
     laptop: true;
     desktop: true;
+  }
+
+  interface Palette {
+    gamera: Palette['primary'];
+  }
+  interface PaletteOptions {
+    gamera: PaletteOptions['primary'];
   }
 }

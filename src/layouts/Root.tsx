@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import NavBar from '@/components/NavBar/NavBar';
@@ -16,6 +15,7 @@ const NavWrapper = styled.div`
 const Main = styled.main`
   height: 100%;
   width: 100%;
+  overflow-y: scroll;
 `;
 
 const RootLayout = () => (

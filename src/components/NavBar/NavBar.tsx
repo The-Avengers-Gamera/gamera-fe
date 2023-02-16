@@ -20,6 +20,7 @@ const NavBar = () => (
       <Link to="/news">News</Link>
       <Link to="/review">Review</Link>
       <Link to="/settings">Settings</Link>
+      <Link to="/post">post</Link>
     </Nav>
   </Aside>
 );
