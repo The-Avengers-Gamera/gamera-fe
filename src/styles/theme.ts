@@ -21,6 +21,7 @@ const theme: CustomTheme = createTheme({
     },
   },
   color: {
+    main: '#6DDB03',
     light: '#191C25',
     bg_light: '#191C25',
   },
