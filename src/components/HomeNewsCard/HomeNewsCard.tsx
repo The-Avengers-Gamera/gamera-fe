@@ -53,7 +53,7 @@ const NewsCardTimeAuthor = styled.div`
 
   div {
     display: flex;
-    color: #6ddb03;
+    color: ${({ theme }) => theme.color.main};
     span {
       margin-left: 10px;
       color: white;
