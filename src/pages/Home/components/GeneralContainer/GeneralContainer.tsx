@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { Divider, Box, Grid } from '@mui/material';
 import React from 'react';
 import style from './index.module.css';
@@ -40,12 +39,11 @@ const GeneralContainer = ({ divider = false, header, children, mobile, laptop, s
 
           {children.map((child: any) => (
             <Grid
-              key={uuid()}
+              key={child.key}
               mobile={mobile}
               laptop={laptop}
               item
             >
-              {/* insert your card here */}
               {child}
             </Grid>
           ))}
