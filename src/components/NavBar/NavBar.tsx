@@ -1,7 +1,6 @@
 import { Box, Drawer, List, ListItem, Button, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
 import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
 import RateReviewRoundedIcon from '@mui/icons-material/RateReviewRounded';
@@ -18,12 +17,12 @@ const generalLinks = [
   { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
   { route: '/review', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
   { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
-].map((item) => ({ ...item, id: uuid() }));
+];
 const conditionalLinks = [
   { route: '/settings', title: 'SETTINGS', icon: <SettingsRoundedIcon /> },
   { route: '/#', title: 'LOGOUT', icon: <ExitToAppRoundedIcon /> },
   { route: '/#', title: 'USER', icon: <AccountCircleRoundedIcon /> },
-].map((item) => ({ ...item, id: uuid() }));
+];
 const NavBar = () => (
   <Drawer
     sx={{
@@ -61,7 +60,7 @@ const NavBar = () => (
         </ListItem>
         {generalLinks.map(({ route, title, icon }) => (
           <ListItem
-            key={uuid()}
+            key={title}
             disablePadding
           >
             <Link
@@ -82,7 +81,7 @@ const NavBar = () => (
       <Box className={style.navBarBottomGroup}>
         {conditionalLinks.map(({ route, title, icon }) => (
           <ListItem
-            key={uuid()}
+            key={title}
             disablePadding
           >
             <Link
