@@ -10,7 +10,7 @@ const CardContainer = styled.div`
   cursor: pointer;
 
   &:hover .cover-img {
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 `;
 
@@ -66,7 +66,10 @@ const NewsCardTimeAuthor = styled.div`
 `;
 
 const HomeNewsCard = () => {
-  const data = {
+  const newsCardData = {
+    title: 'Hogwarts Legacy: How to Open Eye Chests',
+    publishTime: '1 day ago',
+    author: 'Luke Reilly',
     coverUrl:
       'https://assets1.ignimgs.com/2023/02/07/hogwarts-legacy-promo-10-1675736754011-1675784730573.png?crop=16%3A9&width=282&dpr=2',
   };
@@ -76,21 +79,19 @@ const HomeNewsCard = () => {
       <NewsCardCover>
         <img
           className="cover-img"
-          src={data.coverUrl}
+          src={newsCardData.coverUrl}
           alt="news cover"
         />
       </NewsCardCover>
-      <NewsCardTitle>
-        News title News titleNews titleNews titleNews titleNews titleNews titleNews titleNews title
-      </NewsCardTitle>
+      <NewsCardTitle>{newsCardData.title}</NewsCardTitle>
       <NewsCardTimeAuthor>
         <div>
           <AccessTimeFilledIcon />
-          <span>1 day ago</span>
+          <span>{newsCardData.publishTime}</span>
         </div>
         <div>
           <PersonIcon />
-          <span className="author">Luke REILLY</span>
+          <span className="author">{newsCardData.author}</span>
         </div>
       </NewsCardTimeAuthor>
     </CardContainer>

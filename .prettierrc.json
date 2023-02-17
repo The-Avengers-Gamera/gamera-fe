@@ -5,5 +5,8 @@
   "trailingComma": "es5",
   "singleQuote": true,
   "endOfLine": "auto",
-  "singleAttributePerLine": true
+  "singleAttributePerLine": true,
+  "arrowParens": "always",
+  "jsxWrapAttributes": true,
+  "jsxAttributeCasing": "off"
 }
