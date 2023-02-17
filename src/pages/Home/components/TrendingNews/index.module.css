@@ -1,0 +1,7 @@
+.title {
+  height: 25px;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 1rem;
+  clip-path: polygon(5% 100%, 95% 100%, 100% 0, 0 0);
+}
