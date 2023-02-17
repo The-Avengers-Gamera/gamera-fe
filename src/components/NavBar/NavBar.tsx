@@ -1,4 +1,4 @@
-import { Box, Drawer, List, ListItem, IconButton, Typography } from '@mui/material';
+import { Box, Drawer, List, ListItem, Button, Typography } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
@@ -68,9 +68,13 @@ const NavBar = () => (
               className={style.navItemContainer}
               to={route}
             >
-              <IconButton sx={{ color: 'inherit' }}>{icon}</IconButton>
-
-              <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>{title}</Typography>
+              <Button
+                className={style.navBtn}
+                sx={{ color: 'inherit' }}
+              >
+                {icon}
+                <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>{title}</Typography>
+              </Button>
             </Link>
           </ListItem>
         ))}
@@ -85,9 +89,14 @@ const NavBar = () => (
               className={style.navItemContainer}
               to={route}
             >
-              <IconButton sx={{ color: 'inherit' }}>{icon}</IconButton>
+              <Button
+                className={style.navBtn}
+                sx={{ color: 'inherit' }}
+              >
+                {icon}
 
-              <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>{title}</Typography>
+                <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>{title}</Typography>
+              </Button>
             </Link>
           </ListItem>
         ))}
