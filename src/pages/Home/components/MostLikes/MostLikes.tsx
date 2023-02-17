@@ -3,6 +3,7 @@ import { Card } from '@mui/material';
 import React from 'react';
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
+// import LikeCard from '../MostLikes/MostLikesCom/LikeCard';
 
 const cards = ['card', 'card', 'card', 'card', 'card', 'card'];
 const MostLikes = () => (
@@ -14,7 +15,6 @@ const MostLikes = () => (
     mobile={6}
   >
     {cards.map((card) => (
-      // replace your card here
       <Card key={uuid()}>CARD SLOT {card}</Card>
     ))}
   </GeneralContainer>
