@@ -1,0 +1,20 @@
+.comment_icon {
+  position: absolute;
+  left: 0.58px;
+  top: 1.17px;
+  width: 91.67%;
+  height: 85.42%;
+  opacity: 1;
+
+  background: #ffffff;
+}
+
+.heart {
+  position: absolute;
+  left: 1.33px;
+  top: 2px;
+  width: 83.33%;
+  height: 77.08%;
+  opacity: 1;
+  background: #e70000;
+}
