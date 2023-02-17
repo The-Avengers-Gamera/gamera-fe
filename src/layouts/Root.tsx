@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import NavBar from '@/components/NavBar/NavBar';
 
+// import LoginForm from '@/components/Login/loginForm';
+
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
@@ -25,6 +27,7 @@ const RootLayout = () => (
     </NavWrapper>
     <Main>
       <Outlet />
+      {/* <LoginForm /> */}
     </Main>
   </PageWrapper>
 );
