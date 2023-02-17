@@ -19,13 +19,12 @@ const generalLinks = [
   { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
   { route: '/review', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
   { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
-];
-
+].map((item) => ({ ...item, id: uuid() }));
 const conditionalLinks = [
   { route: '/settings', title: 'SETTINGS', icon: <SettingsRoundedIcon /> },
   { route: '/#', title: 'LOGOUT', icon: <ExitToAppRoundedIcon /> },
   { route: '/#', title: 'USER', icon: <AccountCircleRoundedIcon /> },
-];
+].map((item) => ({ ...item, id: uuid() }));
 const NavBar = () => (
   <Drawer
     sx={{

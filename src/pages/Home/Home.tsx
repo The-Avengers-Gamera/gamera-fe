@@ -6,7 +6,6 @@ import Header from './components/Header';
 import PopularReviews from './components/PopularReviews';
 import TrendingNews from './components/TrendingNews';
 import theme from '@/styles/theme';
-import Footer from './components/Footer';
 import MostLikes from './components/MostLikes/MostLikes';
 
 const HomePage = () => (
@@ -21,7 +20,6 @@ const HomePage = () => (
       <PopularReviews />
       <MostLikes />
     </Box>
-    <Footer />
   </>
 );
 
