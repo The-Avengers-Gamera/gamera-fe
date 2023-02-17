@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.containerGrid {
+  display: flex;
+  justify-content: center;
+}
+.gridCarousel {
+  padding: 2rem;
+  display: flex;
+  align-items: end;
+
+  background: url(https://media.st.dl.eccdnx.com//steam/apps/10150/0000008859.1920x1080.jpg)
+    center/cover;
+  background-repeat: no-repeat;
+
+  width: 1050px;
+  min-width: 320px;
+  height: 595px;
+}
+.carouselBtn {
+  width: 140px;
+  height: 35px;
+}
+.carouselContent {
+}
+.carouselText {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.carouselBtn {
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
+  border-radius: 0 !important;
+}

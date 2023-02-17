@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import NavBar from '@/components/NavBar/NavBar';
+import Footer from '@/components/Footer';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -17,7 +18,6 @@ const Main = styled.main`
   width: 100%;
   overflow-y: scroll;
 `;
-
 const RootLayout = () => (
   <PageWrapper>
     <NavWrapper>
@@ -25,6 +25,7 @@ const RootLayout = () => (
     </NavWrapper>
     <Main>
       <Outlet />
+      <Footer />
     </Main>
   </PageWrapper>
 );
