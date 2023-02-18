@@ -12,8 +12,14 @@ const TermAndPrivacyContainer = styled.div`
 
 const TermAndPrivacy = () => (
   <TermAndPrivacyContainer>
-    <FooterLink name="Terms of User" link="www" />
-    <FooterLink name="privacy policy" link="www" />
+    <FooterLink
+      name="Terms of User"
+      link="www"
+    />
+    <FooterLink
+      name="privacy policy"
+      link="www"
+    />
   </TermAndPrivacyContainer>
 );
 

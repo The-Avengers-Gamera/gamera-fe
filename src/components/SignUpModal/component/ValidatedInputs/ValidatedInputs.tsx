@@ -61,7 +61,10 @@ const ValidatedInputs: React.FC<Props> = (props: Props) => {
         }}
       />
       {visibility && (
-        <AlarmLabel ref={alarmLabelDom} htmlFor={type}>
+        <AlarmLabel
+          ref={alarmLabelDom}
+          htmlFor={type}
+        >
           {type} is required
         </AlarmLabel>
       )}

@@ -50,9 +50,21 @@ const RegisterForm = () => {
 
   return (
     <RegisterFormContainer onSubmit={submitionHandler}>
-      <ValidatedInputs type="Username" name="username" setParameter={setUserName} />
-      <ValidatedInputs type="Email" name="email" setParameter={setEmail} />
-      <ValidatedInputs type="Password" name="password" setParameter={setPassword} />
+      <ValidatedInputs
+        type="Username"
+        name="username"
+        setParameter={setUserName}
+      />
+      <ValidatedInputs
+        type="Email"
+        name="email"
+        setParameter={setEmail}
+      />
+      <ValidatedInputs
+        type="Password"
+        name="password"
+        setParameter={setPassword}
+      />
       <ResisterButton type="submit">Create Account</ResisterButton>
     </RegisterFormContainer>
   );
