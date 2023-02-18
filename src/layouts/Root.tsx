@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-constructed-context-values */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
@@ -7,6 +9,8 @@ import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer';
 import SignUpModal from '@/components/SignUpModal';
+
+export const RootContext = React.createContext<(show: boolean) => void>(() => {});
 
 const PageWrapper = styled.div`
   display: flex;
@@ -41,36 +45,43 @@ const Main = styled.main`
   width: 100%;
   overflow-y: scroll;
 `;
+
 const RootLayout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const changeModalToOpen = (show: boolean) => {
+    setModalIsOpen(show);
+  };
+
   return (
-    <PageWrapper>
-      <Modal
-        isOpen={modalIsOpen}
-        ariaHideApp={false}
-      >
-        <SignUpModal
-          setModalIsOpen={() => {
-            setModalIsOpen(false);
-          }}
-        />
-      </Modal>
-      <NavWrapper>
-        <NavBar />
-      </NavWrapper>
-      <Main>
-        <LoginButtonWrapper>
-          <LoginButton
+    <RootContext.Provider value={changeModalToOpen}>
+      <PageWrapper>
+        <Modal
+          isOpen={modalIsOpen}
+          ariaHideApp={false}
+        >
+          <SignUpModal
             setModalIsOpen={() => {
-              setModalIsOpen(true);
+              setModalIsOpen(false);
             }}
           />
-        </LoginButtonWrapper>
-        <Outlet />
-        <Footer />
-      </Main>
-    </PageWrapper>
+        </Modal>
+        <NavWrapper>
+          <NavBar />
+        </NavWrapper>
+        <Main>
+          <LoginButtonWrapper>
+            <LoginButton
+              setModalIsOpen={() => {
+                setModalIsOpen(true);
+              }}
+            />
+          </LoginButtonWrapper>
+          <Outlet />
+          <Footer />
+        </Main>
+      </PageWrapper>
+    </RootContext.Provider>
   );
 };
 

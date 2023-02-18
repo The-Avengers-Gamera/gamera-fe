@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+/* eslint-disable no-use-before-define */
+import React, { useContext, useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
+import { RootContext } from '@/layouts/Root';
 
 const RegisterFormContainer = styled.form`
   margin-top: 1rem;
@@ -34,6 +36,7 @@ const RegisterForm = () => {
   const [usernameInputValid, setUserNameInputValid] = useState(false);
   const [emailInputValid, setEmailInputValid] = useState(false);
   const [passwordInputValid, setPasswordInputValid] = useState(false);
+  const changeModalToOpen = useContext(RootContext);
 
   const submitionHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +49,9 @@ const RegisterForm = () => {
         })
         .then((res) => {
           console.log(res);
+          if (res.status === 201) {
+            changeModalToOpen(false);
+          }
         });
     }
   };
