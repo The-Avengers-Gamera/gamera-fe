@@ -4,5 +4,6 @@
   "semi": true,
   "trailingComma": "es5",
   "singleQuote": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "singleAttributePerLine": true
 }
