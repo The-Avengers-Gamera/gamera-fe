@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+/* eslint-disable react/destructuring-assignment */
+import React from 'react';
 import styled from 'styled-components';
 import RegisterForm from './component/RegisterForm';
+import Loginform from '../Login/loginForm';
 
 const RegisterModalContainer = styled.div`
   width: 30rem;
@@ -58,32 +60,24 @@ const FooterLink = styled.a`
   font-size: 0.8rem;
 `;
 
-const RegisterModal = () => {
-  const [visibility, setVisibility] = useState(true);
-
-  const changeVisibility = () => {
-    setVisibility(!visibility);
-  };
-
-  return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      {visibility && (
-        <RegisterModalContainer>
-          <BackAndCloseButtonContainer>
-            <BackButton>{'<'} Back</BackButton>
-            <CloseButton onClick={changeVisibility}>X</CloseButton>
-          </BackAndCloseButtonContainer>
-          <HeaderContainer>Sign Up</HeaderContainer>
-          <RegisterForm />
-          <TermAndPrivacyContainer>
-            <FooterLink href="www">Terms of User</FooterLink>
-            <FooterLink href="www">privacy policy</FooterLink>
-          </TermAndPrivacyContainer>
-        </RegisterModalContainer>
-      )}
-    </>
-  );
+type Props = {
+  setModalIsOpen: () => void;
 };
+
+const RegisterModal: React.FC<Props> = (props: Props) => (
+  <RegisterModalContainer>
+    <Loginform />
+    <BackAndCloseButtonContainer>
+      <BackButton>{'<'} Back</BackButton>
+      <CloseButton onClick={props.setModalIsOpen}>X</CloseButton>
+    </BackAndCloseButtonContainer>
+    <HeaderContainer>Sign Up</HeaderContainer>
+    <RegisterForm />
+    <TermAndPrivacyContainer>
+      <FooterLink href="www">Terms of User</FooterLink>
+      <FooterLink href="www">privacy policy</FooterLink>
+    </TermAndPrivacyContainer>
+  </RegisterModalContainer>
+);
 
 export default RegisterModal;
