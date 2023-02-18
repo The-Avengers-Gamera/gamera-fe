@@ -82,8 +82,6 @@ const ValidatedInputs: React.FC<Props> = (props: Props) => {
     axios
       .get(`https://mock.apifox.cn/m1/2262741-0-default/users/name/${event.target.value}`)
       .then((res) => {
-        console.log(res.data);
-        console.log(res.status);
         const isNameExist = res.status === 200;
         setParameterValid(!isNameExist);
         setVisibility(isNameExist);

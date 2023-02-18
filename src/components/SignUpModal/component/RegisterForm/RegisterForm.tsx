@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import styled from 'styled-components';
-import ValidatedInputs from '../ValidatedInputs';
+import ValidatedInputs from '../ValidationInputs';
 
 const RegisterFormContainer = styled.form`
   margin-top: 1rem;
@@ -45,10 +45,7 @@ const RegisterForm = () => {
           passwordInputValue,
         })
         .then((res) => {
-          console.log(res.status);
-        })
-        .catch((error) => {
-          console.log(error);
+          console.log(res);
         });
     }
   };
