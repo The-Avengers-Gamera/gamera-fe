@@ -1,9 +1,12 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState } from 'react';
+import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import NavBar from '@/components/NavBar/NavBar';
-import Footer from '@/components/Footer';
 import LoginButton from '@/components/LoginButton';
-// import LoginForm from '@/components/Login/loginForm';
+import Footer from '@/components/Footer';
+import SignUpModal from '@/components/SignUpModal';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -17,12 +20,20 @@ const NavWrapper = styled.div`
 
 const LoginButtonWrapper = styled.div`
   height: 5%;
-  z-index: 3;
+  float: right;
   position: relative;
   top: 3rem;
   display: flex;
-  flex-direction: row-reverse;
-  padding-right: 4rem;
+  padding-right: 9rem;
+`;
+
+const Modal = styled(ReactModal)`
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Main = styled.main`
@@ -30,20 +41,37 @@ const Main = styled.main`
   width: 100%;
   overflow-y: scroll;
 `;
-const RootLayout = () => (
-  <PageWrapper>
-    <NavWrapper>
-      <NavBar />
-    </NavWrapper>
-    <Main>
-      <LoginButtonWrapper>
-        <LoginButton />
-      </LoginButtonWrapper>
-      <Outlet />
-      {/* <LoginForm /> */}
-      <Footer />
-    </Main>
-  </PageWrapper>
-);
+const RootLayout = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  return (
+    <PageWrapper>
+      <Modal
+        isOpen={modalIsOpen}
+        ariaHideApp={false}
+      >
+        <SignUpModal
+          setModalIsOpen={() => {
+            setModalIsOpen(false);
+          }}
+        />
+      </Modal>
+      <NavWrapper>
+        <NavBar />
+      </NavWrapper>
+      <Main>
+        <LoginButtonWrapper>
+          <LoginButton
+            setModalIsOpen={() => {
+              setModalIsOpen(true);
+            }}
+          />
+        </LoginButtonWrapper>
+        <Outlet />
+        <Footer />
+      </Main>
+    </PageWrapper>
+  );
+};
 
 export default RootLayout;

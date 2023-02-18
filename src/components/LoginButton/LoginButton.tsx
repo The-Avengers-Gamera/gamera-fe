@@ -9,6 +9,20 @@ const Button = styled.button`
   background: linear-gradient(-135deg, transparent 10px, #6ddb03 0);
 `;
 
-const LoginButton = () => <Button>LOGIN / SIGNUP</Button>;
+type Props = {
+  setModalIsOpen: () => void;
+};
+
+const LoginButton: React.FC<Props> = (props: Props) => {
+  return (
+    <Button
+      type="button"
+      // eslint-disable-next-line react/destructuring-assignment
+      onClick={props.setModalIsOpen}
+    >
+      LOGIN / SIGNUP
+    </Button>
+  );
+};
 
 export default LoginButton;

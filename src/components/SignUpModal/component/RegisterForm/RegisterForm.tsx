@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import styled from 'styled-components';
-import ValidatedInputs from '../ValidationInputs';
+import ValidationInputs from '../ValidationInputs';
 
 const RegisterFormContainer = styled.form`
   margin-top: 1rem;
@@ -52,17 +52,17 @@ const RegisterForm = () => {
 
   return (
     <RegisterFormContainer onSubmit={submitionHandler}>
-      <ValidatedInputs
+      <ValidationInputs
         name="username"
         setParameter={setUserNameInputValue}
         setParameterValid={setUserNameInputValid}
       />
-      <ValidatedInputs
+      <ValidationInputs
         name="email"
         setParameter={setEmailInputValue}
         setParameterValid={setEmailInputValid}
       />
-      <ValidatedInputs
+      <ValidationInputs
         name="password"
         setParameter={setPasswordInputValue}
         setParameterValid={setPasswordInputValid}

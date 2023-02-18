@@ -36,7 +36,7 @@ type Props = {
   setParameterValid: (state: boolean) => void;
 };
 
-const ValidatedInputs: React.FC<Props> = (props: Props) => {
+const ValidationInputs: React.FC<Props> = (props: Props) => {
   const { name, setParameter, setParameterValid } = props;
   const [inputValue, setInputValue] = useState('');
   const [alarmMessage, setAlarmMessage] = useState('');
@@ -123,4 +123,4 @@ const ValidatedInputs: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default ValidatedInputs;
+export default ValidationInputs;
