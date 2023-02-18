@@ -9,7 +9,7 @@ import ContainerHeader from '../ContainerHeader';
 
 // const cards = [1, 2, 3, 4, 5, 6, 7];
 
-// mock data sent from backend ------------------------------------------------------------
+// TODO: pls replace below mock data sent from backend with axios request------------------------------------------------------------
 type ReviewItemType = {
   imgUrl: string;
   title: string;
@@ -17,7 +17,6 @@ type ReviewItemType = {
   publishTime: string;
 };
 
-// const initialState: ReviewItemType[] = [];
 const initialState: ReviewItemType[] = [];
 
 const mockReviewItem = {
@@ -33,7 +32,7 @@ for (let i = 0; i < 8; ) {
   i += 1;
 }
 
-// ------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------
 
 const PopularReviews = () => {
   const [reviewList] = useState(initialState);
@@ -56,15 +55,14 @@ const PopularReviews = () => {
       </Card>
     ))} */}
 
-      {/* TODO: replace initialState below with reviewList, which is a state */}
-      {reviewList.map((review) => {
+      {reviewList.map(({ imgUrl, title, authorName, publishTime }) => {
         return (
           <ReviewCard
-            key={`${review.title}`}
-            coverUrl={review.imgUrl}
-            title={review.title}
-            authorName={review.authorName}
-            publishTime={review.publishTime}
+            key={title}
+            coverUrl={imgUrl}
+            title={title}
+            authorName={authorName}
+            publishTime={publishTime}
           />
         );
       })}

@@ -36,7 +36,7 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  & .authorName {
+  & .authorName_container {
     display: flex;
     align-items: center;
 
@@ -48,9 +48,10 @@ const Footer = styled.div`
     }
   }
 
-  & .publishTime {
+  & .publishTime_container {
     display: flex;
     align-items: center;
+    //color: ${({ theme }) => theme.color.main};
 
     & span {
       margin-left: 5px;
@@ -59,6 +60,13 @@ const Footer = styled.div`
       font-weight: 700;
     }
   }
+`;
+
+const FooterAuthorIcon = styled(PersonRoundedIcon)`
+  color: ${({ theme }) => theme.color.main};
+`;
+const FooterPublishTimeIcon = styled(AccessTimeFilledRoundedIcon)`
+  color: ${({ theme }) => theme.color.main};
 `;
 
 // types ---------------------------------------
@@ -91,13 +99,13 @@ const ReviewCard = ({ coverUrl, title, authorName, publishTime }: ReviewCardProp
       </Title>
 
       <Footer>
-        <div className="authorName">
-          <PersonRoundedIcon style={{ color: '#6DDB03' }} />
+        <div className="authorName_container">
+          <FooterAuthorIcon />
           <span>{authorName}</span>
         </div>
 
-        <div className="publishTime">
-          <AccessTimeFilledRoundedIcon style={{ color: '#6DDB03' }} />
+        <div className="publishTime_container">
+          <FooterPublishTimeIcon />
           <span>{publishTime}</span>
         </div>
       </Footer>
