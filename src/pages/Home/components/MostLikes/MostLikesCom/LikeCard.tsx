@@ -8,16 +8,16 @@ import style from './index.module.css';
 const LikeCard = () => (
   <div className={style.likeCard}>
     <div className={style.cover}>Put the cover</div>
-    <div className="articleOverview">
-      <Typography className="articleTitle">Hogwarts Legacy: How to Open Eye Chests</Typography>
-      <div className="comment">
+    <div className={style.articleOverview}>
+      <Typography className={style.articleTile}>Hogwarts Legacy: How to Open Eye Chests</Typography>
+      <div className={style.comment}>
         <ChatRoundedIcon className={style.comment_icon}>This is comment number</ChatRoundedIcon>
-        <Typography className="commentNum">2.6K</Typography>
+        <Typography className={style.commentNum}>2.6K</Typography>
       </div>
     </div>
     <div className={style.liked}>
-      <FavoriteRoundedIcon className={style.heart}>This is cover</FavoriteRoundedIcon>
-      <Typography className="LikedNum">10,311</Typography>
+      <FavoriteRoundedIcon className={style.heart}>This is heart</FavoriteRoundedIcon>
+      <Typography className={style.likedNum}>10,311</Typography>
     </div>
   </div>
 );
