@@ -1,20 +1,34 @@
 .comment_icon {
-  position: absolute;
+  position: relative;
   left: 0.58px;
   top: 1.17px;
-  width: 91.67%;
-  height: 85.42%;
+  /*width: 91.67%;*/
+  /*height: 85.42%;*/
   opacity: 1;
-
-  background: #ffffff;
 }
 
 .heart {
-  position: absolute;
+  position: relative;
   left: 1.33px;
   top: 2px;
-  width: 83.33%;
-  height: 77.08%;
+  /*width: 83.33%;*/
+  /*height: 77.08%;*/
   opacity: 1;
-  background: #e70000;
+  color: #e70000;
+}
+
+.likeCard {
+  position: relative;
+  width: 565px;
+  height: 65px;
+}
+
+.cover {
+  position: relative;
+  float: left;
+}
+
+.liked {
+  position: relative;
+  float: right;
 }
