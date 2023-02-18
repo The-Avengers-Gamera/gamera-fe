@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import RegisterForm from './component/RegisterForm';
-import Loginform from '../Login/loginForm';
+import { RootContext } from '@/layouts/Root';
 
 const RegisterModalContainer = styled.div`
   width: 30rem;
@@ -66,9 +66,12 @@ type Props = {
 
 const RegisterModal: React.FC<Props> = (props: Props) => (
   <RegisterModalContainer>
-    <Loginform />
     <BackAndCloseButtonContainer>
-      <BackButton>{'<'} Back</BackButton>
+      <RootContext.Consumer>
+        {(value) => {
+          return <BackButton onClick={value.openLogInPopWindow}>{'<'} Back</BackButton>;
+        }}
+      </RootContext.Consumer>
       <CloseButton onClick={props.setModalIsOpen}>X</CloseButton>
     </BackAndCloseButtonContainer>
     <HeaderContainer>Sign Up</HeaderContainer>

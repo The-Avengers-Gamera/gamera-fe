@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-constructed-context-values */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
@@ -9,8 +8,19 @@ import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer';
 import SignUpModal from '@/components/SignUpModal';
+import Loginform from '@/components/Login/loginForm';
 
-export const RootContext = React.createContext<(show: boolean) => void>(() => {});
+interface RootContextType {
+  changeModalToOpen: (show: boolean) => void;
+  openLogInPopWindow: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  closeLogInPopWindow: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export const RootContext = React.createContext<RootContextType>({
+  changeModalToOpen: () => {},
+  openLogInPopWindow: () => {},
+  closeLogInPopWindow: () => {},
+});
 
 const PageWrapper = styled.div`
   display: flex;
@@ -48,23 +58,36 @@ const Main = styled.main`
 
 const RootLayout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [displayLogInPopWindow, setDisplayLogInPopWindow] = useState(false);
 
   const changeModalToOpen = (show: boolean) => {
     setModalIsOpen(show);
   };
 
+  const openLogInPopWindow = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setDisplayLogInPopWindow(true);
+  };
+
+  const closeLogInPopWindow = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setDisplayLogInPopWindow(true);
+  };
+
   return (
-    <RootContext.Provider value={changeModalToOpen}>
+    <RootContext.Provider value={{ changeModalToOpen, openLogInPopWindow, closeLogInPopWindow }}>
       <PageWrapper>
         <Modal
           isOpen={modalIsOpen}
           ariaHideApp={false}
         >
-          <SignUpModal
-            setModalIsOpen={() => {
-              setModalIsOpen(false);
-            }}
-          />
+          {displayLogInPopWindow ? (
+            <Loginform />
+          ) : (
+            <SignUpModal
+              setModalIsOpen={() => {
+                setModalIsOpen(false);
+              }}
+            />
+          )}
         </Modal>
         <NavWrapper>
           <NavBar />
