@@ -16,8 +16,14 @@ window.onclick = function (event) {
 };
 
 const Loginform = () => (
-  <div className="login-form-modal" id="id01">
-    <form className="login-form animate" action="">
+  <div
+    className="login-form-modal"
+    id="id01"
+  >
+    <form
+      className="login-form animate"
+      action=""
+    >
       <div>
         <span
           onClick="document.getElementById('id01').style.display='none'"
@@ -57,9 +63,17 @@ const Loginform = () => (
             onInput="this.setCustomValidity('')"
           />
           <br />
-          <input type="submit" value="Log In" className="login-btn" />
+          <input
+            type="submit"
+            value="Log In"
+            className="login-btn"
+          />
           <br />
-          <input type="button" value="Forgot Password" className="forgotPwd-btn" />
+          <input
+            type="button"
+            value="Forgot Password"
+            className="forgotPwd-btn"
+          />
         </div>
         <div className="create-account ">
           <a href="#"> Create a free account &gt; </a>
