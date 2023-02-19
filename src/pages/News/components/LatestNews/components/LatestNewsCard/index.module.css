@@ -1,0 +1,47 @@
+.cardContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  height: 130px;
+}
+.cardPicture {
+  border-radius: 10px;
+  height: 100%;
+  width: 25%;
+}
+.cardInfoContainer {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 72%;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.infoTop {
+}
+.infoMiddle {
+}
+.infoStyle {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.infoBottom {
+  width: 50%;
+  min-width: max-content;
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+}
+.infoBottomGroup {
+  display: flex;
+  align-items: center;
+}
+.infoBottomGroup > span {
+  font-weight: 700;
+  margin-left: 0.2rem;
+}
