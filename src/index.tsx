@@ -8,10 +8,6 @@ import App from './App';
 import theme from '@/styles/theme';
 import GlobalStyle from '@/styles/globalStyles';
 
-// type MuiTheme = typeof theme;
-// declare module 'styled-components' {
-//   export interface DefaultTheme extends MuiTheme {}
-// }
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
