@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import MuiTextField from '@mui/material/TextField';
