@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 import styled from 'styled-components';
@@ -29,14 +30,13 @@ const ResisterButton = styled.button`
   font-weight: 700;
 `;
 
-const RegisterForm = () => {
+const RegisterForm: React.FC = () => {
   const [usernameInputValue, setUserNameInputValue] = useState('');
   const [emailInputValue, setEmailInputValue] = useState('');
   const [passwordInputValue, setPasswordInputValue] = useState('');
   const [usernameInputValid, setUserNameInputValid] = useState(false);
   const [emailInputValid, setEmailInputValid] = useState(false);
   const [passwordInputValid, setPasswordInputValid] = useState(false);
-  const changeModalToOpen = useContext(RootContext);
 
   const submitionHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,9 +49,6 @@ const RegisterForm = () => {
         })
         .then((res) => {
           console.log(res);
-          if (res.status === 201) {
-            changeModalToOpen(false);
-          }
         });
     }
   };
@@ -73,7 +70,11 @@ const RegisterForm = () => {
         setParameter={setPasswordInputValue}
         setParameterValid={setPasswordInputValid}
       />
-      <ResisterButton type="submit">Create Account</ResisterButton>
+      <RootContext.Consumer>
+        {(value) => {
+          return <ResisterButton type="submit">Create Account</ResisterButton>;
+        }}
+      </RootContext.Consumer>
     </RegisterFormContainer>
   );
 };
