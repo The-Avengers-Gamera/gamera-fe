@@ -1,7 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
-import React, { useState, useContext } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
@@ -31,16 +28,13 @@ const ResisterButton = styled.button`
 `;
 
 const RegisterForm: React.FC = () => {
-  const [usernameInputValue, setUserNameInputValue] = useState('');
-  const [emailInputValue, setEmailInputValue] = useState('');
-  const [passwordInputValue, setPasswordInputValue] = useState('');
-  const [usernameInputValid, setUserNameInputValid] = useState(false);
-  const [emailInputValid, setEmailInputValid] = useState(false);
-  const [passwordInputValid, setPasswordInputValid] = useState(false);
+  const [usernameInputValue, setUserNameInputValue] = useState({ value: '', valid: false });
+  const [emailInputValue, setEmailInputValue] = useState({ value: '', valid: false });
+  const [passwordInputValue, setPasswordInputValue] = useState({ value: '', valid: false });
 
-  const submitionHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitionHandler = (e: React.FormEvent<HTMLFormElement>, fun: any) => {
     e.preventDefault();
-    if (usernameInputValid && emailInputValid && passwordInputValid) {
+    if (usernameInputValue.valid && emailInputValue.valid && passwordInputValue.valid) {
       axios
         .post('https://mock.apifox.cn/m1/2262741-0-default/users/signup', {
           usernameInputValue,
@@ -48,34 +42,37 @@ const RegisterForm: React.FC = () => {
           passwordInputValue,
         })
         .then((res) => {
-          console.log(res);
+          if (res.status === 201) {
+            fun(false);
+          }
         });
     }
   };
 
   return (
-    <RegisterFormContainer onSubmit={submitionHandler}>
-      <ValidationInputs
-        name="username"
-        setParameter={setUserNameInputValue}
-        setParameterValid={setUserNameInputValid}
-      />
-      <ValidationInputs
-        name="email"
-        setParameter={setEmailInputValue}
-        setParameterValid={setEmailInputValid}
-      />
-      <ValidationInputs
-        name="password"
-        setParameter={setPasswordInputValue}
-        setParameterValid={setPasswordInputValid}
-      />
-      <RootContext.Consumer>
-        {(value) => {
-          return <ResisterButton type="submit">Create Account</ResisterButton>;
-        }}
-      </RootContext.Consumer>
-    </RegisterFormContainer>
+    <RootContext.Consumer>
+      {(value) => (
+        <RegisterFormContainer
+          onSubmit={(event) => {
+            submitionHandler(event, value.changeModalToOpen);
+          }}
+        >
+          <ValidationInputs
+            name="username"
+            setParameter={setUserNameInputValue}
+          />
+          <ValidationInputs
+            name="email"
+            setParameter={setEmailInputValue}
+          />
+          <ValidationInputs
+            name="password"
+            setParameter={setPasswordInputValue}
+          />
+          <ResisterButton type="submit">Create Account</ResisterButton>
+        </RegisterFormContainer>
+      )}
+    </RootContext.Consumer>
   );
 };
 
