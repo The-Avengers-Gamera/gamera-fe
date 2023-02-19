@@ -32,7 +32,7 @@ const LatestNewsCard = ({
       }}
     />
     <Box className={style.cardInfoContainer}>
-      <Box className={style.infoTop}>
+      <Box>
         <Typography
           className={style.infoStyle}
           sx={{
@@ -43,7 +43,7 @@ const LatestNewsCard = ({
           {title}
         </Typography>
       </Box>
-      <Box className={style.infoMiddle}>
+      <Box>
         <Typography
           sx={{
             fontSize: '1rem',

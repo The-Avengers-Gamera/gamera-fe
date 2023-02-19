@@ -20,10 +20,6 @@
   box-sizing: border-box;
 }
 
-.infoTop {
-}
-.infoMiddle {
-}
 .infoStyle {
   text-overflow: ellipsis;
   white-space: nowrap;
