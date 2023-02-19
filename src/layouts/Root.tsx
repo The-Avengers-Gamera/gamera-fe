@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState } from 'react';
@@ -12,14 +13,15 @@ import Loginform from '@/components/Login/loginForm';
 
 interface RootContextType {
   changeModalToOpen: (show: boolean) => void;
-  openLogInPopWindow: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  closeLogInPopWindow: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  changeDisplayLogInPopWindow: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    status: boolean
+  ) => void;
 }
 
 export const RootContext = React.createContext<RootContextType>({
   changeModalToOpen: () => {},
-  openLogInPopWindow: () => {},
-  closeLogInPopWindow: () => {},
+  changeDisplayLogInPopWindow: () => {},
 });
 
 const PageWrapper = styled.div`
@@ -64,16 +66,15 @@ const RootLayout = () => {
     setModalIsOpen(show);
   };
 
-  const openLogInPopWindow = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setDisplayLogInPopWindow(true);
-  };
-
-  const closeLogInPopWindow = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setDisplayLogInPopWindow(true);
+  const changeDisplayLogInPopWindow = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    status: boolean
+  ) => {
+    setDisplayLogInPopWindow(status);
   };
 
   return (
-    <RootContext.Provider value={{ changeModalToOpen, openLogInPopWindow, closeLogInPopWindow }}>
+    <RootContext.Provider value={{ changeModalToOpen, changeDisplayLogInPopWindow }}>
       <PageWrapper>
         <Modal
           isOpen={modalIsOpen}

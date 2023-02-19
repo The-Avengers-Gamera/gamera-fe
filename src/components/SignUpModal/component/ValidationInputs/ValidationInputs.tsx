@@ -32,42 +32,33 @@ type Props = {
   name: string;
   // eslint-disable-next-line no-unused-vars
   setParameter: (state: any) => void;
-  // eslint-disable-next-line no-unused-vars
-  setParameterValid: (state: boolean) => void;
 };
 
 const ValidationInputs: React.FC<Props> = (props: Props) => {
-  const { name, setParameter, setParameterValid } = props;
+  const { name, setParameter } = props;
   const [inputValue, setInputValue] = useState('');
   const [alarmMessage, setAlarmMessage] = useState('');
-  const [visibility, setVisibility] = useState(false);
+  const [labelvisibility, setLabelVisibility] = useState(false);
   const [regularExpression, setRegularExpression] = useState(/^[\s\S]*$/);
   const [formatPrompt, setFormatPrompt] = useState('');
 
   const regularExpressionController = (type: string) => {
-    const passwordRegularExpression = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
-    const emailRegularExpression = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-    const generalRegularExpression = /^[\s\S]*$/;
     switch (type) {
       case 'email':
-        return emailRegularExpression;
+        return /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
       case 'password':
-        return passwordRegularExpression;
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
       default:
-        return generalRegularExpression;
+        return /^[\s\S]*$/;
     }
   };
 
   const forMatPromptController = (type: string) => {
-    const passwordFormatPrompt =
-      'Password must contain at least 6 characters including lowercase characters, uppercase characters, and numbers';
-    const emailFormatPrompt =
-      'Sorry, the email address you entered is not valid. Please enter a valid email address.';
     switch (type) {
       case 'email':
-        return emailFormatPrompt;
+        return 'Sorry, the email address you entered is not valid. Please enter a valid email address.';
       case 'password':
-        return passwordFormatPrompt;
+        return 'Password must contain at least 6 characters including lowercase characters, uppercase characters, and numbers';
       default:
         return '';
     }
@@ -83,29 +74,30 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
       .get(`https://mock.apifox.cn/m1/2262741-0-default/users/name/${event.target.value}`)
       .then((res) => {
         const isNameExist = res.status === 200;
-        setParameterValid(!isNameExist);
-        setVisibility(isNameExist);
+        setParameter((preState: any) => ({ ...preState, valid: !isNameExist }));
+        setLabelVisibility(isNameExist);
         setAlarmMessage(event.target.value === '' ? 'Username required' : res.data.message);
       });
   };
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
-    setParameter(event.target.value);
+    setParameter((preState: any) => ({ ...preState, value: event.target.value }));
+  };
+
+  const nullInputHandler = (event: React.FocusEvent<HTMLInputElement>) =>
+    `${event.target.name} required`;
+
+  const notNullInputHandler = () => {
+    return !inputValue.match(regularExpression) ? formatPrompt : '';
   };
 
   const inputBlurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
-    const alarmMes =
-      // eslint-disable-next-line no-nested-ternary
-      inputValue === ''
-        ? `${event.target.name} required`
-        : !inputValue.match(regularExpression)
-        ? formatPrompt
-        : '';
+    const alarmMes = inputValue === '' ? nullInputHandler(event) : notNullInputHandler();
     const visibilityStatus = alarmMes !== '';
     setAlarmMessage(alarmMes);
-    setVisibility(visibilityStatus);
-    setParameterValid(!visibilityStatus);
+    setLabelVisibility(visibilityStatus);
+    setParameter((preState: any) => ({ ...preState, valid: !visibilityStatus }));
   };
 
   return (
@@ -118,7 +110,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
         onChange={inputChangeHandler}
         onBlur={name === 'username' ? nameUniqueCheck : inputBlurHandler}
       />
-      <> {visibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
+      <> {labelvisibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
     </ValidatedInputsContainer>
   );
 };
