@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
@@ -26,11 +26,23 @@ const ResisterButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
 `;
+export const isSubmitContext = createContext({});
 
 const RegisterForm: React.FC = () => {
-  const [usernameInputValue, setUserNameInputValue] = useState({ value: '', valid: false });
-  const [emailInputValue, setEmailInputValue] = useState({ value: '', valid: false });
-  const [passwordInputValue, setPasswordInputValue] = useState({ value: '', valid: false });
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [usernameInputValue, setUserNameInputValue] = useState({
+    value: '',
+    valid: false,
+  });
+  const [emailInputValue, setEmailInputValue] = useState({
+    value: '',
+    valid: false,
+  });
+  const [passwordInputValue, setPasswordInputValue] = useState({
+    value: '',
+    valid: false,
+  });
 
   const submitionHandler = (e: React.FormEvent<HTMLFormElement>, fun: any) => {
     e.preventDefault();
@@ -46,6 +58,9 @@ const RegisterForm: React.FC = () => {
             fun(false);
           }
         });
+      setIsSubmit(false);
+    } else {
+      setIsSubmit(true);
     }
   };
 
@@ -53,22 +68,25 @@ const RegisterForm: React.FC = () => {
     <RootContext.Consumer>
       {(value) => (
         <RegisterFormContainer
+          noValidate
           onSubmit={(event) => {
             submitionHandler(event, value.changeModalToOpen);
           }}
         >
-          <ValidationInputs
-            name="username"
-            setParameter={setUserNameInputValue}
-          />
-          <ValidationInputs
-            name="email"
-            setParameter={setEmailInputValue}
-          />
-          <ValidationInputs
-            name="password"
-            setParameter={setPasswordInputValue}
-          />
+          <isSubmitContext.Provider value={isSubmit}>
+            <ValidationInputs
+              name="username"
+              setParameter={setUserNameInputValue}
+            />
+            <ValidationInputs
+              name="email"
+              setParameter={setEmailInputValue}
+            />
+            <ValidationInputs
+              name="password"
+              setParameter={setPasswordInputValue}
+            />
+          </isSubmitContext.Provider>
           <ResisterButton type="submit">Create Account</ResisterButton>
         </RegisterFormContainer>
       )}
