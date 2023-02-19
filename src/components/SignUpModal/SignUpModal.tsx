@@ -69,7 +69,15 @@ const RegisterModal: React.FC<Props> = (props: Props) => (
     <BackAndCloseButtonContainer>
       <RootContext.Consumer>
         {(value) => {
-          return <BackButton onClick={value.openLogInPopWindow}>{'<'} Back</BackButton>;
+          return (
+            <BackButton
+              onClick={(event) => {
+                value.changeDisplayLogInPopWindow(event, true);
+              }}
+            >
+              {'<'} Back
+            </BackButton>
+          );
         }}
       </RootContext.Consumer>
       <CloseButton onClick={props.setModalIsOpen}>X</CloseButton>
