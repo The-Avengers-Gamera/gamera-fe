@@ -10,4 +10,4 @@ export interface IArticle {
   updatedTime: string;
 }
 
-export interface IArticlePost extends Omit<IArticle, 'id'> {}
+export interface IArticlePost extends Omit<IArticle, 'id' | 'createdTime' | 'updatedTime'> {}

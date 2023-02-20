@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: '/game', element: <Game /> },
       { path: '/news', element: <News /> },
-      { path: '/review', element: <Review /> },
+      { path: '/review/:id', element: <Review /> },
       { path: '/settings', element: <Settings /> },
       { path: '/post', element: <Post /> },
       { path: '*', element: <NoMatch /> },

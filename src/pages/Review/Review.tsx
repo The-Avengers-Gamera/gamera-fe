@@ -1,5 +1,8 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
-const ReviewPage = () => <div>ReviewPage</div>;
+const ReviewPage = () => {
+  const { id } = useParams();
+  return <div>ReviewPage with id: {id}</div>;
+};
 
 export default ReviewPage;

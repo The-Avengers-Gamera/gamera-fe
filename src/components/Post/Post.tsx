@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import MuiTextField from '@mui/material/TextField';
 import MuiButton from '@mui/material/Button';
@@ -8,6 +9,10 @@ import SideInfo from './SideInfo/SideInfo';
 import TagPicker from './TagPicker';
 import TextEditor from '../TextEditor';
 import ButtonBack from './ButtonBack';
+import { IArticlePost } from '@/interfaces/article';
+import { EArticleType } from '@/constants/article';
+import { createArticle } from '@/services/article';
+import randomImgUrl from '@/utils/randomImgUrl';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -46,22 +51,9 @@ const TextField = styled(MuiTextField)`
     padding-left: 0;
     font-size: 30px;
   }
-  & label.Mui-focused {
-    color: green;
-  }
-  & .MuiInput-underline:after {
-    border-bottom-color: green;
-  }
   & .MuiOutlinedInput-root {
     & fieldset {
       border: none;
-      border-color: red;
-    }
-    &:hover fieldset {
-      border-color: yellow;
-    }
-    &.Mui-focused fieldset {
-      border-color: green;
     }
   }
 `;
@@ -103,16 +95,32 @@ const PublishButton = styled(MuiLoadingButton)`
 `;
 
 const Post = () => {
-  const formik = useFormik({
-    initialValues: {
-      title: '',
-      contents: '',
-      tagList: [],
-    },
-    onSubmit: async (values, { setSubmitting }) => {
-      setSubmitting(false);
+  const navigate = useNavigate();
 
-      // TODO: handle notification
+  const navToArticlePage = (id: number, articleType: EArticleType) => {
+    const type = articleType.toLocaleLowerCase();
+    navigate(`/${type}/${id}`, { replace: true });
+  };
+
+  const initialValues: IArticlePost = {
+    coverImgUrl: randomImgUrl(800, 400),
+    title: '',
+    text: '',
+    type: EArticleType.REVIEW,
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit: async (article, { setSubmitting }) => {
+      setSubmitting(true);
+      try {
+        const {
+          data: { id, type },
+        } = await createArticle(article);
+        navToArticlePage(id, type);
+      } catch (error) {
+        // TODO error notification
+      }
     },
   });
 
@@ -136,11 +144,11 @@ const Post = () => {
               <TagPicker />
             </Header>
             <TextEditor
-              value={formik.values.contents}
-              // onChange={(value: string) => {
-              //   formik.setFieldValue('contents', value);
-              // }}
-              placeholder={`Say something about ${88} ...`}
+              value={formik.values.text}
+              onChange={(value: string) => {
+                formik.setFieldValue('text', value);
+              }}
+              placeholder="write your post content here..."
             />
             <ButtonGroup>
               <PublishButton
@@ -150,12 +158,7 @@ const Post = () => {
               >
                 Publish
               </PublishButton>
-              <Button
-                variant="outlined"
-                onClick={() => {}}
-              >
-                Save draft
-              </Button>
+              <Button variant="outlined">Save draft</Button>
             </ButtonGroup>
           </form>
         </FormWrapper>

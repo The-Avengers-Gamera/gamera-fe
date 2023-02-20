@@ -41,6 +41,7 @@
       {
         "allowSingleExtends": true
       }
-    ]
+    ],
+    "@typescript-eslint/no-inferrable-types": "warn"
   }
 }

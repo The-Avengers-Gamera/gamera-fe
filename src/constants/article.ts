@@ -1,4 +1,4 @@
 export enum EArticleType {
-  NEWS = 'news',
-  REVIEW = 'review',
+  NEWS = 'NEWS',
+  REVIEW = 'REVIEW',
 }
