@@ -1,6 +1,4 @@
-import ReactDOM from 'react-dom';
 import styles from './css/loginForm.module.css';
-import SignUpModal from '@/components/SignUpModal';
 import { RootContext } from '@/layouts/Root';
 
 function closeModal() {
@@ -37,6 +35,7 @@ const LoginForm = () => {
           <label htmlFor="email">
             <span className={styles.labels}> Email</span>
             <input
+              className={styles.login_input}
               id="email"
               type="text"
               name="email"
@@ -49,6 +48,7 @@ const LoginForm = () => {
           <label htmlFor="password">
             <span className={styles.labels}> Password</span>
             <input
+              className={styles.login_input}
               type="password"
               name="password"
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
@@ -73,19 +73,20 @@ const LoginForm = () => {
         </div>
         <RootContext.Consumer>
           {(value) => (
-            <div className={styles.create_account}>
+            <div className="create-account ">
               <button
-                className={styles.create_account_button}
                 type="button"
+                className={styles.create_account_button}
                 onClick={(event) => {
                   value.changeDisplayLogInPopWindow(event, false);
                 }}
               >
-                Create a free account
+                Create a free account {'>'}
               </button>
             </div>
           )}
         </RootContext.Consumer>
+
         <div className={styles.term_policy_box}>
           <a
             href="https://www.ziffdavis.com/terms-of-use"
