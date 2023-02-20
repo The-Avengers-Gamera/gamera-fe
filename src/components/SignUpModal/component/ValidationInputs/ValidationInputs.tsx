@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { isSubmitContext } from '../RegisterForm/RegisterForm';
 
 const ValidatedInputsContainer = styled.div`
   width: 20rem;
@@ -41,6 +42,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
   const [labelvisibility, setLabelVisibility] = useState(false);
   const [regularExpression, setRegularExpression] = useState(/^[\s\S]*$/);
   const [formatPrompt, setFormatPrompt] = useState('');
+  const isSubmit = useContext(isSubmitContext);
 
   const regularExpressionController = (type: string) => {
     switch (type) {
@@ -85,21 +87,23 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
     setParameter((preState: any) => ({ ...preState, value: event.target.value }));
   };
 
-  const nullInputHandler = (event: React.FocusEvent<HTMLInputElement>) =>
-    `${event.target.name} required`;
+  const nullInputHandler = (capitalizedName: string) => `${capitalizedName} required`;
 
   const notNullInputHandler = () => {
     return !inputValue.match(regularExpression) ? formatPrompt : '';
   };
 
-  const inputBlurHandler = (event: React.FocusEvent<HTMLInputElement>) => {
-    const alarmMes = inputValue === '' ? nullInputHandler(event) : notNullInputHandler();
+  const inputBlurHandler = () => {
+    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+    const alarmMes = inputValue === '' ? nullInputHandler(capitalizedName) : notNullInputHandler();
     const visibilityStatus = alarmMes !== '';
     setAlarmMessage(alarmMes);
     setLabelVisibility(visibilityStatus);
     setParameter((preState: any) => ({ ...preState, valid: !visibilityStatus }));
   };
-
+  useEffect(() => {
+    if (isSubmit) inputBlurHandler();
+  }, [isSubmit]);
   return (
     <ValidatedInputsContainer>
       <span>{name.substring(0, 1).toLowerCase() + name.substring(1)}</span>
