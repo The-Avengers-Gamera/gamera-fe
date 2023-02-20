@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
