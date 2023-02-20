@@ -1,46 +1,49 @@
-.login_form_modal {
-  display: inline-block;
+.login-form-modal {
   width: 30rem;
+  height: 36rem;
   overflow: auto; /* Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
   background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
-  padding-bottom: 35px;
+  padding-top: 60px;
   clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
 }
 
-/* close button */
-.close_btn {
-  float: right;
-  margin-right: 5%;
-  margin-top: 5%;
-  color: #fff;
-  background: transparent;
-  border: 0cm;
-  font-size: 35px;
-  font-weight: lighter;
-}
-
-/* Close button on hover */
-.close_btn :hover,
-.close_btn :focus {
-  color: rgba(109, 219, 3, 1);
-  cursor: pointer;
-}
-
-.login_form {
+.login-form {
   text-align: center;
   /* justify-content: center;
     align-items: center; */
   /* background-color: #fefefe; */
-  margin: 5px auto;
+  margin: 5px auto; /* 15% from the top and centered */
   /* border: 1px solid #888; */
   width: 70%; /* Could be more or less, depending on screen size */
   color: rgba(205, 205, 205, 1);
   font-size: 18px;
-  margin-top: 20%;
 }
 
-.login_title {
+/* close button */
+.close {
+  /* Position it in the top right corner outside of the modal */
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #fff;
+  font-size: 35px;
+  font-weight: bold;
+}
+/* Close button on hover */
+.close:hover,
+.close:focus {
+  color: rgba(109, 219, 3, 1);
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s;
+}
+
+.login-title {
   margin-top: -10%;
   font-size: 36px;
 }
@@ -51,8 +54,13 @@
   font-weight: 500;
 }
 
+input:required {
+  /* box-shadow: 4px 4px 20px rgba(200, 0, 0, 0.85); */
+}
+
 /* Full-width inputs */
-.login_input {
+input[type='text'],
+input[type='password'] {
   font-size: 18px;
   width: 100%;
   padding: 12px 20px;
@@ -66,8 +74,8 @@
 }
 
 /*  Styles for the login button */
-.login_btn {
-  width: 58%;
+.login-btn {
+  width: 56%;
   height: 42px;
   border: none;
   background-color: #6ddb03;
@@ -79,12 +87,8 @@
   padding: 1px 30px;
 }
 
-.login_btn:hover {
-  cursor: pointer;
-}
-
-.forgotPwd_btn {
-  width: 58%;
+.forgotPwd-btn {
+  width: 56%;
   height: 42px;
   border: 1px solid #6ddb03;
   background-color: rgba(36, 36, 41, 1);
@@ -93,24 +97,20 @@
   font-size: 18px;
   font-weight: 800;
   margin-top: 7%;
+  padding: 8px 30px;
 }
 
-.forgotPwd_btn:hover {
-  cursor: pointer;
-}
-
-.create_account {
+.create-account {
   margin-top: 15%;
   color: rgba(107, 214, 7, 1);
   font-weight: 700;
 }
 
-.create_account:hover {
+.create-account:hover {
   text-decoration: underline;
-  cursor: pointer;
 }
 
-.term_policy_box {
+.term-policy-box {
   display: flex;
   justify-content: space-around;
   margin-top: 7%;
