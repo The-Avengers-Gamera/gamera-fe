@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import styles from './css/loginForm.module.css';
 import SignUpModal from '@/components/SignUpModal';
+import { RootContext } from '@/layouts/Root';
 
 function closeModal() {
   const modal = document.getElementById('id01');
@@ -70,10 +71,21 @@ const LoginForm = () => {
             className={styles.forgotPwd_btn}
           />
         </div>
-        <div className={styles.create_account}>
-          <span id="id02">Create a free account &gt;</span>
-        </div>
-
+        <RootContext.Consumer>
+          {(value) => (
+            <div className={styles.create_account}>
+              <button
+                className={styles.create_account_button}
+                type="button"
+                onClick={(event) => {
+                  value.changeDisplayLogInPopWindow(event, false);
+                }}
+              >
+                Create a free account
+              </button>
+            </div>
+          )}
+        </RootContext.Consumer>
         <div className={styles.term_policy_box}>
           <a
             href="https://www.ziffdavis.com/terms-of-use"

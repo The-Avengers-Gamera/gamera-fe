@@ -1,6 +1,7 @@
 .login_form_modal {
   display: inline-block;
   width: 30rem;
+  height: 45rem;
   overflow: auto; /* Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
   background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
@@ -103,10 +104,19 @@ input[type='password'] {
 .create_account {
   margin-top: 15%;
   color: rgba(107, 214, 7, 1);
-  font-weight: 700;
 }
 
-.create_account:hover {
+.create_account_button {
+  height: 40px;
+  width: 180px;
+  background-color: rgba(107, 214, 7, 1);
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+.create_account_button:hover {
   text-decoration: underline;
   cursor: pointer;
 }

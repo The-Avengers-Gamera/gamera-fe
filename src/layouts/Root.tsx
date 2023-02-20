@@ -60,7 +60,7 @@ const Main = styled.main`
 
 const RootLayout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [displayLogInPopWindow, setDisplayLogInPopWindow] = useState(false);
+  const [displayLogInPopWindow, setDisplayLogInPopWindow] = useState(true);
 
   const changeModalToOpen = (show: boolean) => {
     setModalIsOpen(show);

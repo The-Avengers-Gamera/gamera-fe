@@ -11,22 +11,24 @@ const ValidatedInputsContainer = styled.div`
 `;
 
 const Inputs = styled.input`
-  height: 2.5rem;
+  height: 3rem;
   margin-top: 0.5rem;
   margin-bottom: 0.7rem;
   border-radius: 4px;
   border: 2px solid green;
-  background-color: black;
+  background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
   color: white;
+  border-radius: 8px;
 `;
 
-const AlarmLabel = styled.span`
+const AlarmLabel = styled.div`
+  float: right;
   background: rgba(107, 214, 7, 0.2);
   border-radius: 4px;
   opacity: 1;
   color: green;
-  font-size: 0.3rem;
-  padding-left: 1rem;
+  font-size: 1rem;
+  padding-left: 0.5rem;
 `;
 
 type Props = {
@@ -104,9 +106,10 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     if (isSubmit) inputBlurHandler();
   }, [isSubmit]);
+
   return (
     <ValidatedInputsContainer>
-      <span>{name.substring(0, 1).toLowerCase() + name.substring(1)}</span>
+      <span>{name.substring(0, 1).toUpperCase() + name.substring(1)}</span>
       <Inputs
         id={name}
         required

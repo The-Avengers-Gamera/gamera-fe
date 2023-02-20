@@ -5,8 +5,23 @@ import ValidationInputs from '../ValidationInputs';
 import { RootContext } from '@/layouts/Root';
 
 const RegisterFormContainer = styled.form`
-  margin-top: 1rem;
-  height: 26rem;
+  margin-top: 3%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 60%;
+`;
+
+const RigisterInputContainer = styled.form`
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ResisterButtonContainer = styled.div`
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,8 +29,7 @@ const RegisterFormContainer = styled.form`
 
 const ResisterButton = styled.button`
   width: 12rem;
-  height: 9rem;
-  margin-top: 1.5rem;
+  height: 8rem;
   background-color: #6bd607;
   border: none;
   border-radius: 3px;
@@ -26,6 +40,7 @@ const ResisterButton = styled.button`
   font-size: 1rem;
   font-weight: 700;
 `;
+
 export const isSubmitContext = createContext({});
 
 const RegisterForm: React.FC = () => {
@@ -87,7 +102,9 @@ const RegisterForm: React.FC = () => {
               setParameter={setPasswordInputValue}
             />
           </isSubmitContext.Provider>
-          <ResisterButton type="submit">Create Account</ResisterButton>
+          <ResisterButtonContainer>
+            <ResisterButton type="submit">Create Account</ResisterButton>
+          </ResisterButtonContainer>
         </RegisterFormContainer>
       )}
     </RootContext.Consumer>
