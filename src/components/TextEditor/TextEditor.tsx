@@ -19,6 +19,7 @@ const Editor = styled.div`
     &.ql-blank::before {
       color: #696363;
       font-style: unset;
+      left: 32px;
     }
   }
   .ql-snow {
@@ -32,13 +33,16 @@ const Editor = styled.div`
 interface TextEditorProps {
   value: string;
   placeholder?: string;
-  onChange?: () => void;
+  onChange(e: string): void;
 }
 
 const modules = {
   toolbar: [
-    ['bold', 'italic'],
     [
+      'bold',
+      'italic',
+      'underline',
+      'link',
       {
         list: 'bullet',
       },
