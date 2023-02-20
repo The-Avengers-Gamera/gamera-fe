@@ -9,7 +9,7 @@ import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer';
 import SignUpModal from '@/components/SignUpModal';
-import Loginform from '@/components/Login/loginForm';
+import LoginForm from '@/components/Login/loginForm';
 
 interface RootContextType {
   changeModalToOpen: (show: boolean) => void;
@@ -81,7 +81,7 @@ const RootLayout = () => {
           ariaHideApp={false}
         >
           {displayLogInPopWindow ? (
-            <Loginform />
+            <LoginForm />
           ) : (
             <SignUpModal
               setModalIsOpen={() => {

@@ -150,12 +150,7 @@ const Post = () => {
               >
                 Publish
               </PublishButton>
-              <Button
-                variant="outlined"
-                onClick={() => {}}
-              >
-                Save draft
-              </Button>
+              <Button variant="outlined">Save draft</Button>
             </ButtonGroup>
           </form>
         </FormWrapper>
