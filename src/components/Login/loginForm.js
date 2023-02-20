@@ -36,6 +36,7 @@ const LoginForm = () => {
           <label htmlFor="email">
             <span className={styles.labels}> Email</span>
             <input
+              className={styles.login_input}
               id="email"
               type="text"
               name="email"
@@ -48,6 +49,7 @@ const LoginForm = () => {
           <label htmlFor="password">
             <span className={styles.labels}> Password</span>
             <input
+              className={styles.login_input}
               type="password"
               name="password"
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
