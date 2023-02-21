@@ -7,6 +7,7 @@ import PopularReviews from './components/PopularReviews';
 import TrendingNews from './components/TrendingNews';
 import theme from '@/styles/theme';
 import MostLikes from './components/MostLikes/MostLikes';
+import BackedBy from './components/BackedBy/BackedBy';
 
 const HomePage = () => (
   <>
@@ -19,6 +20,7 @@ const HomePage = () => (
     <Box sx={{ bgcolor: theme.color.bg_light }}>
       <PopularReviews />
       <MostLikes />
+      <BackedBy />
     </Box>
   </>
 );
