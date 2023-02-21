@@ -99,17 +99,6 @@
   cursor: pointer;
 }
 
-.create_account {
-  margin-top: 15%;
-  color: rgba(107, 214, 7, 1);
-  font-weight: 700;
-}
-
-.create_account:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .create_account_button {
   margin-top: 10%;
   font-weight: 700;
@@ -117,6 +106,11 @@
   font-size: 16px;
   color: rgba(107, 214, 7, 1);
   background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
+}
+
+.create_account_button:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .term_policy_box {

@@ -7,11 +7,6 @@ function closeModal() {
   window.location.reload();
 }
 
-const createNewBtn = document.getElementById('id02');
-// createNewBtn.addEventListener('click', () => {
-//   return <SignUpModal />;
-// });
-
 const LoginForm = () => {
   return (
     <div
