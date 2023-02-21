@@ -7,23 +7,28 @@ const Container = styled.div`
 
   border: 1px solid #fff;
 
-  display: flex;
+  color: #fff;
 
-  & .cardIndex {
-    border-radius: 50% solid #fff;
-    color: #fff;
+  & .reviewTitle {
+    font-family: Roboto;
+
+    margin-bottom: 5px;
   }
+  & .comment {
+    font-family: Roboto;
 
-  & .cardItem {
-    color: #fff;
-
-    & .reviewTitle {
-      font-family: Roboto;
-    }
-    & .comment {
-      font-family: Roboto;
-    }
+    width: 70px;
+    height: 20px;
+    display: flex;
+    align-items: center;
   }
+`;
+
+const ChatIcon = styled(ChatRoundedIcon)`
+  color: ${({ theme }) => theme.color.main};
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
 `;
 
 type Props = {
@@ -34,12 +39,10 @@ type Props = {
 const ReviewCard = ({ title, commentNum }: Props) => {
   return (
     <Container>
-      <div className="cardItem">
-        <div className="reviewTitle">{title}</div>
-        <div className="comment">
-          <ChatRoundedIcon sx={{ backgroundColor: 'blue' }} />
-          <span>{commentNum}</span>
-        </div>
+      <div className="reviewTitle">{title}</div>
+      <div className="comment">
+        <ChatIcon />
+        <span>{commentNum}</span>
       </div>
     </Container>
   );
