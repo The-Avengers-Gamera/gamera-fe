@@ -7,7 +7,7 @@ const Container = styled.div`
 
   height: 100px;
 
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-size: 28px;
   font-weight: 800;
 `;

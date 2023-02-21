@@ -11,6 +11,9 @@ const Container = styled.div`
   & button {
     padding: 8px 16px;
     border-radius: 8px;
+
+    background-color: ${({ theme }) => theme.color.main};
+    color: #3d3d3d;
   }
 `;
 
