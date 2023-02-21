@@ -14,6 +14,7 @@ const Container = styled.div`
 const ToolBar = () => {
   return (
     <Container>
+      {/* should employ state, instead of :hover when click on a button */}
       <PlatformBars />
       <SortBars />
     </Container>
