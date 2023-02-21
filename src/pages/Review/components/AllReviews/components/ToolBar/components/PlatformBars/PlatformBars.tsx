@@ -9,18 +9,23 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-const PlatformButton = styled(BarButton)`
-  width: 150px;
-`;
+interface Props {
+  currentPlatform: string;
+  setCurrentPlatform: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const PlatformBars = () => {
+const PlatformBars = ({ currentPlatform, setCurrentPlatform }: Props) => {
+  // const handleClick = () => {
+  //   setCurrentPlatform;
+  // };
+
   return (
     <Container>
-      <PlatformButton>All</PlatformButton>
-      <PlatformButton>PlayStation</PlatformButton>
-      <PlatformButton>Nintendo</PlatformButton>
-      <PlatformButton>Xbox</PlatformButton>
-      <PlatformButton>PC</PlatformButton>
+      <BarButton>All</BarButton>
+      <BarButton>PlayStation</BarButton>
+      <BarButton>Nintendo</BarButton>
+      <BarButton>Xbox</BarButton>
+      <BarButton>PC</BarButton>
     </Container>
   );
 };

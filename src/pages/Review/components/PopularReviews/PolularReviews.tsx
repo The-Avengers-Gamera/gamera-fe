@@ -2,25 +2,51 @@ import styled from 'styled-components';
 import Top5Reviews from './components/Top5Reviews';
 import TopReviewCover from './components/TopReviewCover';
 
-const Container = styled.div`
+const GeneralContainer = styled.div`
   background-color: #000000;
   height: 575px;
 
-  padding: 95px 85px;
+  padding: 0px 85px 95px;
 
   position: relative;
-  display: flex;
-  align-items: center;
 
   clip-path: polygon(0% 0%, 35% 0%, 37% 5%, 63% 5%, 65% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+  & .titleContainer {
+    height: 95px;
+    position: relative;
+
+    & h2 {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 450px;
+
+      text-align: center;
+
+      border-bottom: solid 1px grey;
+    }
+  }
+
+  & .bodyContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 `;
 
 const PopularReviews = () => {
   return (
-    <Container>
-      <TopReviewCover />
-      <Top5Reviews />
-    </Container>
+    <GeneralContainer>
+      <div className="titleContainer">
+        <h2>Popular Reviews</h2>
+      </div>
+
+      <div className="bodyContainer">
+        <TopReviewCover />
+        <Top5Reviews />
+      </div>
+    </GeneralContainer>
   );
 };
 
