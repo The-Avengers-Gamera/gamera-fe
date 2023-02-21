@@ -19,7 +19,6 @@ const AllReviews = () => {
   return (
     <Container>
       <h2>All Reveiws</h2>
-
       <ToolBar />
       <ReviewCards />
     </Container>

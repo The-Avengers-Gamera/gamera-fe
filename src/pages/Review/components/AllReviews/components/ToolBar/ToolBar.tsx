@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 import PlatformBars from './components/PlatformBars';
 import SortBars from './components/SortBars';
@@ -12,10 +14,15 @@ const Container = styled.div`
 `;
 
 const ToolBar = () => {
+  const [currentPlatform, setCurrentPlatform] = useState<string>('all');
+
   return (
     <Container>
       {/* should employ state, instead of :hover when click on a button */}
-      <PlatformBars />
+      <PlatformBars
+        currentPlatform={currentPlatform}
+        setCurrentPlatform={setCurrentPlatform}
+      />
       <SortBars />
     </Container>
   );
