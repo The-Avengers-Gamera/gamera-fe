@@ -28,7 +28,9 @@ const TrendingNewsTitle = styled.p`
 const NewsContainer = styled.div`
   /* position: relative; */
   margin-top: 110px;
+  padding-top: 30px;
   background-color: #000000;
+  height: 575px;
   clip-path: polygon(
     0 0,
     35.7% 0,
@@ -39,6 +41,16 @@ const NewsContainer = styled.div`
     100% 100%,
     0 100%
   );
+  display: flex;
+
+  .trending-news-item-container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+  }
 `;
 
 interface TrendingNewsList {
@@ -150,9 +162,14 @@ const TrendingNews = () => {
 
       <NewsContainer>
         <TrendingNewsFirstItem news={trendingNews[0]} />
-        {trendingNews.slice(1).map((item) => (
-          <TrendingNewsItem news={item} />
-        ))}
+        <ul className="trending-news-item-container">
+          {trendingNews.slice(1).map((item, index) => (
+            <TrendingNewsItem
+              news={item}
+              order={index + 2 === 10 ? `10` : `0${index + 2}`}
+            />
+          ))}
+        </ul>
       </NewsContainer>
     </OuterContainer>
   );
