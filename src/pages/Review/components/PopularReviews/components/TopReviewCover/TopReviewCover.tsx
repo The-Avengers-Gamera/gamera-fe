@@ -3,9 +3,11 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 755px;
   height: 390px;
+  border-radius: 25px;
   object-fit: cover;
 
   & img {
+    border-radius: 25px;
     width: 100%;
     height: 100%;
   }
