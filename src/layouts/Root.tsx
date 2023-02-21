@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
-import Footer from '@/components/Footer';
+import Footer from '@/components/Footer/Footer';
 import SignUpModal from '@/components/SignUpModal';
 import Loginform from '@/components/Login/loginForm';
 
