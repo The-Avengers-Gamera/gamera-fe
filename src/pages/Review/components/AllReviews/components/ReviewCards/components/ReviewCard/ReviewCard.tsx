@@ -161,40 +161,47 @@ type ReviewCardProps = {
   likeNum: string;
 };
 
-// const ReviewCard = ({ coverUrl, title, commNum, likeNum }: LikeCardProps) => {
-const ReviewCard = () => {
+const ReviewCard = ({
+  coverUrl,
+  title,
+  daysAndOverview,
+  game,
+  author,
+  commNum,
+  likeNum,
+}: ReviewCardProps) => {
   return (
     <Container>
       <Cover>
         {/* fake href */}
         <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
           <img
-            src="fake"
+            src={coverUrl}
             alt=""
           />
         </a>
       </Cover>
       <ReviewContent>
-        <div className="Title_container">Metroid Prime Remastered Review</div>
-        <div className="DayAndOverview_container">6h ago - Optimized Prime.</div>
+        <div className="Title_container">{title}</div>
+        <div className="DayAndOverview_container">{daysAndOverview}</div>
         <div className="Others_container">
           <div className="Game_container">
             <div className="Game_cover">
               <GameIcon />
             </div>
-            <span>Metroid Prime: Remasteredsshajhskjahskjhkjshshs</span>
+            <span>{game}</span>
           </div>
           <div className="Author_container">
             <AuthorIcon />
-            <span>LUKE REILLY</span>
+            <span>{author}</span>
           </div>
           <div className="Like_container">
             <LikeIcon />
-            <span>64</span>
+            <span>{likeNum}</span>
           </div>
           <div className="Comment_container">
             <CommentIcon />
-            <span>36</span>
+            <span>{commNum}</span>
           </div>
         </div>
       </ReviewContent>
