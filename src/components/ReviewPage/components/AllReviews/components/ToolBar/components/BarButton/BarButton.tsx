@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactNode } from 'react';
 
 const StyledButton = styled.button`
-  width: 130px;
+  min-width: 130px;
   height: 45px;
   border-radius: 8px;
 

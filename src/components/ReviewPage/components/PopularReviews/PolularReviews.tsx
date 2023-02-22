@@ -26,7 +26,7 @@ const GeneralContainer = styled.div`
 
       text-align: center;
 
-      border-bottom: 1px solid #5d5d5d; // TODO: manage the color using theme
+      border-bottom: 1px solid #5d5d5d; // TODO: manage the color using theme instead
     }
   }
 
