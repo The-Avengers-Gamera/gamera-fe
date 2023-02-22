@@ -6,6 +6,10 @@ import BarButton from '../BarButton';
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+
+  & BarButton {
+    width: 190px;
+  }
 `;
 
 const SortBars = () => {
