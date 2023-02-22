@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 755px;
+  max-width: 755px;
   height: 390px;
   border-radius: 25px;
   object-fit: cover;

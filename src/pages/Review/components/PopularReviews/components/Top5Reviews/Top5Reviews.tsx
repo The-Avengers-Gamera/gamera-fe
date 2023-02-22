@@ -10,7 +10,7 @@ import four from './src/four.png';
 import five from './src/five.png';
 
 const Container = styled.div`
-  border: 1px solid #fff;
+  //border: 1px solid #fff;
   width: 375px;
   height: 350px;
 
@@ -38,7 +38,7 @@ const Container = styled.div`
   }
 `;
 
-// mock data ----------------------------------------------------
+// TODO: replace mock data that represents data from backend with real axois http request --------------
 type Props = {
   title: string;
   commentNum: number;
@@ -51,7 +51,9 @@ const mockTop5Reivews: Props[] = [
   { title: 'Zelda:breadth of the wild review', commentNum: 44 },
   { title: 'Red dead redemption review', commentNum: 55 },
 ];
-// ----------------------------------------------------
+// TODO: -----------------------------------------------------------------------------------
+
+const cardIndexesImgs = [one, two, three, four, five];
 
 const Top5Reviews = () => {
   const [top5Reviews, setTop5Reviews] = useState(mockTop5Reivews);
@@ -62,38 +64,18 @@ const Top5Reviews = () => {
 
       {/* a list of card index img */}
       <ul className="cardsIndexes">
-        <li>
-          <img
-            src={one}
-            alt="1"
-          />
-        </li>
-        <li>
-          <img
-            src={two}
-            alt="1"
-          />
-        </li>
-        <li>
-          <img
-            src={three}
-            alt="1"
-          />
-        </li>
-        <li>
-          <img
-            src={four}
-            alt="1"
-          />
-        </li>
-        <li>
-          <img
-            src={five}
-            alt="1"
-          />
-        </li>
+        {cardIndexesImgs.map((cardIndexImg) => {
+          return (
+            <li>
+              <img
+                src={cardIndexImg}
+                alt="cardIndex"
+              />
+            </li>
+          );
+        })}
       </ul>
-
+      {/* a list of review info card body */}
       <ul className="cardsBody">
         {top5Reviews.map(({ title, commentNum }) => {
           return (

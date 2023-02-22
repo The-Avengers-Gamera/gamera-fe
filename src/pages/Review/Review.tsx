@@ -7,8 +7,9 @@ import PopularReviews from './components/PopularReviews';
 // css----------------------------------------------------
 const PageContainer = styled.div`
   /* TODO: use theme */
-  background-color: grey;
-  // height: 500px;
+  background-color: ${({ theme }) => theme.color.bg_light};
+
+  margin-top: 100px;
 `;
 
 // component --------------------------------------------------
