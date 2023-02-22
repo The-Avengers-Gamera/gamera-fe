@@ -7,9 +7,13 @@ const Container = styled.div`
 
   height: 100px;
 
-  text-transform: uppercase;
-  font-size: 28px;
-  font-weight: 800;
+  & h2 {
+    font-family: Gen Jyuu Gothic Monospace;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0em;
+  }
 `;
 
 const PageTitle = () => {

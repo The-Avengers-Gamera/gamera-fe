@@ -15,10 +15,6 @@ interface Props {
 }
 
 const PlatformBars = ({ currentPlatform, setCurrentPlatform }: Props) => {
-  // const handleClick = () => {
-  //   setCurrentPlatform;
-  // };
-
   return (
     <Container>
       <BarButton>All</BarButton>
