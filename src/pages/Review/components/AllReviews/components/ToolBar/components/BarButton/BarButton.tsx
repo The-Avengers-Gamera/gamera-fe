@@ -2,10 +2,6 @@ import styled from 'styled-components';
 
 import { ReactNode } from 'react';
 
-interface Props {
-  children: ReactNode;
-}
-
 const StyledButton = styled.button`
   width: 130px;
   height: 45px;
@@ -21,19 +17,24 @@ const StyledButton = styled.button`
 
   margin-right: 10px;
 
-  background-color: #222430;
-  color: #ffffff;
+  background-color: #222430; // TODO: manage the color using theme
+  color: #ffffff; // TODO: manage the color using theme
 
   font-family: Poppins;
   font-size: 18px;
   font-weight: 400;
 
   &:hover {
-    background-color: #6ddb03;
-    color: #3d3d3d;
+    background-color: ${({ theme }) => theme.color.main};
+    color: #3d3d3d; // TODO: manage the color using theme
   }
 `;
 
+interface Props {
+  children: ReactNode;
+}
+
+// this component represents a styled button in tool bar
 const BarButton = ({ children }: Props) => {
   return <StyledButton>{children}</StyledButton>;
 };

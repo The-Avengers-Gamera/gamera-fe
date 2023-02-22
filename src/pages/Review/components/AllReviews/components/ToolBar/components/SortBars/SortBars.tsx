@@ -15,7 +15,7 @@ const SortBars = () => {
         Sort by latest <KeyboardArrowDownIcon />
       </BarButton>
       <BarButton>
-        All Genres <KeyboardArrowDownIcon />{' '}
+        All Genres <KeyboardArrowDownIcon />
       </BarButton>
     </Container>
   );

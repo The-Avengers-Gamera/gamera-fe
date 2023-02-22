@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import LoadMore from './components/LoadMore';
 
 const Container = styled.div`
+  //border: 1px solid #fff;
   margin-top: 45px;
-  border: 1px solid #fff;
 
   max-width: 960px;
 `;
@@ -15,7 +15,7 @@ const Card = styled.div`
   height: 170px;
 
   margin-bottom: 25px;
-  border-bottom: solid 1px red;
+  border-bottom: 1px solid #5d5d5d;
 `;
 
 const ReviewCards = () => {
@@ -27,6 +27,7 @@ const ReviewCards = () => {
       <Card>Card 3</Card>
       <Card>Card 4</Card>
 
+      {/* load more */}
       <LoadMore />
     </Container>
   );

@@ -5,7 +5,7 @@ const Container = styled.div`
   max-width: 360px;
   height: 50px;
 
-  border: 1px solid #fff;
+  // border: 1px solid #fff;
 
   color: #fff;
 
@@ -13,6 +13,12 @@ const Container = styled.div`
     font-family: Roboto;
 
     margin-bottom: 5px;
+
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: capitalize;
+    letter-spacing: 0em;
   }
   & .comment {
     font-family: Roboto;
@@ -21,6 +27,11 @@ const Container = styled.div`
     height: 20px;
     display: flex;
     align-items: center;
+
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0em;
   }
 `;
 
@@ -28,9 +39,10 @@ const ChatIcon = styled(ChatRoundedIcon)`
   color: ${({ theme }) => theme.color.main};
   width: 16px;
   height: 16px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 
+// type --------------
 type Props = {
   title: string;
   commentNum: number;
