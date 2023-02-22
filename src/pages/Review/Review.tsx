@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom';
+import ReviewPage from '@/components/ReviewPage';
 
-const ReviewPage = () => {
-  const { id } = useParams();
-  return <div>ReviewPage with id: {id}</div>;
+// this component is only for routing
+const Review = () => {
+  return <ReviewPage />;
 };
 
-export default ReviewPage;
+export default Review;
