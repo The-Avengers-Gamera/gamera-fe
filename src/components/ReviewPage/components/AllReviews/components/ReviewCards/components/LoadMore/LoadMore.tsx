@@ -16,6 +16,8 @@ const Container = styled.div`
 
     background-color: ${({ theme }) => theme.color.main};
     color: #3d3d3d; // TODO: manage the color using theme instead
+
+    cursor: pointer;
   }
 `;
 
