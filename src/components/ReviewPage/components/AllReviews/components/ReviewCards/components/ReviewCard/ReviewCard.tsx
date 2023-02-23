@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 100%;
   height: 170px;
-  font-family: 'Roboto Light';
+  font-family: 'Roboto';
   display: flex;
   //align-items: center;
 `;
@@ -16,6 +16,7 @@ const Container = styled.div`
 const Cover = styled.div`
   height: 145px;
   width: 245px;
+  min-width: 245px;
   //display: inline-block;
 
   & img {
