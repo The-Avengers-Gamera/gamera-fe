@@ -13,9 +13,9 @@ import style from './index.module.css';
 import logo from './assets/logo.png';
 
 const generalLinks = [
-  { route: '/game', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
+  { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
   { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
-  { route: '/review', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
+  { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
   { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
 ];
 const conditionalLinks = [

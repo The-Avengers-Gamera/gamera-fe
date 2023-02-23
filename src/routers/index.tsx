@@ -49,26 +49,20 @@ const routes: RouteObject[] = [
         element: <>user page</>,
         children: [
           {
-            path: '/my-articles',
+            path: 'my-articles',
             element: <>remember to replace...</>,
             children: [{ path: 'article/:id', element: <>remember to replace...</> }],
           },
           {
-            path: '/liked',
+            path: 'liked',
             element: <>remember to replace...</>,
           },
           {
-            path: '/commented',
+            path: 'commented',
             element: <>remember to replace...</>,
             children: [{ path: ':id', element: <>remember to replace...</> }],
           },
         ],
-      },
-
-      {
-        path: '/account',
-        element: <>remember to replace...</>,
-        children: [{ path: ':id', element: <>remember to replace...</> }],
       },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },
