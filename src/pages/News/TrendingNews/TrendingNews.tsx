@@ -23,12 +23,16 @@ const TrendingNewsTitle = styled.p`
   span {
     margin-left: 10px;
   }
+
+  .icon {
+    color: ${({ theme }) => theme.color.main};
+  }
 `;
 
 const NewsContainer = styled.div`
   /* position: relative; */
   margin-top: 110px;
-  padding-top: 30px;
+  padding-top: 130px;
   background-color: #000000;
   height: 575px;
   clip-path: polygon(
@@ -46,10 +50,12 @@ const NewsContainer = styled.div`
   .trending-news-item-container {
     flex-grow: 1;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     padding: 0 30px;
+    height: 370px;
   }
 `;
 
@@ -156,7 +162,10 @@ const TrendingNews = () => {
   return (
     <OuterContainer>
       <TrendingNewsTitle>
-        <TrendingUpIcon fontSize="large" />
+        <TrendingUpIcon
+          fontSize="large"
+          className="icon"
+        />
         <span>Trending News</span>
       </TrendingNewsTitle>
 

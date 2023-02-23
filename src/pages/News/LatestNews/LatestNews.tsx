@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { Button } from '@mui/material';
 import LatestNewsItem from './LatestNewsItem';
 import PlatformSelectionBar from './PlatformSelectionBar';
 
@@ -14,16 +16,65 @@ const mockNewsItem = {
   commentCount: 36,
 };
 
+const mockNewsItemWithGame = {
+  coverUrl:
+    'https://assets-prd.ignimgs.com/2022/02/27/startersblog-1645989937899.jpg?crop=16%3A9&width=282&dpr=2',
+  title: "Nintendo Reveals Changes Coming in Pokémon Scarlet and Violet's February Update",
+  date: '1d ago',
+  subtitle: 'The games launched with several performance issues.',
+  author: 'Ryan Dinsdale',
+  likeCount: 64,
+  commentCount: 36,
+  game: {
+    id: '001',
+    name: 'POKEMON SCARLET',
+  },
+};
+
 const mockNewsList = [
   mockNewsItem,
+  mockNewsItemWithGame,
   mockNewsItem,
+  mockNewsItemWithGame,
   mockNewsItem,
-  mockNewsItem,
-  mockNewsItem,
-  mockNewsItem,
+  mockNewsItemWithGame,
   mockNewsItem,
   mockNewsItem,
 ];
+
+const OuterContainer = styled.div`
+  margin-top: 50px;
+  margin-left: 85px;
+  width: 1000px;
+
+  .title {
+    font-size: 30px;
+  }
+
+  .news-list {
+    margin-top: 10px;
+  }
+
+  .load-more-btn-container {
+    display: flex;
+  }
+`;
+
+const LoadMoreButton = styled(Button)`
+  && {
+    background-color: ${({ theme }) => theme.color.main};
+    border-radius: 7px;
+    color: #3d3d3d;
+
+    padding: 10px 20px;
+    margin: 30px auto;
+    width: 130px;
+    font-weight: bold;
+    &:hover {
+      background-color: #70e702;
+    }
+  }
+`;
 
 interface LatestNews {
   coverUrl: string;
@@ -48,16 +99,36 @@ const LatestNews = () => {
     }
   }, []);
 
+  const loadMoreNews = () => {
+    // TODO: add the loading effect
+    const temp = [];
+    temp.push(mockNewsItem);
+    temp.push(mockNewsItem);
+    temp.push(mockNewsItem);
+    temp.push(mockNewsItem);
+    temp.push(mockNewsItem);
+    setLatestNewsList([...latestNewsList, ...temp]);
+  };
+
   return (
-    <div>
-      <h2>Latest News</h2>
+    <OuterContainer>
+      <h2 className="title">Latest News</h2>
       <PlatformSelectionBar />
-      <ul>
-        {latestNewsList.map((item) => (
-          <LatestNewsItem />
+      <ul className="news-list">
+        {latestNewsList.map((news) => (
+          <LatestNewsItem news={news} />
         ))}
       </ul>
-    </div>
+      <div className="load-more-btn-container">
+        <LoadMoreButton
+          onClick={() => {
+            loadMoreNews();
+          }}
+        >
+          Load more
+        </LoadMoreButton>
+      </div>
+    </OuterContainer>
   );
 };
 
