@@ -39,8 +39,9 @@ const ArticleOverview = styled.div`
     }
   }
   & .Comment_container {
+    margin-top: 20px;
+    margin-left: 5px;
     & span {
-      margin-left: 5px;
       font-size: 14px;
       font-weight: bold;
     }
