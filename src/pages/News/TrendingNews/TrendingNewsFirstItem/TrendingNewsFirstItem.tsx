@@ -6,7 +6,30 @@ const Container = styled.div`
   width: 350px;
   min-width: 350px;
   height: 370px;
-  margin: 60px 20px 0;
+  margin: 0 20px 0;
+  cursor: pointer;
+
+  &:hover {
+    .news-title-background {
+      background-color: rgba(22, 24, 30, 0.8);
+      .news-title-text {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .order {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-weight: bold;
+    background-color: ${({ theme }) => theme.color.main};
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 30px;
+  }
 
   img {
     width: 100%;
@@ -19,6 +42,7 @@ const Container = styled.div`
     background-color: rgba(22, 24, 30, 0.7);
     padding: 0 20px;
     height: 80px;
+    transition: 0.5s;
   }
   .news-title-text {
     margin-top: 15px;
@@ -42,6 +66,7 @@ interface Props {
 const TrendingNewsFirstItem = ({ news }: Props) => {
   return (
     <Container>
+      <span className="order">01</span>
       <img
         src={news?.coverUrl}
         alt="news cover"
