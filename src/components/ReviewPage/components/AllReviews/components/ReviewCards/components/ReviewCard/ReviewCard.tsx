@@ -17,10 +17,12 @@ const Cover = styled.div`
   height: 145px;
   width: 245px;
   min-width: 245px;
-  //display: inline-block;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
 
   & img {
-    width: 100%;
+    object-fit: cover;
     height: 100%;
     border-radius: 10px;
   }
@@ -30,7 +32,7 @@ const ReviewContent = styled.div`
   height: 141px;
   width: 100%;
   margin-left: 28px;
-  & .Tile_container {
+  & .Title_container {
     & span {
       font-size: 18px;
       font-weight: 700;
@@ -130,8 +132,8 @@ const Like = styled.div`
 
 const CommentIcon = styled(ChatRoundedIcon)`
   color: #6ddb03;
-  width: 12.83px;
-  height: 11.96px;
+  width: 20px;
+  height: 15px;
 `;
 
 const LikeIcon = styled(FavoriteRoundedIcon)`
@@ -143,12 +145,12 @@ const LikeIcon = styled(FavoriteRoundedIcon)`
 const GameIcon = styled(VideogameAssetRoundedIcon)`
   color: #6ddb03;
   width: 25.65px;
-  height: 13.33px;
+  height: 20px;
 `;
 
 const AuthorIcon = styled(PersonRoundedIcon)`
   color: #6ddb03;
-  width: 13.33px;
+  width: 25.65px;
   height: 17.5px;
 `;
 
@@ -183,8 +185,12 @@ const ReviewCard = ({
         </a>
       </Cover>
       <ReviewContent>
-        <div className="Title_container">{title}</div>
-        <div className="DayAndOverview_container">{daysAndOverview}</div>
+        <div className="Title_container">
+          <span>{title}</span>
+        </div>
+        <div className="DayAndOverview_container">
+          <span>{daysAndOverview}</span>
+        </div>
         <div className="Others_container">
           <div className="Game_container">
             <div className="Game_cover">
