@@ -37,9 +37,9 @@ const MostLikes = () => {
     <GeneralContainer
       sx={{ padding: '0.5rem 3rem 3rem' }}
       header={<ContainerHeader title="MOST LIKED" />}
-      padding={3}
       laptop={4}
       mobile={6}
+      divider
     >
       {cards.map(({ coverUrl, title, commNum, likeNum }) => {
         return (
