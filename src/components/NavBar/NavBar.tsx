@@ -21,7 +21,7 @@ const generalLinks = [
 const conditionalLinks = [
   { route: '/settings', title: 'SETTINGS', icon: <SettingsRoundedIcon /> },
   { route: '/#', title: 'LOGOUT', icon: <ExitToAppRoundedIcon /> },
-  { route: '/#', title: 'USER', icon: <AccountCircleRoundedIcon /> },
+  { route: '/account', title: 'USER', icon: <AccountCircleRoundedIcon /> },
 ];
 const NavBar = () => (
   <Drawer

@@ -24,18 +24,12 @@ const routes: RouteObject[] = [
       {
         path: '/news',
         element: <News />,
-        children: [
-          { path: ':platform', element: <News /> },
-          { path: 'news/:id', element: <News /> },
-        ],
+        children: [{ path: ':platform', element: <News /> }],
       },
       {
         path: '/reviews',
         element: <Review />,
-        children: [
-          { path: ':platform', element: <Review /> },
-          { path: 'review/:id', element: <Review /> },
-        ],
+        children: [{ path: ':platform', element: <Review /> }],
       },
       { path: '/settings', element: <Settings /> },
       {
@@ -51,7 +45,7 @@ const routes: RouteObject[] = [
           {
             path: 'my-articles',
             element: <>remember to replace...</>,
-            children: [{ path: 'article/:id', element: <>remember to replace...</> }],
+            children: [{ path: ':id', element: <>remember to replace...</> }],
           },
           {
             path: 'liked',
@@ -63,6 +57,11 @@ const routes: RouteObject[] = [
             children: [{ path: ':id', element: <>remember to replace...</> }],
           },
         ],
+      },
+      {
+        path: '/article',
+        element: <>remember to replace...</>,
+        children: [{ path: ':id', element: <>article</> }],
       },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },
