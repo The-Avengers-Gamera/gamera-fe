@@ -23,7 +23,7 @@ const Container = styled.div`
     top: 15px;
     left: 15px;
     font-weight: bold;
-    background-color: ${({ theme }) => theme.color.main};
+    background-color: ${({ theme }) => theme.color.primary};
     width: 30px;
     height: 30px;
     border-radius: 15px;

@@ -131,7 +131,7 @@ const Like = styled.div`
 `;
 
 const CommentIcon = styled(ChatRoundedIcon)`
-  color: #6ddb03;
+  color: ${({ theme }) => theme.color.primary};
   width: 20px;
   height: 15px;
 `;
@@ -143,13 +143,13 @@ const LikeIcon = styled(FavoriteRoundedIcon)`
 `;
 
 const GameIcon = styled(VideogameAssetRoundedIcon)`
-  color: #6ddb03;
+  color: ${({ theme }) => theme.color.primary};
   width: 25.65px;
   height: 20px;
 `;
 
 const AuthorIcon = styled(PersonRoundedIcon)`
-  color: #6ddb03;
+  color: ${({ theme }) => theme.color.primary};
   width: 25.65px;
   height: 17.5px;
 `;

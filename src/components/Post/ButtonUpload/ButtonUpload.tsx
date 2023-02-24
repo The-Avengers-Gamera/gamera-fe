@@ -6,9 +6,7 @@ const ButtonUpload = () => {
       variant="contained"
       component="label"
       sx={{
-        backgroundColor: 'gamera.main',
         '&:hover': {
-          backgroundColor: 'gamera.main',
           opacity: 0.8,
         },
       }}

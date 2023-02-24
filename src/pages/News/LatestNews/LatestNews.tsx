@@ -62,7 +62,7 @@ const OuterContainer = styled.div`
 
 const LoadMoreButton = styled(Button)`
   && {
-    background-color: ${({ theme }) => theme.color.main};
+    background-color: ${({ theme }) => theme.color.primary};
     border-radius: 7px;
     color: #3d3d3d;
 

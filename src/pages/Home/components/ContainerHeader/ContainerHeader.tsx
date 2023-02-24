@@ -14,7 +14,7 @@ const ContainerHeader = ({ title }: Props) => (
       <Typography>{title}</Typography>
       <Typography
         className={style.headerLeftSubtitle}
-        color={theme.color.main}
+        color={theme.color.primary}
       >
         7 DAYS
       </Typography>
@@ -22,7 +22,7 @@ const ContainerHeader = ({ title }: Props) => (
     <Link
       className={style.headerLink}
       to="/#"
-      style={{ color: theme.color.main }}
+      style={{ color: theme.color.primary }}
     >
       VIEW ALL
     </Link>
