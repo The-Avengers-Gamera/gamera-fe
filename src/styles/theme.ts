@@ -4,8 +4,15 @@ import { createTheme, CustomTheme } from '@mui/material/styles';
 const theme: CustomTheme = createTheme({
   palette: {
     mode: 'dark',
-    gamera: {
+    primary: {
       main: '#6DDB03',
+      contrastText: '#000',
+    },
+    secondary: {
+      main: '#13141F',
+    },
+    background: {
+      default: '#000',
     },
   },
   breakpoints: {
@@ -21,9 +28,15 @@ const theme: CustomTheme = createTheme({
     },
   },
   color: {
-    main: '#6DDB03',
+    primary: '#6DDB03',
     light: '#191C25',
-    bg_light: '#191C25',
+    dark: '#13141F',
+    bg_primary: '#13141F',
+    bg_secondary: ' #222430',
+    bg_nav: '#1A1C25',
+    text: '#F5F8F7',
+    text_secondary: '#E2E2E2',
+    subtitle: '#3D3D3D',
   },
 });
 

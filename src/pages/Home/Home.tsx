@@ -11,13 +11,13 @@ import BackedBy from './components/BackedBy/BackedBy';
 
 const HomePage = () => (
   <>
-    <Box sx={{ bgcolor: theme.color.bg_light }}>
+    <Box sx={{ bgcolor: theme.color.bg_primary }}>
       <Header />
       <Carousel />
       <Guide />
     </Box>
     <TrendingNews />
-    <Box sx={{ bgcolor: theme.color.bg_light }}>
+    <Box sx={{ bgcolor: theme.color.bg_primary }}>
       <PopularReviews />
       <MostLikes />
       <BackedBy />

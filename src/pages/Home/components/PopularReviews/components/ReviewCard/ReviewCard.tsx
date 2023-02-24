@@ -51,7 +51,7 @@ const Footer = styled.div`
   & .publishTime_container {
     display: flex;
     align-items: center;
-    //color: ${({ theme }) => theme.color.main};
+    //color: ${({ theme }) => theme.color.primary};
 
     & span {
       margin-left: 5px;
@@ -63,10 +63,10 @@ const Footer = styled.div`
 `;
 
 const FooterAuthorIcon = styled(PersonRoundedIcon)`
-  color: ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.primary};
 `;
 const FooterPublishTimeIcon = styled(AccessTimeFilledRoundedIcon)`
-  color: ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.primary};
 `;
 
 // types ---------------------------------------

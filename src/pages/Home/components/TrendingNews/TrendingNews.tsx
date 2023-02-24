@@ -12,7 +12,7 @@ const TrendingNews = () => (
     divider={false}
     header={
       <Box
-        sx={{ bgcolor: theme.color.bg_light }}
+        sx={{ bgcolor: theme.color.bg_primary }}
         className={style.title}
       >
         <Typography>TRENDING NEWS</Typography>

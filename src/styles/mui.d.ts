@@ -1,20 +1,31 @@
-/* eslint-disable no-unused-vars */
 import { Theme, ThemeOptions } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface CustomTheme extends Theme {
     color: {
-      main: string;
+      primary: string;
       light: string;
-      bg_light: string;
+      dark: string;
+      bg_primary: string;
+      bg_secondary: string;
+      bg_nav: string;
+      text: string;
+      text_secondary: string;
+      subtitle: string;
     };
   }
   // allow configuration using `createTheme`
   interface CustomThemeOptions extends ThemeOptions {
     color?: {
-      main?: string;
+      primary?: string;
       light?: string;
-      bg_light?: string;
+      dark?: string;
+      bg_primary?: string;
+      bg_secondary?: string;
+      bg_nav?: string;
+      text?: string;
+      text_secondary?: string;
+      subtitle?: string;
     };
   }
   export function createTheme(options?: CustomThemeOptions): CustomTheme;
@@ -30,9 +41,9 @@ declare module '@mui/material/styles' {
   }
 
   interface Palette {
-    gamera: Palette['primary'];
+    custom?: Palette['primary'];
   }
   interface PaletteOptions {
-    gamera: PaletteOptions['primary'];
+    custom?: PaletteOptions['primary'];
   }
 }
