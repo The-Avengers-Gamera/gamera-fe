@@ -6,9 +6,16 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Build') { 
+        stage('Test') { 
             steps {
-                sh 'npm install' 
+                echo 'Testing...'
+                sh 'yarn test' 
+            }
+        }
+        stage('Build'){
+            steps{
+                echo 'Building'
+                sh 'yarn run build'
             }
         }
     }
