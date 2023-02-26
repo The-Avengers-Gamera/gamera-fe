@@ -8,23 +8,23 @@ pipeline {
             }
         }
 
-        stage('Install dependencies'){
+        /*stage('Install dependencies'){
             steps{
                 echo 'Installing npm packages..'
-                sh 'npm install'
+                sh 'yarn install'
             }
         }
-        /*error message:npm command not found*/
+        error message:npm command not found*/
         stage('Test') { 
             steps {
                 echo 'Testing...'
-                sh 'npm test' 
+                sh 'yarn test' 
             }
         }
         stage('Build'){
             steps{
                 echo 'Building...'
-                sh 'npm run build'
+                sh 'yarn run build'
             }
         }
     }
