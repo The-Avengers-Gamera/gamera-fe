@@ -9,13 +9,13 @@ pipeline {
         stage('Test') { 
             steps {
                 echo 'Testing...'
-                sh 'sudo npm test' 
+                sh 'npm test' 
             }
         }
         stage('Build'){
             steps{
                 echo 'Building'
-                sh 'sudo npm run build'
+                sh 'npm run build'
             }
         }
     }
