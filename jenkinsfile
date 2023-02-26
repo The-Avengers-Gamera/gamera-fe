@@ -1,20 +1,28 @@
 pipeline {
     agent any
-    tools {
-        nodejs "nodejs-14.17.3"
-    }
+ 
     stages {
         stage('say hello'){
             steps{
                 echo 'Hello World'
             }
         }
+        stage('Install Nodejs'){
+            steps{
+                echo 'Installing nodejs...'
+                sh 'sudo apt update'
+                sh 'sudo apt install nodejs'
+            }
+        }
+        /*error message: sudo need password*/
+
         stage('Install dependencies'){
             steps{
                 echo 'Installing npm packages..'
                 sh 'npm install'
             }
         }
+        /*error message:npm command not found*/
         stage('Test') { 
             steps {
                 echo 'Testing...'
