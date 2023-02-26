@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs "nodejs-14.17.3"
+    }
     stages {
         stage('say hello'){
             steps{
@@ -26,7 +29,7 @@ pipeline {
         }
         stage('Build'){
             steps{
-                echo 'Building'
+                echo 'Building...'
                 sh 'npm run build'
             }
         }
