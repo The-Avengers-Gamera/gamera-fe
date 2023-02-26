@@ -9,13 +9,13 @@ pipeline {
         stage('Test') { 
             steps {
                 echo 'Testing...'
-                sh 'yarn test' 
+                sh 'sudo npm test' 
             }
         }
         stage('Build'){
             steps{
                 echo 'Building'
-                sh 'yarn run build'
+                sh 'sudo npm run build'
             }
         }
     }
