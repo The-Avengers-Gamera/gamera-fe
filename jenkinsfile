@@ -7,14 +7,6 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Install Nodejs'){
-            steps{
-                echo 'Installing nodejs...'
-                sh 'sudo apt update'
-                sh 'sudo apt install nodejs'
-            }
-        }
-        /*error message: sudo need password*/
 
         stage('Install dependencies'){
             steps{
