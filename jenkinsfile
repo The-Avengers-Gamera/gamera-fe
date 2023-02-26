@@ -9,12 +9,6 @@ pipeline {
                 echo 'Hello World'
             }
         }
-        stage('Install Node.js') {
-            steps {
-                sh 'sudo apt update'
-                sh 'sudo apt install nodejs'
-            }
-        }
         stage('Install dependencies'){
             steps{
                 echo 'Installing npm packages..'
