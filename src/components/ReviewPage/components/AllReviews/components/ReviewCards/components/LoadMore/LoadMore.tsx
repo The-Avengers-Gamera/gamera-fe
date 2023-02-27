@@ -14,7 +14,7 @@ const Container = styled.div`
 
     border: none;
 
-    background-color: ${({ theme }) => theme.color.main};
+    background-color: ${({ theme }) => theme.color.primary};
     color: #3d3d3d; // TODO: manage the color using theme instead
 
     cursor: pointer;

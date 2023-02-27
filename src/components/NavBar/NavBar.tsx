@@ -30,7 +30,7 @@ const NavBar = () => (
       boxSizing: 'border-box',
       flexShrink: 0,
       '& .MuiDrawer-paper': {
-        bgcolor: theme.color.bg_light,
+        bgcolor: theme.color.bg_nav,
         width: 100,
         boxSizing: 'border-box',
         borderRight: '2px dashed rgba(255,255,255,0.5)',

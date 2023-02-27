@@ -56,11 +56,11 @@ const LatestNewsCard = ({
       </Box>
       <Box className={style.infoBottom}>
         <Box className={style.infoBottomGroup}>
-          <PersonRoundedIcon sx={{ color: theme.color.main }} />
+          <PersonRoundedIcon sx={{ color: theme.color.primary }} />
           <Typography component="span">{authorName}</Typography>
         </Box>
         <Box className={style.infoBottomGroup}>
-          <ChatRoundedIcon sx={{ color: theme.color.main }} />
+          <ChatRoundedIcon sx={{ color: theme.color.primary }} />
           <Typography component="span">{commentsNum}</Typography>
         </Box>
         <Box className={style.infoBottomGroup}>

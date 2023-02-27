@@ -5,7 +5,7 @@ import theme from '@/styles/theme';
 
 const Carousel = () => (
   <Grid
-    sx={{ bgcolor: theme.color.bg_light }}
+    sx={{ bgcolor: theme.color.bg_primary }}
     container
     className={style.container}
   >
@@ -23,7 +23,7 @@ const Carousel = () => (
           <Button
             className={style.carouselBtn}
             variant="contained"
-            sx={{ bgcolor: theme.color.main }}
+            sx={{ bgcolor: theme.color.primary }}
           >
             VIEW MORE
           </Button>
