@@ -3,7 +3,7 @@ pipeline {
     environment {
         AWS_REGION            = 'ap-southeast-2'
         S3_BUCKET             = 'gamera.com.au'
-        S3_PREFIX             = 'my-app'
+        /*S3_PREFIX             = 'my-app'*/
     }
     
     stages {
@@ -28,8 +28,8 @@ pipeline {
         }
         stage('Deployment'){
             steps {
-                sh 'aws s3 rm s3://gamera.com.au --recursive'
-                sh 'aws s3 sync build/ s3://gamera.com.au'
+                sh 'aws s3 rm s3://${S3_BUCKET} --recursive'
+                sh 'aws s3 sync build/ s3://${S3_BUCKET}'
             }
         }
     }
