@@ -25,7 +25,7 @@ const TrendingNewsTitle = styled.p`
   }
 
   .icon {
-    color: ${({ theme }) => theme.color.main};
+    color: ${({ theme }) => theme.color.primary};
   }
 `;
 

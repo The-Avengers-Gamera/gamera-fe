@@ -61,7 +61,7 @@ const CardContainer = styled.div`
 `;
 
 const ChatIcon = styled(ChatRoundedIcon)`
-  color: ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.primary};
   width: 16px;
   height: 16px;
   margin-right: 5px;

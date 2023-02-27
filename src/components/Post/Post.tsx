@@ -88,9 +88,9 @@ const PublishButton = styled(MuiLoadingButton)`
   font-size: 18px;
   border-radius: 3px;
   text-transform: none;
-  background-color: ${({ theme }) => theme.color.main};
+  background-color: ${({ theme }) => theme.color.primary};
   &:hover {
-    background-color: ${({ theme }) => theme.color.main};
+    background-color: ${({ theme }) => theme.color.primary};
     opacity: 0.8;
   }
 `;

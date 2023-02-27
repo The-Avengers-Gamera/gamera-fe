@@ -10,7 +10,7 @@ const Card = styled.div`
 
   .order {
     font-weight: bold;
-    color: ${({ theme }) => theme.color.main};
+    color: ${({ theme }) => theme.color.primary};
   }
 
   .title {
@@ -46,7 +46,7 @@ const Card = styled.div`
       color: #e70000;
     }
     .comment .icon {
-      color: ${({ theme }) => theme.color.main};
+      color: ${({ theme }) => theme.color.primary};
     }
   }
 `;

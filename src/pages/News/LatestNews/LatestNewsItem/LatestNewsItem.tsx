@@ -51,7 +51,7 @@ const OuterContainer = styled.div`
           display: flex;
           align-items: center;
           .icon {
-            color: ${({ theme }) => theme.color.main};
+            color: ${({ theme }) => theme.color.primary};
           }
         }
       }
@@ -69,7 +69,7 @@ const OuterContainer = styled.div`
         .author {
           text-transform: uppercase;
           .icon {
-            color: ${({ theme }) => theme.color.main};
+            color: ${({ theme }) => theme.color.primary};
           }
         }
 
@@ -78,7 +78,7 @@ const OuterContainer = styled.div`
         }
 
         .comment-count .icon {
-          color: ${({ theme }) => theme.color.main};
+          color: ${({ theme }) => theme.color.primary};
         }
       }
     }
