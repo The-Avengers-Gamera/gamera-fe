@@ -12,19 +12,21 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'yarn install'
-                sh 'yarn start'
+                sh 'yarn build'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'yarn test'
+                //Currrently test is empty
+                //sh 'yarn test'
+                sh 'echo "Testing"'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo Deployed'
+                sh 'aws s3 sync build/ s3://richard.gamera.com.au --delete'
             }
         }
     }
