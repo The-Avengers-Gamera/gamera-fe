@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'gcp_node'
+    }
 
     stages {
         stage('Git checkout') {
@@ -12,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'yarn install'
-                sh 'yarn build'
+                sh 'yarn run build'
             }
         }
 
@@ -20,7 +22,7 @@ pipeline {
             steps {
                 //Currrently test is empty
                 //sh 'yarn test'
-                sh 'echo "Testing"'
+                echo 'Testing'
             }
         }
 
