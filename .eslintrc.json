@@ -42,6 +42,10 @@
         "allowSingleExtends": true
       }
     ],
-    "@typescript-eslint/no-inferrable-types": "warn"
+    "@typescript-eslint/no-inferrable-types": "warn",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state", "config"] }
+    ]
   }
 }
