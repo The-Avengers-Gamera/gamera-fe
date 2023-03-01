@@ -10,7 +10,7 @@ const Editor = () => (
     <TextEditor
       value=""
       placeholder="write something about..."
-      onChange={() => {}}
+      onChange={() => 0}
     />
   </EditorWrapper>
 );
