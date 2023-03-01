@@ -21,6 +21,8 @@ const NavBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const isLoggedIn = true;
+  const isEditor = true;
 
   const generalLinks = [
     { route: '/game', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
@@ -88,94 +90,100 @@ const NavBar = () => {
             </ListItem>
           ))}
         </Box>
-        <Box className={style.navBarBottomGroup}>
-          {conditionalLinks.map(({ route, title, icon }) => (
+        {isLoggedIn && (
+          <Box className={style.navBarBottomGroup}>
+            {conditionalLinks.map(({ route, title, icon }) => (
+              <ListItem
+                key={title}
+                disablePadding
+              >
+                <Link
+                  className={style.navItemContainer}
+                  to={route}
+                >
+                  <Button
+                    className={style.navBtn}
+                    sx={{ color: 'inherit' }}
+                  >
+                    {icon}
+
+                    <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>
+                      {title}
+                    </Typography>
+                  </Button>
+                </Link>
+              </ListItem>
+            ))}
             <ListItem
-              key={title}
+              sx={{ pb: '0.5rem' }}
               disablePadding
             >
               <Link
                 className={style.navItemContainer}
-                to={route}
+                to="/"
               >
                 <Button
                   className={style.navBtn}
                   sx={{ color: 'inherit' }}
+                  aria-controls="editor-user-menu"
+                  aria-haspopup="true"
+                  aria-expanded={open ? 'true' : undefined}
+                  onClick={handleClick}
                 >
-                  {icon}
-
-                  <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>{title}</Typography>
+                  <AccountCircleRoundedIcon />
+                  USER
                 </Button>
+                <Menu
+                  id="editor-user-menu"
+                  className={style.menu}
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  PaperProps={{
+                    style: {
+                      backgroundColor: '#13141f',
+                    },
+                  }}
+                >
+                  <MenuItem
+                    className={style.menuItem}
+                    onClick={handleClose}
+                  >
+                    MY PROFILE
+                  </MenuItem>
+                  <MenuItem
+                    className={style.menuItem}
+                    onClick={handleClose}
+                  >
+                    LIKES
+                  </MenuItem>
+                  <MenuItem
+                    className={style.menuItem}
+                    onClick={handleClose}
+                  >
+                    COMMENTS
+                  </MenuItem>
+                  {isEditor && (
+                    <MenuItem
+                      className={style.menuItem}
+                      onClick={handleClose}
+                    >
+                      MY POSTS
+                    </MenuItem>
+                  )}
+                </Menu>
               </Link>
             </ListItem>
-          ))}
-          <ListItem
-            sx={{ pb: '0.5rem' }}
-            disablePadding
-          >
-            <Link
-              className={style.navItemContainer}
-              to="/"
-            >
-              <Button
-                className={style.navBtn}
-                sx={{ color: 'inherit' }}
-                aria-controls="editor-user-menu"
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-              >
-                <AccountCircleRoundedIcon />
-                USER
-              </Button>
-              <Menu
-                id="editor-user-menu"
-                className={style.menu}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                PaperProps={{
-                  style: {
-                    backgroundColor: '#13141f',
-                  },
-                }}
-              >
-                <MenuItem
-                  className={style.menuItem}
-                  onClick={handleClose}
-                >
-                  MY PROFILE
-                </MenuItem>
-                <MenuItem
-                  className={style.menuItem}
-                  onClick={handleClose}
-                >
-                  LIKES
-                </MenuItem>
-                <MenuItem
-                  className={style.menuItem}
-                  onClick={handleClose}
-                >
-                  COMMENTS
-                </MenuItem>
-                <MenuItem
-                  className={style.menuItem}
-                  onClick={handleClose}
-                >
-                  MY POSTS
-                </MenuItem>
-              </Menu>
-            </Link>
-          </ListItem>
-        </Box>
+          </Box>
+        )}
       </List>
     </Drawer>
   );
