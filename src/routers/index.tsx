@@ -21,17 +21,9 @@ const routes: RouteObject[] = [
     element: <Root />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/games', element: <Game /> },
-      {
-        path: '/news',
-        element: <News />,
-        children: [{ path: ':platform', element: <News /> }],
-      },
-      {
-        path: '/reviews',
-        element: <Review />,
-        children: [{ path: ':platform', element: <Review /> }],
-      },
+      { path: '/game', element: <Game /> },
+      { path: '/news', element: <News /> },
+      { path: '/review', element: <Review /> },
       { path: '/settings', element: <Settings /> },
       {
         path: '/post',
