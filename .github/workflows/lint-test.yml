@@ -21,6 +21,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      # - run: yarn
+      - run: yarn
       - run: npx eslint .
-      # - run: yarn test --passWithNoTests
+      - run: yarn test --passWithNoTests
