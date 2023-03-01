@@ -23,6 +23,7 @@ const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: '/game', element: <Game /> },
       { path: '/news', element: <News /> },
+      { path: '/article', element: <Article /> },
       { path: '/review', element: <Review /> },
       { path: '/settings', element: <Settings /> },
       {
