@@ -13,6 +13,7 @@ import Term from '@/pages/Term';
 import Privacy from '@/pages/Privacy';
 import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
+import Article from '@/pages/Article';
 
 const routes: RouteObject[] = [
   {
@@ -60,7 +61,7 @@ const routes: RouteObject[] = [
       },
       {
         path: '/article',
-        element: <>remember to replace...</>,
+        element: <Article />,
         children: [{ path: ':id', element: <>article</> }],
       },
       { path: '/about-us', element: <AboutUs /> },
