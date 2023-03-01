@@ -8,6 +8,7 @@ import Review from '@/pages/Review';
 import Settings from '@/pages/Settings';
 import NoMatch from '@/pages/NoMatch';
 import Post from '@/pages/Post';
+import Article from '@/pages/Article/Article';
 
 const routes: RouteObject[] = [
   {
@@ -17,6 +18,7 @@ const routes: RouteObject[] = [
       { index: true, element: <Home /> },
       { path: '/game', element: <Game /> },
       { path: '/news', element: <News /> },
+      { path: '/article', element: <Article /> },
       { path: '/review', element: <Review /> },
       { path: '/settings', element: <Settings /> },
       { path: '/post', element: <Post /> },
