@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
@@ -9,7 +7,7 @@ import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
 import SignUpModal from '@/components/SignUpModal';
-import Loginform from '@/components/Login/loginForm';
+import LoginForm from '@/components/Login/loginForm';
 
 interface RootContextType {
   changeModalToOpen: (show: boolean) => void;
@@ -81,7 +79,7 @@ const RootLayout = () => {
           ariaHideApp={false}
         >
           {displayLogInPopWindow ? (
-            <Loginform />
+            <LoginForm />
           ) : (
             <SignUpModal
               setModalIsOpen={() => {
