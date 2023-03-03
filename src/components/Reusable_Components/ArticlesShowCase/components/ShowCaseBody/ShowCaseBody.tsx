@@ -51,14 +51,39 @@ type ShowCaseBodyProps = {
   selectedPlatformArticleList: ReviewCardType[];
   setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<ReviewCardType[]>>;
 };
-
+// ============================================
 const ShowCaseBody = ({
   selectedPlatformArticleList,
   setSelectedPlatformArticleList,
 }: ShowCaseBodyProps) => {
-  // TODO: replace your card here
-  // const [reviewList] = useState(initialState);
+  // states and hooks -------------------------
 
+  // functions --------------------------------
+  // ! TODO: replace mock data with loading articles on the next page --------------------------------------
+  const mockReviewItem = {
+    coverUrl:
+      'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
+    title: 'The Last Of Us Part 1 Review',
+    daysAndOverview: '6h ago - Optimized Prime.',
+    game: 'The last of Us',
+    author: 'LUKE REILLY',
+    commNum: '36',
+    likeNum: '64',
+  };
+
+  const loadMoreArticles = () => {
+    const addedArticles = [
+      structuredClone(mockReviewItem),
+      structuredClone(mockReviewItem),
+      structuredClone(mockReviewItem),
+    ];
+
+    setSelectedPlatformArticleList([...selectedPlatformArticleList, ...addedArticles]);
+  };
+  // !--------------------------------------------------------------------------------------------------------
+
+  // jsx ---------------------------------------
+  // TODO: replace your card here
   return (
     <Container>
       {selectedPlatformArticleList.map(
@@ -78,11 +103,12 @@ const ShowCaseBody = ({
         }
       )}
 
-      {/* load more */}
+      {/* load more button */}
       <div className="loadMore-container">
         <button
           type="button"
           className="loadMore-btn"
+          onClick={loadMoreArticles}
         >
           Load more
         </button>

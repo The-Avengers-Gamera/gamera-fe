@@ -154,17 +154,33 @@ const AuthorIcon = styled(PersonRoundedIcon)`
   height: 17.5px;
 `;
 
+// Card component ==========================
 type ReviewCardProps = {
-  coverUrl: string;
-  title: string;
+  coverUrl: string; //
+  title: string; //
   daysAndOverview: string;
   game: string;
-  author: string;
-  commNum: string;
-  likeNum: string;
+  author: string; //
+  commNum: string; //
+  likeNum: string; //
 };
 
-// Card component ==========================
+interface Props {
+  news: {
+    coverUrl: string;
+    title: string;
+    date: string;
+    subtitle: string;
+    author: string;
+    likeCount: number;
+    commentCount: number;
+    game?: {
+      id: string;
+      name: string;
+    };
+  };
+}
+
 const ReviewCard = ({
   coverUrl,
   title,
@@ -176,6 +192,7 @@ const ReviewCard = ({
 }: ReviewCardProps) => {
   return (
     <Container>
+      {/* cover  */}
       <Cover>
         {/* fake href */}
         <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
@@ -185,28 +202,36 @@ const ReviewCard = ({
           />
         </a>
       </Cover>
+      {/* section right to the cover img */}
       <ReviewContent>
+        {/* top */}
         <div className="Title_container">
           <span>{title}</span>
         </div>
+        {/* middle */}
         <div className="DayAndOverview_container">
           <span>{daysAndOverview}</span>
         </div>
+        {/* bottom: game-author-like-comment */}
         <div className="Others_container">
+          {/* game */}
           <div className="Game_container">
             <div className="Game_cover">
               <GameIcon />
             </div>
             <span>{game}</span>
           </div>
+          {/* author */}
           <div className="Author_container">
             <AuthorIcon />
             <span>{author}</span>
           </div>
+          {/* like */}
           <div className="Like_container">
             <LikeIcon />
             <span>{likeNum}</span>
           </div>
+          {/* comment */}
           <div className="Comment_container">
             <CommentIcon />
             <span>{commNum}</span>

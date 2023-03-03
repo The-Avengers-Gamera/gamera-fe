@@ -41,15 +41,15 @@ for (let i = 0; i < 4; ) {
 }
 // ! --------------------------------------------------------------------------------------------------
 
-// refactored review page using reusable component: ArticleShowCase
+// refactored review page using reusable component: ArticleShowCase ==================================================
 const ReviewPageV2 = () => {
   // states and hooks ---------------
   // 2 core states here
   const articleType = 'News'; // which is used to differentiate review page and news page
-  const [platformSelected, setPlatformSelected] = useState('PS');
+  const [platformSelected, setPlatformSelected] = useState('All');
   const [selectedPlatformArticleList, setSelectedPlatformArticleList] = useState(initialState);
 
-  // ! FIXME: mock data mimicing axios request when state: platformSelected is changed---------------------------
+  // ! TODO: replace mock data with axios request when state: platformSelected is changed---------------------------
   // const res = getArticle();
   // useEffect(()=>{setSelectedPlatformArticleList(res)}, [res])
 
