@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import mockArticle from './mockArticle';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
+
+const Container = styled.div`
+  margin-left: 100px;
+  margin-top: 110px;
+  margin-right: 200px;
+`;
 
 interface CommentType {
   author: {
@@ -25,6 +32,7 @@ interface ArticleContentType {
   };
   updateTime: string;
   postTime: string;
+  mainContent: string;
   gameList: { id: number; name: string; cover: string }[] | [];
   tagList: { id: number; name: string }[] | [];
 }
@@ -43,6 +51,7 @@ const initArticleContent: ArticleContentType = {
   },
   updateTime: '',
   postTime: '',
+  mainContent: '',
   gameList: [],
   tagList: [],
 };
@@ -52,16 +61,16 @@ const Article = () => {
   const [commentList, setCommentList] = useState<CommentType[]>([]);
 
   useEffect(() => {
-    const { commentList: commentListTemp, ...articleContentTemp } = mockArticle;
+    const { commentList: commentListTemp, ...articleContentTemp }: GetArticleApiType = mockArticle;
     setArticleContent({ ...articleContentTemp });
     setCommentList(commentListTemp);
   }, []);
 
   return (
-    <div>
+    <Container>
       <ArticleContent articleContent={articleContent} />
       <Comments commentList={commentList} />
-    </div>
+    </Container>
   );
 };
 
