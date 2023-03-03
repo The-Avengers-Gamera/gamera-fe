@@ -3,18 +3,19 @@ import TrendingNews from './TrendingNews/TrendingNews';
 import ArticlesShowCase from '../Reusable_Components/ArticlesShowCase';
 
 // ! FIXME: mock data mimicing axios request ------------------------------------------------------------
-type ReviewCardType = {
-  coverUrl: string;
-  title: string;
-  daysAndOverview: string;
-  game: string;
-  author: string;
-  commNum: string;
-  likeNum: string;
-};
-const initialState: ReviewCardType[] = [];
+// type ReviewCardType = {
+//   coverUrl: string;
+//   title: string;
+//   daysAndOverview: string;
+//   game: string;
+//   author: string;
+//   commNum: string;
+//   likeNum: string;
+// };
+// const initialState: ReviewCardType[] = [];
 // ! --------------------------------------------------------------------------------------------------
-interface LatestNews {
+
+type ArticleFormat = {
   coverUrl: string;
   title: string;
   date: string;
@@ -22,9 +23,13 @@ interface LatestNews {
   author: string;
   likeCount: number;
   commentCount: number;
-}
+  game?: {
+    id: string;
+    name: string;
+  };
+};
 
-const mockNewsItem = {
+const mockNewsItem: ArticleFormat = {
   coverUrl:
     'https://assets-prd.ignimgs.com/2023/01/29/marioblog-1675028054393.png?crop=16%3A9&width=282&dpr=2',
   title: "The Super Mario Bros. Movie's Latest Commercial Is an Ad for Super Mario Bros. Plumbing",
@@ -36,7 +41,7 @@ const mockNewsItem = {
   commentCount: 36,
 };
 
-const mockNewsItemWithGame = {
+const mockNewsItemWithGame: ArticleFormat = {
   coverUrl:
     'https://assets-prd.ignimgs.com/2022/02/27/startersblog-1645989937899.jpg?crop=16%3A9&width=282&dpr=2',
   title: "Nintendo Reveals Changes Coming in Pokémon Scarlet and Violet's February Update",
@@ -51,7 +56,7 @@ const mockNewsItemWithGame = {
   },
 };
 
-const mockNewsList = [
+const initialState = [
   mockNewsItem,
   mockNewsItemWithGame,
   mockNewsItem,
@@ -62,10 +67,11 @@ const mockNewsList = [
   mockNewsItem,
 ];
 
-const NewsPage = () => {
+// NewsPageV2 component ======================================================================
+const NewsPageV2 = () => {
   // hooks and states -------------------
   const articleType = 'News'; // which is used to differentiate review page and news page
-  const [platformSelected, setPlatformSelected] = useState('PS');
+  const [platformSelected, setPlatformSelected] = useState('All');
   const [selectedPlatformArticleList, setSelectedPlatformArticleList] = useState(initialState);
   // functions --------------------------
 
@@ -86,4 +92,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default NewsPageV2;

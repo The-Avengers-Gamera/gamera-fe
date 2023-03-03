@@ -13,26 +13,40 @@ const PageContainer = styled.div`
   padding-top: 100px;
 `;
 
-// ! FIXME: mock data mimicing axios request ------------------------------------------------------------
-type ReviewCardType = {
+// ! TODO: mock data mimicing axios request ------------------------------------------------------------
+// type ReviewCardType = {
+//   coverUrl: string;
+//   title: string;
+//   daysAndOverview: string;
+//   game: string;
+//   author: string;
+//   commNum: string;
+//   likeNum: string;
+// };
+type ArticleFormat = {
   coverUrl: string;
   title: string;
-  daysAndOverview: string;
-  game: string;
+  date: string;
+  subtitle: string;
   author: string;
-  commNum: string;
-  likeNum: string;
+  likeCount: number;
+  commentCount: number;
+  game?: {
+    id: string;
+    name: string;
+  };
 };
-const initialState: ReviewCardType[] = [];
-const mockReviewItem = {
+const initialState: ArticleFormat[] = [];
+const mockReviewItem: ArticleFormat = {
   coverUrl:
     'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
   title: 'The Last Of Us Part 1 Review',
-  daysAndOverview: '6h ago - Optimized Prime.',
-  game: 'The last of Us',
+  date: '6h ago ',
+  subtitle: 'Optimized Prime.',
   author: 'LUKE REILLY',
-  commNum: '36',
-  likeNum: '64',
+  commentCount: 36,
+  likeCount: 64,
+  game: { id: '32', name: 'last of us' },
 };
 for (let i = 0; i < 4; ) {
   initialState.push(structuredClone(mockReviewItem));
@@ -45,7 +59,8 @@ for (let i = 0; i < 4; ) {
 const ReviewPageV2 = () => {
   // states and hooks ---------------
   // 2 core states here
-  const articleType = 'News'; // which is used to differentiate review page and news page
+  const articleType = 'Reviews'; // which is used to differentiate review page and news page
+
   const [platformSelected, setPlatformSelected] = useState('All');
   const [selectedPlatformArticleList, setSelectedPlatformArticleList] = useState(initialState);
 

@@ -78,23 +78,30 @@ const OuterContainer = styled.div`
 `;
 
 // NewsCard component ===================================================================
-interface Props {
-  news: {
-    coverUrl: string;
-    title: string;
-    date: string;
-    subtitle: string;
-    author: string;
-    likeCount: number;
-    commentCount: number;
-    game?: {
-      id: string;
-      name: string;
-    };
+type NewsCardProps = {
+  coverUrl: string;
+  title: string;
+  date: string;
+  subtitle: string;
+  author: string;
+  likeCount: number;
+  commentCount: number;
+  game?: {
+    id: string;
+    name: string;
   };
-}
+};
 
-const NewsCard = ({ news }: Props) => {
+const NewsCard = ({
+  coverUrl,
+  title,
+  date,
+  subtitle,
+  author,
+  likeCount,
+  commentCount,
+  game,
+}: NewsCardProps) => {
   // states and hooks ---------------
 
   // functions ----------------------
@@ -104,47 +111,49 @@ const NewsCard = ({ news }: Props) => {
     <OuterContainer>
       <div className="news-card">
         <img
-          src={news.coverUrl}
+          src={coverUrl}
           alt="news cover"
           className="left"
         />
         {/* section right to the cover img */}
         <div className="right">
-          <h3 className="title">{news.title}</h3>
+          {/* top */}
+          <h3 className="title">{title}</h3>
+          {/* middle */}
           <p className="date-subtitle">
-            {news.date} - {news.subtitle}
+            {date} - {subtitle}
           </p>
-          {/* conditional  */}
-          {news.game ? (
+          {/* bottom: conditionally */}
+          {game ? (
             <div className="game-author-like-comment">
               <div className="game">
                 <VideogameAssetIcon className="icon" />
-                {news.game?.name}
+                {game?.name}
               </div>
               <div className="author-like-comment">
                 <span className="author">
-                  <PersonIcon className="icon" /> {news.author}
+                  <PersonIcon className="icon" /> {author}
                 </span>
                 <span className="like-count">
-                  <FavoriteIcon className="icon" /> {news.likeCount}
+                  <FavoriteIcon className="icon" /> {likeCount}
                 </span>
                 <span className="comment-count">
                   <ForumIcon className="icon" />
-                  {news.commentCount}
+                  {commentCount}
                 </span>
               </div>
             </div>
           ) : (
             <div className="author-like-comment">
               <span className="author">
-                <PersonIcon className="icon" /> {news.author}
+                <PersonIcon className="icon" /> {author}
               </span>
               <span className="like-count">
-                <FavoriteIcon className="icon" /> {news.likeCount}
+                <FavoriteIcon className="icon" /> {likeCount}
               </span>
               <span className="comment-count">
                 <ForumIcon className="icon" />
-                {news.commentCount}
+                {commentCount}
               </span>
             </div>
           )}

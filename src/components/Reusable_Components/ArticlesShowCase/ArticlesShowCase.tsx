@@ -17,26 +17,30 @@ const Container = styled.div`
   }
 `;
 
-type ReviewCardType = {
+type ArticleFormat = {
   coverUrl: string;
   title: string;
-  daysAndOverview: string;
-  game: string;
+  date: string;
+  subtitle: string;
   author: string;
-  commNum: string;
-  likeNum: string;
+  likeCount: number;
+  commentCount: number;
+  game?: {
+    id: string;
+    name: string;
+  };
 };
 
 type ArticleShowCaseProps = {
   articleType: string;
   platformSelected: string;
   setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
-  selectedPlatformArticleList: ReviewCardType[];
-  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<ReviewCardType[]>>;
+  selectedPlatformArticleList: ArticleFormat[];
+  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<ArticleFormat[]>>;
 };
 
-// an abstract component that could be reused to generate 'All reviews' section in review page
-// and 'latest news' in news page
+// =========================================================================================================================
+// an abstract component that could be reused to generate 'All reviews' section in review page and 'latest news' in news page
 const ArticlesShowCase = ({
   articleType, // "News" or "Reviews"
   platformSelected,
@@ -46,12 +50,14 @@ const ArticlesShowCase = ({
 }: ArticleShowCaseProps) => {
   return (
     <Container>
-      <h2>All Reveiws</h2>
+      <h2>{articleType === 'News' ? 'Latest News' : 'All Reviews'}</h2>
       <SelectionBars
+        articleType={articleType}
         platformSelected={platformSelected}
         setPlatformSelected={setPlatformSelected}
       />
       <ShowCaseBody
+        articleType={articleType}
         selectedPlatformArticleList={selectedPlatformArticleList}
         setSelectedPlatformArticleList={setSelectedPlatformArticleList}
       />

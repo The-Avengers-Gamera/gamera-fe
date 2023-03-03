@@ -155,41 +155,40 @@ const AuthorIcon = styled(PersonRoundedIcon)`
 `;
 
 // Card component ==========================
-type ReviewCardProps = {
-  coverUrl: string; //
-  title: string; //
-  daysAndOverview: string;
-  game: string;
-  author: string; //
-  commNum: string; //
-  likeNum: string; //
-};
+// type ReviewCardProps = {
+//   coverUrl: string; //
+//   title: string; //
+//   daysAndOverview: string;
+//   game: string;
+//   author: string; //
+//   commNum: string; //
+//   likeNum: string; //
+// };
 
-interface Props {
-  news: {
-    coverUrl: string;
-    title: string;
-    date: string;
-    subtitle: string;
-    author: string;
-    likeCount: number;
-    commentCount: number;
-    game?: {
-      id: string;
-      name: string;
-    };
+type ArticleFormat = {
+  coverUrl: string;
+  title: string;
+  date: string;
+  subtitle: string;
+  author: string;
+  likeCount: number;
+  commentCount: number;
+  game?: {
+    id: string;
+    name: string;
   };
-}
+};
 
 const ReviewCard = ({
   coverUrl,
   title,
-  daysAndOverview,
-  game,
+  date,
+  subtitle,
   author,
-  commNum,
-  likeNum,
-}: ReviewCardProps) => {
+  likeCount,
+  commentCount,
+  game,
+}: ArticleFormat) => {
   return (
     <Container>
       {/* cover  */}
@@ -210,7 +209,9 @@ const ReviewCard = ({
         </div>
         {/* middle */}
         <div className="DayAndOverview_container">
-          <span>{daysAndOverview}</span>
+          <span>
+            {date}-{subtitle}
+          </span>
         </div>
         {/* bottom: game-author-like-comment */}
         <div className="Others_container">
@@ -219,7 +220,7 @@ const ReviewCard = ({
             <div className="Game_cover">
               <GameIcon />
             </div>
-            <span>{game}</span>
+            <span>{game?.name}</span>
           </div>
           {/* author */}
           <div className="Author_container">
@@ -229,12 +230,12 @@ const ReviewCard = ({
           {/* like */}
           <div className="Like_container">
             <LikeIcon />
-            <span>{likeNum}</span>
+            <span>{likeCount}</span>
           </div>
           {/* comment */}
           <div className="Comment_container">
             <CommentIcon />
-            <span>{commNum}</span>
+            <span>{commentCount}</span>
           </div>
         </div>
       </ReviewContent>

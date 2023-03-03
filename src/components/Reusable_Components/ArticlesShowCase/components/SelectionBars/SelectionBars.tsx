@@ -14,18 +14,31 @@ const Container = styled.div`
 `;
 
 type SelectionBarsProps = {
+  articleType: string;
   platformSelected: string;
   setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // this component represents the platform selection and sorting buttons under the tilte of 'All Reviews'
-const SelectionBars = ({ platformSelected, setPlatformSelected }: SelectionBarsProps) => {
-  return (
+const SelectionBars = ({
+  articleType,
+  platformSelected,
+  setPlatformSelected,
+}: SelectionBarsProps) => {
+  return articleType === 'News' ? (
     <Container>
       <PlatformBars
         platformSelected={platformSelected}
         setPlatformSelected={setPlatformSelected}
       />
+    </Container>
+  ) : (
+    <Container>
+      <PlatformBars
+        platformSelected={platformSelected}
+        setPlatformSelected={setPlatformSelected}
+      />
+      {/* SortBars are only visible on Review page */}
       <SortBars />
     </Container>
   );
