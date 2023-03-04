@@ -4,6 +4,7 @@ import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
 import React from 'react';
 import styled from 'styled-components';
+import { IArticleCard } from '@/interfaces/article';
 
 const Container = styled.div`
   width: 100%;
@@ -88,47 +89,47 @@ const ReviewContent = styled.div`
   }
 `;
 
-const ArticleOverview = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  margin-left: 7.5px;
-  margin-right: 7.5px;
-  display: inline-block;
-  width: 400px;
-  & .Tile_container {
-    & span {
-      margin-left: 5px;
+// const ArticleOverview = styled.div`
+//   font-size: 14px;
+//   font-weight: 700;
+//   margin-left: 7.5px;
+//   margin-right: 7.5px;
+//   display: inline-block;
+//   width: 400px;
+//   & .Tile_container {
+//     & span {
+//       margin-left: 5px;
 
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-  & .Comment_container {
-    & span {
-      margin-left: 5px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-`;
+//       font-size: 14px;
+//       font-weight: bold;
+//     }
+//   }
+//   & .Comment_container {
+//     & span {
+//       margin-left: 5px;
+//       font-size: 14px;
+//       font-weight: bold;
+//     }
+//   }
+// `;
 
-const Like = styled.div`
-  display: flex;
-  align-items: center;
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
+// const Like = styled.div`
+//   display: flex;
+//   align-items: center;
+//   display: inline-block;
+//   justify-content: center;
+//   align-items: center;
 
-  & .LikeNum_container {
-    display: flex;
-    align-items: center;
-    & span {
-      margin-left: 5px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-`;
+//   & .LikeNum_container {
+//     display: flex;
+//     align-items: center;
+//     & span {
+//       margin-left: 5px;
+//       font-size: 14px;
+//       font-weight: bold;
+//     }
+//   }
+// `;
 
 const CommentIcon = styled(ChatRoundedIcon)`
   color: ${({ theme }) => theme.color.primary};
@@ -155,40 +156,16 @@ const AuthorIcon = styled(PersonRoundedIcon)`
 `;
 
 // Card component ==========================
-// type ReviewCardProps = {
-//   coverUrl: string; //
-//   title: string; //
-//   daysAndOverview: string;
-//   game: string;
-//   author: string; //
-//   commNum: string; //
-//   likeNum: string; //
-// };
-
-type ArticleFormat = {
-  coverUrl: string;
-  title: string;
-  date: string;
-  subtitle: string;
-  author: string;
-  likeCount: number;
-  commentCount: number;
-  game?: {
-    id: string;
-    name: string;
-  };
-};
-
 const ReviewCard = ({
-  coverUrl,
+  coverImgUrl,
   title,
   date,
-  subtitle,
+  description,
   author,
   likeCount,
   commentCount,
   game,
-}: ArticleFormat) => {
+}: IArticleCard) => {
   return (
     <Container>
       {/* cover  */}
@@ -196,7 +173,7 @@ const ReviewCard = ({
         {/* fake href */}
         <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
           <img
-            src={coverUrl}
+            src={coverImgUrl}
             alt=""
           />
         </a>
@@ -210,7 +187,7 @@ const ReviewCard = ({
         {/* middle */}
         <div className="DayAndOverview_container">
           <span>
-            {date}-{subtitle}
+            {date}-{description}
           </span>
         </div>
         {/* bottom: game-author-like-comment */}
@@ -225,7 +202,7 @@ const ReviewCard = ({
           {/* author */}
           <div className="Author_container">
             <AuthorIcon />
-            <span>{author}</span>
+            <span>{author.name}</span>
           </div>
           {/* like */}
           <div className="Like_container">

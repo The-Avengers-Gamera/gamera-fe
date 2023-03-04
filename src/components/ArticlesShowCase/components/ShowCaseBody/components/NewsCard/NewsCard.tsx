@@ -4,6 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import { IArticleCard } from '@/interfaces/article';
 
 const OuterContainer = styled.div`
   .news-card {
@@ -78,30 +79,30 @@ const OuterContainer = styled.div`
 `;
 
 // NewsCard component ===================================================================
-type NewsCardProps = {
-  coverUrl: string;
-  title: string;
-  date: string;
-  subtitle: string;
-  author: string;
-  likeCount: number;
-  commentCount: number;
-  game?: {
-    id: string;
-    name: string;
-  };
-};
+// type NewsCardProps = {
+//   coverUrl: string;
+//   title: string;
+//   date: string;
+//   description: string;
+//   author: string;
+//   likeCount: number;
+//   commentCount: number;
+//   game?: {
+//     id: string;
+//     name: string;
+//   };
+// };
 
 const NewsCard = ({
-  coverUrl,
+  coverImgUrl,
   title,
   date,
-  subtitle,
+  description,
   author,
   likeCount,
   commentCount,
   game,
-}: NewsCardProps) => {
+}: IArticleCard) => {
   // states and hooks ---------------
 
   // functions ----------------------
@@ -111,7 +112,7 @@ const NewsCard = ({
     <OuterContainer>
       <div className="news-card">
         <img
-          src={coverUrl}
+          src={coverImgUrl}
           alt="news cover"
           className="left"
         />
@@ -120,8 +121,8 @@ const NewsCard = ({
           {/* top */}
           <h3 className="title">{title}</h3>
           {/* middle */}
-          <p className="date-subtitle">
-            {date} - {subtitle}
+          <p className="date-description">
+            {date} - {description}
           </p>
           {/* bottom: conditionally */}
           {game ? (
@@ -132,7 +133,7 @@ const NewsCard = ({
               </div>
               <div className="author-like-comment">
                 <span className="author">
-                  <PersonIcon className="icon" /> {author}
+                  <PersonIcon className="icon" /> {author.name}
                 </span>
                 <span className="like-count">
                   <FavoriteIcon className="icon" /> {likeCount}
@@ -146,7 +147,7 @@ const NewsCard = ({
           ) : (
             <div className="author-like-comment">
               <span className="author">
-                <PersonIcon className="icon" /> {author}
+                <PersonIcon className="icon" /> {author.name}
               </span>
               <span className="like-count">
                 <FavoriteIcon className="icon" /> {likeCount}

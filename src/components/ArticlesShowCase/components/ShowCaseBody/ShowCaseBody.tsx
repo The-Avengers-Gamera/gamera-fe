@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
 import NewsCard from './components/NewsCard';
+import { IArticleCard } from '@/interfaces/article';
+import { EArticleType } from '@/constants/article';
 
 const Container = styled.div`
   //border: 1px solid #fff;
@@ -38,25 +40,10 @@ const Container = styled.div`
   }
 `;
 
-// eslint-disable-next-line react/no-unused-prop-types
-type ArticleFormat = {
-  coverUrl: string;
-  title: string;
-  date: string;
-  subtitle: string;
-  author: string;
-  likeCount: number;
-  commentCount: number;
-  game?: {
-    id: string;
-    name: string;
-  };
-};
-
 type ShowCaseBodyProps = {
   articleType: string;
-  selectedPlatformArticleList: ArticleFormat[];
-  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<ArticleFormat[]>>;
+  selectedPlatformArticleList: IArticleCard[];
+  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<IArticleCard[]>>;
 };
 // componenet ==================================================================
 const ShowCaseBody = ({
@@ -69,14 +56,14 @@ const ShowCaseBody = ({
   // functions --------------------------------
   //!  mock data for load more button ----------------------------------------------------------------------
   // ! TODO: replace mock data for load more button with loading articles on the next page
-  const mockArticle: ArticleFormat = {
-    coverUrl:
+  const mockArticle: IArticleCard = {
+    coverImgUrl:
       'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
     title: 'The Last Of Us Part 1 Review',
     date: '6h ago',
-    subtitle: 'Optimized Prime.',
+    description: 'Optimized Prime.',
     game: { id: '12', name: 'last of us' },
-    author: 'LUKE REILLY',
+    author: { name: 'LUKE REILLY' },
     commentCount: 36,
     likeCount: 64,
   };
@@ -96,15 +83,16 @@ const ShowCaseBody = ({
 
   return (
     <Container>
-      {selectedPlatformArticleList.map((article: ArticleFormat) => {
-        const { coverUrl, title, date, subtitle, author, commentCount, likeCount, game } = article;
-        return articleType === 'News' ? (
+      {selectedPlatformArticleList.map((article: IArticleCard) => {
+        const { coverImgUrl, title, date, description, author, commentCount, likeCount, game } =
+          article;
+        return articleType === EArticleType.NEWS ? (
           <NewsCard
             key={title}
-            coverUrl={coverUrl}
+            coverImgUrl={coverImgUrl}
             title={title}
             date={date}
-            subtitle={subtitle}
+            description={description}
             author={author}
             commentCount={commentCount}
             likeCount={likeCount}
@@ -113,10 +101,10 @@ const ShowCaseBody = ({
         ) : (
           <ReviewCard
             key={title}
-            coverUrl={coverUrl}
+            coverImgUrl={coverImgUrl}
             title={title}
             date={date}
-            subtitle={subtitle}
+            description={description}
             author={author}
             commentCount={commentCount}
             likeCount={likeCount}
@@ -139,5 +127,4 @@ const ShowCaseBody = ({
   );
 };
 
-// eslint-disable-next-line react/no-unused-prop-types
 export default ShowCaseBody;

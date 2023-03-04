@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import styled from 'styled-components';
-import SelectionButton from '../SelectionButton';
+import SelectionButton from '../../../../../Shares/SelectionButton';
+import { PLATFORMS } from '@/constants/platforms';
 
 const Container = styled.div`
   width: 50%;
@@ -16,13 +17,13 @@ interface PlatformBarsProps {
 
 const PlatformBars = ({ platformSelected, setPlatformSelected }: PlatformBarsProps) => {
   // hooks and states
-  const Platforms = ['All', 'PlayStation', 'Nintendo', 'Xbox', 'PC'];
+
   // function
 
   // jsx
   return (
     <Container>
-      {Platforms.map((platform) => {
+      {PLATFORMS.map((platform) => {
         return (
           <SelectionButton
             platformSelected={platformSelected}

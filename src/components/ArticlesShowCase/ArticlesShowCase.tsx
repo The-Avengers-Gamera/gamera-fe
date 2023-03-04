@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import ShowCaseBody from './components/ShowCaseBody';
 // import ReviewCards from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
+import { IArticleCard } from '@/interfaces/article';
+import { EArticleType } from '@/constants/article';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -17,26 +19,12 @@ const Container = styled.div`
   }
 `;
 
-type ArticleFormat = {
-  coverUrl: string;
-  title: string;
-  date: string;
-  subtitle: string;
-  author: string;
-  likeCount: number;
-  commentCount: number;
-  game?: {
-    id: string;
-    name: string;
-  };
-};
-
 type ArticleShowCaseProps = {
   articleType: string;
   platformSelected: string;
   setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
-  selectedPlatformArticleList: ArticleFormat[];
-  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<ArticleFormat[]>>;
+  selectedPlatformArticleList: IArticleCard[];
+  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<IArticleCard[]>>;
 };
 
 // =========================================================================================================================
@@ -50,7 +38,7 @@ const ArticlesShowCase = ({
 }: ArticleShowCaseProps) => {
   return (
     <Container>
-      <h2>{articleType === 'News' ? 'Latest News' : 'All Reviews'}</h2>
+      <h2>{articleType === EArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
       <SelectionBars
         articleType={articleType}
         platformSelected={platformSelected}

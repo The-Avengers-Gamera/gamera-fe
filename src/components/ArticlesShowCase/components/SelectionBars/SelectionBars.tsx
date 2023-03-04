@@ -1,8 +1,7 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 import PlatformBars from './components/PlatformBars';
-import SortBars from './components/SortBars';
+import SortBars from '../../../Shares/SortBars';
+import { EArticleType } from '@/constants/article';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -25,21 +24,14 @@ const SelectionBars = ({
   platformSelected,
   setPlatformSelected,
 }: SelectionBarsProps) => {
-  return articleType === 'News' ? (
-    <Container>
-      <PlatformBars
-        platformSelected={platformSelected}
-        setPlatformSelected={setPlatformSelected}
-      />
-    </Container>
-  ) : (
+  return (
     <Container>
       <PlatformBars
         platformSelected={platformSelected}
         setPlatformSelected={setPlatformSelected}
       />
       {/* SortBars are only visible on Review page */}
-      <SortBars />
+      {articleType === EArticleType.REVIEW ? <SortBars /> : null}
     </Container>
   );
 };

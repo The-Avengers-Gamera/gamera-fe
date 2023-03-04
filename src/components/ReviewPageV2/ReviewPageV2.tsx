@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ArticlesShowCase from '../Reusable_Components/ArticlesShowCase';
+import ArticlesShowCase from '../ArticlesShowCase';
 // import AllReviews from './components/AllReviews';
 import PageTitle from './components/PageTitle';
 import PopularReviews from './components/PopularReviews';
+import { IArticleCard } from '@/interfaces/article';
+import { EArticleType } from '@/constants/article';
 
 // css----------------------------------------------------
 const PageContainer = styled.div`
@@ -14,36 +16,14 @@ const PageContainer = styled.div`
 `;
 
 // ! TODO: mock data mimicing axios request ------------------------------------------------------------
-// type ReviewCardType = {
-//   coverUrl: string;
-//   title: string;
-//   daysAndOverview: string;
-//   game: string;
-//   author: string;
-//   commNum: string;
-//   likeNum: string;
-// };
-type ArticleFormat = {
-  coverUrl: string;
-  title: string;
-  date: string;
-  subtitle: string;
-  author: string;
-  likeCount: number;
-  commentCount: number;
-  game?: {
-    id: string;
-    name: string;
-  };
-};
-const initialState: ArticleFormat[] = [];
-const mockReviewItem: ArticleFormat = {
-  coverUrl:
+const initialState: IArticleCard[] = [];
+const mockReviewItem: IArticleCard = {
+  coverImgUrl:
     'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
   title: 'The Last Of Us Part 1 Review',
   date: '6h ago ',
-  subtitle: 'Optimized Prime.',
-  author: 'LUKE REILLY',
+  description: 'Optimized Prime.',
+  author: { name: 'LUKE REILLY' },
   commentCount: 36,
   likeCount: 64,
   game: { id: '32', name: 'last of us' },
@@ -59,7 +39,7 @@ for (let i = 0; i < 4; ) {
 const ReviewPageV2 = () => {
   // states and hooks ---------------
   // 2 core states here
-  const articleType = 'Reviews'; // which is used to differentiate review page and news page
+  const articleType = EArticleType.REVIEW; // which is used to differentiate review page and news page
 
   const [platformSelected, setPlatformSelected] = useState('All');
   const [selectedPlatformArticleList, setSelectedPlatformArticleList] = useState(initialState);
