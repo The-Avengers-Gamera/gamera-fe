@@ -3,7 +3,7 @@ import TrendingNews from './TrendingNews/TrendingNews';
 import LatestNews from './LatestNews/LatestNews';
 import NewsPageV2 from '@/components/NewsPageV2';
 
-const NewsPage = () => {
+const News = () => {
   return (
     <NewsPageV2 />
 
@@ -14,4 +14,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default News;
