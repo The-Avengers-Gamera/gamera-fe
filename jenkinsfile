@@ -7,23 +7,22 @@ pipeline {
     }
     
     stages {
-        stage('Install packages'){
+        /*stage('Install packages'){
             steps{
                 echo 'Installing npm packages..'
                 sh 'npm install'
             }
-        }
-       
-        stage('Test') { 
-            steps {
-                echo 'Testing...'
-                //sh 'npm run test' 
-            }
-        }
+        }*/
         stage('Build'){
             steps{
                 echo 'Building...'
                 sh 'npm run build'
+            }
+        }
+         stage('Test') { 
+            steps {
+                echo 'Testing...'
+                //sh 'npm run test' 
             }
         }
         stage('Deployment'){
