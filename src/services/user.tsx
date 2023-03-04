@@ -21,4 +21,5 @@ export const updateUserById = async (
 
 export const deleteUser = async (id: number): Promise<void> => apiClient.delete(`/users/${id}`);
 
-export const login = async (user: IUserLogin) => apiClient.post('/users/login', user);
+export const login = async (user: IUserLogin): Promise<AxiosResponse<any>> =>
+  apiClient.post('/users/login', user);

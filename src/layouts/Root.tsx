@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
@@ -7,14 +6,12 @@ import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
 import SignUpModal from '@/components/SignUpModal';
-import LoginForm from '@/components/Login/loginForm';
+import LoginForm from '@/components/Login/LoginForm';
+import useAuth from '@/context/auth';
 
 interface RootContextType {
   changeModalToOpen: (show: boolean) => void;
-  changeDisplayLogInPopWindow: (
-    event: React.MouseEvent<HTMLButtonElement>,
-    status: boolean
-  ) => void;
+  changeDisplayLogInPopWindow: (status: boolean) => void;
 }
 
 export const RootContext = React.createContext<RootContextType>({
@@ -60,19 +57,26 @@ const RootLayout = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [displayLogInPopWindow, setDisplayLogInPopWindow] = useState(true);
 
+  const { auth } = useAuth();
+
   const changeModalToOpen = (show: boolean) => {
     setModalIsOpen(show);
   };
 
-  const changeDisplayLogInPopWindow = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    status: boolean
-  ) => {
+  const changeDisplayLogInPopWindow = (status: boolean) => {
     setDisplayLogInPopWindow(status);
   };
 
+  const value = useMemo(
+    () => ({
+      changeModalToOpen,
+      changeDisplayLogInPopWindow,
+    }),
+    []
+  );
+
   return (
-    <RootContext.Provider value={{ changeModalToOpen, changeDisplayLogInPopWindow }}>
+    <RootContext.Provider value={value}>
       <PageWrapper>
         <Modal
           isOpen={modalIsOpen}
@@ -92,15 +96,19 @@ const RootLayout = () => {
           <NavBar />
         </NavWrapper>
         <Main>
-          <LoginButtonWrapper>
-            <LoginButton
-              setModalIsOpen={() => {
-                setModalIsOpen(true);
-              }}
-            />
-          </LoginButtonWrapper>
-          <Outlet />
-          <Footer />
+          <>
+            {!auth && (
+              <LoginButtonWrapper>
+                <LoginButton
+                  setModalIsOpen={() => {
+                    setModalIsOpen(true);
+                  }}
+                />
+              </LoginButtonWrapper>
+            )}
+            <Outlet />
+            <Footer />
+          </>
         </Main>
       </PageWrapper>
     </RootContext.Provider>
