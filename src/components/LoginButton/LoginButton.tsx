@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import useModal from '@/context/loginModal';
 
 const Button = styled.button`
   border: none;
@@ -9,18 +9,15 @@ const Button = styled.button`
   background: linear-gradient(-135deg, transparent 10px, #6ddb03 0);
 `;
 
-type Props = {
-  setModalIsOpen: () => void;
-};
+const LoginButton = () => {
+  const { setModalIsOpen } = useModal();
 
-const LoginButton: React.FC<Props> = (props: Props) => {
   return (
     <Button
       type="button"
-      // eslint-disable-next-line react/destructuring-assignment
-      onClick={props.setModalIsOpen}
+      onClick={() => setModalIsOpen(true)}
     >
-      LOGIN / SIGNUP
+      LOGIN / SIGN UP
     </Button>
   );
 };
