@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 import { IUserLogin } from '@/interfaces/user';
 
 type AuthContextType = {
