@@ -7,7 +7,7 @@ pipeline {
         stage('Git checkout') {
             steps {
                 //Get source code from project's repository
-                git branch: 'devops-richard-jenkins',
+                git branch: 'main',
                 url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
             }
         }
@@ -26,14 +26,14 @@ pipeline {
             steps {
                 echo 'Testing'
                 //Currrently test is empty
-                //sh 'yarn test'
+                sh 'yarn test'
             }
         }
 
         stage('Deploy') {
             steps {
                 //Deploy build folder to S3 bucket
-                sh 'aws s3 sync build/ s3://richard.gamera.com.au --delete'
+                sh 'aws s3 sync build/ s3://gamera.com.au --delete'
             }
         }
     }
