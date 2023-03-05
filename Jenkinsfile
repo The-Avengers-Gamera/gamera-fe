@@ -25,8 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
-                //Currrently test is empty
-                //sh 'yarn test'
+                sh 'yarn test'
             }
         }
 
