@@ -1,13 +1,38 @@
-import styles from './css/loginForm.module.css';
-import { RootContext } from '@/layouts/Root';
+import { useState } from 'react';
+import styles from './css/LoginForm.module.scss';
+import { IUserLogin } from '@/interfaces/user';
+import useAuth from '@/context/auth';
+import useModal from '@/context/loginModal';
 
 function closeModal() {
   const modal = document.getElementById('id01');
-  modal.style.display = 'none';
+  modal!.style.display = 'none';
   window.location.reload();
 }
 
 const LoginForm = () => {
+  const initialState: IUserLogin = {
+    email: '',
+    password: '',
+  };
+
+  const [formState, setFormState] = useState<IUserLogin>(initialState);
+  const { email, password } = formState;
+
+  const { loading, login } = useAuth();
+  const { changeDisplayLogInPopWindow } = useModal();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormState((pre) => ({ ...pre, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await login({ email, password });
+    closeModal();
+  };
+
   return (
     <div
       className={styles.login_form_modal}
@@ -23,7 +48,7 @@ const LoginForm = () => {
       </button>
       <form
         className={styles.login_form}
-        action=""
+        onSubmit={handleSubmit}
       >
         <h1 className={styles.login_title}>LOGIN</h1>
         <div>
@@ -34,9 +59,12 @@ const LoginForm = () => {
               id="email"
               type="text"
               name="email"
+              value={email}
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               required
-              onInvalid="this.setCustomValidity('Please Enter valid email')"
+              onChange={handleChange}
+              disabled={loading}
+              // onInvalid="this.setCustomValidity('Please Enter valid email')"
             />
           </label>
 
@@ -46,19 +74,24 @@ const LoginForm = () => {
               className={styles.login_input}
               type="password"
               name="password"
+              value={password}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
               required
-              onInvalid="this.setCustomValidity('Password is required')"
-              onInput="this.setCustomValidity('')"
+              disabled={loading}
+              onChange={handleChange}
+              // onInvalid="this.setCustomValidity('Password is required')"
+              // onInput="this.setCustomValidity('')"
             />
             <br />
           </label>
           <br />
-          <input
+          <button
             type="submit"
-            value="Log In"
             className={styles.login_btn}
-          />
+            disabled={loading}
+          >
+            Log In{loading && '...'}
+          </button>
           <br />
           <input
             type="button"
@@ -66,22 +99,15 @@ const LoginForm = () => {
             className={styles.forgotPwd_btn}
           />
         </div>
-        <RootContext.Consumer>
-          {(value) => (
-            <div className="create-account ">
-              <button
-                type="button"
-                className={styles.create_account_button}
-                onClick={(event) => {
-                  value.changeDisplayLogInPopWindow(event, false);
-                }}
-              >
-                Create a free account {'>'}
-              </button>
-            </div>
-          )}
-        </RootContext.Consumer>
-
+        <div className="create-account ">
+          <button
+            type="button"
+            className={styles.create_account_button}
+            onClick={() => changeDisplayLogInPopWindow(false)}
+          >
+            Create a free account {'>'}
+          </button>
+        </div>
         <div className={styles.term_policy_box}>
           <a
             href="https://www.ziffdavis.com/terms-of-use"

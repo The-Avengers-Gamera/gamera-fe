@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import axios from 'axios';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:8080/api/v1';
@@ -13,9 +12,10 @@ apiClient.interceptors.request.use(
     if (localStorage.getItem('token')) {
       config.headers.token = localStorage.getItem('token');
     }
+    return config;
   },
   (error) => {
-    console.log(error);
+    // TODO handle error for notification
     Promise.reject(error);
   }
 );
@@ -23,9 +23,10 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
+      // TODO handle 200
       return Promise.resolve(response);
     }
-    return Promise.reject(response);
+    return Promise.resolve(response);
   },
   (error) => {
     return Promise.reject(error);

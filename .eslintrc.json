@@ -36,12 +36,14 @@
     "import/prefer-default-export": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",
-    "@typescript-eslint/no-empty-interface": [
+    "@typescript-eslint/no-empty-interface": ["error", { "allowSingleExtends": true }],
+    "@typescript-eslint/no-inferrable-types": "warn",
+    "no-param-reassign": [
       "error",
-      {
-        "allowSingleExtends": true
-      }
+      { "props": true, "ignorePropertyModificationsFor": ["state", "config"] }
     ],
-    "@typescript-eslint/no-inferrable-types": "warn"
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "warn"
   }
 }

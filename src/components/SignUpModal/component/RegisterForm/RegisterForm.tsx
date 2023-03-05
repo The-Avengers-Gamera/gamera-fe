@@ -1,8 +1,8 @@
-import React, { useState, createContext } from 'react';
+import { useState, createContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
-import { RootContext } from '@/layouts/Root';
+import useModal from '@/context/loginModal';
 
 const RegisterFormContainer = styled.form`
   margin-top: 3%;
@@ -43,8 +43,9 @@ const ResisterButton = styled.button`
 
 export const isSubmitContext = createContext({});
 
-const RegisterForm: React.FC = () => {
+const RegisterForm = () => {
   const [isSubmit, setIsSubmit] = useState(false);
+  const { changeModalToOpen } = useModal();
 
   const [usernameInputValue, setUserNameInputValue] = useState({
     value: '',
@@ -59,10 +60,10 @@ const RegisterForm: React.FC = () => {
     valid: false,
   });
 
-  const submitionHandler = (e: React.FormEvent<HTMLFormElement>, fun: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (usernameInputValue.valid && emailInputValue.valid && passwordInputValue.valid) {
-      axios
+      await axios
         .post('https://mock.apifox.cn/m1/2262741-0-default/users/signup', {
           usernameInputValue,
           emailInputValue,
@@ -70,7 +71,7 @@ const RegisterForm: React.FC = () => {
         })
         .then((res) => {
           if (res.status === 201) {
-            fun(false);
+            changeModalToOpen(false);
           }
         });
       setIsSubmit(false);
@@ -80,34 +81,28 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <RootContext.Consumer>
-      {(value) => (
-        <RegisterFormContainer
-          noValidate
-          onSubmit={(event) => {
-            submitionHandler(event, value.changeModalToOpen);
-          }}
-        >
-          <isSubmitContext.Provider value={isSubmit}>
-            <ValidationInputs
-              name="username"
-              setParameter={setUserNameInputValue}
-            />
-            <ValidationInputs
-              name="email"
-              setParameter={setEmailInputValue}
-            />
-            <ValidationInputs
-              name="password"
-              setParameter={setPasswordInputValue}
-            />
-          </isSubmitContext.Provider>
-          <ResisterButtonContainer>
-            <ResisterButton type="submit">Create Account</ResisterButton>
-          </ResisterButtonContainer>
-        </RegisterFormContainer>
-      )}
-    </RootContext.Consumer>
+    <RegisterFormContainer
+      noValidate
+      onSubmit={handleSubmit}
+    >
+      <isSubmitContext.Provider value={isSubmit}>
+        <ValidationInputs
+          name="username"
+          setParameter={setUserNameInputValue}
+        />
+        <ValidationInputs
+          name="email"
+          setParameter={setEmailInputValue}
+        />
+        <ValidationInputs
+          name="password"
+          setParameter={setPasswordInputValue}
+        />
+      </isSubmitContext.Provider>
+      <ResisterButtonContainer>
+        <ResisterButton type="submit">Create Account</ResisterButton>
+      </ResisterButtonContainer>
+    </RegisterFormContainer>
   );
 };
 

@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 import RegisterForm from './component/RegisterForm';
-import { RootContext } from '@/layouts/Root';
+import useModal from '@/context/loginModal';
 
 const RegisterModalContainer = styled.div`
   width: 30rem;
@@ -67,30 +66,15 @@ const FooterLink = styled.a`
   font-size: 0.8rem;
 `;
 
-type Props = {
-  setModalIsOpen: () => void;
-};
-
-const RegisterModal: React.FC<Props> = (props: Props) => {
-  const { setModalIsOpen } = props;
+const RegisterModal = () => {
+  const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
 
   return (
     <RegisterModalContainer>
       <BackAndCloseButtonContainer>
-        <RootContext.Consumer>
-          {(value) => {
-            return (
-              <BackButton
-                onClick={(event) => {
-                  value.changeDisplayLogInPopWindow(event, true);
-                }}
-              >
-                {'<'} Back
-              </BackButton>
-            );
-          }}
-        </RootContext.Consumer>
-        <CloseButton onClick={setModalIsOpen}>&times;</CloseButton>
+        <BackButton onClick={() => changeDisplayLogInPopWindow(true)}>{'<'} Back</BackButton>
+
+        <CloseButton onClick={() => setModalIsOpen(false)}>&times;</CloseButton>
       </BackAndCloseButtonContainer>
       <HeaderContainer>
         <Header>SIGN UP</Header>
