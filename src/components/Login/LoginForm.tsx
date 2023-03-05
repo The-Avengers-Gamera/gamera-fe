@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './css/LoginForm.module.scss';
 import { IUserLogin } from '@/interfaces/user';
 import useAuth from '@/context/auth';
@@ -7,7 +8,7 @@ import useModal from '@/context/loginModal';
 function closeModal() {
   const modal = document.getElementById('id01');
   modal!.style.display = 'none';
-  window.location.reload();
+  // window.location.reload();
 }
 
 const LoginForm = () => {
@@ -64,7 +65,6 @@ const LoginForm = () => {
               required
               onChange={handleChange}
               disabled={loading}
-              // onInvalid="this.setCustomValidity('Please Enter valid email')"
             />
           </label>
 
@@ -79,8 +79,6 @@ const LoginForm = () => {
               required
               disabled={loading}
               onChange={handleChange}
-              // onInvalid="this.setCustomValidity('Password is required')"
-              // onInput="this.setCustomValidity('')"
             />
             <br />
           </label>
@@ -109,20 +107,8 @@ const LoginForm = () => {
           </button>
         </div>
         <div className={styles.term_policy_box}>
-          <a
-            href="https://www.ziffdavis.com/terms-of-use"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Term of Use
-          </a>
-          <a
-            href="https://www.ziffdavis.com/privacy-policy?refhost=ign.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Privacy policy
-          </a>
+          <Link to="/term">Term of Use</Link>
+          <Link to="/privacy">Privacy policy</Link>
         </div>
       </form>
     </div>
