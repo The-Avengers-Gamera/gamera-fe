@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './css/LoginForm.module.scss';
-import { RootContext } from '@/layouts/Root';
 import { IUserLogin } from '@/interfaces/user';
-import { useAuth } from '@/context/auth';
+import useAuth from '@/context/auth';
+import useModal from '@/context/loginModal';
 
 function closeModal() {
   const modal = document.getElementById('id01');
@@ -21,7 +21,7 @@ const LoginForm = () => {
   const { email, password } = formState;
 
   const { loading, login } = useAuth();
-  const { changeDisplayLogInPopWindow } = useContext(RootContext);
+  const { changeDisplayLogInPopWindow } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
