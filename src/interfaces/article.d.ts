@@ -4,8 +4,8 @@ import { IUser } from './user';
 
 export interface IArticle {
   id: number;
-  game: IGame;
-  user: IUser;
+  game?: IGame;
+  user?: IUser;
   coverImgUrl: string;
   title: string;
   text: string;
@@ -23,12 +23,11 @@ export interface IArticleMini extends Omit<IArticle, 'game' | 'user'> {}
 
 export interface IArticlePost extends Omit<IArticle, 'id' | 'createdTime' | 'updatedTime'> {}
 
-// used to confine the format of article obj that is used in ArticleShowCase in Review and News page
 export interface IArticleCard {
   coverImgUrl: string;
   title: string;
-  date: string; // format: 'x days ago'
-  description: string; // to be added into database
+  date: string;
+  description: string;
   author: {
     name: string;
   };
@@ -36,6 +35,6 @@ export interface IArticleCard {
     id: string;
     name: string;
   };
-  likeCount: number; // computed by backend
-  commentCount: number; // computed by backend
+  likeCount: number;
+  commentCount: number;
 }

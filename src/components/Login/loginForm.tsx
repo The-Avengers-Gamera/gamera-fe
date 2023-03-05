@@ -1,9 +1,8 @@
 import { useState, useContext } from 'react';
-import { isAxiosError } from 'axios';
-import styles from './css/loginForm.module.scss';
+import styles from './css/LoginForm.module.scss';
 import { RootContext } from '@/layouts/Root';
 import { IUserLogin } from '@/interfaces/user';
-import { login } from '@/services/user';
+import { useAuth } from '@/context/auth';
 
 function closeModal() {
   const modal = document.getElementById('id01');
@@ -11,22 +10,17 @@ function closeModal() {
   window.location.reload();
 }
 
-interface ILoginState extends IUserLogin {
-  isLoading: boolean;
-  error: string;
-}
-
 const LoginForm = () => {
-  const initialState: ILoginState = {
+  const initialState: IUserLogin = {
     email: '',
     password: '',
-    isLoading: false,
-    error: '',
   };
 
-  const [formState, setFormState] = useState<ILoginState>(initialState);
+  const [formState, setFormState] = useState<IUserLogin>(initialState);
+  const { email, password } = formState;
 
-  const { email, password, isLoading, error } = formState;
+  const { loading, login } = useAuth();
+  const { changeDisplayLogInPopWindow } = useContext(RootContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,27 +29,8 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // TODO extract this to hooks or authentication context
-    try {
-      setFormState((pre) => ({ ...pre, isLoading: true }));
-      const { status, headers, data: user } = await login({ email, password });
-      if (status === 200) {
-        const token = headers.authorization;
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', token);
-        closeModal();
-      }
-    } catch (err) {
-      // TODO handle login error
-      if (isAxiosError(err)) {
-        if (err?.response?.status === 401) {
-          setFormState((pre) => ({ ...pre, error: 'login failed' }));
-        }
-      }
-    } finally {
-      setFormState((pre) => ({ ...pre, isLoading: false }));
-    }
+    await login({ email, password });
+    closeModal();
   };
 
   return (
@@ -73,7 +48,6 @@ const LoginForm = () => {
       </button>
       <form
         className={styles.login_form}
-        action=""
         onSubmit={handleSubmit}
       >
         <h1 className={styles.login_title}>LOGIN</h1>
@@ -89,7 +63,7 @@ const LoginForm = () => {
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               required
               onChange={handleChange}
-              disabled={isLoading}
+              disabled={loading}
               // onInvalid="this.setCustomValidity('Please Enter valid email')"
             />
           </label>
@@ -103,7 +77,7 @@ const LoginForm = () => {
               value={password}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
               required
-              disabled={isLoading}
+              disabled={loading}
               onChange={handleChange}
               // onInvalid="this.setCustomValidity('Password is required')"
               // onInput="this.setCustomValidity('')"
@@ -114,9 +88,9 @@ const LoginForm = () => {
           <button
             type="submit"
             className={styles.login_btn}
-            disabled={isLoading}
+            disabled={loading}
           >
-            Log In{isLoading && '...'}
+            Log In{loading && '...'}
           </button>
           <br />
           <input
@@ -125,22 +99,15 @@ const LoginForm = () => {
             className={styles.forgotPwd_btn}
           />
         </div>
-        <RootContext.Consumer>
-          {(value) => (
-            <div className="create-account ">
-              <button
-                type="button"
-                className={styles.create_account_button}
-                onClick={(event) => {
-                  value.changeDisplayLogInPopWindow(event, false);
-                }}
-              >
-                Create a free account {'>'}
-              </button>
-            </div>
-          )}
-        </RootContext.Consumer>
-
+        <div className="create-account ">
+          <button
+            type="button"
+            className={styles.create_account_button}
+            onClick={() => changeDisplayLogInPopWindow(false)}
+          >
+            Create a free account {'>'}
+          </button>
+        </div>
         <div className={styles.term_policy_box}>
           <a
             href="https://www.ziffdavis.com/terms-of-use"

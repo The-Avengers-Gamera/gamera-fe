@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import RegisterForm from './component/RegisterForm';
 import { RootContext } from '@/layouts/Root';
@@ -73,23 +73,13 @@ type Props = {
 
 const RegisterModal: React.FC<Props> = (props: Props) => {
   const { setModalIsOpen } = props;
+  const { changeDisplayLogInPopWindow } = useContext(RootContext);
 
   return (
     <RegisterModalContainer>
       <BackAndCloseButtonContainer>
-        <RootContext.Consumer>
-          {(value) => {
-            return (
-              <BackButton
-                onClick={(event) => {
-                  value.changeDisplayLogInPopWindow(event, true);
-                }}
-              >
-                {'<'} Back
-              </BackButton>
-            );
-          }}
-        </RootContext.Consumer>
+        <BackButton onClick={() => changeDisplayLogInPopWindow(true)}>{'<'} Back</BackButton>
+
         <CloseButton onClick={setModalIsOpen}>&times;</CloseButton>
       </BackAndCloseButtonContainer>
       <HeaderContainer>
