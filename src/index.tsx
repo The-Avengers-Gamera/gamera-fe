@@ -6,7 +6,6 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
 import theme from '@/styles/theme';
-import AuthProvider from '@/context/auth/AuthProvider';
 import GlobalStyle from '@/styles/globalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -18,9 +17,7 @@ root.render(
           <StyledThemeProvider theme={theme}>
             <CssBaseline />
             <GlobalStyle />
-            <AuthProvider>
-              <App />
-            </AuthProvider>
+            <App />
           </StyledThemeProvider>
         </ThemeProvider>
       </StyledEngineProvider>
