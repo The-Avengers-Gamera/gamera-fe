@@ -1,5 +1,5 @@
-import { useState, useContext } from 'react';
-import styles from './css/LoginForm.module.scss';
+import { useContext, useState } from 'react';
+import styles from './css/loginForm.module.scss';
 import { RootContext } from '@/layouts/Root';
 import { IUserLogin } from '@/interfaces/user';
 import { useAuth } from '@/context/auth';
@@ -7,7 +7,7 @@ import { useAuth } from '@/context/auth';
 function closeModal() {
   const modal = document.getElementById('id01');
   modal!.style.display = 'none';
-  window.location.reload();
+  // window.location.reload();
 }
 
 const LoginForm = () => {
@@ -64,7 +64,6 @@ const LoginForm = () => {
               required
               onChange={handleChange}
               disabled={loading}
-              // onInvalid="this.setCustomValidity('Please Enter valid email')"
             />
           </label>
 
@@ -79,8 +78,6 @@ const LoginForm = () => {
               required
               disabled={loading}
               onChange={handleChange}
-              // onInvalid="this.setCustomValidity('Password is required')"
-              // onInput="this.setCustomValidity('')"
             />
             <br />
           </label>
@@ -110,14 +107,14 @@ const LoginForm = () => {
         </div>
         <div className={styles.term_policy_box}>
           <a
-            href="https://www.ziffdavis.com/terms-of-use"
+            href="/term"
             target="_blank"
             rel="noreferrer"
           >
             Term of Use
           </a>
           <a
-            href="https://www.ziffdavis.com/privacy-policy?refhost=ign.com"
+            href="/privacy"
             target="_blank"
             rel="noreferrer"
           >

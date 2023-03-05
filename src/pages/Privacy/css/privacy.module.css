@@ -1,0 +1,51 @@
+.logo_img {
+  width: 180px;
+  margin: 10px;
+}
+
+.last_update {
+  font-size: 1.25rem;
+}
+
+.title {
+  font-size: 76px;
+  font-weight: 200;
+}
+
+.header {
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8) 100%, rgba(0, 0, 0, 0.2) 0%),
+    url('../../../assets/header_img.png');
+  min-height: 220px;
+  max-height: 360px;
+}
+
+.privacy_article {
+  margin: 3% 10%;
+  max-width: 1100px;
+  line-height: 1.7;
+}
+
+.privacy_article p {
+  padding-bottom: 10px;
+}
+
+.privacy_article h2 {
+  font-size: 2rem;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.privacy_article a:hover {
+  color: #96f048;
+}
+
+.link_list li {
+  display: list-item;
+  list-style-position: inside;
+}

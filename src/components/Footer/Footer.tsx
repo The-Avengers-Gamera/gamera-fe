@@ -1,5 +1,5 @@
 import styles from './css/footer.module.css';
-import img from './assets/logo.png';
+import img from '../../assets/logo.png';
 
 const Footer = () => {
   return (
@@ -18,14 +18,14 @@ const Footer = () => {
           <h3>ABOUT</h3>
           <ul>
             <li>
-              <a href="#aboutUs">About Us</a>
+              <a href="/about-us">About Us</a>
             </li>
             <li>
-              <a href="#contactUs">Contact Us</a>
+              <a href="/contact-us">Contact Us</a>
             </li>
             <li>
               <a
-                href="https://www.ziffdavis.com/privacy-policy?refhost=ign.com"
+                href="/privacy"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -34,7 +34,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://www.ziffdavis.com/terms-of-use"
+                href="/term"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -48,7 +48,7 @@ const Footer = () => {
           <h3>OUR TEAM</h3>
           <ul>
             <li>
-              <a href="#ourTeam">Our Team</a>
+              <a href="/our-team">Our Team</a>
             </li>
           </ul>
         </div>
