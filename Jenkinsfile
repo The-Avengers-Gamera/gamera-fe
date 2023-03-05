@@ -11,13 +11,7 @@ pipeline {
     stage('Install Dependencies') {
       steps {
         sh 'yarn install'
-        sh 'yarn start'
-      }
-    }
-
-    stage('Build and Test') {
-      steps {
-        echo 'Bilding stage'
+        sh 'yarn build run'
       }
     }
     stage('Test') {
@@ -27,7 +21,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploy stage'
+        sh 'aws s3 sync build/ s3://ldwilltest.s3.ap-southeast-2.amazonaws.com/p3-fe-ldwill/ --delete'
       }
     }
   }
