@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './css/loginForm.module.scss';
 import { RootContext } from '@/layouts/Root';
 import { IUserLogin } from '@/interfaces/user';
@@ -106,20 +107,8 @@ const LoginForm = () => {
           </button>
         </div>
         <div className={styles.term_policy_box}>
-          <a
-            href="/term"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Term of Use
-          </a>
-          <a
-            href="/privacy"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Privacy policy
-          </a>
+          <Link to="/term">Term of Use</Link>
+          <Link to="/privacy">Privacy policy</Link>
         </div>
       </form>
     </div>

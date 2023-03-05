@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './css/footer.module.css';
 import img from '../../assets/logo.png';
 
@@ -18,28 +19,16 @@ const Footer = () => {
           <h3>ABOUT</h3>
           <ul>
             <li>
-              <a href="/about-us">About Us</a>
+              <Link to="/about-us">About Us</Link>
             </li>
             <li>
-              <a href="/contact-us">Contact Us</a>
+              <Link to="/contact-us">Contact Us</Link>
             </li>
             <li>
-              <a
-                href="/privacy"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Privacy
-              </a>
+              <Link to="/privacy">Privacy</Link>
             </li>
             <li>
-              <a
-                href="/term"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Term Of Use
-              </a>
+              <Link to="/term">Term Of Use</Link>
             </li>
           </ul>
         </div>
@@ -48,7 +37,7 @@ const Footer = () => {
           <h3>OUR TEAM</h3>
           <ul>
             <li>
-              <a href="/our-team">Our Team</a>
+              <Link to="/our-team">Our Team</Link>
             </li>
           </ul>
         </div>

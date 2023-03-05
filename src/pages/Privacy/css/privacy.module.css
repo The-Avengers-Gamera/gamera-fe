@@ -21,8 +21,8 @@
   background-repeat: no-repeat;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8) 100%, rgba(0, 0, 0, 0.2) 0%),
     url('../../../assets/header_img.png');
-  min-height: 220px;
-  max-height: 360px;
+  min-height: 250px;
+  max-height: 380px;
 }
 
 .privacy_article {

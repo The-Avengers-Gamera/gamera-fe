@@ -4,14 +4,12 @@ import styles from './css/privacy.module.css';
 const Privacy = () => {
   return (
     <div className={styles.container}>
-      <div>
-        <img
-          src={img}
-          alt="Gamera Logo"
-          id="logo"
-          className={styles.logo_img}
-        />
-      </div>
+      <img
+        src={img}
+        alt="Gamera Logo"
+        id="logo"
+        className={styles.logo_img}
+      />
       <div className={styles.header}>
         <h1 className={styles.title}>Privacy Policy for Gamera</h1>
       </div>
