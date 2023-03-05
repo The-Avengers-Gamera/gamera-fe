@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './css/loginForm.module.scss';
+import styles from './css/LoginForm.module.scss';
 import { RootContext } from '@/layouts/Root';
 import { IUserLogin } from '@/interfaces/user';
 import { useAuth } from '@/context/auth';
