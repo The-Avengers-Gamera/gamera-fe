@@ -31,5 +31,11 @@ pipeline {
                 echo 'Depoying'
             }
         }
+        
+        stage('Cleanup') {
+            steps {
+                echo 'Cleanup'
+            }
+        }
     }
 }
