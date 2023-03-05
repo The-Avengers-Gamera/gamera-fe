@@ -47,7 +47,11 @@ ul {
   padding-top: 10px;
   color: rgba(255, 255, 255, 0.85);
   font: 16px;
-  font-weight: 500;
+  font-weight: 700;
+}
+
+li:hover {
+  color: #96f048;
 }
 
 hr {
