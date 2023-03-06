@@ -92,7 +92,7 @@ const NavBar = () => {
                 />
               ))}
             </Box>
-            {1 && (
+            {isLoggedIn && (
               <Box className={style.navBarBottomGroup}>
                 <NavListItem
                   navBtnSelected={navBtnSelected}
