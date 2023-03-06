@@ -24,7 +24,7 @@ const LoginButtonWrapper = styled.div`
   width: 156px;
   position: absolute;
   top: 3rem;
-  right: 7vw;
+  right: 10%;
 `;
 
 const Modal = styled(ReactModal)`

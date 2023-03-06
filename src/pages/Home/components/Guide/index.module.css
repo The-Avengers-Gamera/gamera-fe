@@ -10,7 +10,7 @@
 
 .container {
   position: relative;
-  padding: 2rem;
+  padding: 0 2rem;
   width: 100%;
   display: flex !important;
   justify-content: space-around;
