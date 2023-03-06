@@ -5,22 +5,33 @@
   justify-content: center;
   align-items: center;
   height: 470px;
-  min-width: 500px;
+  z-index: 1000;
 }
+
 .container {
+  position: relative;
+  padding: 2rem;
+  width: 100%;
   display: flex !important;
   justify-content: space-around;
   align-items: center;
 }
+
 .image {
+  position: absolute;
   min-height: 275px;
   min-width: 205px;
 }
+
 .imageLeft {
+  left: 100px;
   background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-1.ce116612.png&w=256&q=75')
     center/cover;
 }
+
 .imageRight {
+  right: 100px;
+
   background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-2.6dfc9cf8.png&w=256&q=75')
     center/cover;
 }

@@ -1,21 +1,20 @@
 .container {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .backed_img {
   /* position: absolute; */
-  background: url('../assets/backedBy.png') no-repeat;
-  background-size: cover;
+  background: url('../assets/backedBy.png') no-repeat center/cover;
   width: 1209px;
   height: 720px;
-  margin-left: 14%;
 }
 
 @media screen and (min-width: 1200px) and (max-width: 1600px) {
   .backed_img {
     width: 1200px;
     height: 720px;
-    margin-left: 2%;
   }
 }
 
@@ -23,7 +22,6 @@
   .backed_img {
     width: 1000px;
     height: 620px;
-    margin-left: 2%;
   }
 }
 
@@ -31,7 +29,6 @@
   .backed_img {
     width: 700px;
     height: 420px;
-    margin-left: 2%;
   }
 }
 
@@ -39,6 +36,5 @@
   .backed_img {
     width: 400px;
     height: 250px;
-    margin-left: 0%;
   }
 }

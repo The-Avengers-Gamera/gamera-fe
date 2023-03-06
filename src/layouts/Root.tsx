@@ -20,12 +20,11 @@ const NavWrapper = styled.div`
 `;
 
 const LoginButtonWrapper = styled.div`
-  height: 5%;
-  float: right;
-  position: relative;
+  height: 41px;
+  width: 156px;
+  position: absolute;
   top: 3rem;
-  display: flex;
-  padding-right: 9rem;
+  right: 7vw;
 `;
 
 const Modal = styled(ReactModal)`
@@ -38,6 +37,7 @@ const Modal = styled(ReactModal)`
 `;
 
 const Main = styled.main`
+  position: relative;
   height: 100%;
   width: 100%;
   overflow-y: scroll;

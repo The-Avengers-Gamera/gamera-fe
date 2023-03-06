@@ -1,0 +1,33 @@
+:root {
+  --button-color-selected: #13141f;
+}
+
+.navItemContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.listItemSelected {
+  background-color: var(--button-color-selected);
+  color: #e4e4e4;
+
+  ::before {
+    padding: 0;
+    display: block;
+    content: '';
+    background-color: #6ddb03;
+    width: 4px;
+    height: 100%;
+  }
+}
+
+.navBtn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
