@@ -25,4 +25,16 @@ pipeline {
       }
     }
   }
+  post {
+        always {
+            //Clean the workspace after every pipeline build process
+            echo 'Cleaning workspace'
+            cleanWs()
+        }
+
+        failure {
+            //Send error messages to developer to debug
+            echo 'Build fail, sending error message to developer'
+        }
+    }
 }
