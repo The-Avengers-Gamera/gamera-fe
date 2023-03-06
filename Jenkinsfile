@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        sh 'aws s3 sync build/ s3://ldwilltest.s3.ap-southeast-2.amazonaws.com/p3-fe-ldwill/ --delete'
+        sh 'aws s3 sync build/ s3://ronald.gamera.com.au --delete'
       }
     }
   }
