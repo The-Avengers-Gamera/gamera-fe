@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying to AWS s3 bucket.'
                 //Deploy build folder to S3 bucket
-                sh 'aws s3 sync build/ s3://gamera.fe.s3.ron --delete'
+                sh 'aws s3 sync build/ s3://ron.gamera.com.au --delete'
             }
         }
     }
