@@ -1,5 +1,5 @@
 import img from '../../assets/logo.png';
-import styles from './css/Privacy.module.css';
+import styles from './Privacy.module.css';
 
 const Privacy = () => {
   return (

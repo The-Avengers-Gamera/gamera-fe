@@ -20,7 +20,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-image: linear-gradient(rgba(0, 0, 0, 0.8) 100%, rgba(0, 0, 0, 0.2) 0%),
-    url('../../../assets/header_img.png');
+    url('../../assets/header_img.png');
   min-height: 250px;
   max-height: 380px;
 }
@@ -36,10 +36,9 @@
 }
 
 .privacy_article h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   padding-top: 15px;
   padding-bottom: 10px;
-  font-weight: 300;
 }
 
 .privacy_article a:hover {

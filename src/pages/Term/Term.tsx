@@ -1,5 +1,5 @@
 import img from '../../assets/logo.png';
-import styles from './css/Term.module.css';
+import styles from './Term.module.css';
 
 const TermPage = () => {
   return (
