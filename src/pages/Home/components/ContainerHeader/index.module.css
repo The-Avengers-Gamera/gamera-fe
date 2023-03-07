@@ -1,14 +1,15 @@
 .containerHeader {
-  padding: 2rem 3rem 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .headerLeft {
   display: flex;
   align-items: center;
 }
+
 .headerLeftSubtitle {
   padding-left: 1.5rem;
 }
@@ -16,6 +17,7 @@
 .headerLink:hover {
   opacity: 0.6;
 }
+
 .headerLink:active {
   opacity: 0.2;
 }

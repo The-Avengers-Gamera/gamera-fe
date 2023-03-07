@@ -4,9 +4,10 @@
   overflow: auto;
   /* Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
-  background-color: rgba(36, 36, 41, 1);
+  background-color: rgb(36, 36, 41);
   /* Black w/ opacity */
   padding-bottom: 35px;
+  -webkit-clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -23,7 +24,7 @@
 
 .close_btn :hover,
 .close_btn :focus {
-  color: rgba(109, 219, 3, 1);
+  color: rgb(109, 219, 3);
   cursor: pointer;
 }
 
@@ -36,7 +37,7 @@
   /* border: 1px solid #888; */
   width: 70%;
   /* Could be more or less, depending on screen size */
-  color: rgba(205, 205, 205, 1);
+  color: rgb(205, 205, 205);
   font-size: 18px;
   margin-top: 20%;
 }
@@ -58,9 +59,9 @@
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid rgba(109, 219, 3, 1);
+  border: 1px solid rgb(109, 219, 3);
   box-sizing: border-box;
-  background-color: rgba(36, 36, 41, 1);
+  background-color: rgb(36, 36, 41);
   border-radius: 8px;
   color: #fff;
 }
@@ -71,15 +72,15 @@
   border: none;
   background-color: #6ddb03;
   border-radius: 3px;
-  color: rgba(61, 61, 61, 1);
+  color: rgb(61, 61, 61);
   font-size: 18px;
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+}
 
-  &:disabled {
-    background-color: #6ddb0370;
-  }
+.login_btn:disabled {
+  background-color: rgba(109, 219, 3, 0.4392156863);
 }
 
 .login_btn:hover {
@@ -90,7 +91,7 @@
   width: 58%;
   height: 42px;
   border: 1px solid #6ddb03;
-  background-color: rgba(36, 36, 41, 1);
+  background-color: rgb(36, 36, 41);
   border-radius: 3px;
   color: #6ddb03;
   font-size: 18px;
@@ -107,8 +108,8 @@
   font-weight: 700;
   border: none;
   font-size: 16px;
-  color: rgba(107, 214, 7, 1);
-  background-color: rgba(36, 36, 41, 1);
+  color: rgb(107, 214, 7);
+  background-color: rgb(36, 36, 41);
 }
 
 .create_account_button:hover {
@@ -121,6 +122,8 @@
   justify-content: space-around;
   margin-top: 7%;
   font-size: 14px;
-  color: rgba(140, 136, 136, 1);
+  color: rgb(140, 136, 136);
   text-decoration: underline;
 }
+
+/*# sourceMappingURL=LoginForm.module.css.map */
