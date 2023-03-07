@@ -4,19 +4,11 @@ pipeline {
     }
 
     stages {
-        stage('Git checkout') {
-            steps {
-                //Get source code from project's repository
-                git branch: 'main',
-                url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
-            }
-        }
-
         stage('Build') {
             steps {
+                sh 'echo "building ..."'
                 //Add project's dependencies
                 sh 'yarn install'
-
                 //Generate build folder for deployment
                 sh 'yarn run build'
             }
@@ -24,16 +16,16 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Testing'
-                //Currrently test is empty
+                sh 'echo "testing...."'
                 //sh 'yarn test'
             }
         }
 
         stage('Deploy') {
             steps {
+                echo 'Deploying to AWS s3 bucket.'
                 //Deploy build folder to S3 bucket
-                sh 'aws s3 sync build/ s3://gamera.com.au --delete'
+                sh 'aws s3 sync build/ s3://gamera.fe.s3.ron --delete'
             }
         }
     }
