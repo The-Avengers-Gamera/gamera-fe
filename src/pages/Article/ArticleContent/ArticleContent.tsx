@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ArticleMainContent from './ArticleMainContent/ArticleMainContent';
 
@@ -128,54 +129,53 @@ interface Props {
     updateTime: string;
     postTime: string;
     mainContent: string;
-    gameList: { id: number; name: string; cover: string }[] | [];
+    game: { id: number; name: string; cover: string };
     tagList: { id: number; name: string }[] | [];
   };
 }
 
 const ArticleContent = ({ articleContent }: Props) => {
+  const { title, subtitle, author, updateTime, postTime, mainContent, game, tagList } =
+    articleContent;
+
   return (
     <Container>
       <ul className="game-list-top">
-        {articleContent.gameList.map((game) => (
-          <li>{game.name}</li>
-        ))}
+        <li>{game.name}</li>
       </ul>
-      <h1>{articleContent.title}</h1>
-      <h2>{articleContent.subtitle}</h2>
+      <h1>{title}</h1>
+      <h2>{subtitle}</h2>
       <div className="article-info">
         <div className="author">
           <img
-            src={articleContent.author.avatar}
+            src={author.avatar}
             alt="author-avatar"
           />
           <p>
-            BY <a href="/user">{articleContent.author.name}</a>
+            BY <Link to={`/user/${author.id}`}>{author.name}</Link>
           </p>
         </div>
-        <div className="date">UPDATED: {articleContent.updateTime}</div>
-        <div className="date">POSTED: {articleContent.postTime}</div>
+        <div className="date">UPDATED: {updateTime}</div>
+        <div className="date">POSTED: {postTime}</div>
       </div>
-      <ArticleMainContent mainContent={articleContent.mainContent} />
+      <ArticleMainContent mainContent={mainContent} />
       <hr />
       <div className="in-this-article">
         <h3>In This Article</h3>
         <ul className="game-list">
-          {articleContent.gameList.map((game) => (
-            <li key={game.id}>
-              <img
-                src={game.cover}
-                alt="game-cover"
-              />
-              <p>{game.name}</p>
-            </li>
-          ))}
+          <li key={game.id}>
+            <img
+              src={game.cover}
+              alt="game-cover"
+            />
+            <p>{game.name}</p>
+          </li>
         </ul>
       </div>
       <div className="topics">
         <h3>Topics</h3>
         <ul className="tag-list">
-          {articleContent.tagList.map((tag) => (
+          {tagList.map((tag) => (
             <li>{tag.name}</li>
           ))}
         </ul>
