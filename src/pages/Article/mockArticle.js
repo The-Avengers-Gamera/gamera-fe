@@ -35,20 +35,12 @@ const mockArticle = {
   <p>
       <br>
   </p>`,
-  gameList: [
-    {
-      id: 0,
-      name: 'CALL OF DUTY: MODERN WARFARE II',
-      cover:
-        'https://assets-prd.ignimgs.com/2022/05/24/call-of-duty-modern-warfare-2-button-02-1653417394041.jpg?width=300&crop=1%3A1%2Csmart&dpr=2',
-    },
-    {
-      id: 1,
-      name: 'CALL OF DUTY: MODERN WARFARE I',
-      cover:
-        'https://assets-prd.ignimgs.com/2022/05/24/call-of-duty-modern-warfare-2-button-02-1653417394041.jpg?width=300&crop=1%3A1%2Csmart&dpr=2',
-    },
-  ],
+  game: {
+    id: 0,
+    name: 'CALL OF DUTY: MODERN WARFARE II',
+    cover:
+      'https://assets-prd.ignimgs.com/2022/05/24/call-of-duty-modern-warfare-2-button-02-1653417394041.jpg?width=300&crop=1%3A1%2Csmart&dpr=2',
+  },
   tagList: [
     {
       id: 0,

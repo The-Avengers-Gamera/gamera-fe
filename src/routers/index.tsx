@@ -62,7 +62,6 @@ const routes: RouteObject[] = [
       {
         path: '/article',
         element: <Article />,
-        children: [{ path: ':id', element: <>article</> }],
       },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },

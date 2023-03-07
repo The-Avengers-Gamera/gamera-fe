@@ -33,7 +33,7 @@ interface ArticleContentType {
   updateTime: string;
   postTime: string;
   mainContent: string;
-  gameList: { id: number; name: string; cover: string }[] | [];
+  game: { id: number; name: string; cover: string };
   tagList: { id: number; name: string }[] | [];
 }
 
@@ -52,7 +52,7 @@ const initArticleContent: ArticleContentType = {
   updateTime: '',
   postTime: '',
   mainContent: '',
-  gameList: [],
+  game: { id: 0, name: '', cover: '' },
   tagList: [],
 };
 

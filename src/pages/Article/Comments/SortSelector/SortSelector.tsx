@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import DoneIcon from '@mui/icons-material/Done';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 
 const Container = styled.div`
   position: relative;
@@ -63,23 +64,8 @@ enum SortType {
 
 const SortSelector = () => {
   const [sortType, setSortType] = useState<SortType>(SortType.Best);
-  const [expended, setExpended] = useState<boolean>(false);
-
   const expendBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (expendBtnRef.current && !expendBtnRef.current.contains(e.target as Node)) {
-        setExpended(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [expendBtnRef]);
+  const [expended, setExpended] = useToggleWhenClickOutside(expendBtnRef, false);
 
   const selectType = (type: string) => {
     if (type === 'Best') {
@@ -102,7 +88,7 @@ const SortSelector = () => {
         ref={expendBtnRef}
         type="button"
         className="expend-btn"
-        onClick={() => expandClickHandler()}
+        onClick={expandClickHandler}
       >
         {sortType} <KeyboardArrowDownIcon />
       </button>
