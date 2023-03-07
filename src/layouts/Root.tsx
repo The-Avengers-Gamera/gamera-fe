@@ -29,7 +29,7 @@ const LoginButtonWrapper = styled.div`
 
 const Modal = styled(ReactModal)`
   background-color: rgba(0, 0, 0, 0.8);
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -52,6 +52,11 @@ const RootLayout = () => {
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
+        style={{
+          overlay: {
+            zIndex: 1200,
+          },
+        }}
       >
         {displayLogInPopWindow ? <LoginForm /> : <SignUpModal />}
       </Modal>

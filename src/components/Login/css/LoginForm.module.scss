@@ -1,9 +1,11 @@
 .login_form_modal {
   display: inline-block;
   width: 30rem;
-  overflow: auto; /* Enable scroll if needed */
+  overflow: auto;
+  /* Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
-  background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
+  background-color: rgba(36, 36, 41, 1);
+  /* Black w/ opacity */
   padding-bottom: 35px;
   clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -32,7 +34,8 @@
   /* background-color: #fefefe; */
   margin: 5px auto;
   /* border: 1px solid #888; */
-  width: 70%; /* Could be more or less, depending on screen size */
+  width: 70%;
+  /* Could be more or less, depending on screen size */
   color: rgba(205, 205, 205, 1);
   font-size: 18px;
   margin-top: 20%;
@@ -73,6 +76,7 @@
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+
   &:disabled {
     background-color: #6ddb0370;
   }

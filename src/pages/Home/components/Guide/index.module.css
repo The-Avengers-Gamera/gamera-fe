@@ -1,11 +1,13 @@
-.giudeContainer {
+.guideContainer {
+  overflow: hidden;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 470px;
-  z-index: 1000;
+
+  z-index: 1;
 }
 
 .container {
