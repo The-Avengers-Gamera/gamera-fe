@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@700&family=Montserrat&family=Poppins:wght@600&family=Russo+One&display=swap');
+
 .giudeContainer {
   padding: 2rem;
   display: flex;
@@ -23,4 +25,23 @@
 .imageRight {
   background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-2.6dfc9cf8.png&w=256&q=75')
     center/cover;
+}
+
+.bannerContainer {
+  height: 80px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: max-content;
+  min-width: max-content;
+  margin: 10px auto;
 }
