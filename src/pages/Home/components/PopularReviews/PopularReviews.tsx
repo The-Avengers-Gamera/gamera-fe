@@ -39,10 +39,15 @@ const PopularReviews = () => {
 
   return (
     <GeneralContainer
-      sx={{ padding: '0.5rem 3rem 3rem' }}
-      header={<ContainerHeader title="POPULAR REVIEWS" />}
+      sx={{ padding: '0.5rem 7rem 3rem' }}
+      header={
+        <ContainerHeader
+          padding="3rem 7rem 0rem"
+          title="POPULAR REVIEWS"
+        />
+      }
       laptop={3}
-      mobile={4}
+      mobile={6}
       divider
     >
       {/* {cards.map((card) => (

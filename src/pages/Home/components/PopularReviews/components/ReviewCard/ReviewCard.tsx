@@ -1,32 +1,30 @@
 import styled from 'styled-components';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded'; // time icon
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'; // author icon
+import { otherFont, titleFont } from '@/pages/Home/utils/useFont';
 
 // css ----------------------------------------
 const Container = styled.div`
-  width: 273px;
-  height: 314px;
-
-  //border: solid 1px;
-  font-family: Poppins;
+  width: 100%;
+  min-width: 150px;
 `;
 
 const Cover = styled.div`
-  height: 243px;
-
   border-radius: 5px;
-
   & img {
     width: 100%;
-    height: 100%;
-
+    height: 260px;
+    object-fit: cover;
     border-radius: 5px;
   }
 `;
 const Title = styled.div`
+  ${titleFont}
   font-size: 18px;
-  font-weight: 600;
-
+  padding-top: 9px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   & :hover {
     text-decoration: underline;
   }
@@ -35,16 +33,19 @@ const Title = styled.div`
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  padding-top: 9px;
+  min-width: fix-content;
 
   & .authorName_container {
     display: flex;
     align-items: center;
-
+    overflow: hidden;
     & span {
       margin-left: 5px;
-
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-size: 16px;
-      font-weight: bold;
     }
   }
 
@@ -52,12 +53,13 @@ const Footer = styled.div`
     display: flex;
     align-items: center;
     //color: ${({ theme }) => theme.color.primary};
-
+    overflow: hidden;
     & span {
       margin-left: 5px;
-
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-size: 16px;
-      font-weight: 700;
     }
   }
 `;

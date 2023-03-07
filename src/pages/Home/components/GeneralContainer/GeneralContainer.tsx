@@ -1,6 +1,8 @@
 import { Divider, Box, Grid } from '@mui/material';
+
 import React from 'react';
 import style from './index.module.css';
+import theme from '@/styles/theme';
 
 interface Props {
   divider: boolean | null | undefined;
@@ -9,9 +11,18 @@ interface Props {
   mobile: number;
   laptop: number;
   sx: object;
+  rowGapPx?: string;
 }
 
-const GeneralContainer = ({ divider = false, header, children, mobile, laptop, sx }: Props) => (
+const GeneralContainer = ({
+  divider = false,
+  header,
+  children,
+  mobile,
+  laptop,
+  sx,
+  rowGapPx,
+}: Props) => (
   <Box>
     <Box
       sx={{
@@ -27,18 +38,24 @@ const GeneralContainer = ({ divider = false, header, children, mobile, laptop, s
       >
         <Grid
           container
-          spacing={3}
+          spacing={rowGapPx ? 0 : 3}
+          justifyContent="space-between"
         >
           <Grid
             mobile={12}
             laptop={12}
             item
           >
-            {divider ? <Divider /> : ''}
+            {divider ? <Divider sx={{ bgcolor: theme.color.subtitle }} /> : ''}
           </Grid>
 
           {children.map((child: any) => (
             <Grid
+              sx={{
+                pt: rowGapPx,
+                display: 'flex',
+                alignItems: 'center',
+              }}
               key={child.key}
               mobile={mobile}
               laptop={laptop}
