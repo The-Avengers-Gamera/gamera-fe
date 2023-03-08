@@ -57,6 +57,7 @@ const mockArticle = {
   ],
   commentList: [
     {
+      id: 0,
       author: {
         id: 1,
         avatar:
@@ -69,6 +70,7 @@ const mockArticle = {
         'Can\'t wait for that. "Microsoft has stepped away from activision acquisition" Its time they regret not taking care of their own studios. End gamepass and make quality games again or get out of gaming. ',
       childCommentList: [
         {
+          id: 1,
           author: {
             id: 1,
             avatar:
@@ -82,6 +84,7 @@ const mockArticle = {
           childCommentList: [],
         },
         {
+          id: 2,
           author: {
             id: 1,
             avatar:
@@ -94,6 +97,7 @@ const mockArticle = {
             'Can\'t wait for that. "Microsoft has stepped away from activision acquisition" Its time they regret not taking care of their own studios. End gamepass and make quality games again or get out of gaming. ',
           childCommentList: [
             {
+              id: 3,
               author: {
                 id: 1,
                 avatar:
@@ -105,7 +109,9 @@ const mockArticle = {
               content:
                 'Can\'t wait for that. "Microsoft has stepped away from activision acquisition" Its time they regret not taking care of their own studios. End gamepass and make quality games again or get out of gaming. ',
               childCommentList: [
+                // layer 4
                 {
+                  id: 4,
                   author: {
                     id: 1,
                     avatar:
@@ -116,7 +122,23 @@ const mockArticle = {
                   like: 3,
                   content:
                     'Can\'t wait for that. "Microsoft has stepped away from activision acquisition" Its time they regret not taking care of their own studios. End gamepass and make quality games again or get out of gaming. ',
-                  childCommentList: [],
+                  childCommentList: [
+                    // layer 5
+                    {
+                      id: 19,
+                      author: {
+                        id: 1,
+                        avatar:
+                          'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
+                        username: 'hardentheaint',
+                      },
+                      postTime: '1 day ago',
+                      like: 3,
+                      content:
+                        'Can\'t wait for that. "Microsoft has stepped away from activision acquisition" Its time they regret not taking care of their own studios. End gamepass and make quality games again or get out of gaming. ',
+                      childCommentList: [],
+                    },
+                  ],
                 },
               ],
             },
@@ -125,6 +147,7 @@ const mockArticle = {
       ],
     },
     {
+      id: 5,
       author: {
         id: 3,
         avatar:

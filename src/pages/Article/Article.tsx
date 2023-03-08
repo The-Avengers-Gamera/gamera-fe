@@ -3,24 +3,13 @@ import styled from 'styled-components';
 import mockArticle from './mockArticle';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
+import { ICommentItem } from './comment';
 
 const Container = styled.div`
   margin-left: 100px;
   margin-top: 110px;
   margin-right: 200px;
 `;
-
-interface CommentType {
-  author: {
-    id: number;
-    avatar: string;
-    username: string;
-  };
-  postTime: string;
-  like: number;
-  content: string;
-  childCommentList: CommentType[] | [];
-}
 
 interface ArticleContentType {
   title: string;
@@ -38,7 +27,7 @@ interface ArticleContentType {
 }
 
 interface GetArticleApiType extends ArticleContentType {
-  commentList: CommentType[];
+  commentList: ICommentItem[];
 }
 
 const initArticleContent: ArticleContentType = {
@@ -58,7 +47,7 @@ const initArticleContent: ArticleContentType = {
 
 const Article = () => {
   const [articleContent, setArticleContent] = useState<ArticleContentType>(initArticleContent);
-  const [commentList, setCommentList] = useState<CommentType[]>([]);
+  const [commentList, setCommentList] = useState<ICommentItem[]>([]);
 
   useEffect(() => {
     const { commentList: commentListTemp, ...articleContentTemp }: GetArticleApiType = mockArticle;

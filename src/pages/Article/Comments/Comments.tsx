@@ -1,11 +1,12 @@
 import { Button, TextField } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { ICommentItem } from '../comment';
+import CommentItem from './CommentItem';
 import FilterSelector from './SortSelector/SortSelector';
 
 const Container = styled.div`
   width: 80%;
-
   h3 {
     margin-bottom: 15px;
     color: #f5f8f7;
@@ -20,7 +21,7 @@ const Container = styled.div`
   hr {
     display: block;
     border: 0;
-    height: 3px;
+    height: 2px;
     background-color: ${({ theme }) => theme.color.primary};
     opacity: 1;
     margin-bottom: 20px;
@@ -33,7 +34,7 @@ const Container = styled.div`
       font-size: 18px;
       margin-bottom: 20px;
     }
-    .second-row {
+    .avatar-input {
       margin-bottom: 15px;
       display: flex;
       .avatar {
@@ -63,22 +64,14 @@ const Container = styled.div`
       margin-right: 10px;
     }
   }
+
+  .comments {
+    margin-top: 30px;
+  }
 `;
 
-interface CommentType {
-  author: {
-    id: number;
-    avatar: string;
-    username: string;
-  };
-  postTime: string;
-  like: number;
-  content: string;
-  childCommentList: CommentType[] | [];
-}
-
 interface Props {
-  commentList: CommentType[] | [];
+  commentList: ICommentItem[] | [];
 }
 
 const Comments = ({ commentList }: Props) => {
@@ -87,6 +80,8 @@ const Comments = ({ commentList }: Props) => {
     avatar:
       'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
   };
+
+  const [activeReplyInputCommentId, setActiveReplyInputCommentId] = useState<number | null>(null);
 
   return (
     <Container>
@@ -97,32 +92,48 @@ const Comments = ({ commentList }: Props) => {
       <div className="post-comment-input">
         <p className="username">{currentUser.username}</p>
         <div className="second-row">
-          <img
-            src={currentUser.avatar}
-            alt="avatar"
-            className="avatar"
-          />
-          <TextField
-            id="outlined-basic"
-            label="What do you think?"
-            variant="filled"
-            multiline
-            maxRows={40}
-            className="comment-input"
-          />
-        </div>
-        <div className="send-btn-container">
-          <Button
-            className="send-btn"
-            variant="contained"
-          >
-            Send
-          </Button>
+          <div className="avatar-input">
+            <img
+              src={currentUser.avatar}
+              alt="avatar"
+              className="avatar"
+            />
+            <TextField
+              id="outlined-basic"
+              label="What do you think?"
+              variant="filled"
+              multiline
+              maxRows={40}
+              className="comment-input"
+            />
+          </div>
+          <div className="send-btn-container">
+            <Button
+              className="send-btn"
+              variant="contained"
+            >
+              Send
+            </Button>
+          </div>
         </div>
       </div>
       <div className="filter">
         <p>Sort by</p>
         <FilterSelector />
+      </div>
+      <div className="comments">
+        {commentList.map((comment) => (
+          <CommentItem
+            layer={0}
+            key={comment.id}
+            comment={comment}
+            parentAuthorName={null}
+            activeReplyState={{
+              activeReplyInputCommentId,
+              setActiveReplyInputCommentId,
+            }}
+          />
+        ))}
       </div>
     </Container>
   );
