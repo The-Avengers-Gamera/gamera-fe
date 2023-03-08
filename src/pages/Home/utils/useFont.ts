@@ -4,7 +4,7 @@ const titleFont = {
 };
 
 const otherFont = {
-  fontFamily: 'Mintserrat',
+  fontFamily: 'Montserrat',
   fontWeight: 'Regular',
 };
 export { titleFont, otherFont };

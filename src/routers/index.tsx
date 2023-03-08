@@ -13,6 +13,7 @@ import Term from '@/pages/Term';
 import Privacy from '@/pages/Privacy';
 import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
+import Article from '@/pages/Article';
 
 const routes: RouteObject[] = [
   {
@@ -21,16 +22,8 @@ const routes: RouteObject[] = [
     children: [
       { index: true, element: <Home /> },
       { path: '/games', element: <Game /> },
-      {
-        path: '/news',
-        element: <News />,
-        children: [{ path: ':platform', element: <News /> }],
-      },
-      {
-        path: '/reviews',
-        element: <Review />,
-        children: [{ path: ':platform', element: <Review /> }],
-      },
+      { path: '/news', element: <News /> },
+      { path: '/reviews', element: <Review /> },
       { path: '/settings', element: <Settings /> },
       {
         path: '/post',
@@ -60,8 +53,7 @@ const routes: RouteObject[] = [
       },
       {
         path: '/article',
-        element: <>remember to replace...</>,
-        children: [{ path: ':id', element: <>article</> }],
+        element: <Article />,
       },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },

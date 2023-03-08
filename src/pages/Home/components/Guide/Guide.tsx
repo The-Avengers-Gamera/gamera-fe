@@ -56,7 +56,7 @@ const Guide = () => (
         </Typography>
       </Box>
     </Box>
-    <Box className={`${style.image} ${style.imageRight}`} />
+    <span className={`${style.image} ${style.imageRight}`} />
   </Box>
 );
 
