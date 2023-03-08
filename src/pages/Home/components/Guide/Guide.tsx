@@ -1,7 +1,20 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import banner from './assets/banner.png';
 import style from './index.module.css';
+
+import registerIcon from './assets/register.svg';
+import newsIcon from './assets/news.svg';
+import reviewsIcon from './assets/reviews.svg';
+import commentsIcon from './assets/comments.svg';
+import shareIcon from './assets/share.svg';
+
+const guideItems = [
+  { text: 'REGISTER', icon: registerIcon },
+  { text: 'NEWS', icon: newsIcon },
+  { text: 'REVIEWS', icon: reviewsIcon },
+  { text: 'COMMENTS', icon: commentsIcon },
+  { text: 'SHARE', icon: shareIcon },
+];
 
 const Guide = () => (
   <Box className={style.container}>
@@ -18,13 +31,7 @@ const Guide = () => (
       >
         SMOOTH TO JOIN & COMMENT
       </Typography>
-      <Box className={`${style.bannerContainer}`}>
-        <img
-          className={`${style.banner}`}
-          src={banner}
-          alt="banner"
-        />
-      </Box>
+
       <Box sx={{ mt: 2 }}>
         <Typography
           variant="h6"
@@ -37,11 +44,15 @@ const Guide = () => (
             fontSize: '18px',
           }}
         >
-          <span>REGISTER</span>
-          <span>NEWS</span>
-          <span>REVIEWS</span>
-          <span>COMMENTS</span>
-          <span>SHARE</span>
+          {guideItems.map((item) => (
+            <div key={item.text}>
+              <img
+                src={item.icon}
+                alt={item.text}
+              />
+              <span>{item.text}</span>
+            </div>
+          ))}
         </Typography>
       </Box>
     </Box>
