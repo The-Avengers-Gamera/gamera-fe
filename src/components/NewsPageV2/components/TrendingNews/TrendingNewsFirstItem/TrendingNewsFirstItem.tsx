@@ -34,6 +34,7 @@ const Container = styled.div`
   img {
     width: 100%;
     height: 100%;
+    margin-left: 15px;
   }
 
   .news-title-background {
@@ -47,6 +48,7 @@ const Container = styled.div`
   .news-title-text {
     margin-top: 15px;
     font-weight: bold;
+    font-family: Montserrat;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

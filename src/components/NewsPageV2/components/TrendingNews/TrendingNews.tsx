@@ -16,6 +16,7 @@ const TrendingNewsTitle = styled.p`
   transform: translateX(-50%);
   font-size: 28px;
   font-weight: bold;
+  font-family: 'Alumni Sans';
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -166,7 +167,7 @@ const TrendingNews = () => {
           fontSize="large"
           className="icon"
         />
-        <span>Trending News</span>
+        <span>TRENDING NEWS</span>
       </TrendingNewsTitle>
 
       <NewsContainer>

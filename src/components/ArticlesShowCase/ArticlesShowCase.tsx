@@ -11,7 +11,7 @@ const Container = styled.div`
   padding: 45px 84px 0%;
 
   & h2 {
-    font-family: Gen Jyuu Gothic Monospace;
+    font-family: 'Alumni Sans';
     font-size: 28px;
     font-weight: 800;
     text-transform: uppercase;
