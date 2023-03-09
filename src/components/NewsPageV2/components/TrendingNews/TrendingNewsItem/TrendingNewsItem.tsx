@@ -14,7 +14,7 @@ const Card = styled.div`
   }
 
   .title {
-    margin-top: 10px;
+    margin-top: 5px;
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;

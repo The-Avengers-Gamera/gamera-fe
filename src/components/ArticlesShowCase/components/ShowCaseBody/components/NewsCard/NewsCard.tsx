@@ -11,6 +11,7 @@ const OuterContainer = styled.div`
     padding: 25px 0;
     display: flex;
     cursor: pointer;
+    font-family: Montserrat;
     &:hover {
       .title {
         text-decoration: underline;
@@ -22,6 +23,7 @@ const OuterContainer = styled.div`
     .left {
       width: 245px;
       height: 145px;
+      object-fit: cover;
       border-radius: 10px;
       transition: 0.3s;
     }
@@ -33,18 +35,21 @@ const OuterContainer = styled.div`
       .title {
         color: white;
         font-size: 18px;
+        font-weight: bold;
+        font-family: Montserrat;
       }
       .icon {
         margin-right: 7px;
       }
       .game-author-like-comment {
         display: flex;
-        justify-content: space-between;
+        //justify-content: space-between;
         padding-right: 80px;
         .game {
           font-weight: bold;
           display: flex;
           align-items: center;
+          margin-right: 20px;
           .icon {
             color: ${({ theme }) => theme.color.primary};
           }

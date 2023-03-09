@@ -42,6 +42,8 @@ const initialState = [
   mockNewsItemWithGame,
   mockNewsItem,
   mockNewsItem,
+  mockNewsItem,
+  mockNewsItemWithGame,
 ];
 // ! ---------------------------------------------------------------------------------------------
 
