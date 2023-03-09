@@ -1,6 +1,12 @@
 import { AxiosResponse } from 'axios';
 import apiClient from '@/utils/apiClient';
-import { IArticle, IArticleCard, IArticlePost, IArticlePut } from '@/interfaces/article';
+import {
+  IArticle,
+  IArticleCard,
+  IArticlePost,
+  IArticlePut,
+  IPagingDto,
+} from '@/interfaces/article';
 import { ISearchArticle } from '@/interfaces/search';
 import { IPage } from '@/interfaces/page';
 
@@ -27,3 +33,6 @@ export const getArticles = async (
   );
   return response.data;
 };
+
+export const getNews = async (): Promise<AxiosResponse<IPagingDto>> =>
+  apiClient.get(`/articles/news`);
