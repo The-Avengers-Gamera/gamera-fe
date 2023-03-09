@@ -19,6 +19,7 @@ interface ArticleContentType {
     name: string;
     avatar: string;
   };
+  likeCount: number;
   updateTime: string;
   postTime: string;
   mainContent: string;
@@ -38,6 +39,7 @@ const initArticleContent: ArticleContentType = {
     name: '',
     avatar: '',
   },
+  likeCount: 0,
   updateTime: '',
   postTime: '',
   mainContent: '',

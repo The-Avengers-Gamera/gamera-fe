@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ArticleMainContent from './ArticleMainContent/ArticleMainContent';
 
 const Container = styled.div`
-  margin-bottom: 70px;
+  margin-bottom: 0px;
   .game-list-top {
     display: flex;
     margin-bottom: 35px;
@@ -97,6 +99,7 @@ const Container = styled.div`
   }
 
   .topics {
+    margin-bottom: 50px;
     h3 {
       margin-bottom: 10px;
     }
@@ -115,6 +118,27 @@ const Container = styled.div`
       }
     }
   }
+  .like-count {
+    h3 {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .like-article-btn {
+        margin-left: 10px;
+        background-color: transparent;
+        color: ${({ theme }) => theme.color.primary};
+        border: 0px;
+        cursor: pointer;
+        .like-icon {
+          font-size: 30px;
+        }
+      }
+      span {
+        font-size: 20px;
+        margin-left: 10px;
+      }
+    }
+  }
 `;
 
 interface Props {
@@ -128,6 +152,7 @@ interface Props {
     };
     updateTime: string;
     postTime: string;
+    likeCount: number;
     mainContent: string;
     game: { id: number; name: string; cover: string };
     tagList: { id: number; name: string }[] | [];
@@ -135,8 +160,15 @@ interface Props {
 }
 
 const ArticleContent = ({ articleContent }: Props) => {
-  const { title, subtitle, author, updateTime, postTime, mainContent, game, tagList } =
+  const { title, subtitle, author, updateTime, postTime, likeCount, mainContent, game, tagList } =
     articleContent;
+
+  // TODO: initial value should be based on user object
+  const [likedThisArticle, setLikedThisArticle] = useState<boolean>(false);
+
+  const handleLikeArticleClick = () => {
+    setLikedThisArticle(!likedThisArticle);
+  };
 
   return (
     <Container>
@@ -179,6 +211,23 @@ const ArticleContent = ({ articleContent }: Props) => {
             <li>{tag.name}</li>
           ))}
         </ul>
+      </div>
+      <div className="like-count">
+        <h3>
+          Like this article{' '}
+          <button
+            className="like-article-btn"
+            type="button"
+            onClick={handleLikeArticleClick}
+          >
+            {likedThisArticle ? (
+              <ThumbUpAltIcon className="like-icon" />
+            ) : (
+              <ThumbUpOffAltIcon className="like-icon" />
+            )}
+          </button>
+          <span>{likeCount}</span>
+        </h3>
       </div>
     </Container>
   );

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+// import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { Button, TextField } from '@mui/material';
 import { ICommentItem } from '../../comment';
 
@@ -64,6 +64,10 @@ const Container = styled.div`
       }
 
       .reply-input-box {
+        &.active {
+          display: block;
+        }
+        display: none;
         width: 60%;
         .avatar-input {
           margin-top: 20px;
@@ -118,12 +122,30 @@ const LayerClass = ['first-layer', 'second-layer', 'third-layer', 'fourth-layer'
 const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }: Props) => {
   const { id, author, postTime, like, content, childCommentList } = comment;
   const { activeReplyInputCommentId, setActiveReplyInputCommentId } = activeReplyState;
+  const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
 
   const layerClass = LayerClass[layer];
   // the user that is using
   const currentUser = {
     avatar:
       'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
+  };
+
+  useEffect(() => {
+    if (activeReplyInputCommentId === id) {
+      setReplyInputShown(true);
+    } else {
+      setReplyInputShown(false);
+    }
+  }, [activeReplyInputCommentId]);
+
+  const handleReplyClick = () => {
+    if (replyInputShown) {
+      setActiveReplyInputCommentId(null);
+    } else {
+      setActiveReplyInputCommentId(id);
+    }
+    setReplyInputShown(!replyInputShown);
   };
 
   return (
@@ -145,18 +167,23 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
             <button
               className="reply-btn"
               type="button"
+              onClick={handleReplyClick}
             >
               Reply
             </button>
-            <button
+            {/* <button
               className="like-btn"
               type="button"
             >
               <ThumbUpOffAltIcon />
               <span>{like}</span>
-            </button>
+            </button> */}
           </div>
-          <div className="reply-input-box">
+          <div
+            className={`reply-input-box ${
+              replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
+            }`}
+          >
             <div className="avatar-input">
               <img
                 src={currentUser.avatar}
