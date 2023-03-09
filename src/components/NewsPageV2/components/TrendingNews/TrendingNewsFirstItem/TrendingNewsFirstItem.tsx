@@ -38,11 +38,13 @@ const Container = styled.div`
   }
 
   .news-title-background {
+    margin-left: 15px;
     position: absolute;
     bottom: 0;
     background-color: rgba(22, 24, 30, 0.7);
     padding: 0 20px;
     height: 80px;
+    width: 100%;
     transition: 0.5s;
   }
   .news-title-text {
