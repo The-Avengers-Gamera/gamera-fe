@@ -36,6 +36,7 @@ const Container = styled.div`
       }
       .operation {
         display: flex;
+        align-items: baseline;
         button {
           display: block;
           background-color: transparent;
@@ -45,7 +46,7 @@ const Container = styled.div`
         }
         .reply-btn {
           font-size: 18px;
-          margin-right: 20px;
+          margin-right: 15px;
           padding: 5px 10px;
           border-radius: 3px;
         }
@@ -60,6 +61,11 @@ const Container = styled.div`
           span {
             margin-left: 5px;
           }
+        }
+
+        .show-more-btn {
+          color: gray;
+          font-size: 16px;
         }
       }
 
@@ -96,6 +102,13 @@ const Container = styled.div`
     }
   }
 
+  .child-container {
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
+
   &.second-layer,
   &.third-layer,
   &.fourth-layer {
@@ -123,6 +136,7 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
   const { id, author, postTime, like, content, childCommentList } = comment;
   const { activeReplyInputCommentId, setActiveReplyInputCommentId } = activeReplyState;
   const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
+  const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
 
   const layerClass = LayerClass[layer];
   // the user that is using
@@ -146,6 +160,10 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
       setActiveReplyInputCommentId(id);
     }
     setReplyInputShown(!replyInputShown);
+  };
+
+  const handleShowChildClick = () => {
+    setChildCommentsShown(!childCommentsShown);
   };
 
   return (
@@ -178,6 +196,15 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
               <ThumbUpOffAltIcon />
               <span>{like}</span>
             </button> */}
+            {childCommentList.length === 0 ? null : (
+              <button
+                type="button"
+                className="show-more-btn"
+                onClick={handleShowChildClick}
+              >
+                {!childCommentsShown ? 'Show more replies...' : 'Show less replies'}
+              </button>
+            )}
           </div>
           <div
             className={`reply-input-box ${
@@ -210,19 +237,20 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
           </div>
         </div>
       </div>
-
-      {childCommentList.map((childComment) => (
-        <CommentItem
-          key={childComment.id}
-          comment={childComment}
-          layer={layer + 1 > 4 ? 4 : layer + 1}
-          parentAuthorName={layer + 1 >= 4 ? author.username : null}
-          activeReplyState={{
-            activeReplyInputCommentId,
-            setActiveReplyInputCommentId,
-          }}
-        />
-      ))}
+      <div className={`child-container ${childCommentsShown ? 'active' : ''}`}>
+        {childCommentList.map((childComment) => (
+          <CommentItem
+            key={childComment.id}
+            comment={childComment}
+            layer={layer + 1 > 4 ? 4 : layer + 1}
+            parentAuthorName={layer + 1 >= 4 ? author.username : null}
+            activeReplyState={{
+              activeReplyInputCommentId,
+              setActiveReplyInputCommentId,
+            }}
+          />
+        ))}
+      </div>
 
       {layer === 0 ? <hr /> : null}
     </Container>
