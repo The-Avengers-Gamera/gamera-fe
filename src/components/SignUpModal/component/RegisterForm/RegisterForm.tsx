@@ -59,7 +59,7 @@ const RegisterForm = () => {
         email: emailInputValue.value,
         password: passwordInputValue.value,
       };
-      await createUser(user).then((res) => {
+      createUser(user).then((res) => {
         if (res.status === 200) {
           changeModalToOpen(false);
         }

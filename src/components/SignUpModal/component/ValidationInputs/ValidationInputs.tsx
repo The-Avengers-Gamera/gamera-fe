@@ -83,14 +83,13 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
 
   const emailUniqueCheck = async (event: React.FocusEvent<HTMLInputElement>) => {
     const emailAddress = event.target.value;
-    await getEmailExists(emailAddress).then((res) => {
-      const emailUniqueResult = res.data;
-      if (emailUniqueResult) {
+    getEmailExists(emailAddress)
+      .then(() => {
+        setParameter({ value: inputValue, valid: true });
+      })
+      .catch(() => {
         showAlarm('Email already exist!');
-        return;
-      }
-      setParameter({ value: inputValue, valid: true });
-    });
+      });
   };
 
   const nullInputHandler = () => {
