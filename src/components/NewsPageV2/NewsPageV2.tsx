@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import TrendingNews from './components/TrendingNews/TrendingNews';
 import ArticlesShowCase from '../ArticlesShowCase';
 import { IArticleCard } from '@/interfaces/article';
@@ -44,6 +45,13 @@ const initialState = [
 ];
 // ! ---------------------------------------------------------------------------------------------
 
+const PageContainer = styled.div`
+  /* TODO: use theme */
+  background-color: ${({ theme }) => theme.color.bg_primary};
+
+  padding-top: 100px;
+`;
+
 // NewsPageV2 component ======================================================================
 const NewsPageV2 = () => {
   // hooks and states -------------------
@@ -54,7 +62,7 @@ const NewsPageV2 = () => {
 
   // jsx --------------------------------
   return (
-    <div>
+    <PageContainer>
       <TrendingNews />
       {/* employ reusable component ArticleShowCase instead */}
       {/* <LatestNews /> */}
@@ -65,7 +73,7 @@ const NewsPageV2 = () => {
         selectedPlatformArticleList={selectedPlatformArticleList}
         setSelectedPlatformArticleList={setSelectedPlatformArticleList}
       />
-    </div>
+    </PageContainer>
   );
 };
 

@@ -12,7 +12,7 @@ const OuterContainer = styled.div`
 const TrendingNewsTitle = styled.p`
   position: absolute;
   left: 50%;
-  top: -25px;
+  top: -50px;
   transform: translateX(-50%);
   font-size: 28px;
   font-weight: bold;

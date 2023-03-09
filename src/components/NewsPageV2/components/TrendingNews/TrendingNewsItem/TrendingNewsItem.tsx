@@ -4,7 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
 
 const Card = styled.div`
-  width: 313px;
+  width: 300px;
   flex-shrink: 0;
   cursor: pointer;
 
@@ -30,7 +30,7 @@ const Card = styled.div`
 
   .comment-like {
     display: flex;
-    justify-content: baseline;
+    justify-content: center;
     margin-top: 10px;
 
     span {

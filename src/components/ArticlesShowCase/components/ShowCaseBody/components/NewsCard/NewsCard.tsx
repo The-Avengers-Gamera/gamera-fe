@@ -31,6 +31,7 @@ const OuterContainer = styled.div`
       flex-direction: column;
       justify-content: space-between;
       .title {
+        color: white;
         font-size: 18px;
       }
       .icon {
