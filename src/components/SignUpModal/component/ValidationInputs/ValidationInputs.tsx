@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { isSubmitContext } from '../RegisterForm/RegisterForm';
+import { getEmailExists } from '@/services/user';
 
 const ValidatedInputsContainer = styled.div`
   width: 20rem;
@@ -33,18 +32,21 @@ const AlarmLabel = styled.div`
 
 type Props = {
   name: string;
-  // eslint-disable-next-line no-unused-vars
-  setParameter: (state: any) => void;
+  setParameter: React.Dispatch<
+    React.SetStateAction<{
+      value: string;
+      valid: boolean;
+    }>
+  >;
 };
 
 const ValidationInputs: React.FC<Props> = (props: Props) => {
   const { name, setParameter } = props;
   const [inputValue, setInputValue] = useState('');
   const [alarmMessage, setAlarmMessage] = useState('');
-  const [labelvisibility, setLabelVisibility] = useState(false);
+  const [labelVisibility, setLabelVisibility] = useState(false);
   const [regularExpression, setRegularExpression] = useState(/^[\s\S]*$/);
   const [formatPrompt, setFormatPrompt] = useState('');
-  const isSubmit = useContext(isSubmitContext);
 
   const regularExpressionController = (type: string) => {
     switch (type) {
@@ -73,39 +75,44 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
     setFormatPrompt(forMatPromptController(name));
   }, []);
 
-  const nameUniqueCheck = (event: React.FocusEvent<HTMLInputElement>) => {
-    axios
-      .get(`https://mock.apifox.cn/m1/2262741-0-default/users/name/${event.target.value}`)
-      .then((res) => {
-        const isNameExist = res.status === 200;
-        setParameter((preState: any) => ({ ...preState, valid: !isNameExist }));
-        setLabelVisibility(isNameExist);
-        setAlarmMessage(event.target.value === '' ? 'Username required' : res.data.message);
+  const showAlarm = (alarmMes: string) => {
+    setAlarmMessage(alarmMes);
+    setLabelVisibility(true);
+    setParameter({ value: inputValue, valid: false });
+  };
+
+  const emailUniqueCheck = async (event: React.FocusEvent<HTMLInputElement>) => {
+    const emailAddress = event.target.value;
+    getEmailExists(emailAddress)
+      .then(() => {
+        setParameter({ value: inputValue, valid: true });
+      })
+      .catch(() => {
+        showAlarm('Email already exist!');
       });
   };
 
-  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    setParameter((preState: any) => ({ ...preState, value: event.target.value }));
-  };
-
-  const nullInputHandler = (capitalizedName: string) => `${capitalizedName} required`;
-
-  const notNullInputHandler = () => {
-    return !inputValue.match(regularExpression) ? formatPrompt : '';
-  };
-
-  const inputBlurHandler = () => {
+  const nullInputHandler = () => {
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-    const alarmMes = inputValue === '' ? nullInputHandler(capitalizedName) : notNullInputHandler();
-    const visibilityStatus = alarmMes !== '';
-    setAlarmMessage(alarmMes);
-    setLabelVisibility(visibilityStatus);
-    setParameter((preState: any) => ({ ...preState, valid: !visibilityStatus }));
+    showAlarm(`${capitalizedName} required`);
   };
-  useEffect(() => {
-    if (isSubmit) inputBlurHandler();
-  }, [isSubmit]);
+
+  const notNullInputHandler = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (!inputValue.match(regularExpression)) {
+      showAlarm(formatPrompt);
+      return;
+    }
+    if (name === 'email') {
+      emailUniqueCheck(event);
+      return;
+    }
+    setParameter(() => ({ value: inputValue, valid: true }));
+  };
+
+  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLabelVisibility(false);
+    setInputValue(event.target.value);
+  };
 
   return (
     <ValidatedInputsContainer>
@@ -115,9 +122,10 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
         required
         name={name}
         onChange={inputChangeHandler}
-        onBlur={name === 'username' ? nameUniqueCheck : inputBlurHandler}
+        onBlur={inputValue === '' ? nullInputHandler : notNullInputHandler}
+        autoComplete="off"
       />
-      <> {labelvisibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
+      <> {labelVisibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
     </ValidatedInputsContainer>
   );
 };

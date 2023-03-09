@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import apiClient from '@/utils/apiClient';
 import { IUser, IUserSignUp, IUserLogin, IUserAuthority } from '@/interfaces/user';
 
-export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<IUser>> =>
+export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<any>> =>
   apiClient.post('/users/signup', user);
 
 export const addAuthorityToUser = async (
@@ -23,3 +23,6 @@ export const deleteUser = async (id: number): Promise<void> => apiClient.delete(
 
 export const login = async (user: IUserLogin): Promise<AxiosResponse<any>> =>
   apiClient.post('/users/login', user);
+
+export const getEmailExists = (emailAddress: string): Promise<AxiosResponse<boolean>> =>
+  apiClient.get(`/users/emailExistsVerification/${emailAddress}`);
