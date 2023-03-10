@@ -1,17 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './css/LoginForm.module.scss';
 import { IUserLogin } from '@/interfaces/user';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
 
-function closeModal() {
-  const modal = document.getElementById('id01');
-  modal!.style.display = 'none';
-  // window.location.reload();
-}
-
-const LoginForm = () => {
+const loginModal = () => {
   const initialState: IUserLogin = {
     email: '',
     password: '',
@@ -21,12 +14,17 @@ const LoginForm = () => {
   const { email, password } = formState;
 
   const { loading, login } = useAuth();
-  const { changeDisplayLogInPopWindow } = useModal();
+  const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState((pre) => ({ ...pre, [name]: value }));
   };
+
+  function closeModal() {
+    setModalIsOpen(false);
+    // window.location.href = '/';
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,9 +32,15 @@ const LoginForm = () => {
     closeModal();
   };
 
+  // function inputValidation((in: string)){
+  //   if(in = ''){
+  //     return "user is empty"
+  //   }
+  // }
+
   return (
     <div
-      className={styles.login_form_modal}
+      className={styles.wrapper}
       id="id01"
     >
       <button
@@ -75,7 +79,7 @@ const LoginForm = () => {
               type="password"
               name="password"
               value={password}
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               required
               disabled={loading}
               onChange={handleChange}
@@ -107,12 +111,12 @@ const LoginForm = () => {
           </button>
         </div>
         <div className={styles.term_policy_box}>
-          <Link to="/term">Term of Use</Link>
-          <Link to="/privacy">Privacy policy</Link>
+          <a href="/term">Term of Use</a>
+          <a href="/privacy">Privacy policy</a>
         </div>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default loginModal;

@@ -1,4 +1,4 @@
-.login_form_modal {
+.wrapper {
   display: inline-block;
   width: 30rem;
   overflow: auto;
@@ -78,7 +78,6 @@
   margin-top: 14%;
   padding: 1px 30px;
 }
-
 .login_btn:disabled {
   background-color: rgba(109, 219, 3, 0.4392156863);
 }
@@ -124,6 +123,4 @@
   font-size: 14px;
   color: rgb(140, 136, 136);
   text-decoration: underline;
-}
-
-/*# sourceMappingURL=LoginForm.module.css.map */
+} /*# sourceMappingURL=LoginForm.module.css.map */
