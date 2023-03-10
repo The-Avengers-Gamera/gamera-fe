@@ -36,9 +36,9 @@ const ButtonContainer = styled.div`
 `;
 
 interface SelectionButtonProps {
-  platformSelected: string;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
-  platformName: string;
+  platformSelected: Platform;
+  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
+  platformName: Platform;
 }
 
 // this component represents a styled button in tool bar ===================================
