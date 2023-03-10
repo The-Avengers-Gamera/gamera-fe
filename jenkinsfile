@@ -1,16 +1,17 @@
 pipeline {
-    agent any
+    agent {
+        label 'gcp_node'
+    }
     environment {
         AWS_REGION            = 'ap-southeast-2'
         S3_BUCKET             = 'gamera.com.au'
-        /*S3_PREFIX             = 'my-app'*/
     }
     
     stages {
-        stage('Install packages'){
+        stage('Git checkout'){
             steps{
-                echo 'Installing npm packages..'
-                sh 'npm install'
+                git branch: 'devops-sherry',
+                url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
             }
         }
          stage('Test') { 
@@ -22,6 +23,7 @@ pipeline {
         stage('Build'){
             steps{
                 echo 'Building...'
+                sh 'yarn install'
                 sh 'yarn run build'
             }
         }
@@ -37,6 +39,7 @@ pipeline {
             echo 'Cleaning workspace...'
             cleanWs()
         }
+        
         failure{
             mail to: 'rsysherry@gmail.com',
             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
