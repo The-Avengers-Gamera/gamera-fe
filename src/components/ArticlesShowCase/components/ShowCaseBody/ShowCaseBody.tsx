@@ -4,6 +4,7 @@ import NewsCard from './components/NewsCard';
 import { IArticleCard } from '@/interfaces/article';
 import { EArticleType } from '@/constants/article';
 import { nowToCreated } from '@/utils/time';
+import LoadMore from '@/LoadMore';
 
 const Container = styled.div`
   //border: 1px solid #fff;
@@ -44,10 +45,9 @@ const Container = styled.div`
 type ShowCaseBodyProps = {
   articleType: EArticleType;
   filteredArticle: IArticleCard[] | undefined;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 };
-const ShowCaseBody = ({ articleType, filteredArticle }: ShowCaseBodyProps) => {
-  const loadMoreArticles = () => {};
-
+const ShowCaseBody = ({ articleType, filteredArticle, setCurrentPage }: ShowCaseBodyProps) => {
   return (
     <Container>
       {filteredArticle?.map((article: IArticleCard) => {
@@ -68,13 +68,7 @@ const ShowCaseBody = ({ articleType, filteredArticle }: ShowCaseBodyProps) => {
 
       {/* load more button, this should lift up */}
       <div className="loadMore-container">
-        <button
-          type="button"
-          className="loadMore-btn"
-          onClick={loadMoreArticles}
-        >
-          Load more
-        </button>
+        <LoadMore setCurrentPage={setCurrentPage} />
       </div>
     </Container>
   );
