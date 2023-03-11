@@ -24,5 +24,5 @@ export const deleteUser = async (id: number): Promise<void> => apiClient.delete(
 export const login = async (user: IUserLogin): Promise<AxiosResponse<any>> =>
   apiClient.post('/users/login', user);
 
-export const getEmailExists = (emailAddress: string): Promise<AxiosResponse<boolean>> =>
-  apiClient.get(`/users/emailExistsVerification/${emailAddress}`);
+export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =>
+  apiClient.get(`/users/verification?email=${email}`);
