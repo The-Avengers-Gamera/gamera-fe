@@ -2,6 +2,10 @@ pipeline {
     agent {
         label 'gcp_node'
     }
+    environment {
+        DISTRIBUTION_ID = 'E3BU2FM9FX62ZF'
+        PATHS_TO_INVALIDATE = '/*'
+    }
 
     stages {
         stage('Build') {
@@ -26,6 +30,7 @@ pipeline {
                 echo 'Deploying to AWS s3 bucket.'
                 //Deploy build folder to S3 bucket
                 sh 'aws s3 sync build/ s3://ron.gamera.com.au --delete'
+                // sh 'aws cloudfront create-invalidation --distribution-id  "${DISTRIBUTION_ID}" --paths "${PATHS_TO_INVALIDATE}"'
             }
         }
     }
