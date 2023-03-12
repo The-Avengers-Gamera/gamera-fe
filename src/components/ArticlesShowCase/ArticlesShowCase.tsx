@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
 import ShowCaseBody from './components/ShowCaseBody';
-// import ReviewCards from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
-import { IArticleCard } from '@/interfaces/article';
+import { ISearchArticle, SearchPlatform } from '@/interfaces/search';
 import { EArticleType } from '@/constants/article';
+import { getArticles } from '@/services/article';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -20,22 +22,41 @@ const Container = styled.div`
 `;
 
 type ArticleShowCaseProps = {
-  articleType: string;
-  platformSelected: string;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
-  selectedPlatformArticleList: IArticleCard[];
-  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<IArticleCard[]>>;
+  articleType: EArticleType;
 };
 
-// =========================================================================================================================
-// an abstract component that could be reused to generate 'All reviews' section in review page and 'latest news' in news page
+const initFilters: ISearchArticle = { page: 1, size: 20, platform: 'all' };
+
 const ArticlesShowCase = ({
   articleType, // "News" or "Reviews"
-  platformSelected,
-  setPlatformSelected,
-  selectedPlatformArticleList,
-  setSelectedPlatformArticleList,
 }: ArticleShowCaseProps) => {
+  const queryType = articleType === EArticleType.NEWS ? 'news' : 'reviews';
+
+  // TODO click filter button to setFilters
+  const [filters, setFilters] = useState(initFilters);
+  const [platformSelected, setPlatformSelected] = useState<Platform>('All');
+
+  // TODO implement infiniteQuery next step
+  const {
+    isLoading,
+    error,
+    data: pageArticle,
+  } = useQuery({
+    queryKey: [queryType, filters],
+    queryFn: async () => getArticles(queryType, filters),
+  });
+
+  const filteredArticle = pageArticle?.data;
+
+  useEffect(() => {
+    setFilters((pre) => ({ ...pre, platform: platformSelected.toLowerCase() as SearchPlatform }));
+  }, [platformSelected]);
+
+  // TODO implement loading component
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <Container>
       <h2>{articleType === EArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
@@ -46,8 +67,7 @@ const ArticlesShowCase = ({
       />
       <ShowCaseBody
         articleType={articleType}
-        selectedPlatformArticleList={selectedPlatformArticleList}
-        setSelectedPlatformArticleList={setSelectedPlatformArticleList}
+        filteredArticle={filteredArticle}
       />
     </Container>
   );

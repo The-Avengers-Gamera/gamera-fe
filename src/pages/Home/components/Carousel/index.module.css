@@ -1,12 +1,10 @@
 .container {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
-.containerGrid {
-  display: flex;
-  justify-content: center;
-}
-.gridCarousel {
+
+.carousel {
   padding: 2rem;
   display: flex;
   align-items: end;
@@ -14,22 +12,28 @@
   background: url(https://media.st.dl.eccdnx.com//steam/apps/10150/0000008859.1920x1080.jpg)
     center/cover;
   background-repeat: no-repeat;
+  width: 1062px;
 
-  width: 1050px;
-  min-width: 320px;
   height: 595px;
 }
+
+@media screen and (max-width: 1024px) {
+  .carousel {
+    width: 690px;
+    height: 386px;
+  }
+}
+
 .carouselBtn {
-  width: 140px;
-  height: 35px;
+  width: 143px;
+  height: 34px;
 }
-.carouselContent {
-}
+
 .carouselText {
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
-  font-weight: 700;
 }
+
 .carouselBtn {
   clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
   border-radius: 0 !important;

@@ -3,10 +3,15 @@ import useModal from '@/context/loginModal';
 
 const Button = styled.button`
   border: none;
-  width: 8rem;
-  float: right;
-  font-weight: 600;
-  background: linear-gradient(-135deg, transparent 10px, #6ddb03 0);
+  height: 100%;
+  width: 100%;
+  display: block;
+  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
+
+  background: #6ddb03;
+  cursor: pointer;
+  font-weight: Semibold;
+  font-family: Poppins;
 `;
 
 const LoginButton = () => {

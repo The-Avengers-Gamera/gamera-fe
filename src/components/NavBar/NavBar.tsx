@@ -12,12 +12,19 @@ import theme from '@/styles/theme';
 import style from './index.module.scss';
 import logo from './assets/logo.png';
 import useAuth from '@/context/auth';
+import NavListItem from './components/NavListItem';
 
+export const navItemStyle = {
+  fontWeight: 'regular',
+  fontSize: '0.5rem',
+  textAlign: 'center',
+  fontFamily: 'Russo One',
+};
 const NavBar = () => {
   const { auth: isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [navBtnSelected, setNavBtnSelected] = React.useState<string | null>();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -38,19 +45,17 @@ const NavBar = () => {
     { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
     { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
   ];
-
   return (
     <>
       <Drawer
         sx={{
-          width: 100,
-          boxSizing: 'border-box',
-          flexShrink: 0,
+          width: '101px',
           '& .MuiDrawer-paper': {
             bgcolor: theme.color.bg_nav,
-            width: 100,
+            minHeight: '340px',
+            width: '101px',
             boxSizing: 'border-box',
-            borderRight: '2px dashed rgba(255,255,255,0.5)',
+            borderRight: '2px solid #303442',
           },
         }}
         variant="permanent"
@@ -77,79 +82,56 @@ const NavBar = () => {
                 </Link>
               </ListItem>
               {generalLinks.map(({ route, title, icon }) => (
-                <ListItem
+                <NavListItem
+                  navBtnSelected={navBtnSelected}
+                  setNavBtnSelected={setNavBtnSelected}
+                  route={route}
+                  title={title}
+                  icon={icon}
                   key={title}
-                  disablePadding
-                >
-                  <Link
-                    className={style.navItemContainer}
-                    to={route}
-                  >
-                    <Button
-                      className={style.navBtn}
-                      sx={{ color: 'inherit' }}
-                    >
-                      {icon}
-                      <Typography sx={{ fontSize: '0.5rem', textAlign: 'center' }}>
-                        {title}
-                      </Typography>
-                    </Button>
-                  </Link>
-                </ListItem>
+                />
               ))}
             </Box>
             {isLoggedIn && (
               <Box className={style.navBarBottomGroup}>
-                <ListItem
-                  sx={{ pb: '0.5rem' }}
-                  disablePadding
+                <NavListItem
+                  navBtnSelected={navBtnSelected}
+                  setNavBtnSelected={setNavBtnSelected}
+                  route="/settings"
+                  title="SETTINGS"
+                  icon={<SettingsRoundedIcon />}
+                />
+                <NavListItem
+                  title="LOGOUT"
+                  navBtnSelected={navBtnSelected}
+                  setNavBtnSelected={setNavBtnSelected}
                 >
-                  <Link
-                    className={style.navItemContainer}
-                    to="/settings"
+                  <Button
+                    className={style.navBtn}
+                    sx={{ color: 'inherit' }}
+                    onClick={handleLogout}
                   >
-                    <Button
-                      className={style.navBtn}
-                      sx={{ color: 'inherit' }}
-                    >
-                      <SettingsRoundedIcon />
-                      SETTINGS
-                    </Button>
-                  </Link>
-                </ListItem>
-                <ListItem
-                  sx={{ pb: '0.5rem' }}
-                  disablePadding
+                    <ExitToAppRoundedIcon />
+                    <Typography sx={navItemStyle}>LOGOUT</Typography>
+                  </Button>
+                </NavListItem>
+                <NavListItem
+                  title="USER"
+                  navBtnSelected={navBtnSelected}
+                  setNavBtnSelected={setNavBtnSelected}
                 >
-                  <div className={style.navItemContainer}>
-                    <Button
-                      className={style.navBtn}
-                      sx={{ color: 'inherit' }}
-                      onClick={handleLogout}
-                    >
-                      <ExitToAppRoundedIcon />
-                      LOGOUT
-                    </Button>
-                  </div>
-                </ListItem>
-                <ListItem
-                  sx={{ pb: '0.5rem' }}
-                  disablePadding
-                >
-                  <div className={style.navItemContainer}>
-                    <Button
-                      className={style.navBtn}
-                      sx={{ color: 'inherit' }}
-                      aria-controls="editor-user-menu"
-                      aria-haspopup="true"
-                      aria-expanded={open ? 'true' : undefined}
-                      onClick={handleClick}
-                    >
-                      <AccountCircleRoundedIcon />
-                      USER
-                    </Button>
-                  </div>
-                </ListItem>
+                  <Button
+                    className={style.navBtn}
+                    sx={{ color: 'inherit' }}
+                    aria-controls="editor-user-menu"
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                  >
+                    <AccountCircleRoundedIcon />
+                    <Typography sx={navItemStyle}>USER</Typography>
+                  </Button>
+                </NavListItem>
               </Box>
             )}
           </>

@@ -2,33 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import PersonIcon from '@mui/icons-material/Person';
+import { titleFont } from '@/pages/Home/utils/useFont';
 
 const CardContainer = styled.div`
   /* background-color: green; */
-  width: 400px;
+  width: 100%;
+  max-width: 396px;
   position: relative;
   cursor: pointer;
-
   &:hover .cover-img {
     transform: scale(1.05);
   }
 `;
 
 const NewsCardCover = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 220px;
-  max-width: 100%;
   object-fit: cover;
-  display: block;
   clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
-
   img {
-    width: 100%;
     transition: transform 0.5s;
+    height: 100%;
   }
 `;
 
 const NewsCardTitle = styled.div`
+  ${titleFont}
   background-color: #22252a;
   text-align: center;
   height: 70px;
@@ -38,7 +40,6 @@ const NewsCardTitle = styled.div`
   text-overflow: ellipsis;
   line-height: 70px;
   border-bottom: 1px solid #3d3d3d;
-  font-weight: bold;
   font-size: 18px;
 `;
 
@@ -54,12 +55,18 @@ const NewsCardTimeAuthor = styled.div`
   div {
     display: flex;
     color: ${({ theme }) => theme.color.primary};
+    overflow: hidden;
     span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       margin-left: 10px;
       color: white;
-      font-weight: bold;
     }
     span.author {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-transform: uppercase;
     }
   }

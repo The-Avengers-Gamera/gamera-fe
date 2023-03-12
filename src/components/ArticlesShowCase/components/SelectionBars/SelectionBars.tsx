@@ -13,12 +13,11 @@ const Container = styled.div`
 `;
 
 type SelectionBarsProps = {
-  articleType: string;
-  platformSelected: string;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
+  articleType: EArticleType;
+  platformSelected: Platform;
+  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
 };
 
-// this component represents the platform selection and sorting buttons under the tilte of 'All Reviews'
 const SelectionBars = ({
   articleType,
   platformSelected,
