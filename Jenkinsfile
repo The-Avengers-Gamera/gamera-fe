@@ -7,7 +7,7 @@ pipeline {
         stage('Git checkout') {
             steps {
                 //Get source code from project's repository
-                git branch: 'main',
+                git branch: 'develop',
                 url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
             }
         }
