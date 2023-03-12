@@ -27,6 +27,8 @@ pipeline {
   }
   post {
         always {
+            //Sent email
+            emailext(attachlog:true, body:'Test result', subject: 'This is a notification from Jenkins', to 'ronaldlgh1995@gmail.com' )
             //Clean the workspace after every pipeline build process
             echo 'Cleaning workspace'
             cleanWs()
