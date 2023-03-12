@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TrendingNewsList } from '@/interfaces/TrendingNewsList';
+import { IArticle } from '@/interfaces/article';
 
 const Container = styled.div`
   position: relative;
@@ -58,7 +58,7 @@ const Container = styled.div`
 `;
 
 interface Props {
-  news: TrendingNewsList;
+  news: IArticle;
 }
 
 const TrendingNewsFirstItem = ({ news }: Props) => {

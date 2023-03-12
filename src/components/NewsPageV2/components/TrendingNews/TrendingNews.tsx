@@ -5,7 +5,7 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingNewsFirstItem from './TrendingNewsFirstItem/TrendingNewsFirstItem';
 import TrendingNewsItem from './TrendingNewsItem/TrendingNewsItem';
 import { getNews } from '@/services/article';
-import { TrendingNewsList } from '@/interfaces/TrendingNewsList';
+import { IArticle } from '@/interfaces/article';
 
 const OuterContainer = styled.div`
   position: relative;
@@ -62,17 +62,25 @@ const NewsContainer = styled.div`
 `;
 
 const TrendingNews = () => {
-  const [trendingNews, setTrendingNews] = useState<TrendingNewsList[]>([]);
+  const [trendingNews, setTrendingNews] = useState<IArticle[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const hasMountedRef = useRef(false);
 
   useEffect(() => {
     if (!hasMountedRef.current) {
       hasMountedRef.current = true;
-      getNews().then((res) => {
-        const newsList = res.data;
-        setTrendingNews(newsList.data);
-      });
+      getNews()
+        .then((res) => {
+          const newsList = res.data;
+          setTrendingNews(newsList.data);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+          setIsError(true);
+        });
     }
   }, []);
 
@@ -85,18 +93,25 @@ const TrendingNews = () => {
         />
         <span>Trending News</span>
       </TrendingNewsTitle>
-
       <NewsContainer>
-        <TrendingNewsFirstItem news={trendingNews[0]} />
-        <ul className="trending-news-item-container">
-          {trendingNews.slice(1).map((item, index) => (
-            <TrendingNewsItem
-              key={item.id}
-              news={item}
-              order={index + 2 === 10 ? `10` : `0${index + 2}`}
-            />
-          ))}
-        </ul>
+        <>
+          {isLoading && <div>loading...</div>}
+          {isError && <div>load failed</div>}
+          {trendingNews && (
+            <>
+              <TrendingNewsFirstItem news={trendingNews[0]} />
+              <ul className="trending-news-item-container">
+                {trendingNews.slice(1).map((item, index) => (
+                  <TrendingNewsItem
+                    key={item.id}
+                    news={item}
+                    order={index + 2 === 10 ? `10` : `0${index + 2}`}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
+        </>
       </NewsContainer>
     </OuterContainer>
   );

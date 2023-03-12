@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
-import { TrendingNewsList } from '@/interfaces/TrendingNewsList';
+import { IArticle } from '@/interfaces/article';
 
 const Card = styled.div`
   width: 313px;
@@ -53,7 +53,7 @@ const Card = styled.div`
 `;
 
 interface Props {
-  news: TrendingNewsList;
+  news: IArticle;
   order: string;
 }
 

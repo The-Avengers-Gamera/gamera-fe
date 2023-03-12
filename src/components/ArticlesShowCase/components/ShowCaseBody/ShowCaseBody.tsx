@@ -4,7 +4,7 @@ import NewsCard from './components/NewsCard';
 import { IArticleCard } from '@/interfaces/article';
 import { EArticleType } from '@/constants/article';
 import { nowToCreated } from '@/utils/time';
-import LoadMore from '@/LoadMore';
+import LoadMore from '@/components/LoadMore';
 
 const Container = styled.div`
   //border: 1px solid #fff;

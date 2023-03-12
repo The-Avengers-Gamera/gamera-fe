@@ -40,10 +40,3 @@ export interface IArticleCard {
   date?: string;
   createdTime: string;
 }
-
-export interface IPagingDto {
-  data: any;
-  totalItems: number;
-  totalPages: numer;
-  currentPage: number;
-}
