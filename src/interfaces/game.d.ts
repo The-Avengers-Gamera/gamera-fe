@@ -13,6 +13,7 @@ export interface IGame {
   description: string;
   createdTime: string;
   updatedTime: string;
+  imgUrl: string;
   genreList: Array<IGenre>;
 }
 
