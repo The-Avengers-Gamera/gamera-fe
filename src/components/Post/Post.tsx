@@ -108,6 +108,8 @@ const Post = () => {
     title: '',
     text: '',
     type: EArticleType.REVIEW,
+    commentList: [],
+    tagList: [],
   };
 
   const formik = useFormik({
