@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IArticle } from '@/interfaces/article';
 
 const Container = styled.div`
   position: relative;
@@ -57,10 +58,7 @@ const Container = styled.div`
 `;
 
 interface Props {
-  news: {
-    coverUrl: string;
-    title: string;
-  };
+  news: IArticle;
 }
 
 const TrendingNewsFirstItem = ({ news }: Props) => {
@@ -68,7 +66,7 @@ const TrendingNewsFirstItem = ({ news }: Props) => {
     <Container>
       <span className="order">01</span>
       <img
-        src={news?.coverUrl}
+        src={news?.coverImgUrl}
         alt="news cover"
         srcSet=""
       />
