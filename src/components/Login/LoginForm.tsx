@@ -63,7 +63,6 @@ const loginModal = () => {
       window.location.href = '/';
     } catch (error) {
       setLoginError('Email or password is not correct');
-      console.log('Login Error', error);
     }
   };
 
