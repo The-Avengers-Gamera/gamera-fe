@@ -13,7 +13,7 @@ export const updateArticleById = async (
 ): Promise<AxiosResponse<IArticle>> => apiClient.put(`/articles/${id}`, articlePut);
 
 export const getArticleById = async (id: number): Promise<AxiosResponse<IArticle>> =>
-  apiClient.post(`/articles/${id}`);
+  apiClient.get(`/articles/${id}`);
 
 export const deleteArticleById = async (id: number): Promise<AxiosResponse<string>> =>
   apiClient.delete(`/articles/${id}`);
