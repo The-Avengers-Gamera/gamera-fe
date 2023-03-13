@@ -11,6 +11,9 @@ const loginModal = () => {
   };
 
   const [formState, setFormState] = useState<IUserLogin>(initialState);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState('');
   const { email, password } = formState;
 
   const { loading, login } = useAuth();
@@ -19,24 +22,50 @@ const loginModal = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState((pre) => ({ ...pre, [name]: value }));
+    setLoginError('');
+    if (name === 'email') {
+      if (value.length === 0) {
+        setEmailError('Email is required');
+      } else if (
+        value.match(
+          /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        setEmailError('');
+      } else {
+        setEmailError('Email is not valid');
+      }
+    }
+
+    if (name === 'password') {
+      if (value.length === 0) {
+        setPasswordError('Password is required');
+      } else if (value.length > 1 && value.length < 8) {
+        setPasswordError('Password is not valid');
+      } else if (/[A-Z]/.test(value) && !/^[A-Za-z]*$/.test(value)) {
+        setPasswordError('');
+      } else {
+        setPasswordError('Password is not valid');
+      }
+    }
   };
 
   function closeModal() {
     setModalIsOpen(false);
-    // window.location.href = '/';
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await login({ email, password });
-    closeModal();
+    // if .error.. return
+    try {
+      await login({ email, password });
+      closeModal();
+      window.location.href = '/';
+    } catch (error) {
+      setLoginError('Email or password is not correct');
+      console.log('Login Error', error);
+    }
   };
-
-  // function inputValidation((in: string)){
-  //   if(in = ''){
-  //     return "user is empty"
-  //   }
-  // }
 
   return (
     <div
@@ -70,6 +99,9 @@ const loginModal = () => {
               onChange={handleChange}
               disabled={loading}
             />
+            <div className={styles.input_msg}>
+              <p> {emailError} </p>
+            </div>
           </label>
 
           <label htmlFor="password">
@@ -84,7 +116,10 @@ const loginModal = () => {
               disabled={loading}
               onChange={handleChange}
             />
-            <br />
+            <div className={styles.input_msg}>
+              <p> {passwordError} </p>
+              <p> {loginError} </p>
+            </div>
           </label>
           <br />
           <button

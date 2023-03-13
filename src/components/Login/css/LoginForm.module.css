@@ -42,6 +42,20 @@
   margin-top: 20%;
 }
 
+.input_msg {
+  display: flex;
+  background-color: rgba(107, 214, 7, 0.1);
+  justify-content: left;
+  border-radius: 5px;
+}
+
+.input_msg p {
+  padding: 6px 18px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(109, 219, 3, 0.5);
+}
+
 .login_title {
   margin-top: -10%;
   font-size: 36px;

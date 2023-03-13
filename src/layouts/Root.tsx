@@ -56,7 +56,7 @@ const RootLayout = () => {
         style={{
           overlay: {
             zIndex: 1200,
-            background: 'rgba(0, 0, 0, 0)',
+            background: 'rgba(0, 0, 0, 0.6)',
           },
         }}
       >
