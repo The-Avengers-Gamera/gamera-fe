@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 // import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { Button, TextField } from '@mui/material';
-import { ICommentItem } from '../../comment';
+import { IComment } from '@/interfaces/comment';
 
 const childCommentIndent = '80px';
 const Container = styled.div`
@@ -121,7 +121,7 @@ const Container = styled.div`
 `;
 
 interface Props {
-  comment: ICommentItem;
+  comment: IComment;
   layer: number;
   parentAuthorName: string | null;
   activeReplyState: {
@@ -133,7 +133,7 @@ interface Props {
 const LayerClass = ['first-layer', 'second-layer', 'third-layer', 'fourth-layer', ''];
 
 const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }: Props) => {
-  const { id, author, postTime, like, content, childCommentList } = comment;
+  const { id, user, updatedTime, text, childComment } = comment;
   const { activeReplyInputCommentId, setActiveReplyInputCommentId } = activeReplyState;
   const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
   const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
@@ -144,6 +144,9 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
     avatar:
       'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
   };
+
+  // TODO: add the backend user avatar
+  user.profileImgUrl = user.profileImgUrl || currentUser.avatar;
 
   useEffect(() => {
     if (activeReplyInputCommentId === id) {
@@ -171,16 +174,16 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
       <div className="this-comment">
         <img
           className="comment-avatar"
-          src={author.avatar}
+          src={user.profileImgUrl}
           alt="avatar"
         />
         <div className="comment-right">
-          <p className="username">{author.username}</p>
+          <p className="username">{user.name}</p>
           <p className="post-time">
             {parentAuthorName ? `reply to ${parentAuthorName} - ` : ''}
-            {postTime}
+            {updatedTime}
           </p>
-          <p className="comment-text">{content}</p>
+          <p className="comment-text">{text}</p>
           <div className="operation">
             <button
               className="reply-btn"
@@ -196,7 +199,7 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
               <ThumbUpOffAltIcon />
               <span>{like}</span>
             </button> */}
-            {childCommentList.length === 0 ? null : (
+            {childComment?.length === 0 ? null : (
               <button
                 type="button"
                 className="show-more-btn"
@@ -219,7 +222,7 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
               />
               <TextField
                 id="outlined-basic"
-                label={`Reply to ${author.username}...`}
+                label={`Reply to ${user.name}...`}
                 variant="filled"
                 multiline
                 maxRows={10}
@@ -238,12 +241,12 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
         </div>
       </div>
       <div className={`child-container ${childCommentsShown ? 'active' : ''}`}>
-        {childCommentList.map((childComment) => (
+        {childComment?.map((child: IComment) => (
           <CommentItem
-            key={childComment.id}
-            comment={childComment}
+            key={child.id}
+            comment={child}
             layer={layer + 1 > 4 ? 4 : layer + 1}
-            parentAuthorName={layer + 1 >= 4 ? author.username : null}
+            parentAuthorName={layer + 1 >= 4 ? user.name : null}
             activeReplyState={{
               activeReplyInputCommentId,
               setActiveReplyInputCommentId,
