@@ -91,14 +91,11 @@
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+  cursor: pointer;
 }
 .login_btn:disabled {
   background-color: rgba(109, 219, 3, 0.4392156863);
   cursor: not-allowed;
-}
-
-.login_btn:hover {
-  cursor: pointer;
 }
 
 .forgotPwd_btn {

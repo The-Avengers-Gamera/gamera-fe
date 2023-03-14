@@ -27,9 +27,11 @@ const LoginModal = () => {
     const { name, value } = e.target;
     setFormState((pre) => ({ ...pre, [name]: value }));
     setLoginError('');
+    setBtnDisabled(false);
     if (name === 'email') {
       if (value.length === 0) {
         setEmailError('Email is required');
+        setBtnDisabled(true);
       } else if (
         value.match(
           /^(([^<>()[\]\\.,;:\s@\\"]+(\.[^<>()[\]\\.,;:\s@\\"]+)*)|(\\".+\\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -38,18 +40,22 @@ const LoginModal = () => {
         setEmailError('');
       } else {
         setEmailError('Email is not valid');
+        setBtnDisabled(true);
       }
     }
 
     if (name === 'password') {
       if (value.length === 0) {
         setPasswordError('Password is required');
+        setBtnDisabled(true);
       } else if (value.length > 1 && value.length < 8) {
         setPasswordError('Password is not valid');
+        setBtnDisabled(true);
       } else if (/[A-Z]/.test(value) && !/^[A-Za-z]*$/.test(value)) {
         setPasswordError('');
       } else {
         setPasswordError('Password is not valid');
+        setBtnDisabled(true);
       }
     }
   };
@@ -66,7 +72,6 @@ const LoginModal = () => {
       navigate('/');
     } catch (err) {
       setLoginError('Email or password is not correct');
-      useAuth().error = loginError;
       setBtnDisabled(true);
     }
   };

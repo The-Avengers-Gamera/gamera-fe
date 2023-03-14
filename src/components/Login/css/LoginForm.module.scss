@@ -90,15 +90,12 @@
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+  cursor: pointer;
 
   &:disabled {
     background-color: #6ddb0370;
     cursor: not-allowed;
   }
-}
-
-.login_btn:hover {
-  cursor: pointer;
 }
 
 .forgotPwd_btn {
