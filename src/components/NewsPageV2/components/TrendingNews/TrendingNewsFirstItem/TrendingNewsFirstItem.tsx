@@ -35,19 +35,23 @@ const Container = styled.div`
   img {
     width: 100%;
     height: 100%;
+    margin-left: 15px;
   }
 
   .news-title-background {
+    margin-left: 15px;
     position: absolute;
     bottom: 0;
     background-color: rgba(22, 24, 30, 0.7);
     padding: 0 20px;
     height: 80px;
+    width: 100%;
     transition: 0.5s;
   }
   .news-title-text {
     margin-top: 15px;
     font-weight: bold;
+    font-family: Montserrat;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
