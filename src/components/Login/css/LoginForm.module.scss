@@ -61,7 +61,7 @@
 }
 
 .labels {
-  margin-top: 10%;
+  margin-top: 8%;
   float: left;
   font-weight: 500;
 }
@@ -93,6 +93,7 @@
 
   &:disabled {
     background-color: #6ddb0370;
+    cursor: not-allowed;
   }
 }
 

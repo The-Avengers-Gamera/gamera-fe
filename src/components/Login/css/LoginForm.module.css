@@ -62,7 +62,7 @@
 }
 
 .labels {
-  margin-top: 10%;
+  margin-top: 8%;
   float: left;
   font-weight: 500;
 }
@@ -94,6 +94,7 @@
 }
 .login_btn:disabled {
   background-color: rgba(109, 219, 3, 0.4392156863);
+  cursor: not-allowed;
 }
 
 .login_btn:hover {

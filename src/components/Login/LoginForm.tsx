@@ -1,22 +1,26 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './css/LoginForm.module.scss';
 import { IUserLogin } from '@/interfaces/user';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
 
-const loginModal = () => {
+const LoginModal = () => {
   const initialState: IUserLogin = {
     email: '',
     password: '',
   };
 
+  const navigate = useNavigate();
+
   const [formState, setFormState] = useState<IUserLogin>(initialState);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [btnDisabled, setBtnDisabled] = useState(false);
   const { email, password } = formState;
 
-  const { loading, login } = useAuth();
+  const { loading, login, error } = useAuth();
   const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,13 +60,14 @@ const loginModal = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if .error.. return
     try {
       await login({ email, password });
       closeModal();
-      window.location.href = '/';
-    } catch (error) {
+      navigate('/');
+    } catch (err) {
       setLoginError('Email or password is not correct');
+      useAuth().error = loginError;
+      setBtnDisabled(true);
     }
   };
 
@@ -93,8 +98,6 @@ const loginModal = () => {
               type="text"
               name="email"
               value={email}
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-              required
               onChange={handleChange}
               disabled={loading}
             />
@@ -110,21 +113,23 @@ const loginModal = () => {
               type="password"
               name="password"
               value={password}
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              required
               disabled={loading}
               onChange={handleChange}
             />
             <div className={styles.input_msg}>
               <p> {passwordError} </p>
+            </div>
+            <br />
+            <div className={styles.input_msg}>
               <p> {loginError} </p>
             </div>
           </label>
           <br />
           <button
             type="submit"
+            name="login"
             className={styles.login_btn}
-            disabled={loading}
+            disabled={btnDisabled}
           >
             Log In{loading && '...'}
           </button>
@@ -153,4 +158,4 @@ const loginModal = () => {
   );
 };
 
-export default loginModal;
+export default LoginModal;
