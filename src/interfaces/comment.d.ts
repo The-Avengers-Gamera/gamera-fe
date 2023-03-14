@@ -1,6 +1,7 @@
 import { IUserSlim } from './user';
 
 export interface ICommentSlim {
+  user: IUserSlim;
   id: number;
   text: string;
   CommentSlimDto: ICommentSlim;
@@ -10,13 +11,13 @@ export interface ICommentSlim {
 }
 
 export interface IComment extends Omit<ICommentSlim, 'CommentSlimDto' | 'UserSlimGetDto'> {
-  parentComment: ICommentSlim;
-  childComment: Array<ICommentSlim>;
+  parentComment?: ICommentSlim;
+  childComment?: Array<ICommentSlim>;
 }
 
 export interface ICommentPost {
   text: string;
-  parentId: number;
+  parentId?: number;
   articleId: number;
   authorId: number;
 }

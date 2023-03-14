@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import mockArticle from './mockArticle';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
-import { ICommentItem } from './comment';
 import { getArticleById } from '../../services/article';
 import { IArticle } from '../../interfaces/article';
 import { EArticleType } from '../../constants/article';
+import { IComment } from '../../interfaces/comment';
 
 const Container = styled.div`
   margin-left: 100px;
@@ -28,7 +28,7 @@ const initArticleContent: IArticle = {
 
 const Article = () => {
   const [articleContent, setArticleContent] = useState<IArticle>(initArticleContent);
-  const [commentList, setCommentList] = useState<ICommentItem[]>([]);
+  const [commentList, setCommentList] = useState<IComment[]>([]);
 
   useEffect(() => {
     async function fetchArticle(): Promise<void> {
@@ -51,7 +51,10 @@ const Article = () => {
   return (
     <Container>
       <ArticleContent articleContent={articleContent} />
-      {/* <Comments commentList={commentList} /> */}
+      <Comments
+        commentList={commentList}
+        articleId={articleContent.id}
+      />
     </Container>
   );
 };

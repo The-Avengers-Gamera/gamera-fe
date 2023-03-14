@@ -28,6 +28,7 @@ export interface IUserInfo {
 }
 
 export interface IUserSlim {
+  profileImgUrl?: string;
   id: number;
   name: string;
 }
