@@ -38,7 +38,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
           setError(error);
         }
       }
-      // TODO notification error
+      throw err;
     } finally {
       setLoading(false);
     }

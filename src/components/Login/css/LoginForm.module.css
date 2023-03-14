@@ -1,4 +1,4 @@
-.login_form_modal {
+.wrapper {
   display: inline-block;
   width: 30rem;
   overflow: auto;
@@ -42,13 +42,27 @@
   margin-top: 20%;
 }
 
+.input_msg {
+  display: flex;
+  background-color: rgba(107, 214, 7, 0.1);
+  justify-content: left;
+  border-radius: 5px;
+}
+
+.input_msg p {
+  padding: 6px 18px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(109, 219, 3, 0.5);
+}
+
 .login_title {
   margin-top: -10%;
   font-size: 36px;
 }
 
 .labels {
-  margin-top: 10%;
+  margin-top: 8%;
   float: left;
   font-weight: 500;
 }
@@ -77,14 +91,11 @@
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+  cursor: pointer;
 }
-
 .login_btn:disabled {
   background-color: rgba(109, 219, 3, 0.4392156863);
-}
-
-.login_btn:hover {
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .forgotPwd_btn {
@@ -124,6 +135,4 @@
   font-size: 14px;
   color: rgb(140, 136, 136);
   text-decoration: underline;
-}
-
-/*# sourceMappingURL=LoginForm.module.css.map */
+} /*# sourceMappingURL=LoginForm.module.css.map */
