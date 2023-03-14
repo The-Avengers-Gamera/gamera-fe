@@ -35,7 +35,6 @@ const Article = () => {
       const articleId = 3;
       try {
         const response = await getArticleById(articleId);
-        console.log(response);
         if (response.status === 200) {
           const article = response.data;
           setArticleContent({ ...article });
@@ -53,6 +52,7 @@ const Article = () => {
       <ArticleContent articleContent={articleContent} />
       <Comments
         commentList={commentList}
+        setCommentList={setCommentList}
         articleId={articleContent.id}
       />
     </Container>

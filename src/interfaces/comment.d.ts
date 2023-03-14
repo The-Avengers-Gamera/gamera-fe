@@ -12,7 +12,7 @@ export interface ICommentSlim {
 
 export interface IComment extends Omit<ICommentSlim, 'CommentSlimDto' | 'UserSlimGetDto'> {
   parentComment?: ICommentSlim;
-  childComment?: Array<ICommentSlim>;
+  childComment?: Array<ICommentSlim> | Array<IComment>;
 }
 
 export interface ICommentPost {

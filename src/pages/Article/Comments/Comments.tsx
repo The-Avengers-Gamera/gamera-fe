@@ -74,9 +74,10 @@ const Container = styled.div`
 interface Props {
   commentList: IComment[] | [];
   articleId: number;
+  setCommentList: (commentList: IComment[]) => void;
 }
 
-const Comments = ({ commentList, articleId }: Props) => {
+const Comments = ({ commentList, articleId, setCommentList }: Props) => {
   const currentUser = {
     id: 1,
     username: 'Alice.Bob',
@@ -85,17 +86,16 @@ const Comments = ({ commentList, articleId }: Props) => {
   };
 
   const [commentInput, setCommentInput] = useState<string>('');
-  const [commentListState, setCommentListState] = useState<IComment[]>([]);
+  // const [commentListState, setCommentListState] = useState<IComment[]>([]);
 
   const postComment = async (comment: ICommentPost) => {
-    console.log(comment);
     const response = await createComment(comment);
     if (response) {
-      setCommentListState((prev) => [...prev, response.data]);
+      setCommentList([response.data, ...commentList]);
     }
   };
 
-  const handleSendComment = () => {
+  const handleSendCommentClick = () => {
     if (commentInput !== '') {
       const newComment: ICommentPost = {
         authorId: currentUser.id,
@@ -103,6 +103,7 @@ const Comments = ({ commentList, articleId }: Props) => {
         articleId,
       };
       postComment(newComment);
+      setCommentInput('');
     }
   };
 
@@ -138,7 +139,7 @@ const Comments = ({ commentList, articleId }: Props) => {
             <Button
               className="send-btn"
               variant="contained"
-              onClick={handleSendComment}
+              onClick={handleSendCommentClick}
             >
               Send
             </Button>
@@ -155,11 +156,14 @@ const Comments = ({ commentList, articleId }: Props) => {
             layer={0}
             key={comment.id}
             comment={comment}
-            parentAuthorName={null}
+            parent={null}
+            articleId={articleId}
             activeReplyState={{
               activeReplyInputCommentId,
               setActiveReplyInputCommentId,
             }}
+            setCommentList={setCommentList}
+            commentList={commentList}
           />
         ))}
       </div>

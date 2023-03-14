@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 // import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { Button, TextField } from '@mui/material';
-import { IComment } from '@/interfaces/comment';
+import { IComment, ICommentPost } from '@/interfaces/comment';
+import { createComment } from '@/services/comment';
 
 const childCommentIndent = '80px';
 const Container = styled.div`
@@ -21,6 +22,7 @@ const Container = styled.div`
 
     .comment-right {
       margin-bottom: 25px;
+      width: 100%;
       .username {
         font-weight: bold;
         font-size: 18px;
@@ -123,24 +125,37 @@ const Container = styled.div`
 interface Props {
   comment: IComment;
   layer: number;
-  parentAuthorName: string | null;
+  parent: IComment | null;
   activeReplyState: {
     activeReplyInputCommentId: number | null;
     setActiveReplyInputCommentId: (value: React.SetStateAction<number | null>) => void;
   };
+  articleId: number;
+  commentList: IComment[];
+  setCommentList: (commentList: IComment[]) => void;
 }
 
 const LayerClass = ['first-layer', 'second-layer', 'third-layer', 'fourth-layer', ''];
 
-const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }: Props) => {
+const CommentItem = ({
+  comment,
+  layer = 0,
+  parent,
+  activeReplyState,
+  articleId,
+  commentList,
+  setCommentList,
+}: Props) => {
   const { id, user, updatedTime, text, childComment } = comment;
   const { activeReplyInputCommentId, setActiveReplyInputCommentId } = activeReplyState;
   const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
   const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
+  const [commentInput, setCommentInput] = useState<string>('');
 
   const layerClass = LayerClass[layer];
-  // the user that is using
+  // TODO: get the user that is using
   const currentUser = {
+    id: 1,
     avatar:
       'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
   };
@@ -165,6 +180,37 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
     setReplyInputShown(!replyInputShown);
   };
 
+  const postComment = async (newComment: ICommentPost) => {
+    const response = await createComment(newComment);
+    if (response) {
+      const respondedComment = response.data;
+      // iterate the comment list to find the parent comment
+      const newCommentList = commentList.map((commentElement) => {
+        if (commentElement.id === respondedComment.parentComment?.id) {
+          // eslint-disable-next-line no-param-reassign
+          if (!commentElement.childComment) commentElement.childComment = [];
+          // eslint-disable-next-line no-param-reassign
+          commentElement.childComment = [...commentElement.childComment, respondedComment];
+        }
+        return commentElement;
+      });
+      setCommentList([...newCommentList]);
+    }
+  };
+
+  const handleSendCommentClick = () => {
+    if (commentInput !== '') {
+      const newComment: ICommentPost = {
+        authorId: currentUser.id,
+        text: commentInput,
+        articleId,
+        parentId: parent?.id || id,
+      };
+      postComment(newComment);
+      setCommentInput('');
+    }
+  };
+
   const handleShowChildClick = () => {
     setChildCommentsShown(!childCommentsShown);
   };
@@ -180,7 +226,7 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
         <div className="comment-right">
           <p className="username">{user.name}</p>
           <p className="post-time">
-            {parentAuthorName ? `reply to ${parentAuthorName} - ` : ''}
+            {parent?.user.name ? `reply to ${parent?.user.name} - ` : ''}
             {updatedTime}
           </p>
           <p className="comment-text">{text}</p>
@@ -227,12 +273,15 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
                 multiline
                 maxRows={10}
                 className="comment-input"
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
               />
             </div>
             <div className="send-btn-container">
               <Button
                 className="send-btn"
                 variant="contained"
+                onClick={handleSendCommentClick}
               >
                 Send
               </Button>
@@ -246,11 +295,14 @@ const CommentItem = ({ comment, layer = 0, parentAuthorName, activeReplyState }:
             key={child.id}
             comment={child}
             layer={layer + 1 > 4 ? 4 : layer + 1}
-            parentAuthorName={layer + 1 >= 4 ? user.name : null}
+            parent={comment}
+            articleId={articleId}
             activeReplyState={{
               activeReplyInputCommentId,
               setActiveReplyInputCommentId,
             }}
+            setCommentList={setCommentList}
+            commentList={commentList}
           />
         ))}
       </div>
