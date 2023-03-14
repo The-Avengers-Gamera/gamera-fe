@@ -85,30 +85,13 @@ const OuterContainer = styled.div`
 `;
 
 // NewsCard component ===================================================================
-// type NewsCardProps = {
-//   coverUrl: string;
-//   title: string;
-//   date: string;
-//   description: string;
-//   author: string;
-//   likeCount: number;
-//   commentCount: number;
-//   game?: {
-//     id: string;
-//     name: string;
-//   };
-// };
+interface INewsCardPros {
+  article: IArticleCard;
+}
 
 const NewsCard = ({
-  coverImgUrl,
-  title,
-  date,
-  description,
-  author,
-  likeCount,
-  commentCount,
-  game,
-}: IArticleCard) => {
+  article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
+}: INewsCardPros) => {
   // states and hooks ---------------
 
   // functions ----------------------

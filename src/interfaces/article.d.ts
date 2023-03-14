@@ -24,9 +24,9 @@ export interface IArticleMini extends Omit<IArticle, 'game' | 'user'> {}
 export interface IArticlePost extends Omit<IArticle, 'id' | 'createdTime' | 'updatedTime'> {}
 
 export interface IArticleCard {
+  id: number;
   coverImgUrl: string;
   title: string;
-  date: string;
   description: string;
   author: {
     name: string;
@@ -37,4 +37,6 @@ export interface IArticleCard {
   };
   likeCount: number;
   commentCount: number;
+  date?: string;
+  createdTime: string;
 }

@@ -7,7 +7,7 @@ pipeline {
         stage('Git checkout') {
             steps {
                 //Get source code from project's repository
-                git branch: 'main',
+                git branch: 'develop',
                 url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
             }
         }
@@ -34,6 +34,7 @@ pipeline {
             steps {
                 //Deploy build folder to S3 bucket
                 sh 'aws s3 sync build/ s3://gamera.com.au --delete'
+                sh 'aws cloudfront create-invalidation --distribution-id  E3BU2FM9FX62ZF --paths "/*"'
             }
         }
     }
