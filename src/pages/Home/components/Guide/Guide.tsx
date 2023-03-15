@@ -1,18 +1,9 @@
-import React from 'react';
 import style from './index.module.css';
 import registerIcon from './assets/register.svg';
 import newsIcon from './assets/news.svg';
 import reviewsIcon from './assets/reviews.svg';
 import commentsIcon from './assets/comments.svg';
 import shareIcon from './assets/share.svg';
-
-const guideItems = [
-  { text: 'REGISTER', icon: registerIcon },
-  { text: 'NEWS', icon: newsIcon },
-  { text: 'REVIEWS', icon: reviewsIcon },
-  { text: 'COMMENTS', icon: commentsIcon },
-  { text: 'SHARE', icon: shareIcon },
-];
 
 const Guide = () => (
   <section className={style.container}>
