@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded'; // time icon
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'; // author icon
-import { otherFont, titleFont } from '@/pages/Home/utils/useFont';
+import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 // css ----------------------------------------
 const Container = styled.div`
@@ -19,8 +19,7 @@ const Cover = styled.div`
   }
 `;
 const Title = styled.div`
-  ${titleFont}
-  font-size: 18px;
+  ${titleOfCards}
   padding-top: 9px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -45,7 +44,7 @@ const Footer = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -59,7 +58,7 @@ const Footer = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;

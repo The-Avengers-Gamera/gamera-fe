@@ -2,7 +2,7 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import React from 'react';
 import styled from 'styled-components';
-import { titleFont } from '@/pages/Home/utils/useFont';
+import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const Container = styled.div`
   //width: 565px;
@@ -27,27 +27,24 @@ const Cover = styled.div`
 `;
 
 const ArticleOverview = styled.div`
-  font-size: 14px;
   margin-left: 7.5px;
   margin-right: 7.5px;
   display: inline-block;
   width: 400px;
 
   & .Tile_container {
-
     & span {
-      ${titleFont}  
+      ${titleOfCards}  
       margin-left: 5px;
-
       font-size: 14px;
     }
   }
   & .Comment_container {
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 5px;
     & span {
       padding-left:7px;
-      font-size: 14px;
+      font-size: 12px;
   }
 `;
 
