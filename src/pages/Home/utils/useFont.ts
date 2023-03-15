@@ -8,8 +8,4 @@ const otherFont = {
   fontWeight: 'Regular',
 };
 
-const navFont = {
-  fontFamily: 'Russo one',
-  fontWeight: 'Regular',
-};
-export { titleFont, otherFont, navFont };
+export { titleFont, otherFont };
