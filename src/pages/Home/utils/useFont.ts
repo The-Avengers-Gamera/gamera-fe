@@ -4,10 +4,17 @@ const titleFont = {
   fontSize: '28px',
 };
 
+// For '7 Days and view all'
 const secTitleFont = {
   fontFamily: 'Alumni Sans',
   fontWeight: 'Bold',
   fontSize: '20px',
+};
+
+const titleOfCards = {
+  fontFamily: 'Inter',
+  fontWeight: 'Bold',
+  fontSize: '16px',
 };
 
 const otherFont = {
@@ -16,9 +23,4 @@ const otherFont = {
   fontSize: '14px',
 };
 
-const titleOfCards = {
-  fontFamily: 'Inter',
-  fontWeight: 'Bold',
-  fontSize: '16px',
-};
 export { titleFont, otherFont, secTitleFont, titleOfCards };
