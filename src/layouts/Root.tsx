@@ -1,6 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
@@ -8,6 +9,7 @@ import SignUpModal from '@/components/SignUpModal';
 import LoginForm from '@/components/Login/LoginForm';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
+import DropdownItem from '@/components/NavBar/components/DropdownItem';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -46,9 +48,11 @@ const Main = styled.main`
 const RootLayout = () => {
   const { auth } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
+  const [isMore, setIsMore] = useState(false);
 
   return (
     <PageWrapper>
+      {isMore && <DropdownItem setIsMore={setIsMore} />}
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
@@ -60,10 +64,11 @@ const RootLayout = () => {
       >
         {displayLogInPopWindow ? <LoginForm /> : <SignUpModal />}
       </Modal>
+
       <NavWrapper>
-        <NavBar />
+        <NavBar setIsMore={setIsMore} />
       </NavWrapper>
-      <Main>
+      <Main style={{ zIndex: -1 }}>
         <>
           {!auth && (
             <LoginButtonWrapper>

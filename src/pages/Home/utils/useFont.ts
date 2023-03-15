@@ -7,4 +7,9 @@ const otherFont = {
   fontFamily: 'Montserrat',
   fontWeight: 'Regular',
 };
-export { titleFont, otherFont };
+
+const navFont = {
+  fontFamily: 'Russo one',
+  fontWeight: 'Regular',
+};
+export { titleFont, otherFont, navFont };
