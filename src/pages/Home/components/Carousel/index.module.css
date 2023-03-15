@@ -1,40 +1,88 @@
 .container {
+  width: 1065px;
+  height: 595px;
+  position: relative;
+  overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+  border-radius: 2rem;
+}
+
+.carouselImg {
   width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.carousel {
-  padding: 2rem;
+.contentBackground {
+  position: absolute;
+  bottom: 0px;
+  height: 80px;
+  background-color: rgba(19, 20, 31, 0.3);
+  z-index: 1;
+  width: 100%;
+  left: 0;
+}
+
+.title {
+  position: absolute;
+  bottom: 0;
+  left: 80px;
+  color: #fff;
+  font-size: 24px;
+  font-family: 'Russo One', sans-serif;
+  line-height: 80px;
+  padding: auto 30px auto 1;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.carouselBtnContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  align-items: end;
-
-  background: url(https://media.st.dl.eccdnx.com//steam/apps/10150/0000008859.1920x1080.jpg)
-    center/cover;
-  background-repeat: no-repeat;
-  width: 1062px;
-
-  height: 595px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
 }
 
-@media screen and (max-width: 1024px) {
-  .carousel {
-    width: 690px;
-    height: 386px;
-  }
+.carouselBtnContainer:hover .carouselBtn {
+  opacity: 1;
+  background-color: rgba(19, 20, 31, 0.3);
+  color: rgba(256, 256, 256, 0.7);
 }
 
 .carouselBtn {
-  width: 143px;
-  height: 34px;
+  position: relative;
+  width: 50px;
+  height: 70px;
+  background-color: transparent;
+  font-size: 30px;
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  border: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 5px;
+  color: transparent;
 }
 
-.carouselText {
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+.carouselBtn:hover {
+  opacity: 1;
 }
 
-.carouselBtn {
-  clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
-  border-radius: 0 !important;
+/* .carouselBtnPrev {
+  left: 0px;
 }
+.carouselBtnNext {
+  right: 0px;
+} */
