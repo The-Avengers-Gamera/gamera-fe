@@ -21,7 +21,7 @@ const BackedBy = () => {
           src={backedBy}
           alt="backedBy"
         />
-        <h2 className={styles.title}>Backed By</h2>
+        <h2 className={styles.title}>BACKED BY</h2>
       </div>
 
       <div className={styles.logo_wall}>

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import style from './index.module.css';
-
+import { titleFont } from '../../utils/useFont';
 import registerIcon from './assets/register.svg';
 import newsIcon from './assets/news.svg';
 import reviewsIcon from './assets/reviews.svg';
@@ -22,12 +22,7 @@ const Guide = () => (
     <Box className={style.giudeContainer}>
       <Typography
         variant="h6"
-        sx={{
-          fontFamily: 'Alumni Sans, sans-serif',
-          fontSize: '28px',
-          fontWeight: 700,
-          paddingBottom: '30px',
-        }}
+        sx={titleFont}
       >
         SMOOTH TO JOIN & COMMENT
       </Typography>

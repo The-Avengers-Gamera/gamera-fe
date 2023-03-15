@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import PersonIcon from '@mui/icons-material/Person';
-import { titleFont } from '@/pages/Home/utils/useFont';
+import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const CardContainer = styled.div`
   /* background-color: green; */
@@ -20,9 +20,9 @@ const NewsCardCover = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 220px;
+  height: 240px;
   object-fit: cover;
-  clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 23px, 80px 23px, 120px 0, 100% 0, 100% 100%, 0 100%);
   img {
     transition: transform 0.5s;
     height: 100%;
@@ -30,7 +30,7 @@ const NewsCardCover = styled.div`
 `;
 
 const NewsCardTitle = styled.div`
-  ${titleFont}
+  ${titleOfCards}
   background-color: #22252a;
   text-align: center;
   height: 70px;
@@ -40,14 +40,13 @@ const NewsCardTitle = styled.div`
   text-overflow: ellipsis;
   line-height: 70px;
   border-bottom: 1px solid #3d3d3d;
-  font-size: 18px;
 `;
 
 const NewsCardTimeAuthor = styled.div`
   background-color: #22252a;
   display: flex;
   justify-content: space-between;
-  height: 70px;
+  height: 50px;
   align-items: center;
   padding: 0 25px;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
@@ -74,7 +73,7 @@ const NewsCardTimeAuthor = styled.div`
 
 const HomeNewsCard = () => {
   const newsCardData = {
-    title: 'Hogwarts Legacy: How to Open Eye Chests',
+    title: 'Hogwarts Legacy: How to Open Eye Chests and Find the Mirror of Erised',
     publishTime: '1 day ago',
     author: 'Luke Reilly',
     coverUrl:
