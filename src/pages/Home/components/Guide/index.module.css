@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@700&family=Montserrat&family=Poppins:wght@600&family=Russo+One&display=swap');
 
-.giudeContainer {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 470px;
-  z-index: 1;
-}
-
 .container {
   position: relative;
   padding: 0 2rem;
@@ -17,6 +7,20 @@
   display: flex !important;
   justify-content: space-around;
   align-items: center;
+}
+
+.guideContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 470px;
+  z-index: 1;
+}
+.guideContainer h2 {
+  font-family: 'Alumni Sans', sans-serif;
+  font-size: 28px;
+  padding-bottom: 70px;
 }
 
 .image {
@@ -27,52 +31,43 @@
 
 .imageLeft {
   left: 100px;
-  background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-1.ce116612.png&w=256&q=75')
-    center/cover;
 }
 
 .imageRight {
   right: 100px;
-
-  background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-2.6dfc9cf8.png&w=256&q=75')
-    center/cover;
 }
 
-h6 {
-  margin-bottom: 1rem;
-  padding-bottom: 30px;
-}
-
-h6 + div {
+.moduleContainer {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  width: 70vw;
 }
 
-h6 + div div {
+.module {
+  width: 120px;
+}
+
+.module img {
+  width: auto;
+  height: 80px;
+  margin: 0 20px;
+}
+
+.module p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 15px 0;
+  font-family: 'Russo One', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  position: relative;
 }
 
-/* h6 + div div::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  width: 100%;
+.divider {
+  background-color: #6ddb03;
   height: 2px;
-  background-color: green;
-} */
-
-h6 + div div img {
-  height: 5rem;
-}
-
-h6 + div div span {
-  font-size: 1rem;
+  width: 60px;
+  margin-top: 30px;
 }
