@@ -45,17 +45,17 @@
 }
 
 .module {
-  width: 120px;
+  width: auto;
 }
 
 .module img {
   width: auto;
-  height: 80px;
+  height: 90px;
   margin: 0 20px;
 }
 
 .module p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   margin: 15px 0;
   font-family: 'Russo One', sans-serif;
