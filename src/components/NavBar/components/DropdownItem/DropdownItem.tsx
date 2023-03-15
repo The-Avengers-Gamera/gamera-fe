@@ -7,20 +7,9 @@ const items = [
   { label: 'PRIVACY', url: '/privacy' },
 ];
 
-const DropdownItem = ({ setIsMore }: any) => {
-  const handleExpansionOpen = () => {
-    setIsMore(true);
-  };
-
-  const handleExpansionClose = () => {
-    setIsMore(false);
-  };
+const DropdownItem = () => {
   return (
-    <div
-      className={style.container}
-      onMouseEnter={handleExpansionOpen}
-      onMouseLeave={handleExpansionClose}
-    >
+    <div className={style.container}>
       <ul className={style.items}>
         {items.map(({ label, url }) => (
           <li

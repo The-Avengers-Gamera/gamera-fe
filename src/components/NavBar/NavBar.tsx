@@ -20,7 +20,7 @@ export const navItemStyle = {
   textAlign: 'center',
   fontFamily: 'Russo One',
 };
-const NavBar = ({ setIsMore }: any) => {
+const NavBar = ({ setIsMore, expendBtnRef }: any) => {
   const { auth: isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -38,12 +38,8 @@ const NavBar = ({ setIsMore }: any) => {
     navigate('/');
   };
   const isEditor = true;
-  const handleChangeOpen = () => {
-    setIsMore(true);
-  };
-
-  const handleChangeClose = () => {
-    setIsMore(false);
+  const handleMoreClick = () => {
+    setIsMore((prev: boolean) => !prev);
   };
 
   const generalLinks = [
@@ -100,13 +96,13 @@ const NavBar = ({ setIsMore }: any) => {
               ))}
               <ListItem
                 disablePadding
-                onMouseEnter={handleChangeOpen}
-                onMouseLeave={handleChangeClose}
+                onClick={handleMoreClick}
               >
                 <Box className={style.navItemContainer}>
                   <Button
                     className={style.navBtn}
                     sx={{ color: 'inherit' }}
+                    ref={expendBtnRef}
                   >
                     <MoreHorizRoundedIcon />
                     <Typography sx={navItemStyle}>MORE</Typography>

@@ -11,8 +11,8 @@
 
 .items {
   position: absolute;
-  left: 98px;
-  top: 417px;
+  left: 100px;
+  top: 416px;
   padding-top: 5px;
   background-color: #1a1c25;
   width: 125px;
@@ -20,7 +20,6 @@
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  border-radius: 5px;
 }
 .item {
   height: 30px;

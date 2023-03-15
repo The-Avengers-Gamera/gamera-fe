@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
@@ -10,6 +10,7 @@ import LoginForm from '@/components/Login/LoginForm';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
 import DropdownItem from '@/components/NavBar/components/DropdownItem';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -48,11 +49,12 @@ const Main = styled.main`
 const RootLayout = () => {
   const { auth } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
-  const [isMore, setIsMore] = useState(false);
+  const expendBtnRef = useRef<HTMLButtonElement>(null);
+  const [isMore, setIsMore] = useToggleWhenClickOutside(expendBtnRef, false);
 
   return (
     <PageWrapper>
-      {isMore && <DropdownItem setIsMore={setIsMore} />}
+      {isMore && <DropdownItem />}
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
@@ -66,7 +68,10 @@ const RootLayout = () => {
       </Modal>
 
       <NavWrapper>
-        <NavBar setIsMore={setIsMore} />
+        <NavBar
+          setIsMore={setIsMore}
+          expendBtnRef={expendBtnRef}
+        />
       </NavWrapper>
       <Main style={{ zIndex: -1 }}>
         <>
