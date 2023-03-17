@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         AWS_REGION            = 'ap-southeast-2'
-        S3_BUCKET             = 'gamera.com.au'
+        S3_BUCKET             = 'sherry.gamera.com.au'
         CLOUDFRONT_DISTRIBUTION_ID = 'E38ZVA30TXRPLU'
     }
     

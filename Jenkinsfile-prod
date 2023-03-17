@@ -1,0 +1,57 @@
+pipeline {
+    agent {
+        label 'gcp_node'
+    }
+    environment {
+        AWS_REGION            = 'ap-southeast-2'
+        S3_BUCKET             = 'sherry.gamera.com.au'
+        CLOUDFRONT_DISTRIBUTION_ID = 'E38ZVA30TXRPLU'
+    }
+    
+    stages {
+        stage('Git checkout'){
+            steps{
+                git branch: 'devops-sherry',
+                url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
+            }
+        }
+         stage('Test') { 
+            steps {
+                echo 'Testing...'
+                //sh 'npm run test' 
+            }
+        }
+        stage('Build'){
+            steps{
+                echo 'Building...'
+                sh 'yarn install'
+                sh 'yarn run build'
+            }
+        }
+        stage('Deployment to production & invalidate CDN Cache'){
+            steps {
+                timeout(time:10, unit:'MINUTES'){
+                    input(
+                        message:"Are you sure to deploy to production environment?"
+                        ok: "YES"
+                    )
+               }
+                sh 'aws s3 rm s3://${S3_BUCKET} --recursive'
+                sh 'aws s3 sync build/ s3://${S3_BUCKET}'
+                sh 'aws cloudfront create-invalidation --distribution-id ${env.CLOUDFRONT_DISTRIBUTION_ID} --paths /*'
+            }
+        }
+    }
+    post {
+        always{
+            echo 'Cleaning workspace...'
+            cleanWs()
+        }
+        
+        failure{
+            mail to: 'rsysherry@gmail.com',
+            subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+            body: "Something is wrong with ${env.BUILD_URL}"
+        }
+    }
+}
