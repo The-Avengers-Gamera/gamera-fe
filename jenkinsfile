@@ -5,6 +5,7 @@ pipeline {
     environment {
         AWS_REGION            = 'ap-southeast-2'
         S3_BUCKET             = 'gamera.com.au'
+        CLOUDFRONT_DISTRIBUTION_ID = 'E38ZVA30TXRPLU'
     }
     
     stages {
@@ -27,10 +28,11 @@ pipeline {
                 sh 'yarn run build'
             }
         }
-        stage('Deployment'){
+        stage('Deployment & invalidate CDN Cache'){
             steps {
                 sh 'aws s3 rm s3://${S3_BUCKET} --recursive'
                 sh 'aws s3 sync build/ s3://${S3_BUCKET}'
+                sh 'aws cloudfront create-invalidation --distribution-id ${env.CLOUDFRONT_DISTRIBUTION_ID} --paths /*'
             }
         }
     }
