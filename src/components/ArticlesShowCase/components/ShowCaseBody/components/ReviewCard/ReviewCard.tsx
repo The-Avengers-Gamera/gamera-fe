@@ -1,218 +1,157 @@
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
-import React from 'react';
 import styled from 'styled-components';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import PersonIcon from '@mui/icons-material/Person';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ForumIcon from '@mui/icons-material/Forum';
+import React from 'react';
 import { IArticleCard } from '@/interfaces/article';
 
-const Container = styled.div`
-  width: 100%;
-  height: 170px;
-  font-family: 'Roboto';
-  display: flex;
-  //align-items: center;
-`;
-
-const Cover = styled.div`
-  height: 145px;
-  width: 245px;
-  min-width: 245px;
-  display: flex;
-  justify-content: center;
-  //align-items: center;
-
-  & img {
-    object-fit: cover;
-    height: 100%;
-    border-radius: 10px;
-  }
-`;
-
-const ReviewContent = styled.div`
-  height: 141px;
-  width: 100%;
-  margin-left: 28px;
-  & .Title_container {
-    & span {
-      font-size: 18px;
-      font-weight: 700;
-    }
-  }
-  & .DayAndOverview_container {
-    margin-top: 20px;
-    & span {
-      font-size: 16px;
-      font-weight: 400;
-    }
-  }
-  & .Others_container {
-    margin-top: 20px;
-    width: 575px;
+const OuterContainer = styled.div`
+  .news-card {
+    padding: 25px 0;
     display: flex;
-    & .Game_container {
-      width: 242px;
+    cursor: pointer;
+    font-family: Montserrat;
+    &:hover {
+      .title {
+        text-decoration: underline;
+      }
+      .left {
+        filter: brightness(85%);
+      }
+    }
+    .left {
+      width: 245px;
+      height: 145px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    .right {
+      margin-left: 25px;
       display: flex;
-      & .Game_cover {
-        height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      .title {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        font-family: Montserrat;
       }
-      & span {
-        margin-left: 10px;
-        font-size: 16px;
-        font-weight: 700;
+      .icon {
+        margin-right: 7px;
       }
-    }
-    & .Author_container {
-      margin-left: 30px;
-      & span {
-        margin-left: 5px;
-        font-size: 16px;
-        font-weight: 700;
+      .game-author-like-comment {
+        display: flex;
+        //justify-content: space-between;
+        padding-right: 80px;
+        .game {
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          .icon {
+            color: ${({ theme }) => theme.color.primary};
+          }
+        }
       }
-    }
-    & .Like_container {
-      margin-left: 30px;
-      & span {
-        margin-left: 5px;
-        font-size: 16px;
-        font-weight: 700;
-      }
-    }
-    & .Comment_container {
-      margin-left: 30px;
-      & span {
-        margin-left: 5px;
-        font-size: 16px;
-        font-weight: 700;
+      .author-like-comment {
+        display: flex;
+        span {
+          display: flex;
+          justify-content: center;
+          margin-right: 20px;
+          font-weight: bolder;
+        }
+        .author {
+          text-transform: uppercase;
+          .icon {
+            color: ${({ theme }) => theme.color.primary};
+          }
+        }
+        .like-count .icon {
+          color: #e70000;
+        }
+        .comment-count .icon {
+          color: ${({ theme }) => theme.color.primary};
+        }
       }
     }
   }
+  hr {
+    border: 0px;
+    border-top: 2px solid #3d3d3d;
+  }
 `;
 
-// const ArticleOverview = styled.div`
-//   font-size: 14px;
-//   font-weight: 700;
-//   margin-left: 7.5px;
-//   margin-right: 7.5px;
-//   display: inline-block;
-//   width: 400px;
-//   & .Tile_container {
-//     & span {
-//       margin-left: 5px;
-
-//       font-size: 14px;
-//       font-weight: bold;
-//     }
-//   }
-//   & .Comment_container {
-//     & span {
-//       margin-left: 5px;
-//       font-size: 14px;
-//       font-weight: bold;
-//     }
-//   }
-// `;
-
-// const Like = styled.div`
-//   display: flex;
-//   align-items: center;
-//   display: inline-block;
-//   justify-content: center;
-//   align-items: center;
-
-//   & .LikeNum_container {
-//     display: flex;
-//     align-items: center;
-//     & span {
-//       margin-left: 5px;
-//       font-size: 14px;
-//       font-weight: bold;
-//     }
-//   }
-// `;
-
-const CommentIcon = styled(ChatRoundedIcon)`
-  color: ${({ theme }) => theme.color.primary};
-  width: 20px;
-  height: 15px;
-`;
-
-const LikeIcon = styled(FavoriteRoundedIcon)`
-  color: red;
-  width: 16.67px;
-  height: 15.42px;
-`;
-
-const GameIcon = styled(VideogameAssetRoundedIcon)`
-  color: ${({ theme }) => theme.color.primary};
-  width: 25.65px;
-  height: 20px;
-`;
-
-const AuthorIcon = styled(PersonRoundedIcon)`
-  color: ${({ theme }) => theme.color.primary};
-  width: 25.65px;
-  height: 17.5px;
-`;
-
+// NewsCard component ===================================================================
 interface IReviewCardPros {
   article: IArticleCard;
 }
-// Card component ==========================
+
 const ReviewCard = ({
   article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
 }: IReviewCardPros) => {
+  // states and hooks ---------------
+
+  // functions ----------------------
+
+  // jsx ----------------------------
   return (
-    <Container>
-      {/* cover  */}
-      <Cover>
-        {/* fake href */}
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
-          <img
-            src={coverImgUrl}
-            alt=""
-          />
-        </a>
-      </Cover>
-      {/* section right to the cover img */}
-      <ReviewContent>
-        {/* top */}
-        <div className="Title_container">
-          <span>{title}</span>
-        </div>
-        {/* middle */}
-        <div className="DayAndOverview_container">
-          <span>
+    <OuterContainer>
+      <div className="news-card">
+        <img
+          src={coverImgUrl}
+          alt="news cover"
+          className="left"
+        />
+        {/* section right to the cover img */}
+        <div className="right">
+          {/* top */}
+          <h3 className="title">{title}</h3>
+          {/* middle */}
+          <p className="date-description">
             {date} - {description}
-          </span>
-        </div>
-        {/* bottom: game-author-like-comment */}
-        <div className="Others_container">
-          {/* game */}
-          <div className="Game_container">
-            <div className="Game_cover">
-              <GameIcon />
+          </p>
+          {/* bottom: conditionally */}
+          {game ? (
+            <div className="game-author-like-comment">
+              <div className="game">
+                <VideogameAssetIcon className="icon" />
+                {game?.name}
+              </div>
+              <div className="author-like-comment">
+                <span className="author">
+                  <PersonIcon className="icon" /> {author.name}
+                </span>
+                <span className="like-count">
+                  <FavoriteIcon className="icon" /> {likeCount}
+                </span>
+                <span className="comment-count">
+                  <ForumIcon className="icon" />
+                  {commentCount}
+                </span>
+              </div>
             </div>
-            <span>{game?.name}</span>
-          </div>
-          {/* author */}
-          <div className="Author_container">
-            <AuthorIcon />
-            <span>{author.name}</span>
-          </div>
-          {/* like */}
-          <div className="Like_container">
-            <LikeIcon />
-            <span>{likeCount}</span>
-          </div>
-          {/* comment */}
-          <div className="Comment_container">
-            <CommentIcon />
-            <span>{commentCount}</span>
-          </div>
+          ) : (
+            <div className="author-like-comment">
+              <span className="author">
+                <PersonIcon className="icon" /> {author.name}
+              </span>
+              <span className="like-count">
+                <FavoriteIcon className="icon" /> {likeCount}
+              </span>
+              <span className="comment-count">
+                <ForumIcon className="icon" />
+                {commentCount}
+              </span>
+            </div>
+          )}
         </div>
-      </ReviewContent>
-    </Container>
+      </div>
+      <hr />
+    </OuterContainer>
   );
 };
+
 export default ReviewCard;

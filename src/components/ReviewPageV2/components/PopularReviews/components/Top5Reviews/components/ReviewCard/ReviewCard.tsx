@@ -57,6 +57,9 @@ const CardContainer = styled.div`
       font-weight: bold;
       letter-spacing: 0em;
     }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
