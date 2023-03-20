@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import mockArticle from './mockArticle';
 import ArticleContent from './ArticleContent/ArticleContent';
