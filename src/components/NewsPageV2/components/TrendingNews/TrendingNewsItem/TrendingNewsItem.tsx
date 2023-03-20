@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
+import { IArticle } from '@/interfaces/article';
 
 const Card = styled.div`
-  width: 313px;
+  width: 300px;
   flex-shrink: 0;
   cursor: pointer;
 
@@ -14,7 +15,7 @@ const Card = styled.div`
   }
 
   .title {
-    margin-top: 10px;
+    margin-top: 5px;
     font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -30,7 +31,7 @@ const Card = styled.div`
 
   .comment-like {
     display: flex;
-    justify-content: baseline;
+    justify-content: center;
     margin-top: 10px;
 
     span {
@@ -52,11 +53,7 @@ const Card = styled.div`
 `;
 
 interface Props {
-  news: {
-    title: string;
-    commentCount: number;
-    likeCount: number;
-  };
+  news: IArticle;
   order: string;
 }
 
@@ -68,11 +65,11 @@ const TrendingNewsItem = ({ news, order }: Props) => {
       <div className="comment-like">
         <span className="comment">
           <ForumIcon className="icon" />
-          {news.commentCount}
+          {/* {news.commentCount} */}
         </span>
         <span className="like">
           <FavoriteIcon className="icon" />
-          {news.likeCount}
+          {/* {news.likeCount} */}
         </span>
       </div>
     </Card>

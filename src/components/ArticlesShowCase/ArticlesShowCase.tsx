@@ -6,6 +6,7 @@ import SelectionBars from './components/SelectionBars';
 import { ISearchArticle, SearchPlatform } from '@/interfaces/search';
 import { EArticleType } from '@/constants/article';
 import { getArticles } from '@/services/article';
+import { IArticleCard } from '@/interfaces/article';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -13,7 +14,7 @@ const Container = styled.div`
   padding: 45px 84px 0%;
 
   & h2 {
-    font-family: Gen Jyuu Gothic Monospace;
+    font-family: 'Alumni Sans';
     font-size: 28px;
     font-weight: 800;
     text-transform: uppercase;
@@ -35,22 +36,25 @@ const ArticlesShowCase = ({
   // TODO click filter button to setFilters
   const [filters, setFilters] = useState(initFilters);
   const [platformSelected, setPlatformSelected] = useState<Platform>('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredArticle, setFilteredArticle] = useState<IArticleCard[]>([]);
+  // const [pageArticle, setPageArticle] = useState<IArticleCard[]>([]);
 
   // TODO implement infiniteQuery next step
-  const {
-    isLoading,
-    error,
-    data: pageArticle,
-  } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: [queryType, filters],
     queryFn: async () => getArticles(queryType, filters),
+    onSuccess: (pageArticleData) =>
+      setFilteredArticle((preState) => [...preState, ...pageArticleData.data]),
   });
 
-  const filteredArticle = pageArticle?.data;
-
   useEffect(() => {
-    setFilters((pre) => ({ ...pre, platform: platformSelected.toLowerCase() as SearchPlatform }));
-  }, [platformSelected]);
+    setFilters((pre) => ({
+      ...pre,
+      page: currentPage,
+      platform: platformSelected.toLowerCase() as SearchPlatform,
+    }));
+  }, [platformSelected, currentPage]);
 
   // TODO implement loading component
   if (isLoading) {
@@ -68,6 +72,7 @@ const ArticlesShowCase = ({
       <ShowCaseBody
         articleType={articleType}
         filteredArticle={filteredArticle}
+        setCurrentPage={setCurrentPage}
       />
     </Container>
   );

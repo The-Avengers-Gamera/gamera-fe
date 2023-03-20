@@ -27,3 +27,6 @@ export const getArticles = async (
   );
   return response.data;
 };
+
+export const getNews = async (): Promise<AxiosResponse<IPage<IArticle[]>>> =>
+  apiClient.get(`/articles/news`);

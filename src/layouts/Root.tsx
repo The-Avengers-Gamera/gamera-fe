@@ -15,6 +15,7 @@ import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
+  z-index: 1000;
 `;
 
 const NavWrapper = styled.div`
@@ -61,6 +62,7 @@ const RootLayout = () => {
         style={{
           overlay: {
             zIndex: 1200,
+            background: 'rgba(0, 0, 0, 0.6)',
           },
         }}
       >
