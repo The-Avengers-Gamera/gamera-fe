@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom';
 import style from './DropdownItem.module.css';
 
 const items = [
   { label: 'ABOUT US', url: '/about-us' },
   { label: 'SUPPORT', url: '/support' },
-  { label: 'TERMS', url: '/terms' },
+  { label: 'TERMS', url: '/term' },
   { label: 'PRIVACY', url: '/privacy' },
 ];
 
@@ -16,12 +17,7 @@ const DropdownItem = () => {
             key={url}
             className={style.item}
           >
-            <a
-              key={url}
-              href={url}
-            >
-              {label}
-            </a>
+            <Link to={url}>{label}</Link>
           </li>
         ))}
       </ul>
