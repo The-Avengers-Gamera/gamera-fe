@@ -19,7 +19,7 @@ const GeneralContainer = styled.div`
       right: 0;
       width: 450px;
 
-      font-family: Poppins;
+      font-family: Montserrato;
       font-size: 28px;
       font-weight: 600;
       text-transform: capitalize;
