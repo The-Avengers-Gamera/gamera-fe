@@ -3,7 +3,6 @@ import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';
-import React from 'react';
 import { IArticleCard } from '@/interfaces/article';
 
 const OuterContainer = styled.div`
@@ -92,11 +91,7 @@ interface IReviewCardPros {
 const ReviewCard = ({
   article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
 }: IReviewCardPros) => {
-  // states and hooks ---------------
-
-  // functions ----------------------
-
-  // jsx ----------------------------
+  // ---------------------------- jsx ----------------------------
   return (
     <OuterContainer>
       <div className="news-card">
@@ -118,7 +113,7 @@ const ReviewCard = ({
             <div className="game-author-like-comment">
               <div className="game">
                 <VideogameAssetIcon className="icon" />
-                {game?.name}
+                {game.name}
               </div>
               <div className="author-like-comment">
                 <span className="author">
