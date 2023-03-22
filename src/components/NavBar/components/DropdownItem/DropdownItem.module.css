@@ -1,0 +1,45 @@
+:root {
+  --button-color-selected: #13141f;
+}
+
+.container {
+  cursor: pointer;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+}
+
+.items {
+  position: absolute;
+  left: 100px;
+  top: 42.5%;
+  padding-top: 5px;
+  background-color: #1a1c25;
+  width: 125px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+.item {
+  height: 30px;
+  font-family: 'Russo one';
+  font-weight: 'Regular';
+  font-size: 12px;
+  width: inherit;
+  color: #5d5d5d;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  justify-content: center;
+}
+.item:hover {
+  color: white;
+}
+.item:last-child {
+  margin-bottom: 5px;
+}
+.item + .item {
+  border-top: 1px solid #303442;
+}

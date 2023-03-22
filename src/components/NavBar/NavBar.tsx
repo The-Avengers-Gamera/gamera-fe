@@ -20,7 +20,7 @@ export const navItemStyle = {
   textAlign: 'center',
   fontFamily: 'Russo One',
 };
-const NavBar = () => {
+const NavBar = ({ setIsMore, expendBtnRef }: any) => {
   const { auth: isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -38,13 +38,16 @@ const NavBar = () => {
     navigate('/');
   };
   const isEditor = true;
+  const handleMoreClick = () => {
+    setIsMore((prev: boolean) => !prev);
+  };
 
   const generalLinks = [
     { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
     { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
     { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
-    { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
   ];
+
   return (
     <>
       <Drawer
@@ -91,6 +94,21 @@ const NavBar = () => {
                   key={title}
                 />
               ))}
+              <ListItem
+                disablePadding
+                onClick={handleMoreClick}
+              >
+                <Box className={style.navItemContainer}>
+                  <Button
+                    className={style.navBtn}
+                    sx={{ color: 'inherit' }}
+                    ref={expendBtnRef}
+                  >
+                    <MoreHorizRoundedIcon />
+                    <Typography sx={navItemStyle}>MORE</Typography>
+                  </Button>
+                </Box>
+              </ListItem>
             </Box>
             {isLoggedIn && (
               <Box className={style.navBarBottomGroup}>
