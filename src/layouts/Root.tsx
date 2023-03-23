@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
@@ -75,7 +75,7 @@ const RootLayout = () => {
           expendBtnRef={expendBtnRef}
         />
       </NavWrapper>
-      <Main style={{ zIndex: -1 }}>
+      <Main>
         <>
           {!auth && (
             <LoginButtonWrapper>

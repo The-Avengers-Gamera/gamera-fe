@@ -58,7 +58,6 @@ const NavBar = ({ setIsMore, expendBtnRef }: any) => {
             minHeight: '340px',
             width: '101px',
             boxSizing: 'border-box',
-            borderRight: '2px solid #303442',
           },
         }}
         variant="permanent"

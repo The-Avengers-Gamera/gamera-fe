@@ -1,12 +1,9 @@
-:root {
-  --button-color-selected: #13141f;
-}
-
 .container {
   cursor: pointer;
   position: relative;
   padding: 0px;
   margin: 0px;
+  z-index: 100;
 }
 
 .items {

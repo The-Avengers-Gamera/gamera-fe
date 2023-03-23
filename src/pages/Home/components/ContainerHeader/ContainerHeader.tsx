@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import theme from '@/styles/theme';
 import style from './index.module.css';
-import { titleFont } from '../../utils/useFont';
+import { titleFont, secTitleFont } from '../../utils/useFont';
 
 interface Props {
   title: string;
@@ -20,7 +20,7 @@ const ContainerHeader = ({ title, padding }: Props) => (
       <Typography
         className={style.headerLeftSubtitle}
         color={theme.color.primary}
-        sx={titleFont}
+        sx={secTitleFont}
       >
         7 DAYS
       </Typography>
@@ -28,7 +28,7 @@ const ContainerHeader = ({ title, padding }: Props) => (
     <Link
       className={style.headerLink}
       to="/#"
-      style={{ color: theme.color.primary, ...titleFont }}
+      style={{ color: theme.color.primary, ...secTitleFont }}
     >
       VIEW ALL
     </Link>

@@ -7,10 +7,9 @@ const Button = styled.button`
   width: 100%;
   display: block;
   clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%);
-
   background: #6ddb03;
   cursor: pointer;
-  font-weight: Semibold;
+  font-weight: 600;
   font-family: Poppins;
 `;
 

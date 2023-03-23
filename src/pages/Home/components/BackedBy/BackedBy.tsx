@@ -1,17 +1,17 @@
 import styles from './backedBy.module.css';
-import sony from './assets/Sony.png';
-import microsoft from './assets/MicroSoft.png';
-import nintendo from './assets/nintendo.png';
-import naughtyDog from './assets/Naughty.png';
-import mojang from './assets/Mojang.png';
-import eaSports from './assets/EA.png';
-import popCap from './assets/popcap.png';
-import blizzard from './assets/Blizzard.png';
-import rockStar from './assets/Rockstar.png';
-import twok from './assets/2K.png';
-import sega from './assets/sega.png';
-import santaMonica from './assets/Santa.png';
-import backedBy from './assets/backedBy.png';
+import sony from './assets/Sony.svg';
+import microsoft from './assets/MicroSoft.svg';
+import nintendo from './assets/nintendo.svg';
+import naughtyDog from './assets/Naughty.svg';
+import mojang from './assets/Mojang.svg';
+import eaSports from './assets/EA.svg';
+import popCap from './assets/popcap.svg';
+import blizzard from './assets/Blizzard.svg';
+import rockStar from './assets/Rockstar.svg';
+import twok from './assets/2K.svg';
+import sega from './assets/sega.svg';
+import santaMonica from './assets/Santa.svg';
+import backedBy from './assets/backedBy.svg';
 
 const BackedBy = () => {
   return (
@@ -21,7 +21,7 @@ const BackedBy = () => {
           src={backedBy}
           alt="backedBy"
         />
-        <h2 className={styles.title}>Backed By</h2>
+        <h2 className={styles.title}>BACKED BY</h2>
       </div>
 
       <div className={styles.logo_wall}>
