@@ -25,13 +25,6 @@ const ContainerHeader = ({ title, padding }: Props) => (
         7 DAYS
       </Typography>
     </Box>
-    <Link
-      className={style.headerLink}
-      to="/#"
-      style={{ color: theme.color.primary, ...secTitleFont }}
-    >
-      VIEW ALL
-    </Link>
   </Box>
 );
 export default ContainerHeader;

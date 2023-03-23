@@ -41,7 +41,7 @@ const Article = () => {
           setCommentList(article.commentList);
         }
       } catch ({ response }) {
-        console.error(response); // TODO: error information can be pop up
+        // console.log(response); // TODO: error information can be pop up
       }
     }
     fetchArticle();
