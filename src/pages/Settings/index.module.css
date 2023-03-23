@@ -65,7 +65,8 @@
 }
 
 .saveButton:hover {
-  background-color: darkgreen;
+  background-color: #418301;
+  color: white;
 }
 
 .divider {
@@ -96,6 +97,6 @@
   font-size: 1rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  width: 15rem;
+  width: 20rem;
   margin-left: 1rem;
 }
