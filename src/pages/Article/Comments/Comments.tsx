@@ -1,9 +1,10 @@
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ICommentItem } from '../comment';
 import CommentItem from './CommentItem';
 import FilterSelector from './SortSelector/SortSelector';
+import { IComment, ICommentPost } from '../../../interfaces/comment';
+import { createComment } from '@/services/comment';
 
 const Container = styled.div`
   width: 80%;
@@ -71,14 +72,39 @@ const Container = styled.div`
 `;
 
 interface Props {
-  commentList: ICommentItem[] | [];
+  commentList: IComment[] | [];
+  articleId: number;
+  setCommentList: (commentList: IComment[]) => void;
 }
 
-const Comments = ({ commentList }: Props) => {
+const Comments = ({ commentList, articleId, setCommentList }: Props) => {
   const currentUser = {
+    id: 1,
     username: 'Alice.Bob',
     avatar:
       'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
+  };
+
+  const [commentInput, setCommentInput] = useState<string>('');
+  // const [commentListState, setCommentListState] = useState<IComment[]>([]);
+
+  const postComment = async (comment: ICommentPost) => {
+    const response = await createComment(comment);
+    if (response) {
+      setCommentList([response.data, ...commentList]);
+    }
+  };
+
+  const handleSendCommentClick = () => {
+    if (commentInput !== '') {
+      const newComment: ICommentPost = {
+        authorId: currentUser.id,
+        text: commentInput,
+        articleId,
+      };
+      postComment(newComment);
+      setCommentInput('');
+    }
   };
 
   const [activeReplyInputCommentId, setActiveReplyInputCommentId] = useState<number | null>(null);
@@ -105,12 +131,15 @@ const Comments = ({ commentList }: Props) => {
               multiline
               maxRows={40}
               className="comment-input"
+              value={commentInput}
+              onChange={(e) => setCommentInput(e.target.value)}
             />
           </div>
           <div className="send-btn-container">
             <Button
               className="send-btn"
               variant="contained"
+              onClick={handleSendCommentClick}
             >
               Send
             </Button>
@@ -127,11 +156,14 @@ const Comments = ({ commentList }: Props) => {
             layer={0}
             key={comment.id}
             comment={comment}
-            parentAuthorName={null}
+            parent={null}
+            articleId={articleId}
             activeReplyState={{
               activeReplyInputCommentId,
               setActiveReplyInputCommentId,
             }}
+            setCommentList={setCommentList}
+            commentList={commentList}
           />
         ))}
       </div>
