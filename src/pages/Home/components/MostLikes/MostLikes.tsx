@@ -1,9 +1,12 @@
 // import { v4 as uuid } from 'uuid';
 // import { Card } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
 import LikeCard from '../MostLikes/MostLikesCom/LikeCard';
+import { getArticlesOrderByLike } from '@/services/article';
+import { IArticleCard } from '@/interfaces/article';
+import { IPage } from '@/interfaces/page';
 
 // const cards = ['card', 'card', 'card', 'card', 'card', 'card'];
 
@@ -31,7 +34,19 @@ for (let i = 0; i < 10; ) {
 }
 
 const MostLikes = () => {
-  const [cards] = useState(initialState);
+  const [cards, setCards] = useState<IArticleCard[]>([]);
+  const [isLoad, setIsLoad] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    getArticlesOrderByLike()
+      .then(({ data: myData }) => {
+        setCards(myData.data);
+      })
+      .catch((error) => {
+        setIsError(true);
+      });
+  }, []);
 
   return (
     <GeneralContainer
@@ -47,14 +62,14 @@ const MostLikes = () => {
       rowGapPx="10px"
       divider
     >
-      {cards.map(({ coverUrl, title, commNum, likeNum }) => {
+      {cards.map(({ title, coverImgUrl, likeCount, commentCount }) => {
         return (
           <LikeCard
             key={title}
-            coverUrl={coverUrl}
+            coverUrl={coverImgUrl}
             title={title}
-            commNum={commNum}
-            likeNum={likeNum}
+            commNum={commentCount}
+            likeNum={likeCount}
           />
         );
       })}

@@ -30,3 +30,6 @@ export const getArticles = async (
 
 export const getNews = async (): Promise<AxiosResponse<IPage<IArticle[]>>> =>
   apiClient.get(`/articles/news`);
+
+export const getArticlesOrderByLike = async (): Promise<AxiosResponse<IPage<IArticleCard[]>>> =>
+  apiClient.get(`/articles/`);
