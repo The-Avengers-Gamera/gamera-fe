@@ -4,6 +4,8 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 import TrendingNewsFirstItem from './TrendingNewsFirstItem/TrendingNewsFirstItem';
 import TrendingNewsItem from './TrendingNewsItem/TrendingNewsItem';
+import { getNews } from '@/services/article';
+import { IArticle } from '@/interfaces/article';
 
 const OuterContainer = styled.div`
   position: relative;
@@ -12,10 +14,11 @@ const OuterContainer = styled.div`
 const TrendingNewsTitle = styled.p`
   position: absolute;
   left: 50%;
-  top: -25px;
+  top: -50px;
   transform: translateX(-50%);
   font-size: 28px;
   font-weight: bold;
+  font-family: 'Alumni Sans';
   letter-spacing: 2px;
   display: flex;
   align-items: center;
@@ -59,103 +62,26 @@ const NewsContainer = styled.div`
   }
 `;
 
-interface TrendingNewsList {
-  coverUrl: string;
-  title: string;
-  commentCount: number;
-  likeCount: number;
-}
-
 const TrendingNews = () => {
-  const [trendingNews, setTrendingNews] = useState<TrendingNewsList[]>([]);
+  const [trendingNews, setTrendingNews] = useState<IArticle[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const hasMountedRef = useRef(false);
 
   useEffect(() => {
     if (!hasMountedRef.current) {
       hasMountedRef.current = true;
-      setTrendingNews([
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-        {
-          coverUrl:
-            'https://assets-prd.ignimgs.com/2023/02/20/legend-of-zelda-tears-of-the-kingdom-1663081213439-1675804568959-1676863480057.jpg?fit=crop&width=282&height=282&dpr=2',
-          title:
-            'PSA: The Legend of Zelda: Tears of the Kingdom Art Book Has Seemingly Leaked Online',
-          commentCount: 17,
-          likeCount: 100,
-        },
-      ]);
+      getNews()
+        .then((res) => {
+          const newsList = res.data;
+          setTrendingNews(newsList.data);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+          setIsError(true);
+        });
     }
   }, []);
 
@@ -166,19 +92,27 @@ const TrendingNews = () => {
           fontSize="large"
           className="icon"
         />
-        <span>Trending News</span>
+        <span>TRENDING NEWS</span>
       </TrendingNewsTitle>
-
       <NewsContainer>
-        <TrendingNewsFirstItem news={trendingNews[0]} />
-        <ul className="trending-news-item-container">
-          {trendingNews.slice(1).map((item, index) => (
-            <TrendingNewsItem
-              news={item}
-              order={index + 2 === 10 ? `10` : `0${index + 2}`}
-            />
-          ))}
-        </ul>
+        <>
+          {isLoading && <div>loading...</div>}
+          {isError && <div>load failed</div>}
+          {trendingNews && (
+            <>
+              <TrendingNewsFirstItem news={trendingNews[0]} />
+              <ul className="trending-news-item-container">
+                {trendingNews.slice(1).map((item, index) => (
+                  <TrendingNewsItem
+                    key={item.id}
+                    news={item}
+                    order={index + 2 === 10 ? `10` : `0${index + 2}`}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
+        </>
       </NewsContainer>
     </OuterContainer>
   );

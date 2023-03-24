@@ -155,17 +155,13 @@ const AuthorIcon = styled(PersonRoundedIcon)`
   height: 17.5px;
 `;
 
+interface IReviewCardPros {
+  article: IArticleCard;
+}
 // Card component ==========================
 const ReviewCard = ({
-  coverImgUrl,
-  title,
-  date,
-  description,
-  author,
-  likeCount,
-  commentCount,
-  game,
-}: IArticleCard) => {
+  article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
+}: IReviewCardPros) => {
   return (
     <Container>
       {/* cover  */}
@@ -187,7 +183,7 @@ const ReviewCard = ({
         {/* middle */}
         <div className="DayAndOverview_container">
           <span>
-            {date}-{description}
+            {date} - {description}
           </span>
         </div>
         {/* bottom: game-author-like-comment */}

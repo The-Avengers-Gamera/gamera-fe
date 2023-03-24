@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import styled from 'styled-components';
 import SelectionButton from '../../../../../Shares/SelectionButton';
 import { PLATFORMS } from '@/constants/platforms';
@@ -11,8 +10,8 @@ const Container = styled.div`
 `;
 
 interface PlatformBarsProps {
-  platformSelected: string;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<string>>;
+  platformSelected: Platform;
+  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
 }
 
 const PlatformBars = ({ platformSelected, setPlatformSelected }: PlatformBarsProps) => {
@@ -26,6 +25,7 @@ const PlatformBars = ({ platformSelected, setPlatformSelected }: PlatformBarsPro
       {PLATFORMS.map((platform) => {
         return (
           <SelectionButton
+            key={platform}
             platformSelected={platformSelected}
             setPlatformSelected={setPlatformSelected}
             platformName={platform}

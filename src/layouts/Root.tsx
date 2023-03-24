@@ -12,6 +12,7 @@ import useModal from '@/context/loginModal';
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
+  z-index: 1000;
 `;
 
 const NavWrapper = styled.div`
@@ -20,17 +21,16 @@ const NavWrapper = styled.div`
 `;
 
 const LoginButtonWrapper = styled.div`
-  height: 5%;
-  float: right;
-  position: relative;
+  height: 41px;
+  width: 156px;
+  position: absolute;
   top: 3rem;
-  display: flex;
-  padding-right: 9rem;
+  right: 10%;
 `;
 
 const Modal = styled(ReactModal)`
   background-color: rgba(0, 0, 0, 0.8);
-  width: 100%;
+  width: 100vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -38,6 +38,7 @@ const Modal = styled(ReactModal)`
 `;
 
 const Main = styled.main`
+  position: relative;
   height: 100%;
   width: 100%;
   overflow-y: scroll;
@@ -52,6 +53,12 @@ const RootLayout = () => {
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
+        style={{
+          overlay: {
+            zIndex: 1200,
+            background: 'rgba(0, 0, 0, 0.6)',
+          },
+        }}
       >
         {displayLogInPopWindow ? <LoginForm /> : <SignUpModal />}
       </Modal>

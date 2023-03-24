@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 import styles from './css/footer.module.css';
-import img from './assets/logo.png';
+import img from '../../assets/logo.png';
 
 const Footer = () => {
   return (
@@ -18,28 +19,16 @@ const Footer = () => {
           <h3>ABOUT</h3>
           <ul>
             <li>
-              <a href="#aboutUs">About Us</a>
+              <Link to="/about-us">About Us</Link>
             </li>
             <li>
-              <a href="#contactUs">Contact Us</a>
+              <Link to="/contact-us">Contact Us</Link>
             </li>
             <li>
-              <a
-                href="https://www.ziffdavis.com/privacy-policy?refhost=ign.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Privacy
-              </a>
+              <Link to="/privacy">Privacy</Link>
             </li>
             <li>
-              <a
-                href="https://www.ziffdavis.com/terms-of-use"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Term Of Use
-              </a>
+              <Link to="/term">Term Of Use</Link>
             </li>
           </ul>
         </div>
@@ -48,7 +37,7 @@ const Footer = () => {
           <h3>OUR TEAM</h3>
           <ul>
             <li>
-              <a href="#ourTeam">Our Team</a>
+              <Link to="/our-team">Our Team</Link>
             </li>
           </ul>
         </div>

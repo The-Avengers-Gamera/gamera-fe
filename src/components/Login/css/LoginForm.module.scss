@@ -1,9 +1,11 @@
-.login_form_modal {
+.wrapper {
   display: inline-block;
   width: 30rem;
-  overflow: auto; /* Enable scroll if needed */
+  overflow: auto;
+  /* Enable scroll if needed */
   /* background-color: rgb(0,0,0); Fallback color */
-  background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
+  background-color: rgba(36, 36, 41, 1);
+  /* Black w/ opacity */
   padding-bottom: 35px;
   clip-path: polygon(0 23px, 130px 23px, 145px 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -32,10 +34,25 @@
   /* background-color: #fefefe; */
   margin: 5px auto;
   /* border: 1px solid #888; */
-  width: 70%; /* Could be more or less, depending on screen size */
+  width: 70%;
+  /* Could be more or less, depending on screen size */
   color: rgba(205, 205, 205, 1);
   font-size: 18px;
   margin-top: 20%;
+}
+
+.input_msg {
+  display: flex;
+  background-color: rgba(107, 214, 7, 0.1);
+  justify-content: left;
+  border-radius: 5px;
+}
+
+.input_msg p {
+  padding: 6px 18px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(109, 219, 3, 0.5);
 }
 
 .login_title {
@@ -44,7 +61,7 @@
 }
 
 .labels {
-  margin-top: 10%;
+  margin-top: 8%;
   float: left;
   font-weight: 500;
 }
@@ -73,13 +90,12 @@
   font-weight: 800;
   margin-top: 14%;
   padding: 1px 30px;
+  cursor: pointer;
+
   &:disabled {
     background-color: #6ddb0370;
+    cursor: not-allowed;
   }
-}
-
-.login_btn:hover {
-  cursor: pointer;
 }
 
 .forgotPwd_btn {

@@ -81,8 +81,8 @@ const RegisterModal = () => {
       </HeaderContainer>
       <RegisterForm />
       <TermAndPrivacyContainer>
-        <FooterLink href="www">Terms of User</FooterLink>
-        <FooterLink href="www">privacy policy</FooterLink>
+        <FooterLink href="/term">Terms of User</FooterLink>
+        <FooterLink href="/privacy">privacy policy</FooterLink>
       </TermAndPrivacyContainer>
     </RegisterModalContainer>
   );

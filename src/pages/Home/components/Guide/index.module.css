@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@700&family=Montserrat&family=Poppins:wght@600&family=Russo+One&display=swap');
+
 .giudeContainer {
   padding: 2rem;
   display: flex;
@@ -5,22 +7,72 @@
   justify-content: center;
   align-items: center;
   height: 470px;
-  min-width: 500px;
+
+  z-index: 1;
 }
+
 .container {
+  position: relative;
+  padding: 0 2rem;
+  width: 100%;
   display: flex !important;
   justify-content: space-around;
   align-items: center;
 }
+
 .image {
+  position: absolute;
   min-height: 275px;
   min-width: 205px;
 }
+
 .imageLeft {
+  left: 100px;
   background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-1.ce116612.png&w=256&q=75')
     center/cover;
 }
+
 .imageRight {
+  right: 100px;
+
   background: url('https://gamefi.org/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhome-widget-2.6dfc9cf8.png&w=256&q=75')
     center/cover;
+}
+
+h6 {
+  margin-bottom: 1rem;
+}
+
+h6 + div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h6 + div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* h6 + div div::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 2px;
+  background-color: green;
+} */
+
+h6 + div div img {
+  height: 5rem;
+}
+
+h6 + div div span {
+  font-size: 1rem;
 }

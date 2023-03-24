@@ -25,6 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing'
+                //Currrently test is empty
                 //sh 'yarn test'
             }
         }
@@ -33,6 +34,7 @@ pipeline {
             steps {
                 //Deploy build folder to S3 bucket
                 sh 'aws s3 sync build/ s3://richard.gamera.com.au --delete'
+                sh 'aws cloudfront create-invalidation --distribution-id  E3BU2FM9FX62ZF --paths "/*"'
             }
         }
     }

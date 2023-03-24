@@ -3,6 +3,8 @@ import ReviewCard from './components/ReviewCard';
 import NewsCard from './components/NewsCard';
 import { IArticleCard } from '@/interfaces/article';
 import { EArticleType } from '@/constants/article';
+import { nowToCreated } from '@/utils/time';
+import LoadMore from '@/components/LoadMore';
 
 const Container = styled.div`
   //border: 1px solid #fff;
@@ -41,87 +43,32 @@ const Container = styled.div`
 `;
 
 type ShowCaseBodyProps = {
-  articleType: string;
-  selectedPlatformArticleList: IArticleCard[];
-  setSelectedPlatformArticleList: React.Dispatch<React.SetStateAction<IArticleCard[]>>;
+  articleType: EArticleType;
+  filteredArticle: IArticleCard[] | undefined;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 };
-// componenet ==================================================================
-const ShowCaseBody = ({
-  articleType, // decide which card ( NewsCard or ReviewCard) should be rendered
-  selectedPlatformArticleList,
-  setSelectedPlatformArticleList,
-}: ShowCaseBodyProps) => {
-  // states and hooks -------------------------
-
-  // functions --------------------------------
-  //!  mock data for load more button ----------------------------------------------------------------------
-  // ! TODO: replace mock data for load more button with loading articles on the next page
-  const mockArticle: IArticleCard = {
-    coverImgUrl:
-      'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
-    title: 'The Last Of Us Part 1 Review',
-    date: '6h ago',
-    description: 'Optimized Prime.',
-    game: { id: '12', name: 'last of us' },
-    author: { name: 'LUKE REILLY' },
-    commentCount: 36,
-    likeCount: 64,
-  };
-
-  const loadMoreArticles = () => {
-    const addedArticles = [
-      structuredClone(mockArticle),
-      structuredClone(mockArticle),
-      structuredClone(mockArticle),
-    ];
-
-    setSelectedPlatformArticleList([...selectedPlatformArticleList, ...addedArticles]);
-  };
-  // !--------------------------------------------------------------------------------------------------------
-
-  // jsx ---------------------------------------
-
+const ShowCaseBody = ({ articleType, filteredArticle, setCurrentPage }: ShowCaseBodyProps) => {
   return (
     <Container>
-      {selectedPlatformArticleList.map((article: IArticleCard) => {
-        const { coverImgUrl, title, date, description, author, commentCount, likeCount, game } =
-          article;
+      {filteredArticle?.map((article: IArticleCard) => {
+        const { createdTime } = article;
+        const date = nowToCreated(createdTime);
         return articleType === EArticleType.NEWS ? (
           <NewsCard
-            key={title}
-            coverImgUrl={coverImgUrl}
-            title={title}
-            date={date}
-            description={description}
-            author={author}
-            commentCount={commentCount}
-            likeCount={likeCount}
-            game={game}
+            key={article.id}
+            article={{ ...article, date }}
           />
         ) : (
           <ReviewCard
-            key={title}
-            coverImgUrl={coverImgUrl}
-            title={title}
-            date={date}
-            description={description}
-            author={author}
-            commentCount={commentCount}
-            likeCount={likeCount}
-            game={game}
+            key={article.id}
+            article={{ ...article, date }}
           />
         );
       })}
 
-      {/* load more button */}
+      {/* load more button, this should lift up */}
       <div className="loadMore-container">
-        <button
-          type="button"
-          className="loadMore-btn"
-          onClick={loadMoreArticles}
-        >
-          Load more
-        </button>
+        <LoadMore setCurrentPage={setCurrentPage} />
       </div>
     </Container>
   );

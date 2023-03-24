@@ -1,8 +1,10 @@
-import { useState, createContext } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
 import useModal from '@/context/loginModal';
+import { createUser } from '@/services/user';
+import { IUserSignUp } from '@/interfaces/user';
 
 const RegisterFormContainer = styled.form`
   margin-top: 3%;
@@ -11,13 +13,6 @@ const RegisterFormContainer = styled.form`
   flex-direction: column;
   align-items: center;
   height: 60%;
-`;
-
-const RigisterInputContainer = styled.form`
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const ResisterButtonContainer = styled.div`
@@ -41,12 +36,8 @@ const ResisterButton = styled.button`
   font-weight: 700;
 `;
 
-export const isSubmitContext = createContext({});
-
 const RegisterForm = () => {
-  const [isSubmit, setIsSubmit] = useState(false);
   const { changeModalToOpen } = useModal();
-
   const [usernameInputValue, setUserNameInputValue] = useState({
     value: '',
     valid: false,
@@ -63,20 +54,16 @@ const RegisterForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (usernameInputValue.valid && emailInputValue.valid && passwordInputValue.valid) {
-      await axios
-        .post('https://mock.apifox.cn/m1/2262741-0-default/users/signup', {
-          usernameInputValue,
-          emailInputValue,
-          passwordInputValue,
-        })
-        .then((res) => {
-          if (res.status === 201) {
-            changeModalToOpen(false);
-          }
-        });
-      setIsSubmit(false);
-    } else {
-      setIsSubmit(true);
+      const user: IUserSignUp = {
+        name: usernameInputValue.value,
+        email: emailInputValue.value,
+        password: passwordInputValue.value,
+      };
+      createUser(user).then((res) => {
+        if (res.status === 200) {
+          changeModalToOpen(false);
+        }
+      });
     }
   };
 
@@ -85,20 +72,18 @@ const RegisterForm = () => {
       noValidate
       onSubmit={handleSubmit}
     >
-      <isSubmitContext.Provider value={isSubmit}>
-        <ValidationInputs
-          name="username"
-          setParameter={setUserNameInputValue}
-        />
-        <ValidationInputs
-          name="email"
-          setParameter={setEmailInputValue}
-        />
-        <ValidationInputs
-          name="password"
-          setParameter={setPasswordInputValue}
-        />
-      </isSubmitContext.Provider>
+      <ValidationInputs
+        name="username"
+        setParameter={setUserNameInputValue}
+      />
+      <ValidationInputs
+        name="email"
+        setParameter={setEmailInputValue}
+      />
+      <ValidationInputs
+        name="password"
+        setParameter={setPasswordInputValue}
+      />
       <ResisterButtonContainer>
         <ResisterButton type="submit">Create Account</ResisterButton>
       </ResisterButtonContainer>
