@@ -11,6 +11,7 @@ import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
 import DropdownItem from '@/components/NavBar/components/DropdownItem';
 import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
+import NotificationToast from '../components/NotificationToast/NotificationToast';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ const RootLayout = () => {
 
   return (
     <PageWrapper>
+      <NotificationToast />
       {isMore && <DropdownItem />}
       <Modal
         isOpen={modalIsOpen}
