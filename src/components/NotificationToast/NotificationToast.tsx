@@ -66,7 +66,8 @@ const Container = styled.div`
 `;
 
 const NotificationToast = () => {
-  const { toastIsOpen, setToastIsOpen, toastMessage, toastType, toastDuration } = useToast();
+  const { toastIsOpen, setToastIsOpen, toastContent } = useToast();
+  const { type, message, duration } = toastContent;
 
   // When the toast is open, set a timeout to close it after the specified duration
   React.useEffect(() => {
@@ -74,17 +75,17 @@ const NotificationToast = () => {
     if (toastIsOpen) {
       timeout = setTimeout(() => {
         setToastIsOpen(false);
-      }, toastDuration);
+      }, duration);
     } else {
       // if the toast is closed, clear the timeout
       clearTimeout(timeout);
     }
-  }, [setToastIsOpen, toastDuration, toastIsOpen]);
+  }, [setToastIsOpen, duration, toastIsOpen]);
 
   return (
     <Container
       toastIsOpen={toastIsOpen}
-      toastType={toastType}
+      toastType={type}
     >
       <button
         type="button"
@@ -95,11 +96,11 @@ const NotificationToast = () => {
       >
         <CloseIcon />
       </button>
-      {toastType === EToastType.SUCCESS && <CheckCircleIcon className="notification-icon" />}
-      {toastType === EToastType.ERROR && <DangerousIcon className="notification-icon" />}
-      {toastType === EToastType.WARNING && <WarningIcon className="notification-icon" />}
-      {toastType === EToastType.INFO && <InfoIcon className="notification-icon" />}
-      <span className="notification-text">{toastMessage}</span>
+      {type === EToastType.SUCCESS && <CheckCircleIcon className="notification-icon" />}
+      {type === EToastType.ERROR && <DangerousIcon className="notification-icon" />}
+      {type === EToastType.WARNING && <WarningIcon className="notification-icon" />}
+      {type === EToastType.INFO && <InfoIcon className="notification-icon" />}
+      <span className="notification-text">{message}</span>
     </Container>
   );
 };

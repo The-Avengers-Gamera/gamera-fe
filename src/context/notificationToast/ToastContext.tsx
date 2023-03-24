@@ -1,26 +1,23 @@
 import { createContext } from 'react';
 import { EToastType } from '@/constants/notification';
+import { INotificationToastContent } from '@/interfaces/notifacationToast';
 
 interface ToastContextType {
   toastIsOpen: boolean;
   setToastIsOpen(open: boolean): void;
-  toastMessage: string;
-  setToastMessage(message: string): void;
-  toastType: EToastType;
-  setToastType(type: EToastType): void;
-  toastDuration: number;
-  setDuration(duration: number): void;
+  toastContent: INotificationToastContent;
+  setToastContent(content: INotificationToastContent): void;
 }
 
 const ToastContext = createContext<ToastContextType>({
   toastIsOpen: false,
   setToastIsOpen: () => {},
-  toastMessage: '',
-  setToastMessage: () => {},
-  toastType: EToastType.SUCCESS,
-  setToastType: () => {},
-  toastDuration: 3000,
-  setDuration: () => {},
+  toastContent: {
+    message: '',
+    type: EToastType.SUCCESS,
+    duration: 3000,
+  },
+  setToastContent: () => {},
 });
 
 export default ToastContext;

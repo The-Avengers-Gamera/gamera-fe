@@ -4,22 +4,20 @@ import ToastContext from './ToastContext';
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [toastIsOpen, setToastIsOpen] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const [toastType, setToastType] = useState(EToastType.SUCCESS);
-  const [toastDuration, setDuration] = useState(3000);
+  const [toastContent, setToastContent] = useState({
+    message: '',
+    type: EToastType.SUCCESS,
+    duration: 3000,
+  });
 
   const value = useMemo(
     () => ({
       toastIsOpen,
       setToastIsOpen,
-      toastMessage,
-      setToastMessage,
-      toastType,
-      setToastType,
-      toastDuration,
-      setDuration,
+      toastContent,
+      setToastContent,
     }),
-    [toastIsOpen, toastMessage, toastType, toastDuration]
+    [toastIsOpen, toastContent]
   );
   return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
 };

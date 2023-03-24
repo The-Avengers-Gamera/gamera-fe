@@ -91,7 +91,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
   // const [commentListState, setCommentListState] = useState<IComment[]>([]);
 
   // useToast hook is used to show a toast notification
-  const { setToastIsOpen, setToastMessage, setToastType, setToastDuration } = useToast();
+  const { setToastIsOpen, setToastContent } = useToast();
 
   const postComment = async (comment: ICommentPost) => {
     const response = await createComment(comment);
@@ -108,11 +108,14 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         articleId,
       };
       postComment(newComment);
-      setCommentInput('');
-      setToastMessage('Comment posted successfully');
-      setToastType(EToastType.SUCCESS);
+
+      // set the toast notification
       setToastIsOpen(true);
-      setToastDuration(3000);
+      setToastContent({
+        type: EToastType.SUCCESS,
+        message: 'Comment posted successfully',
+        duration: 3000,
+      });
     }
   };
 
