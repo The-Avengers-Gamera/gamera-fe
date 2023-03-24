@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        CLOUDFRONT_ID = credentials('RICHARD_PRODUCTION_CLOUDFRONT_ID')
+        CLOUDFRONT_ID = credentials('RICHARD_PROD_CLOUDFRONT_ID')
     }
 
     stages {
@@ -13,15 +13,6 @@ pipeline {
                 // Get source code from project's repository
                 git branch: 'devops-richard-jenkins',
                 url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Testing'
-
-                // Test project
-                sh 'yarn test'
             }
         }
 
@@ -34,6 +25,15 @@ pipeline {
 
                 // Generate build folder for deployment
                 sh 'yarn run build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing'
+
+                // Test project
+                sh 'yarn test'
             }
         }
 
