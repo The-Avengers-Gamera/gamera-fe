@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded'; // time icon
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'; // author icon
 import { titleOfCards } from '@/pages/Home/utils/useFont';
 
-// css ----------------------------------------
 const Container = styled.div`
   width: 100%;
   min-width: 150px;
@@ -70,47 +70,43 @@ const FooterPublishTimeIcon = styled(AccessTimeFilledRoundedIcon)`
   color: ${({ theme }) => theme.color.primary};
 `;
 
-// types ---------------------------------------
 type ReviewCardProps = {
-  coverUrl: string;
-  title: string;
-  authorName: string;
-  publishTime: string;
+  meta: {
+    id: number;
+    coverUrl: string;
+    title: string;
+    author: string;
+    publishTime: string | undefined;
+  };
 };
 
-// components ----------------------------------
-const ReviewCard = ({ coverUrl, title, authorName, publishTime }: ReviewCardProps) => {
+const ReviewCard = ({ meta }: ReviewCardProps) => {
+  const { id, coverUrl, title, author, publishTime } = meta;
   return (
-    <Container>
-      {/* TODO: router to be added when click on cover img or title */}
-      <Cover>
-        {/* fake href */}
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
+    <Link to={`/article/${id}`}>
+      <Container>
+        {/* TODO: router to be added when click on cover img or title */}
+        <Cover>
           <img
             src={coverUrl}
             alt=""
           />
-        </a>
-      </Cover>
+        </Cover>
 
-      <Title>
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
-          {title}
-        </a>
-      </Title>
+        <Title>{title}</Title>
 
-      <Footer>
-        <div className="authorName_container">
-          <FooterAuthorIcon />
-          <span>{authorName}</span>
-        </div>
-
-        <div className="publishTime_container">
-          <FooterPublishTimeIcon />
-          <span>{publishTime}</span>
-        </div>
-      </Footer>
-    </Container>
+        <Footer>
+          <div className="authorName_container">
+            <FooterAuthorIcon />
+            <span>{author}</span>
+          </div>
+          <div className="publishTime_container">
+            <FooterPublishTimeIcon />
+            <span>{publishTime}</span>
+          </div>
+        </Footer>
+      </Container>
+    </Link>
   );
 };
 
