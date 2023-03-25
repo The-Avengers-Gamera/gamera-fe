@@ -2,7 +2,6 @@ import { EArticleType } from '@/constants/article';
 import { IGame } from './game';
 import { IUser } from './user';
 import { ITagSlim } from './tag';
-import { ICommentSlim } from './comment';
 
 export interface IArticle {
   id: number;

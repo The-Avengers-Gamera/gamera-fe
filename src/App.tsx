@@ -6,7 +6,13 @@ import { ModalProvider } from '@/context/loginModal';
 import { ToastProvider } from './context/notificationToast';
 
 const App = () => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   const element = useRoutes(routes);
 

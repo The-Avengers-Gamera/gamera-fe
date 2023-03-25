@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ForumIcon from '@mui/icons-material/Forum';

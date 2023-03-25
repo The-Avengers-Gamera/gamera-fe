@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import ShowCaseBody from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
-import { ISearchArticle, SearchPlatform } from '@/interfaces/search';
-import { EArticleType } from '@/constants/article';
+import { IArticleQuery, SearchGenre } from '@/interfaces/search';
+import { ArticleType, Platform, ReviewOrder, ReviewSort } from '@/constants/article';
 import { getArticles } from '@/services/article';
-import { IArticleCard } from '@/interfaces/article';
+import { SortBarDate, SortBarGenre } from '@/constants/dropdown';
+import { SortItem, SortType } from '../Shares/SortBars/SortBars';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -23,38 +24,58 @@ const Container = styled.div`
 `;
 
 type ArticleShowCaseProps = {
-  articleType: EArticleType;
+  articleType: ArticleType;
 };
 
-const initFilters: ISearchArticle = { page: 1, size: 20, platform: 'all' };
+const initFilters: IArticleQuery = {
+  page: 1,
+  size: 20,
+  platform: Platform.All,
+  genre: SortBarGenre.All.toLowerCase() as SearchGenre,
+  sort: ReviewSort.CREATED_TIME,
+  order: ReviewOrder.DESC,
+};
 
-const ArticlesShowCase = ({
-  articleType, // "News" or "Reviews"
-}: ArticleShowCaseProps) => {
-  const queryType = articleType === EArticleType.NEWS ? 'news' : 'reviews';
-
-  // TODO click filter button to setFilters
+const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
   const [filters, setFilters] = useState(initFilters);
-  const [platformSelected, setPlatformSelected] = useState<Platform>('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredArticle, setFilteredArticle] = useState<IArticleCard[]>([]);
-  // const [pageArticle, setPageArticle] = useState<IArticleCard[]>([]);
 
-  // TODO implement infiniteQuery next step
-  const { isLoading, error, data } = useQuery({
-    queryKey: [queryType, filters],
-    queryFn: async () => getArticles(queryType, filters),
-    onSuccess: (pageArticleData) =>
-      setFilteredArticle((preState) => [...preState, ...pageArticleData.data]),
+  const { isLoading, data } = useQuery({
+    queryKey: [articleType, filters],
+    queryFn: async () => getArticles(articleType, filters),
   });
+
+  const filteredArticle = data?.data;
 
   useEffect(() => {
     setFilters((pre) => ({
       ...pre,
       page: currentPage,
-      platform: platformSelected.toLowerCase() as SearchPlatform,
     }));
-  }, [platformSelected, currentPage]);
+  }, [currentPage]);
+
+  const getSortFromSelected = {
+    [SortBarDate.Latest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.DESC },
+    [SortBarDate.Oldest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.ASC },
+    [SortBarDate.Score]: { sort: ReviewSort.SCORES, order: ReviewOrder.DESC },
+    [SortBarDate.Title]: { sort: ReviewSort.TITLE, order: ReviewOrder.ASC },
+  };
+
+  const handlePlatformSelected = (value: Platform) => {
+    setFilters((pre) => ({ ...pre, platform: value }));
+  };
+
+  const handleSortChange = (type: SortType, item: SortItem) => {
+    if (type === 'sort') {
+      const res = getSortFromSelected[item as SortBarDate];
+      setFilters((pre) => ({ ...pre, sort: res.sort, order: res.order }));
+    }
+
+    if (type === 'genre') {
+      const res = item as SortBarGenre;
+      setFilters((pre) => ({ ...pre, genre: res.toLowerCase() as SearchGenre }));
+    }
+  };
 
   // TODO implement loading component
   if (isLoading) {
@@ -63,11 +84,12 @@ const ArticlesShowCase = ({
 
   return (
     <Container>
-      <h2>{articleType === EArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
+      <h2>{articleType === ArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
       <SelectionBars
         articleType={articleType}
-        platformSelected={platformSelected}
-        setPlatformSelected={setPlatformSelected}
+        barsSelected={filters}
+        onPlatformSelected={handlePlatformSelected}
+        onSortChange={handleSortChange}
       />
       <ShowCaseBody
         articleType={articleType}

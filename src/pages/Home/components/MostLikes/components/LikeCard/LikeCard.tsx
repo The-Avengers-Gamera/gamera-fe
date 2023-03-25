@@ -1,6 +1,5 @@
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
-import React from 'react';
 import styled from 'styled-components';
 import { titleOfCards } from '@/pages/Home/utils/useFont';
 
@@ -34,7 +33,7 @@ const ArticleOverview = styled.div`
 
   & .Tile_container {
     & span {
-      ${titleOfCards}  
+      ${titleOfCards}
       margin-left: 5px;
       font-size: 14px;
     }
@@ -43,8 +42,9 @@ const ArticleOverview = styled.div`
     margin-top: 15px;
     margin-left: 5px;
     & span {
-      padding-left:7px;
+      padding-left: 7px;
       font-size: 12px;
+    }
   }
 `;
 

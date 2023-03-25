@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import Carousel from './components/Carousel';
 import Guide from './components/Guide';

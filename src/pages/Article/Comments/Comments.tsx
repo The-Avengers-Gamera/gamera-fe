@@ -1,5 +1,5 @@
 import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
 import FilterSelector from './SortSelector/SortSelector';

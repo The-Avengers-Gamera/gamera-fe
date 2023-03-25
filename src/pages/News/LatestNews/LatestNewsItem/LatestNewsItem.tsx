@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
