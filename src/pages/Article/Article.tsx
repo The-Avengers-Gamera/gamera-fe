@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import mockArticle from './mockArticle';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
 import { getArticleById } from '../../services/article';
@@ -41,7 +40,7 @@ const Article = () => {
           setCommentList(article.commentList);
         }
       } catch ({ response }) {
-        // console.log(response); // TODO: error information can be pop up
+        // TODO: error information can be pop up
       }
     }
     fetchArticle();

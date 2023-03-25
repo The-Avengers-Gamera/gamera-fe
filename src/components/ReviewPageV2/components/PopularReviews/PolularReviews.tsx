@@ -19,7 +19,7 @@ const GeneralContainer = styled.div`
       right: 0;
       width: 450px;
 
-      font-family: Poppins;
+      font-family: Montserrat;
       font-size: 28px;
       font-weight: 600;
       text-transform: capitalize;
@@ -43,7 +43,6 @@ const PopularReviews = () => {
       <div className="titleContainer">
         <h2>Popular Reviews</h2>
       </div>
-
       <div className="bodyContainer">
         <TopReviewCover />
         <Top5Reviews />

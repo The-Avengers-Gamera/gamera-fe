@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import PersonIcon from '@mui/icons-material/Person';
 import { titleOfCards } from '@/pages/Home/utils/useFont';
@@ -70,37 +70,42 @@ const NewsCardTimeAuthor = styled.div`
     }
   }
 `;
-
-const HomeNewsCard = () => {
-  const newsCardData = {
-    title: 'Hogwarts Legacy: How to Open Eye Chests and Find the Mirror of Erised',
-    publishTime: '1 day ago',
-    author: 'Luke Reilly',
-    coverUrl:
-      'https://assets1.ignimgs.com/2023/02/07/hogwarts-legacy-promo-10-1675736754011-1675784730573.png?crop=16%3A9&width=282&dpr=2',
+type Props = {
+  meta: {
+    id: number;
+    title: string;
+    publishTime: string | undefined;
+    author: string;
+    coverUrl: string;
   };
+};
+
+const HomeNewsCard = ({ meta }: Props) => {
+  const { id, title, publishTime, author, coverUrl } = meta;
 
   return (
-    <CardContainer>
-      <NewsCardCover>
-        <img
-          className="cover-img"
-          src={newsCardData.coverUrl}
-          alt="news cover"
-        />
-      </NewsCardCover>
-      <NewsCardTitle>{newsCardData.title}</NewsCardTitle>
-      <NewsCardTimeAuthor>
-        <div>
-          <AccessTimeFilledIcon />
-          <span>{newsCardData.publishTime}</span>
-        </div>
-        <div>
-          <PersonIcon />
-          <span className="author">{newsCardData.author}</span>
-        </div>
-      </NewsCardTimeAuthor>
-    </CardContainer>
+    <Link to={`/article/${id}`}>
+      <CardContainer>
+        <NewsCardCover>
+          <img
+            className="cover-img"
+            src={coverUrl}
+            alt="news cover"
+          />
+        </NewsCardCover>
+        <NewsCardTitle>{title}</NewsCardTitle>
+        <NewsCardTimeAuthor>
+          <div>
+            <AccessTimeFilledIcon />
+            <span>{publishTime}</span>
+          </div>
+          <div>
+            <PersonIcon />
+            <span className="author">{author}</span>
+          </div>
+        </NewsCardTimeAuthor>
+      </CardContainer>
+    </Link>
   );
 };
 

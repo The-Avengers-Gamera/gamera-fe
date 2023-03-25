@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
 
@@ -35,18 +34,16 @@ const Top5Reviews = () => {
 
   return (
     <Container>
-      {/* a list of review info */}
-      {top5Reviews.map(({ title, commentNum }, cardIndex) => {
-        return (
-          <li>
-            <ReviewCard
-              title={title}
-              commentNum={commentNum}
-              cardIndex={cardIndex}
-            />
-          </li>
-        );
-      })}
+      {top5Reviews.map(({ title, commentNum }, cardIndex) => (
+        <li>
+          <ReviewCard
+            key={title}
+            title={title}
+            commentNum={commentNum}
+            cardIndex={cardIndex}
+          />
+        </li>
+      ))}
     </Container>
   );
 };

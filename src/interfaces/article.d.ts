@@ -44,3 +44,8 @@ export interface IArticleCard {
   date?: string;
   createdTime: string;
 }
+
+export interface IPopularReview {
+  title: string;
+  commentNum: number;
+}

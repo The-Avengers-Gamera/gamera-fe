@@ -3,10 +3,11 @@ import SelectionButton from '../../../../../Shares/SelectionButton';
 import { PLATFORMS } from '@/constants/platforms';
 
 const Container = styled.div`
-  width: 50%;
-
+  min-width: 50%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
+  padding-top: 5px;
 `;
 
 interface PlatformBarsProps {
