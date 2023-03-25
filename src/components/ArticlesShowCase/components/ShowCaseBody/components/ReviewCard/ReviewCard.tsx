@@ -82,8 +82,6 @@ const OuterContainer = styled.div`
     border-top: 2px solid #3d3d3d;
   }
 `;
-
-// NewsCard component ===================================================================
 interface IReviewCardPros {
   article: IArticleCard;
 }
@@ -91,7 +89,6 @@ interface IReviewCardPros {
 const ReviewCard = ({
   article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
 }: IReviewCardPros) => {
-  // ---------------------------- jsx ----------------------------
   return (
     <OuterContainer>
       <div className="news-card">
@@ -100,15 +97,11 @@ const ReviewCard = ({
           alt="news cover"
           className="left"
         />
-        {/* section right to the cover img */}
         <div className="right">
-          {/* top */}
           <h3 className="title">{title}</h3>
-          {/* middle */}
           <p className="date-description">
             {date} - {description}
           </p>
-          {/* bottom: conditionally */}
           {game ? (
             <div className="game-author-like-comment">
               <div className="game">
