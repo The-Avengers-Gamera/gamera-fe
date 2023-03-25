@@ -61,19 +61,19 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
     [SortBarDate.Title]: { sort: ReviewSort.TITLE, order: ReviewOrder.ASC },
   };
 
-  const handlePlatformSelected = (value: Platform) => {
+  const handlePlatformChange = (value: Platform) => {
     setFilters((pre) => ({ ...pre, platform: value }));
   };
 
   const handleSortChange = (type: SortType, item: SortItem) => {
     if (type === 'sort') {
-      const res = getSortFromSelected[item as SortBarDate];
-      setFilters((pre) => ({ ...pre, sort: res.sort, order: res.order }));
+      const { sort, order } = getSortFromSelected[item as SortBarDate];
+      setFilters((pre) => ({ ...pre, sort, order }));
     }
 
     if (type === 'genre') {
-      const res = item as SortBarGenre;
-      setFilters((pre) => ({ ...pre, genre: res.toLowerCase() as SearchGenre }));
+      const genre = item.toLowerCase() as SearchGenre;
+      setFilters((pre) => ({ ...pre, genre }));
     }
   };
 
@@ -88,7 +88,7 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
       <SelectionBars
         articleType={articleType}
         barsSelected={filters}
-        onPlatformSelected={handlePlatformSelected}
+        onPlatformSelected={handlePlatformChange}
         onSortChange={handleSortChange}
       />
       <ShowCaseBody
