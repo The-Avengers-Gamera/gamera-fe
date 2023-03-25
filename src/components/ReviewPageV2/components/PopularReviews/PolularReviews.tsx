@@ -43,7 +43,6 @@ const PopularReviews = () => {
       <div className="titleContainer">
         <h2>Popular Reviews</h2>
       </div>
-
       <div className="bodyContainer">
         <TopReviewCover />
         <Top5Reviews />

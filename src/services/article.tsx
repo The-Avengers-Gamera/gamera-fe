@@ -30,3 +30,5 @@ export const getArticles = async (
 
 export const getNews = async (): Promise<AxiosResponse<IPage<IArticle[]>>> =>
   apiClient.get(`/articles/news`);
+
+export const getPopularReviews = async () => apiClient.get('/articles/reviews/comment-num');
