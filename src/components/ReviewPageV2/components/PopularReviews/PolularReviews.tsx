@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Top5Reviews from './components/Top5Reviews';
 import TopReviewCover from './components/TopReviewCover';
-import { IPopularReview } from '@/interfaces/article';
 
 const GeneralContainer = styled.div`
   background-color: #000000;
@@ -38,12 +37,7 @@ const GeneralContainer = styled.div`
   }
 `;
 
-type PopularReviewBodyProps = {
-  filteredReview: IPopularReview[] | undefined;
-};
-
-const PopularReviews = ({ filteredReview }: PopularReviewBodyProps) => {
-  // console.log(filteredReview);
+const PopularReviews = () => {
   return (
     <GeneralContainer>
       <div className="titleContainer">

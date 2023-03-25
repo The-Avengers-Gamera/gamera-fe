@@ -16,7 +16,7 @@ const ReviewPageV2 = () => {
   return (
     <PageContainer>
       <PageTitle />
-      <PopularReviews filteredReview={undefined} />
+      <PopularReviews />
       <ArticlesShowCase articleType={articleType} />
     </PageContainer>
   );
