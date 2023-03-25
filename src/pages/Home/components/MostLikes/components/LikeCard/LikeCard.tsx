@@ -80,8 +80,8 @@ const LikeIcon = styled(FavoriteRoundedIcon)`
 type LikeCardProps = {
   coverUrl: string;
   title: string;
-  commNum: string;
-  likeNum: string;
+  commNum: number;
+  likeNum: number;
 };
 
 const LikeCard = ({ coverUrl, title, commNum, likeNum }: LikeCardProps) => {
