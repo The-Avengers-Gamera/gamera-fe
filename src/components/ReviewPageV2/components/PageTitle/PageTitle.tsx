@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 100px;
 
   & h2 {
-    font-family: Gen Jyuu Gothic Monospace;
+    font-family: 'Alumni Sans';
     font-size: 28px;
     font-weight: 800;
     text-transform: uppercase;

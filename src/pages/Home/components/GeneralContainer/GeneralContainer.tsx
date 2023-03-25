@@ -49,21 +49,22 @@ const GeneralContainer = ({
             {divider ? <Divider sx={{ bgcolor: theme.color.subtitle }} /> : ''}
           </Grid>
 
-          {children.map((child: any) => (
-            <Grid
-              sx={{
-                pt: rowGapPx,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              key={child.key}
-              mobile={mobile}
-              laptop={laptop}
-              item
-            >
-              {child}
-            </Grid>
-          ))}
+          {children &&
+            children.map((child: any) => (
+              <Grid
+                sx={{
+                  pt: rowGapPx,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                key={child.key}
+                mobile={mobile}
+                laptop={laptop}
+                item
+              >
+                {child}
+              </Grid>
+            ))}
         </Grid>
       </Box>
     </Box>

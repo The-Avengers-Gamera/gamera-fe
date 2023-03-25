@@ -1,41 +1,38 @@
 // import { Card } from '@mui/material';
 // import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ReviewCard from './components/ReviewCard';
 
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
-
-// const cards = [1, 2, 3, 4, 5, 6, 7];
-
-// TODO: pls replace below mock data sent from backend with axios request------------------------------------------------------------
-type ReviewItemType = {
-  imgUrl: string;
-  title: string;
-  authorName: string;
-  publishTime: string;
-};
-
-const initialState: ReviewItemType[] = [];
-
-const mockReviewItem = {
-  imgUrl:
-    'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
-  title: 'The Last Of Us Part 1 Review',
-  authorName: 'LUKE REILLY',
-  publishTime: '1 day ago',
-};
-for (let i = 0; i < 8; ) {
-  initialState.push(structuredClone(mockReviewItem));
-  mockReviewItem.title = `The Last Of Us Part 1 Review ${i}`; // mock data: make title unique
-  i += 1;
-}
-
-// --------------------------------------------------------------------------------------------------------
+import { getArticles } from '@/services/article';
+import { IArticleCard } from '@/interfaces/article';
+import { nowToCreated } from '@/utils/time';
 
 const PopularReviews = () => {
-  const [reviewList] = useState(initialState);
+  const [reviewCards, setReviewCards] = useState<IArticleCard[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isFail, setIsFail] = useState<boolean>(false);
+  const [msg, setMsg] = useState<string>('Loading...');
+
+  useEffect(() => {
+    getArticles('reviews', {
+      page: 1,
+      size: 8,
+      platform: 'all',
+      genre: '',
+    })
+      .then((res) => {
+        setReviewCards(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setMsg(err.error);
+        setIsFail(true);
+        setMsg('Fail to load');
+      });
+  }, []);
 
   return (
     <GeneralContainer
@@ -50,27 +47,20 @@ const PopularReviews = () => {
       mobile={6}
       divider
     >
-      {/* {cards.map((card) => (
-      // replace your card here
-      <Card
-        sx={{ height: 250 }}
-        key={card}
-      >
-        CARD SLOT {card}
-      </Card>
-    ))} */}
-
-      {reviewList.map(({ imgUrl, title, authorName, publishTime }) => {
-        return (
-          <ReviewCard
-            key={title}
-            coverUrl={imgUrl}
-            title={title}
-            authorName={authorName}
-            publishTime={publishTime}
-          />
-        );
-      })}
+      {isLoading
+        ? [msg]
+        : reviewCards?.map((reviewCard) => (
+            <ReviewCard
+              key={reviewCard.id}
+              meta={{
+                id: reviewCard.id,
+                title: reviewCard.title,
+                publishTime: nowToCreated(reviewCard.createdTime),
+                author: reviewCard.author.name,
+                coverUrl: reviewCard.coverImgUrl,
+              }}
+            />
+          ))}
     </GeneralContainer>
   );
 };

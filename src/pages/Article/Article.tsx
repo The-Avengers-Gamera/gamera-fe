@@ -40,7 +40,7 @@ const Article = () => {
           setCommentList(article.commentList);
         }
       } catch ({ response }) {
-        // console.error(response); // TODO: error information can be pop up
+        // TODO: error information can be pop up
       }
     }
     fetchArticle();
