@@ -22,7 +22,7 @@ const ButtonContainer = styled.div`
 
     font-family: Poppins;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
 
     background-color: #222430; // TODO: manage the color using theme
     color: #ffffff; // TODO: manage the color using theme
