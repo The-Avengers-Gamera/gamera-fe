@@ -1,6 +1,7 @@
 import { platform } from 'os';
 import styled from 'styled-components';
 import { IArticle } from '@/interfaces/article';
+import { ICurrentGame } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`
   border-radius: 15px;
@@ -24,12 +25,13 @@ const Img = styled.img`
 `;
 
 const GameContentContainer = styled.div`
-  width: 60%;
+  width: 50%;
   height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin-left: 1rem;
+  margin-right: 0.5rem;
 `;
 
 const GameNameAndGenreContainer = styled.div`
@@ -58,17 +60,30 @@ const PlatformContainer = styled.div`
   font-weight: 700;
 `;
 
+const CloseContainer = styled.div`
+  width: 11%;
+  height: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  z-index: 77;
+`;
+
+const CloseButton = styled.button`
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #d8d8d8;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+`;
+
 type Props = {
   useWindowStyle: boolean;
-  MockGame: {
-    name: string;
-    genre: string;
-    platform: string[];
-    img: string;
-  };
+  CurrentGame: ICurrentGame;
+  changeIsAddAsClose: () => void;
 };
 
-export const AddedGame = ({ useWindowStyle, MockGame }: Props) => {
+export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: Props) => {
   const AddedGameButtonStyle = {
     backgroundColor: '#303442',
   };
@@ -82,16 +97,20 @@ export const AddedGame = ({ useWindowStyle, MockGame }: Props) => {
       <GameImageContainer>
         <Img
           alt="game"
-          src={MockGame.img}
+          src={CurrentGame.img}
         />
       </GameImageContainer>
       <GameContentContainer>
         <GameNameAndGenreContainer>
-          <GameNameContainer>{MockGame.name}</GameNameContainer>
-          <GenreContainer>{MockGame.genre}</GenreContainer>
+          <GameNameContainer>{CurrentGame.name}</GameNameContainer>
+          <GenreContainer>{CurrentGame.genre}</GenreContainer>
         </GameNameAndGenreContainer>
-        <PlatformContainer>{MockGame.platform}</PlatformContainer>
+        <PlatformContainer>{CurrentGame.platform}</PlatformContainer>
       </GameContentContainer>
+
+      <CloseContainer>
+        {!useWindowStyle && <CloseButton onClick={changeIsAddAsClose}>X</CloseButton>}
+      </CloseContainer>
     </AddedGameContainer>
   );
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
+import { ICurrentGame } from '@/interfaces/game';
 import AddedGame from './components/AddedGame';
 import AddGameWindow from './components/AddGameWindow';
 import EmptyGame from './components/EmptyGame';
@@ -21,19 +22,24 @@ const AddedGameContainer = styled.div`
   margin: 1rem 0;
 `;
 
+const initialGame = {
+  name: 'Elden Ring',
+  genre: 'FROMSOFTWARE',
+  platform: ['PC,', 'XBOX,', 'PS4,', 'PS5'],
+  img: 'https://assets1.ignimgs.com/2023/03/21/atlasfallen-preview-deck-663300-1679407499860.jpg',
+};
+
 export const AddGame = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [currentGame, setCurrentGame] = useState<ICurrentGame>(initialGame);
 
-  const changeIsAdd = () => {
+  const changeIsAddAsTrue = () => {
     setIsAdd(true);
   };
 
-  const MockGame = {
-    name: 'Elden Ring',
-    genre: 'FROMSOFTWARE',
-    platform: ['PC,', 'XBOX,', 'PS4,', 'PS5'],
-    img: 'https://assets1.ignimgs.com/2023/03/21/atlasfallen-preview-deck-663300-1679407499860.jpg',
+  const changeIsAddAsClose = () => {
+    setIsAdd(false);
   };
 
   const closeModal = () => {
@@ -57,15 +63,17 @@ export const AddGame = () => {
         onRequestClose={closeModal}
       >
         <AddGameWindow
-          changeIsAdd={changeIsAdd}
+          changeIsAdd={changeIsAddAsTrue}
           closeModal={closeModal}
+          setCurrentGame={setCurrentGame}
         />
       </AddGameModal>
       {isAdd ? (
         <AddedGameContainer>
           <AddedGame
             useWindowStyle={false}
-            MockGame={MockGame}
+            CurrentGame={currentGame}
+            changeIsAddAsClose={changeIsAddAsClose}
           />
         </AddedGameContainer>
       ) : (
