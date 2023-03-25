@@ -5,6 +5,8 @@ import CommentItem from './CommentItem';
 import FilterSelector from './SortSelector/SortSelector';
 import { IComment, ICommentPost } from '../../../interfaces/comment';
 import { createComment } from '@/services/comment';
+import useToast from '@/context/notificationToast';
+import { EToastType } from '@/constants/notification';
 
 const Container = styled.div`
   width: 80%;
@@ -88,6 +90,9 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
   const [commentInput, setCommentInput] = useState<string>('');
   // const [commentListState, setCommentListState] = useState<IComment[]>([]);
 
+  // useToast hook is used to show a toast notification
+  const { setToastIsOpen, setToastContent } = useToast();
+
   const postComment = async (comment: ICommentPost) => {
     const response = await createComment(comment);
     if (response) {
@@ -103,7 +108,14 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         articleId,
       };
       postComment(newComment);
-      setCommentInput('');
+
+      // set the toast notification
+      setToastIsOpen(true);
+      setToastContent({
+        type: EToastType.SUCCESS,
+        message: 'Comment posted successfully',
+        duration: 3000,
+      });
     }
   };
 
