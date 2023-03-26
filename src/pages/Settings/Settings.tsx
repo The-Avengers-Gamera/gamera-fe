@@ -22,8 +22,11 @@ const SettingsPage = () => {
         <div className={styles.divider} />
         <div className={styles.inputContainer}>
           <div className={styles.inputBox}>
-            <label htmlFor="nameInput">
-              Name
+            <label
+              className={styles.label}
+              htmlFor="nameInput"
+            >
+              <div>Name</div>
               <input
                 type="text"
                 id="nameInput"
@@ -31,9 +34,12 @@ const SettingsPage = () => {
               />
             </label>
           </div>
-          <div className={styles.inputBox}>
-            <label htmlFor="passwordInput">
-              Password
+          <div className={`${styles.inputBox} ${styles.right}`}>
+            <label
+              className={styles.label}
+              htmlFor="passwordInput"
+            >
+              <div>Password</div>
               <input
                 type="password"
                 id="passwordInput"
