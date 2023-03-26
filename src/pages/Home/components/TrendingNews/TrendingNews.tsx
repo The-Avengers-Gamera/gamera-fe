@@ -24,6 +24,9 @@ const TrendingNews = () => {
       genre: '',
     })
       .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+
         setNewsCards(res.data);
         setIsLoading(false);
       })

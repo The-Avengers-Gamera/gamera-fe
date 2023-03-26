@@ -1,6 +1,13 @@
 import { AxiosResponse } from 'axios';
 import apiClient from '@/utils/apiClient';
-import { IUser, IUserSignUp, IUserLogin, IUserAuthority } from '@/interfaces/user';
+import {
+  IUser,
+  IUserSignUp,
+  IUserLogin,
+  IUserAuthority,
+  IUserInfo,
+  IUseDetailedInfo,
+} from '@/interfaces/user';
 
 export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<any>> =>
   apiClient.post('/users/signup', user);
@@ -26,3 +33,6 @@ export const login = async (user: IUserLogin): Promise<AxiosResponse<any>> =>
 
 export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =>
   apiClient.get(`/users/verification?email=${email}`);
+
+export const getUserInfo = (): Promise<AxiosResponse<IUseDetailedInfo>> =>
+  apiClient.get(`/users/info`);

@@ -55,7 +55,6 @@ const GeneralContainer = ({
                 sx={{
                   pt: rowGapPx,
                   display: 'flex',
-                  alignItems: 'center',
                 }}
                 key={child.key}
                 mobile={mobile}

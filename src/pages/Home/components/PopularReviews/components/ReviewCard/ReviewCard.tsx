@@ -11,7 +11,10 @@ const Container = styled.div`
 
 const Cover = styled.div`
   border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
   & img {
+    overflow: hidden;
     width: 100%;
     height: 260px;
     object-fit: cover;
@@ -20,6 +23,7 @@ const Cover = styled.div`
 `;
 const Title = styled.div`
   ${titleOfCards}
+  width: 100%;
   padding-top: 9px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,7 +38,8 @@ const Footer = styled.div`
   justify-content: space-between;
   padding-top: 9px;
   min-width: fix-content;
-
+  text-overflow: ellipsis;
+  white-space: nowrap;
   & .authorName_container {
     display: flex;
     align-items: center;
@@ -83,8 +88,8 @@ type ReviewCardProps = {
 const ReviewCard = ({ meta }: ReviewCardProps) => {
   const { id, coverUrl, title, author, publishTime } = meta;
   return (
-    <Link to={`/article/${id}`}>
-      <Container>
+    <Container>
+      <Link to={`/article/${id}`}>
         {/* TODO: router to be added when click on cover img or title */}
         <Cover>
           <img
@@ -105,8 +110,8 @@ const ReviewCard = ({ meta }: ReviewCardProps) => {
             <span>{publishTime}</span>
           </div>
         </Footer>
-      </Container>
-    </Link>
+      </Link>
+    </Container>
   );
 };
 

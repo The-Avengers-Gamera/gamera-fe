@@ -6,9 +6,8 @@ import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const CardContainer = styled.div`
   /* background-color: green; */
-  width: 100%;
-  max-width: 396px;
-  position: relative;
+  width: 396px;
+  overflow: hidden;
   cursor: pointer;
   &:hover .cover-img {
     transform: scale(1.05);
@@ -19,12 +18,12 @@ const NewsCardCover = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 240px;
-  object-fit: cover;
   clip-path: polygon(0 23px, 80px 23px, 120px 0, 100% 0, 100% 100%, 0 100%);
   img {
+    object-fit: cover;
     transition: transform 0.5s;
+    width: 100%;
     height: 100%;
   }
 `;
@@ -84,8 +83,8 @@ const HomeNewsCard = ({ meta }: Props) => {
   const { id, title, publishTime, author, coverUrl } = meta;
 
   return (
-    <Link to={`/article/${id}`}>
-      <CardContainer>
+    <CardContainer>
+      <Link to={`/article/${id}`}>
         <NewsCardCover>
           <img
             className="cover-img"
@@ -104,8 +103,8 @@ const HomeNewsCard = ({ meta }: Props) => {
             <span className="author">{author}</span>
           </div>
         </NewsCardTimeAuthor>
-      </CardContainer>
-    </Link>
+      </Link>
+    </CardContainer>
   );
 };
 

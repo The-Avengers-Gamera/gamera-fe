@@ -23,7 +23,7 @@ export const getArticles = async (
   { page = 1, size = 20, platform = 'all', genre = '' }: ISearchArticle
 ): Promise<IPage<IArticleCard[]>> => {
   const response = await apiClient.get(
-    `/articles/${queryType}?page=${page}&limit=${size}&platform=${platform}&genre=${genre}`
+    `/articles/${queryType}?page=${page}&size=${size}&platform=${platform}&genre=${genre}`
   );
   return response.data;
 };
