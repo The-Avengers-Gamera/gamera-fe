@@ -1,0 +1,35 @@
+.editorContainer {
+  flex-basis: calc(33.33% - 10px);
+  margin-bottom: 20px;
+  background-color: #222430;
+  border-radius: 1rem;
+}
+.normalContainer {
+  flex-basis: calc(50% - 10px);
+  margin-bottom: 20px;
+  background-color: #222430;
+  border-radius: 1rem;
+}
+
+.columnTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.8rem;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: 'Russo One', sans-serif;
+}
+
+.viewMore {
+  color: #6ddb03;
+  font-size: x-small;
+}
+/* 
+.cardContainer:nth-child(2n) {
+  margin-right: 0;
+}
+
+.cardContainer:last-child {
+  margin-right: 0;
+} */
