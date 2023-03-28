@@ -13,6 +13,7 @@ import Privacy from '@/pages/Privacy';
 import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
+import UserProfile from '@/pages/UserProfile';
 
 const routes: RouteObject[] = [
   {
@@ -33,7 +34,7 @@ const routes: RouteObject[] = [
 
       {
         path: '/account',
-        element: <>user page</>,
+        element: <UserProfile />,
         children: [
           {
             path: 'my-articles',
