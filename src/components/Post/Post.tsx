@@ -14,6 +14,7 @@ import { IArticlePost } from '@/interfaces/article';
 import { EArticleType } from '@/constants/article';
 import { createArticle } from '@/services/article';
 import randomImgUrl from '@/utils/randomImgUrl';
+import AddGameButton from './AddGame';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -131,6 +132,7 @@ const Post = () => {
     <PageWrapper>
       <Main>
         <ButtonBack />
+        <AddGameButton />
         <FormWrapper>
           <form onSubmit={formik.handleSubmit}>
             <Header>
