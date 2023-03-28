@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-// import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import { Button, TextField } from '@mui/material';
 import { IComment, ICommentPost } from '@/interfaces/comment';
 import { createComment } from '@/services/comment';

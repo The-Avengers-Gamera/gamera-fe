@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
 
@@ -30,7 +29,7 @@ const mockTop5Reivews: Props[] = [
 // TODO: -----------------------------------------------------------------------------------
 
 const Top5Reviews = () => {
-  const [top5Reviews, setTop5Reviews] = useState(mockTop5Reivews);
+  const top5Reviews = mockTop5Reivews;
 
   return (
     <Container>

@@ -74,6 +74,7 @@ const NavBar = ({ setIsMore, expendBtnRef }: any) => {
                 disablePadding
               >
                 <Link
+                  onClick={() => setNavBtnSelected('')}
                   className={style.navItemContainer}
                   to="/"
                 >
@@ -93,21 +94,26 @@ const NavBar = ({ setIsMore, expendBtnRef }: any) => {
                   key={title}
                 />
               ))}
-              <ListItem
-                disablePadding
-                onClick={handleMoreClick}
+              <NavListItem
+                navBtnSelected={navBtnSelected}
+                setNavBtnSelected={() => {
+                  handleMoreClick();
+                  setNavBtnSelected('MORE');
+                }}
+                route=""
+                title="MORE"
+                icon={<MoreHorizRoundedIcon />}
+                key="MORE"
               >
-                <Box className={style.navItemContainer}>
-                  <Button
-                    className={style.navBtn}
-                    sx={{ color: 'inherit' }}
-                    ref={expendBtnRef}
-                  >
-                    <MoreHorizRoundedIcon />
-                    <Typography sx={navItemStyle}>MORE</Typography>
-                  </Button>
-                </Box>
-              </ListItem>
+                <Button
+                  className={style.navBtn}
+                  sx={{ color: 'inherit' }}
+                  ref={expendBtnRef}
+                >
+                  <MoreHorizRoundedIcon />
+                  <Typography sx={navItemStyle}>MORE</Typography>
+                </Button>
+              </NavListItem>
             </Box>
             {isLoggedIn && (
               <Box className={style.navBarBottomGroup}>

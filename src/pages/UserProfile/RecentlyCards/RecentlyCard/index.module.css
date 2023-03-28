@@ -1,0 +1,70 @@
+.cardBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  position: relative;
+  border-bottom: 1px solid #5d5d5d;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cover {
+  width: 50px;
+  margin: 0.5rem 0;
+}
+
+.cover img {
+  max-width: 50px;
+  height: auto;
+}
+
+.articleInfo {
+  display: flex;
+  width: calc(100% - 65px);
+  flex-direction: column;
+  padding: 5px 0;
+  margin-left: 1rem;
+}
+
+.titleContainer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  padding-bottom: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.infoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: inherit;
+  line-height: 14px;
+}
+
+.commentsContainer,
+.likesContainer {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.likesContainer {
+  margin-left: 30px;
+}
+
+.commentsIcon,
+.likesIcon {
+  margin-right: 10px;
+}
+
+.likesIcon {
+  color: red;
+}
+
+.cardBox:last-child {
+  border-bottom: none;
+}

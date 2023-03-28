@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
 import LikeCard from './components/LikeCard/LikeCard';

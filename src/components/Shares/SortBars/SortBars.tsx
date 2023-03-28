@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-
 import Filter from '@/components/Dropdowns/Filter';
-import { SORT_ITEMS, GENRE_FILTER_ITEMS } from '@/constants/dropdown';
+import { SortBarDate, SortBarGenre } from '@/constants/dropdown';
+import { ReviewOrder, ReviewSort } from '@/constants/article';
+import { SearchGenre } from '@/interfaces/search';
 
 const Container = styled.div`
   display: flex;
@@ -13,33 +13,73 @@ const Container = styled.div`
   }
 `;
 
-const SortBars = () => {
-  // TODO make type or interface
-  const filterGroup = [
+export type SortType = 'sort' | 'genre';
+export type SortItem = SortBarDate | SortBarGenre;
+interface SortBarsProps {
+  sort: ReviewSort;
+  order: ReviewOrder;
+  genre: SearchGenre;
+  onSortChange: (type: SortType, sort: SortBarDate | SortBarGenre) => void;
+}
+
+const SortBars = ({ sort, order, genre, onSortChange }: SortBarsProps) => {
+  type SortBar = {
+    type: SortType;
+    items: SortItem[];
+    selected: SortItem;
+  };
+
+  const genreSelected = Object.keys(SortBarGenre)[
+    Object.values(SortBarGenre).indexOf(
+      (genre.charAt(0).toUpperCase() + genre.slice(1)) as SortBarGenre
+    )
+  ] as SortBarGenre;
+
+  const getSelectedFromSort = () => {
+    let item = SortBarDate.Latest;
+    if (sort === ReviewSort.CREATED_TIME && order === ReviewOrder.DESC) {
+      item = SortBarDate.Latest;
+    }
+    if (sort === ReviewSort.CREATED_TIME && order === ReviewOrder.ASC) {
+      item = SortBarDate.Oldest;
+    }
+    if (sort === ReviewSort.SCORES) {
+      item = SortBarDate.Score;
+    }
+    if (sort === ReviewSort.TITLE) {
+      item = SortBarDate.Title;
+    }
+    return item;
+  };
+
+  const sortSelected = getSelectedFromSort();
+
+  const SortGroup: SortBar[] = [
     {
-      name: 'sort',
-      items: SORT_ITEMS,
+      type: 'sort',
+      items: Object.values(SortBarDate),
+      selected: sortSelected,
     },
     {
-      name: 'genre',
-      items: GENRE_FILTER_ITEMS,
+      type: 'genre',
+      items: Object.values(SortBarGenre),
+      selected: genreSelected,
     },
   ];
 
-  const [selected, setSelected] = useState({
-    [filterGroup[0].name]: SORT_ITEMS[0],
-    [filterGroup[1].name]: GENRE_FILTER_ITEMS[0],
-  });
+  const handleSelectChange = (type: SortType, item: SortItem) => {
+    onSortChange(type, item);
+  };
 
   return (
     <Container>
-      {filterGroup.map((e) => (
+      {SortGroup.map((e) => (
         <Filter
-          key={e.name}
-          type={e.name}
+          key={e.type}
+          type={e.type}
           items={e.items}
-          selected={selected[e.name]}
-          setSelected={setSelected}
+          selected={e.selected}
+          onSelectChange={handleSelectChange}
         />
       ))}
     </Container>

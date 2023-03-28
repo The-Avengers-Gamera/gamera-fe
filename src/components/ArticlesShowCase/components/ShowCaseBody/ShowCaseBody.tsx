@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
 import NewsCard from './components/NewsCard';
 import { IArticleCard } from '@/interfaces/article';
-import { EArticleType } from '@/constants/article';
+import { ArticleType } from '@/constants/article';
 import { nowToCreated } from '@/utils/time';
 import LoadMore from '@/components/LoadMore';
 
@@ -43,7 +43,7 @@ const Container = styled.div`
 `;
 
 type ShowCaseBodyProps = {
-  articleType: EArticleType;
+  articleType: ArticleType;
   filteredArticle: IArticleCard[] | undefined;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 };
@@ -53,7 +53,7 @@ const ShowCaseBody = ({ articleType, filteredArticle, setCurrentPage }: ShowCase
       {filteredArticle?.map((article: IArticleCard) => {
         const { createdTime } = article;
         const date = nowToCreated(createdTime);
-        return articleType === EArticleType.NEWS ? (
+        return articleType === ArticleType.NEWS ? (
           <NewsCard
             key={article.id}
             article={{ ...article, date }}

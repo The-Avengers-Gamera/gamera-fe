@@ -4,7 +4,7 @@ import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
 import { getArticleById } from '../../services/article';
 import { IArticle } from '../../interfaces/article';
-import { EArticleType } from '../../constants/article';
+import { ArticleType } from '../../constants/article';
 import { IComment } from '../../interfaces/comment';
 
 const Container = styled.div`
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const initArticleContent: IArticle = {
   id: 0,
-  type: EArticleType.NEWS,
+  type: ArticleType.NEWS,
   title: '',
   updatedTime: '',
   createdTime: '',
@@ -40,7 +40,7 @@ const Article = () => {
           setCommentList(article.commentList);
         }
       } catch ({ response }) {
-        // TODO: error information can be pop up
+        // console.error(response); // TODO: error information can be pop up
       }
     }
     fetchArticle();

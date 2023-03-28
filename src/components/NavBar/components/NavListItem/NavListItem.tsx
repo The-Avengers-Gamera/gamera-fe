@@ -11,6 +11,7 @@ type Props = {
   children?: JSX.Element;
   setNavBtnSelected: React.Dispatch<React.SetStateAction<string | null | undefined>>;
   navBtnSelected: string | null | undefined;
+  ref?: any;
 };
 
 const NavListItem = ({
@@ -20,6 +21,7 @@ const NavListItem = ({
   children,
   setNavBtnSelected,
   navBtnSelected,
+  ref,
 }: Props) => {
   const handleNavBtnClick = () => {
     setNavBtnSelected(title);
@@ -32,7 +34,10 @@ const NavListItem = ({
       className={navBtnSelected === title ? style.listItemSelected : style.listItem}
       onClick={handleNavBtnClick}
     >
-      <Box className={style.navItemContainer}>
+      <Box
+        className={style.navItemContainer}
+        ref={ref || null}
+      >
         {children || (
           <Link
             style={{ width: 100 }}
