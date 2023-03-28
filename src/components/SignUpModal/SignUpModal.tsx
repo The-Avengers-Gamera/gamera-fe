@@ -6,6 +6,9 @@ const RegisterModalContainer = styled.div`
   width: 30rem;
   height: 45rem;
   background-color: rgba(36, 36, 41, 1); /* Black w/ opacity */
+  display: flex;
+  flex-direction: column;
+  justify-content: evenly;
 `;
 
 const BackAndCloseButtonContainer = styled.div`
@@ -53,10 +56,12 @@ const Header = styled.h1`
 
 const TermAndPrivacyContainer = styled.div`
   margin-top: 9%;
-  height: 2rem;
+  height: 20%;
   width: auto;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 2rem;
 `;
 
 const FooterLink = styled.a`

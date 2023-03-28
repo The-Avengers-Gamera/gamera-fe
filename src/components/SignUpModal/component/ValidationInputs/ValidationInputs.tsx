@@ -124,6 +124,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
         onChange={inputChangeHandler}
         onBlur={inputValue === '' ? nullInputHandler : notNullInputHandler}
         autoComplete="off"
+        type={name}
       />
       <> {labelVisibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
     </ValidatedInputsContainer>
