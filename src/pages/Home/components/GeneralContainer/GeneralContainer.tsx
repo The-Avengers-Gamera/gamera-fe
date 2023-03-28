@@ -49,7 +49,6 @@ const GeneralContainer = ({
             >
               {divider ? <Divider sx={{ bgcolor: theme.color.subtitle }} /> : ''}
             </Grid>
-
             {children &&
               children.map((child: any) => (
                 <Grid

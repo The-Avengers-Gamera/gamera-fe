@@ -1,6 +1,4 @@
-import { platform } from 'os';
 import styled from 'styled-components';
-import { IArticle } from '@/interfaces/article';
 import { ICurrentGame } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`

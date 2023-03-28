@@ -11,7 +11,7 @@ type Props = {
   children?: JSX.Element;
   setNavBtnSelected: React.Dispatch<React.SetStateAction<string | null | undefined>>;
   navBtnSelected: string | null | undefined;
-  ref?: any;
+  ref?: undefined;
 };
 
 const NavListItem = ({
