@@ -87,7 +87,7 @@ interface IReviewCardPros {
 }
 
 const ReviewCard = ({
-  article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
+  article: { coverImgUrl, title, date, description, author, likeCount, commentNum, game },
 }: IReviewCardPros) => {
   return (
     <OuterContainer>
@@ -117,7 +117,7 @@ const ReviewCard = ({
                 </span>
                 <span className="comment-count">
                   <ForumIcon className="icon" />
-                  {commentCount}
+                  {commentNum}
                 </span>
               </div>
             </div>
@@ -131,7 +131,7 @@ const ReviewCard = ({
               </span>
               <span className="comment-count">
                 <ForumIcon className="icon" />
-                {commentCount}
+                {commentNum}
               </span>
             </div>
           )}

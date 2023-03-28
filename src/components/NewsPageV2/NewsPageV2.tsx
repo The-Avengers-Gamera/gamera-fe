@@ -10,13 +10,11 @@ const PageContainer = styled.div`
   padding-top: 100px;
 `;
 
-const NewsPageV2 = () => {
-  return (
-    <PageContainer>
-      <TrendingNews />
-      <ArticlesShowCase articleType={ArticleType.NEWS} />
-    </PageContainer>
-  );
-};
+const NewsPageV2 = () => (
+  <PageContainer>
+    <TrendingNews />
+    <ArticlesShowCase articleType={ArticleType.NEWS} />
+  </PageContainer>
+);
 
 export default NewsPageV2;

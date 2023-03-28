@@ -10,14 +10,12 @@ const PageContainer = styled.div`
   padding-top: 100px;
 `;
 
-const ReviewPageV2 = () => {
-  return (
-    <PageContainer>
-      <PageTitle />
-      <PopularReviews />
-      <ArticlesShowCase articleType={ArticleType.REVIEWS} />
-    </PageContainer>
-  );
-};
+const ReviewPageV2 = () => (
+  <PageContainer>
+    <PageTitle />
+    <PopularReviews />
+    <ArticlesShowCase articleType={ArticleType.REVIEWS} />
+  </PageContainer>
+);
 
 export default ReviewPageV2;

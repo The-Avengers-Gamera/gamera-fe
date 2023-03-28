@@ -39,12 +39,7 @@ export interface IArticleCard {
     name: string;
   };
   likeCount: number;
-  commentCount: number;
+  commentNum: number;
   date?: string;
   createdTime: string;
-}
-
-export interface IPopularReview {
-  title: string;
-  commentNum: number;
 }

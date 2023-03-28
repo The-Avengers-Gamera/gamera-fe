@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import ReviewCard from './components/ReviewCard';
 import NewsCard from './components/NewsCard';
 import { IArticleCard } from '@/interfaces/article';
@@ -53,16 +54,17 @@ const ShowCaseBody = ({ articleType, filteredArticle, setCurrentPage }: ShowCase
       {filteredArticle?.map((article: IArticleCard) => {
         const { createdTime } = article;
         const date = nowToCreated(createdTime);
-        return articleType === ArticleType.NEWS ? (
-          <NewsCard
+        return (
+          <Link
+            to={`/article/${article.id}`}
             key={article.id}
-            article={{ ...article, date }}
-          />
-        ) : (
-          <ReviewCard
-            key={article.id}
-            article={{ ...article, date }}
-          />
+          >
+            {articleType === ArticleType.NEWS ? (
+              <NewsCard article={{ ...article, date }} />
+            ) : (
+              <ReviewCard article={{ ...article, date }} />
+            )}
+          </Link>
         );
       })}
 

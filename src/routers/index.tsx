@@ -25,13 +25,13 @@ const routes: RouteObject[] = [
       { path: '/news', element: <News /> },
       { path: '/reviews', element: <Review /> },
       { path: '/reviews/:platform', element: <Review /> },
+      { path: '/article/:id', element: <Article /> },
       { path: '/settings', element: <Settings /> },
       {
         path: '/post',
         element: <Post />,
         children: [{ path: ':type', element: <Post /> }],
       },
-
       {
         path: '/account',
         element: <UserProfile />,
@@ -52,15 +52,12 @@ const routes: RouteObject[] = [
           },
         ],
       },
-      {
-        path: '/article',
-        element: <Article />,
-      },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },
       { path: '/privacy', element: <Privacy /> },
       { path: '/term', element: <Term /> },
       { path: '/our-team', element: <OurTeam /> },
+      { path: '/404', element: <NoMatch /> },
       { path: '*', element: <NoMatch /> },
     ],
   },

@@ -13,15 +13,17 @@ const Container = styled.div`
   }
 `;
 
-const TopReviewCover = () => {
-  return (
-    <Container>
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBIT2c9adct3gQJZDB6mP74AuNn5wCCjJL6Q&usqp=CAU"
-        alt="a review cover"
-      />
-    </Container>
-  );
-};
+interface TopReviewCoverProps {
+  coverImgUrl: string;
+}
+
+const TopReviewCover = ({ coverImgUrl }: TopReviewCoverProps) => (
+  <Container>
+    <img
+      src={coverImgUrl}
+      alt="popular review cover"
+    />
+  </Container>
+);
 
 export default TopReviewCover;

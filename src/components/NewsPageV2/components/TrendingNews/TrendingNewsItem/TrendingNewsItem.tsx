@@ -6,7 +6,6 @@ import { IArticle } from '@/interfaces/article';
 const Card = styled.div`
   width: 300px;
   flex-shrink: 0;
-  cursor: pointer;
 
   .order {
     font-weight: bold;
@@ -51,28 +50,26 @@ const Card = styled.div`
   }
 `;
 
-interface Props {
+interface TrendingNewsItemProps {
   news: IArticle;
   order: string;
 }
 
-const TrendingNewsItem = ({ news, order }: Props) => {
-  return (
-    <Card>
-      <div className="order">{order}</div>
-      <div className="title">{news.title}</div>
-      <div className="comment-like">
-        <span className="comment">
-          <ForumIcon className="icon" />
-          {/* {news.commentCount} */}
-        </span>
-        <span className="like">
-          <FavoriteIcon className="icon" />
-          {/* {news.likeCount} */}
-        </span>
-      </div>
-    </Card>
-  );
-};
+const TrendingNewsItem = ({ news: { title }, order }: TrendingNewsItemProps) => (
+  <Card>
+    <div className="order">{order}</div>
+    <div className="title">{title}</div>
+    <div className="comment-like">
+      <span className="comment">
+        <ForumIcon className="icon" />
+        {/* {news.commentCount} */}
+      </span>
+      <span className="like">
+        <FavoriteIcon className="icon" />
+        {/* {news.likeCount} */}
+      </span>
+    </div>
+  </Card>
+);
 
 export default TrendingNewsItem;

@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
-import { IPopularReview } from '@/interfaces/article';
-import { getPopularReviews } from '@/services/article';
+import { IArticleCard } from '@/interfaces/article';
 
 const Container = styled.div`
   //border: 1px solid #fff;
@@ -16,38 +15,31 @@ const Container = styled.div`
   }
 `;
 
-const Top5Reviews = () => {
-  const [popularReviews, setPopularReviews] = useState<IPopularReview[]>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+interface Top5ReviewsProps {
+  popularReviews: IArticleCard[];
+  isLoading: boolean;
+  isError: boolean;
+}
 
-  useEffect(() => {
-    getPopularReviews()
-      .then((res) => {
-        const reviewsList = res.data;
-        setPopularReviews(reviewsList.data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsError(true);
-      });
-  }, []);
-  return (
-    <Container>
-      {isLoading && <div>loading...</div>}
-      {isError && <div>load failed</div>}
-      <li>
-        {popularReviews?.slice(0, 5).map((item, cardIndex) => (
+const Top5Reviews = ({ popularReviews, isLoading, isError }: Top5ReviewsProps) => (
+  <Container>
+    {isLoading && <div>loading...</div>}
+    {isError && <div>load failed</div>}
+    <li>
+      {popularReviews?.slice(0, 5).map((item, cardIndex) => (
+        <Link
+          to={`/article/${item.id}`}
+          key={item.id}
+        >
           <ReviewCard
             title={item.title}
             commentNum={item.commentNum}
             cardIndex={cardIndex}
           />
-        ))}
-      </li>
-    </Container>
-  );
-};
+        </Link>
+      ))}
+    </li>
+  </Container>
+);
 
 export default Top5Reviews;

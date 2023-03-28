@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { IArticleCard } from '@/interfaces/article';
+import { getPopularReviews } from '@/services/article';
 import Top5Reviews from './components/Top5Reviews';
 import TopReviewCover from './components/TopReviewCover';
 
@@ -38,14 +42,42 @@ const GeneralContainer = styled.div`
 `;
 
 const PopularReviews = () => {
+  const [popularReviews, setPopularReviews] = useState<IArticleCard[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setIsError(false);
+    getPopularReviews()
+      .then(({ data: { data: reviewsList } }) => {
+        setPopularReviews(reviewsList);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+        setIsError(true);
+      });
+  }, []);
+
   return (
     <GeneralContainer>
       <div className="titleContainer">
         <h2>Popular Reviews</h2>
       </div>
       <div className="bodyContainer">
-        <TopReviewCover />
-        <Top5Reviews />
+        {popularReviews.length > 1 && (
+          <>
+            <Link to={`/article/${popularReviews[0].id}`}>
+              <TopReviewCover coverImgUrl={popularReviews[0].coverImgUrl} />
+            </Link>
+            <Top5Reviews
+              isLoading={isLoading}
+              isError={isError}
+              popularReviews={popularReviews}
+            />
+          </>
+        )}
       </div>
     </GeneralContainer>
   );
