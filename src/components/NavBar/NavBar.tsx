@@ -20,7 +20,7 @@ export const navItemStyle = {
   textAlign: 'center',
   fontFamily: 'Russo One',
 };
-const NavBar = ({ setIsMore, expendBtnRef }: any) => {
+const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
   const { auth: isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -190,13 +190,13 @@ const NavBar = ({ setIsMore, expendBtnRef }: any) => {
           className={style.menuItem}
           onClick={handleClose}
         >
-          LIKES
+          LIKED
         </MenuItem>
         <MenuItem
           className={style.menuItem}
           onClick={handleClose}
         >
-          COMMENTS
+          COMMENTED
         </MenuItem>
         {isEditor && (
           <MenuItem

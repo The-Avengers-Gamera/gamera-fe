@@ -23,7 +23,8 @@ const SettingsPage = () => {
         const { id, authorities, email, name, updatedTime } = res.data;
         setUserInfo({ id, authorities, email, name, updatedTime });
       })
-      .catch((err) => {
+      .catch(() => {
+        // TODO: handle error
         setIsFail(true);
       })
       .finally(() => setLoading(false));
@@ -36,11 +37,13 @@ const SettingsPage = () => {
         password: form.pwdInput,
         name: form.nameInput,
       })
-        .then((res) => {
+        .then(() => {
+          // TODO: handle result
           setIsUpdated('succ');
           sleep(5000).then(() => setIsUpdated('notActive'));
         })
-        .catch((err) => {
+        .catch(() => {
+          // TODO: handle error
           setIsUpdated('fail');
           sleep(5000).then(() => setIsUpdated('notActive'));
         });
@@ -55,7 +58,7 @@ const SettingsPage = () => {
       {isUpdated === 'fail' && 'Updated fail!'}
       <h1 className={styles.header}>SETTINGS</h1>
 
-      {loading ? (
+      {loading && !isFail ? (
         'Loading...'
       ) : (
         <div className={styles.settingsBox}>

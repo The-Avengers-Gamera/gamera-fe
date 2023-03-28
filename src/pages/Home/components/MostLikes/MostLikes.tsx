@@ -4,9 +4,10 @@ import ContainerHeader from '../ContainerHeader';
 import LikeCard from './components/LikeCard/LikeCard';
 import { getArticlesOrderByLike } from '@/services/article';
 import LoadAndError from './components/LoadAndError';
+import { IArticleCard } from '@/interfaces/article';
 
 const MostLikes = () => {
-  const [cards, setCards] = useState<any>([]);
+  const [cards, setCards] = useState<Array<IArticleCard>>([]);
   const [isLoad, setIsLoad] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -41,14 +42,14 @@ const MostLikes = () => {
     >
       {isLoad
         ? [<LoadAndError type="load" />]
-        : cards.map((card: any) => {
+        : cards.map((card: IArticleCard) => {
             return (
               <LikeCard
                 key={card.title}
                 coverUrl={card.coverImgUrl}
                 title={card.title}
-                commNum={card.commentsNum}
-                likeNum={card.like}
+                commNum={card.commentCount}
+                likeNum={card.likeCount}
               />
             );
           })}

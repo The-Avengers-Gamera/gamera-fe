@@ -5,11 +5,10 @@ import {
   IUserSignUp,
   IUserLogin,
   IUserAuthority,
-  IUserInfo,
   IUseDetailedInfo,
 } from '@/interfaces/user';
 
-export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<any>> =>
+export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<undefined>> =>
   apiClient.post('/users/signup', user);
 
 export const addAuthorityToUser = async (
@@ -28,7 +27,7 @@ export const updateUserById = async (
 
 export const deleteUser = async (id: number): Promise<void> => apiClient.delete(`/users/${id}`);
 
-export const login = async (user: IUserLogin): Promise<AxiosResponse<any>> =>
+export const login = async (user: IUserLogin): Promise<AxiosResponse<undefined>> =>
   apiClient.post('/users/login', user);
 
 export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =>
