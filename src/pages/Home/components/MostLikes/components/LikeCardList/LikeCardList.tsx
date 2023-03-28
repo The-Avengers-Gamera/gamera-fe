@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import LikeCard from '../LikeCard/LikeCard';
 
 export const LikeCardList = ({ cards }: { cards: any[] }) => {

@@ -11,13 +11,17 @@ interface ToastContextType {
 
 const ToastContext = createContext<ToastContextType>({
   toastIsOpen: false,
-  setToastIsOpen: () => {},
+  setToastIsOpen: () => {
+    //
+  },
   toastContent: {
     message: '',
     type: EToastType.SUCCESS,
     duration: 3000,
   },
-  setToastContent: () => {},
+  setToastContent: () => {
+    //
+  },
 });
 
 export default ToastContext;

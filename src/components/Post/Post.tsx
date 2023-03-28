@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -11,7 +10,7 @@ import TagPicker from './TagPicker';
 import TextEditor from '../TextEditor';
 import ButtonBack from './ButtonBack';
 import { IArticlePost } from '@/interfaces/article';
-import { EArticleType } from '@/constants/article';
+import { ArticleType } from '@/constants/article';
 import { createArticle } from '@/services/article';
 import randomImgUrl from '@/utils/randomImgUrl';
 import AddGameButton from './AddGame';
@@ -99,7 +98,7 @@ const PublishButton = styled(MuiLoadingButton)`
 const Post = () => {
   const navigate = useNavigate();
 
-  const navToArticlePage = (id: number, articleType: EArticleType) => {
+  const navToArticlePage = (id: number, articleType: ArticleType) => {
     const type = articleType.toLocaleLowerCase();
     navigate(`/${type}/${id}`, { replace: true });
   };
@@ -108,7 +107,7 @@ const Post = () => {
     coverImgUrl: randomImgUrl(800, 400),
     title: '',
     text: '',
-    type: EArticleType.REVIEW,
+    type: ArticleType.REVIEWS,
     commentList: [],
     tagList: [],
   };

@@ -73,7 +73,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     setRegularExpression(regularExpressionController(name));
     setFormatPrompt(forMatPromptController(name));
-  }, []);
+  }, [name]);
 
   const showAlarm = (alarmMes: string) => {
     setAlarmMessage(alarmMes);

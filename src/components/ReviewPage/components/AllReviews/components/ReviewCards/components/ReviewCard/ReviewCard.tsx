@@ -2,7 +2,6 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
-import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -88,48 +87,6 @@ const ReviewContent = styled.div`
   }
 `;
 
-const ArticleOverview = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  margin-left: 7.5px;
-  margin-right: 7.5px;
-  display: inline-block;
-  width: 400px;
-  & .Tile_container {
-    & span {
-      margin-left: 5px;
-
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-  & .Comment_container {
-    & span {
-      margin-left: 5px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-`;
-
-const Like = styled.div`
-  display: flex;
-  align-items: center;
-  display: inline-block;
-  justify-content: center;
-  align-items: center;
-
-  & .LikeNum_container {
-    display: flex;
-    align-items: center;
-    & span {
-      margin-left: 5px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-  }
-`;
-
 const CommentIcon = styled(ChatRoundedIcon)`
   color: ${({ theme }) => theme.color.primary};
   width: 20px;
@@ -176,7 +133,6 @@ const ReviewCard = ({
   return (
     <Container>
       <Cover>
-        {/* fake href */}
         <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
           <img
             src={coverUrl}

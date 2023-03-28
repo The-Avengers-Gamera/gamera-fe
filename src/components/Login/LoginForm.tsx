@@ -20,7 +20,7 @@ const LoginModal = () => {
   const [btnDisabled, setBtnDisabled] = useState(false);
   const { email, password } = formState;
 
-  const { loading, login, error } = useAuth();
+  const { loading, login } = useAuth();
   const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

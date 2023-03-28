@@ -10,10 +10,16 @@ interface ModalContextType {
 
 const ModalContext = createContext<ModalContextType>({
   modalIsOpen: false,
-  setModalIsOpen: () => {},
+  setModalIsOpen: () => {
+    //
+  },
   displayLogInPopWindow: false,
-  changeModalToOpen: () => {},
-  changeDisplayLogInPopWindow: () => {},
+  changeModalToOpen: () => {
+    //
+  },
+  changeDisplayLogInPopWindow: () => {
+    //
+  },
 });
 
 export default ModalContext;

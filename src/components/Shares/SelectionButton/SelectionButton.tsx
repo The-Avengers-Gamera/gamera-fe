@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { ReactNode } from 'react';
+import { Platform } from '@/constants/article';
 
 const ButtonContainer = styled.div`
   margin-right: 10px;
@@ -37,30 +36,32 @@ const ButtonContainer = styled.div`
 
 interface SelectionButtonProps {
   platformSelected: Platform;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
-  platformName: Platform;
+  onPlatformChange: (platform: Platform) => void;
+  currentPlatform: Platform;
 }
 
-// this component represents a styled button in tool bar ===================================
 const SelectionButton = ({
   platformSelected,
-  setPlatformSelected,
-  platformName,
+  onPlatformChange,
+  currentPlatform,
 }: SelectionButtonProps) => {
-  // functions --------------------------------------
+  const platformKey = Object.keys(Platform)[Object.values(Platform).indexOf(currentPlatform)];
+
   const handleClick = () => {
-    setPlatformSelected(platformName);
+    if (currentPlatform === platformSelected) {
+      return;
+    }
+    onPlatformChange(currentPlatform);
   };
-  // jsx -------------------------------------------
-  // return <StyledButton>{children}</StyledButton>;
+
   return (
     <ButtonContainer>
       <button
-        className={platformSelected === platformName ? 'btn highlight' : 'btn'}
+        className={currentPlatform === platformSelected ? 'btn highlight' : 'btn'}
         type="button"
         onClick={handleClick}
       >
-        {platformName}
+        {platformKey}
       </button>
     </ButtonContainer>
   );

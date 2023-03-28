@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import theme from '@/styles/theme';
 import GeneralContainer from '../GeneralContainer';
 
@@ -9,19 +9,19 @@ import { titleFont } from '../../utils/useFont';
 import { getArticles } from '@/services/article';
 import { IArticleCard } from '@/interfaces/article';
 import { nowToCreated } from '@/utils/time';
+import { ArticleType, Platform } from '@/constants/article';
 
 const TrendingNews = () => {
   const [newsCards, setNewsCards] = useState<IArticleCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isFail, setIsFail] = useState<boolean>(false);
   const [msg, setMsg] = useState<string>('Loading...');
 
   useEffect(() => {
-    getArticles('news', {
+    getArticles(ArticleType.NEWS, {
       page: 1,
       size: 6,
-      platform: 'all',
-      genre: '',
+      platform: Platform.All,
+      genre: 'all',
     })
       .then((res) => {
         setNewsCards(res.data);
@@ -29,7 +29,6 @@ const TrendingNews = () => {
       })
       .catch((err) => {
         setMsg(err.error);
-        setIsFail(true);
         setMsg('Fail to load');
       });
   }, []);

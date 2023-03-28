@@ -1,27 +1,23 @@
-// import { Card } from '@mui/material';
-// import React from 'react';
 import { useState, useEffect } from 'react';
-
 import ReviewCard from './components/ReviewCard';
-
 import GeneralContainer from '../GeneralContainer';
 import ContainerHeader from '../ContainerHeader';
 import { getArticles } from '@/services/article';
 import { IArticleCard } from '@/interfaces/article';
 import { nowToCreated } from '@/utils/time';
+import { ArticleType, Platform } from '@/constants/article';
 
 const PopularReviews = () => {
   const [reviewCards, setReviewCards] = useState<IArticleCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isFail, setIsFail] = useState<boolean>(false);
   const [msg, setMsg] = useState<string>('Loading...');
 
   useEffect(() => {
-    getArticles('reviews', {
+    getArticles(ArticleType.REVIEWS, {
       page: 1,
       size: 8,
-      platform: 'all',
-      genre: '',
+      platform: Platform.All,
+      genre: 'all',
     })
       .then((res) => {
         setReviewCards(res.data);
@@ -29,7 +25,6 @@ const PopularReviews = () => {
       })
       .catch((err) => {
         setMsg(err.error);
-        setIsFail(true);
         setMsg('Fail to load');
       });
   }, []);

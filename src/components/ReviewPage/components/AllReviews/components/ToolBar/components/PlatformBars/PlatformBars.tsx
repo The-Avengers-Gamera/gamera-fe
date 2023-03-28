@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import styled from 'styled-components';
 import BarButton from '../BarButton';
 
@@ -9,12 +8,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 
-interface Props {
-  currentPlatform: string;
-  setCurrentPlatform: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const PlatformBars = ({ currentPlatform, setCurrentPlatform }: Props) => {
+const PlatformBars = () => {
   return (
     <Container>
       <BarButton>All</BarButton>

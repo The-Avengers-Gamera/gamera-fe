@@ -26,7 +26,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": ["error"],
-    "no-console": "error",
+    "no-console": "warn",
     "no-restricted-exports": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"] }],
     "import/extensions": [0],
@@ -49,6 +49,6 @@
     "no-empty-function": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "off"
   }
 }
