@@ -83,19 +83,13 @@ const OuterContainer = styled.div`
   }
 `;
 
-// NewsCard component ===================================================================
-interface INewsCardPros {
+interface NewsCardPros {
   article: IArticleCard;
 }
 
 const NewsCard = ({
-  article: { coverImgUrl, title, date, description, author, likeCount, commentCount, game },
-}: INewsCardPros) => {
-  // states and hooks ---------------
-
-  // functions ----------------------
-
-  // jsx ----------------------------
+  article: { coverImgUrl, title, date, description, author, likeCount, commentNum, game },
+}: NewsCardPros) => {
   return (
     <OuterContainer>
       <div className="news-card">
@@ -128,7 +122,7 @@ const NewsCard = ({
                 </span>
                 <span className="comment-count">
                   <ForumIcon className="icon" />
-                  {commentCount}
+                  {commentNum}
                 </span>
               </div>
             </div>
@@ -142,7 +136,7 @@ const NewsCard = ({
               </span>
               <span className="comment-count">
                 <ForumIcon className="icon" />
-                {commentCount}
+                {commentNum}
               </span>
             </div>
           )}

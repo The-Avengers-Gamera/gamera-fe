@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useParams, useNavigate } from 'react-router-dom';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
 import { getArticleById } from '../../services/article';
@@ -26,23 +27,31 @@ const initArticleContent: IArticle = {
 };
 
 const Article = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const articleId = Number(id);
+
   const [articleContent, setArticleContent] = useState<IArticle>(initArticleContent);
   const [commentList, setCommentList] = useState<IComment[]>([]);
 
   useEffect(() => {
     async function fetchArticle(): Promise<void> {
-      const articleId = 3;
       try {
-        const response = await getArticleById(articleId);
-        if (response.status === 200) {
-          const article = response.data;
+        const { data: article, status } = await getArticleById(articleId);
+        if (status === 200) {
           setArticleContent({ ...article });
           setCommentList(article.commentList);
         }
       } catch ({ response }) {
-        // console.error(response); // TODO: error information can be pop up
+        // TODO: error information can be pop up
       }
     }
+
+    if (!articleId) {
+      navigate('/404');
+      return;
+    }
+
     fetchArticle();
   }, []);
 
