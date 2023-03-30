@@ -7,6 +7,8 @@ import { getArticleById } from '../../services/article';
 import { IArticle } from '../../interfaces/article';
 import { ArticleType } from '../../constants/article';
 import { IComment } from '../../interfaces/comment';
+import useToast from '../../context/notificationToast/useToast';
+import { EToastType } from '@/constants/notification';
 
 const Container = styled.div`
   margin-left: 100px;
@@ -34,6 +36,9 @@ const Article = () => {
   const [articleContent, setArticleContent] = useState<IArticle>(initArticleContent);
   const [commentList, setCommentList] = useState<IComment[]>([]);
 
+  // useToast hook is used to show a toast notification
+  const { setToastIsOpen, setToastContent } = useToast();
+
   useEffect(() => {
     async function fetchArticle(): Promise<void> {
       try {
@@ -41,9 +46,19 @@ const Article = () => {
         if (status === 200) {
           setArticleContent({ ...article });
           setCommentList(article.commentList);
+          console.log(article);
         }
       } catch ({ response }) {
         // TODO: error information can be pop up
+        setToastContent({
+          type: EToastType.ERROR,
+          message: "It seems like there's something wrong...",
+          duration: 3000,
+        });
+        setToastIsOpen(true);
+
+        // navigate to 404 page
+        navigate('/404');
       }
     }
 

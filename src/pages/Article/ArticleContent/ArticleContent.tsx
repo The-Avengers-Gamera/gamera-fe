@@ -5,6 +5,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ArticleMainContent from './ArticleMainContent/ArticleMainContent';
 import { IArticle } from '../../../interfaces/article';
+import { nowToCreated } from '../../../utils/time';
 
 const Container = styled.div`
   margin-bottom: 0px;
@@ -147,7 +148,8 @@ interface Props {
 }
 
 const ArticleContent = ({ articleContent }: Props) => {
-  const { title, user, updatedTime, createdTime, text, game, tagList } = articleContent;
+  const { title, author, updatedTime, createdTime, text, game, tagList, commentNum, likeNum } =
+    articleContent;
 
   // TODO: initial value should be based on user object
   const [likedThisArticle, setLikedThisArticle] = useState<boolean>(false);
@@ -166,38 +168,50 @@ const ArticleContent = ({ articleContent }: Props) => {
       <div className="article-info">
         <div className="author">
           <img
-            src={user?.profileImgUrl} // TODO: backend needs to add the user image
+            src={
+              author?.profileImgUrl || 'http://localhost:3000/src/components/NavBar/assets/logo.png'
+            } // TODO: backend needs to add the user image
             alt="author-avatar"
           />
           <p>
-            BY <Link to={`/user/${user?.id}`}>{user?.name}</Link>
+            BY <Link to={`/user/${author?.id}`}>{author?.name}</Link>
           </p>
         </div>
-        <div className="date">UPDATED: {updatedTime}</div>
-        <div className="date">POSTED: {createdTime}</div>
+        <div className="date">UPDATED: {nowToCreated(updatedTime)}</div>
+        <div className="date">POSTED: {nowToCreated(createdTime)}</div>
       </div>
       <ArticleMainContent mainContent={text} />
       <hr />
-      <div className="in-this-article">
-        <h3>In This Article</h3>
-        <ul className="game-list">
-          <li key={game?.id}>
-            <img
-              src={game?.imgUrl} // TODO: backend needs to add the game image url
-              alt="game-cover"
-            />
-            <p>{game?.name}</p>
-          </li>
-        </ul>
-      </div>
-      <div className="topics">
-        <h3>Topics</h3>
-        <ul className="tag-list">
-          {tagList.map((tag) => (
-            <li>{tag.name}</li>
-          ))}
-        </ul>
-      </div>
+      {
+        // if game is not null, show the game info
+        game && (
+          <div className="in-this-article">
+            <h3>In This Article</h3>
+            <ul className="game-list">
+              <li key={game?.id}>
+                <img
+                  src={
+                    game?.imgUrl || 'http://localhost:3000/src/components/NavBar/assets/logo.png'
+                  } // TODO: backend needs to add the game image url
+                  alt="game-cover"
+                />
+                <p>{game?.name}</p>
+              </li>
+            </ul>
+          </div>
+        )
+      }
+
+      {tagList && tagList.length > 0 && (
+        <div className="topics">
+          <h3>Topics</h3>
+          <ul className="tag-list">
+            {tagList.map((tag) => (
+              <li>{tag.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="like-count">
         <h3>
           Like this article{' '}
@@ -213,7 +227,7 @@ const ArticleContent = ({ articleContent }: Props) => {
             )}
           </button>
           {/* TODO: ask backend developers to add likes count to the response */}
-          <span>89</span>
+          <span>{likeNum}</span>
         </h3>
       </div>
     </Container>
