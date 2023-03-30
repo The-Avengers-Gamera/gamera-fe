@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { ICurrentGame } from '@/interfaces/game';
+import { ICurrentGame, IGame } from '@/interfaces/game';
 import AddedGame from './components/AddedGame';
 import AddGameWindow from './components/AddGameWindow';
 import EmptyGame from './components/EmptyGame';
@@ -32,7 +32,7 @@ const initialGame = {
 export const AddGame = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentGame, setCurrentGame] = useState<ICurrentGame>(initialGame);
+  const [currentGame, setCurrentGame] = useState<IGame>({} as IGame);
 
   const changeIsAddAsTrue = () => {
     setIsAdd(true);
@@ -61,6 +61,7 @@ export const AddGame = () => {
         }}
         shouldCloseOnEsc
         onRequestClose={closeModal}
+        appElement={document.getElementById('root') || undefined}
       >
         <AddGameWindow
           changeIsAdd={changeIsAddAsTrue}

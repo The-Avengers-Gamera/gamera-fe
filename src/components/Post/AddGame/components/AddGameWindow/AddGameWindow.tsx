@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ICurrentGame } from '@/interfaces/game';
+import { ICurrentGame, IGame } from '@/interfaces/game';
 import AddGameItem from './components/AddGameItem';
+import { getGames } from '@/services/game';
 
 const AddGameWindowContainer = styled.div`
   height: 100%;
@@ -34,17 +35,17 @@ const AddGameItemContainer = styled.div`
   margin-top: 1.4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 type Props = {
   changeIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<ICurrentGame>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<IGame>>;
   closeModal: () => void;
 };
 
 export const AddGameWindow = ({ changeIsAdd, closeModal, setCurrentGame }: Props) => {
+  const [gameList, setGameList] = useState<IGame[]>([] as IGame[]);
   const MockGameArr = [
     {
       name: 'Elden Ring',
@@ -66,14 +67,21 @@ export const AddGameWindow = ({ changeIsAdd, closeModal, setCurrentGame }: Props
     },
   ];
 
+  useEffect(() => {
+    getGames().then(({ data }) => {
+      setGameList(data);
+    });
+  }, []);
+
   return (
     <AddGameWindowContainer>
       <Header>ADD GAME</Header>
       <Input />
       <AddGameItemContainer>
-        {MockGameArr.map((mockGame) => (
+        {gameList.map((game) => (
           <AddGameItem
-            MockGame={mockGame}
+            key={game.id}
+            game={game}
             changeIsAdd={changeIsAdd}
             closeModal={closeModal}
             setCurrentGame={setCurrentGame}

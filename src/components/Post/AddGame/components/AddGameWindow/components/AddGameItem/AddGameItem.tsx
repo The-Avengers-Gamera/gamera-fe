@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICurrentGame } from '@/interfaces/game';
+import { ICurrentGame, IGame } from '@/interfaces/game';
 import AddedGame from '../../../AddedGame';
 
 const AddGameItemContainer = styled.div`
@@ -35,23 +35,23 @@ const AddedGameContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20rem;
+  width: 70%;
   height: 6rem;
 `;
 
 type Props = {
-  MockGame: ICurrentGame;
+  game: IGame;
   changeIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<ICurrentGame>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<IGame>>;
   closeModal: () => void;
 };
 
-export const AddGameItem = ({ MockGame, changeIsAdd, closeModal, setCurrentGame }: Props) => {
+export const AddGameItem = ({ game, changeIsAdd, closeModal, setCurrentGame }: Props) => {
   return (
     <AddGameItemContainer>
       <AddedGameContainer>
         <AddedGame
-          CurrentGame={MockGame}
+          CurrentGame={game}
           useWindowStyle
         />
       </AddedGameContainer>
@@ -61,7 +61,7 @@ export const AddGameItem = ({ MockGame, changeIsAdd, closeModal, setCurrentGame 
           onClick={() => {
             changeIsAdd(true);
             closeModal();
-            setCurrentGame(MockGame);
+            setCurrentGame(game);
           }}
         >
           +
