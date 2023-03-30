@@ -14,7 +14,8 @@ export enum Platform {
 export enum ReviewSort {
   CREATED_TIME = 'createdTime',
   TITLE = 'title',
-  SCORES = 'game.scores',
+  // TODO: temporarily disable this sort option, waiting for backend to implement
+  // SCORES = 'game.scores',
 }
 
 export enum ReviewOrder {

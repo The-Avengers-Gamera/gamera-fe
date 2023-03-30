@@ -16,8 +16,8 @@ const Container = styled.div`
 export type SortType = 'sort' | 'genre';
 export type SortItem = SortBarDate | SortBarGenre;
 interface SortBarsProps {
-  sort: ReviewSort;
-  order: ReviewOrder;
+  sort?: ReviewSort;
+  order?: ReviewOrder;
   genre: SearchGenre;
   onSortChange: (type: SortType, sort: SortBarDate | SortBarGenre) => void;
 }
@@ -43,9 +43,11 @@ const SortBars = ({ sort, order, genre, onSortChange }: SortBarsProps) => {
     if (sort === ReviewSort.CREATED_TIME && order === ReviewOrder.ASC) {
       item = SortBarDate.Oldest;
     }
-    if (sort === ReviewSort.SCORES) {
-      item = SortBarDate.Score;
-    }
+
+    // TODO: temporarily disable this sort option, waiting for backend to implement
+    // if (sort === ReviewSort.SCORES) {
+    //   item = SortBarDate.Score;
+    // }
     if (sort === ReviewSort.TITLE) {
       item = SortBarDate.Title;
     }
