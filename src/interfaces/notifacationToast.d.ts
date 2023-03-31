@@ -1,7 +1,7 @@
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 
 export interface INotificationToastContent {
-  type: EToastType;
+  type: ToastType;
   message: string;
   duration?: number;
 }

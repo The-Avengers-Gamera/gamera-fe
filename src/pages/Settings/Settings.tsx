@@ -10,7 +10,7 @@ type Form = {
 };
 const SettingsPage = () => {
   const [userInfo, setUserInfo] = useState<IUseDetailedInfo | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isFail, setIsFail] = useState<boolean>(false);
   const [isUpdated, setIsUpdated] = useState<'notActive' | 'succ' | 'fail'>('notActive');
   const [form, setForm] = useState<Form>({
@@ -18,6 +18,7 @@ const SettingsPage = () => {
     pwdInput: '',
   });
   useEffect(() => {
+    setLoading(true);
     getUserInfo()
       .then((res) => {
         const { id, authorities, email, name, updatedTime } = res.data;

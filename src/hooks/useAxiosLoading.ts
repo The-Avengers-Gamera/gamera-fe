@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '@/context/auth/useAuth';
 import apiClients from '@/utils/apiClient';
 import useToast from '@/context/notificationToast';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 
 export const apiClient = apiClients;
 
@@ -26,7 +26,7 @@ const useAxiosLoading = () => {
       navigate('/', { replace: true });
       setToastIsOpen(true);
       setToastContent({
-        type: EToastType.WARNING,
+        type: ToastType.WARNING,
         message: 'Your session has expired. Please login again.',
         duration: 3000,
       });
@@ -36,7 +36,7 @@ const useAxiosLoading = () => {
       navigate('/', { replace: true });
       setToastIsOpen(true);
       setToastContent({
-        type: EToastType.WARNING,
+        type: ToastType.WARNING,
         message: 'You are not authorized to access this page.',
         duration: 3000,
       });
