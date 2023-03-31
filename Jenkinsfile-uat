@@ -1,0 +1,91 @@
+pipeline {
+    agent {
+        label "gcp_node"
+    }
+
+    stages {
+        stage("Git checkout") {
+            steps {
+                //Get source code from project"s repository
+                echo "Getting the source code..."
+
+                git branch: "develop",
+                url: "https://github.com/The-Avengers-Gamera/gamera-fe.git"
+            }
+        }
+
+        stage("Get credentials") {
+            steps {
+                //Get credentials from AWS secrets manager and store as environment variables
+                echo "Getting frontend's credentials"
+
+                script {
+                    def secretJson = sh(
+                        script: """
+                            aws secretsmanager get-secret-value \
+                                --secret-id dev-gamera-frontend-credentials \
+                                --query SecretString \
+                                --output text
+                            """,
+                        returnStdout: true
+                    ).trim()
+
+                    def secretMap = readJSON text: secretJson
+
+                    env.bucket_name = secretMap["bucket-name"]
+                    env.cloudfront_id = secretMap["cloudfront-id"]
+                }
+            }
+        }
+
+        stage("Build") {
+            steps {
+                echo "Building"
+
+                //Add project"s dependencies
+                sh "yarn install"
+
+                //Generate build folder for deployment
+                sh "yarn run build"
+            }
+        }
+
+        stage("Test") {
+            steps {
+                echo "Testing"
+
+                //Test project
+                sh "yarn test"
+            }
+        }
+
+        stage("Deploy") {
+            steps {
+                echo "Deploying"
+
+                //Deploy build folder to S3 bucket
+                sh "aws s3 sync build/ s3://'${env.bucket_name}' --delete"
+
+                //Invalidate the caches
+                sh "aws cloudfront create-invalidation --distribution-id ${env.cloudfront_id} --paths /*"
+            }
+        }
+    }
+
+    post {
+        always {
+            //Clean the workspace after every pipeline build process
+            echo "Cleaning workspace"
+            cleanWs()
+        }
+
+        failure {
+            echo "Build fail, sending error message for debuging"
+
+            // Send error messages to DevOps engineer for debuging
+            mail to: "yyaug99@gmail.com",
+            subject: "Pipeline build fails in: ${currentBuild.fullDisplayName}",
+            body: "Build failed in ${env.BUILD_URL}"
+        }
+    }
+}
