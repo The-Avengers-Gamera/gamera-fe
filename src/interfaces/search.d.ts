@@ -1,9 +1,13 @@
-type SearchPlatform = Lowercase<Platform>;
+import { Platform, ReviewSort, ReviewOrder } from '@/constants/article';
+import { SortBarGenre } from '@/constants/dropdown';
 
-export interface ISearchArticle {
+type SearchGenre = Lowercase<SortBarGenre>;
+
+export interface IArticleQuery {
   page: number;
   size: number;
-  sort?: string;
-  platform?: SearchPlatform;
-  genre?: string;
+  platform: Platform;
+  genre: SearchGenre;
+  sort?: ReviewSort;
+  order?: ReviewOrder;
 }

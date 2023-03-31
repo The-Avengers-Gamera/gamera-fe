@@ -20,7 +20,7 @@ export const navItemStyle = {
   textAlign: 'center',
   fontFamily: 'Russo One',
 };
-const NavBar = () => {
+const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
   const { auth: isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -38,13 +38,16 @@ const NavBar = () => {
     navigate('/');
   };
   const isEditor = true;
+  const handleMoreClick = () => {
+    setIsMore((prev: boolean) => !prev);
+  };
 
   const generalLinks = [
     { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
     { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
     { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
-    { route: '/#', title: 'MORE', icon: <MoreHorizRoundedIcon /> },
   ];
+
   return (
     <>
       <Drawer
@@ -55,7 +58,6 @@ const NavBar = () => {
             minHeight: '340px',
             width: '101px',
             boxSizing: 'border-box',
-            borderRight: '2px solid #303442',
           },
         }}
         variant="permanent"
@@ -72,6 +74,7 @@ const NavBar = () => {
                 disablePadding
               >
                 <Link
+                  onClick={() => setNavBtnSelected('')}
                   className={style.navItemContainer}
                   to="/"
                 >
@@ -91,6 +94,26 @@ const NavBar = () => {
                   key={title}
                 />
               ))}
+              <NavListItem
+                navBtnSelected={navBtnSelected}
+                setNavBtnSelected={() => {
+                  handleMoreClick();
+                  setNavBtnSelected('MORE');
+                }}
+                route=""
+                title="MORE"
+                icon={<MoreHorizRoundedIcon />}
+                key="MORE"
+              >
+                <Button
+                  className={style.navBtn}
+                  sx={{ color: 'inherit' }}
+                  ref={expendBtnRef}
+                >
+                  <MoreHorizRoundedIcon />
+                  <Typography sx={navItemStyle}>MORE</Typography>
+                </Button>
+              </NavListItem>
             </Box>
             {isLoggedIn && (
               <Box className={style.navBarBottomGroup}>
@@ -167,13 +190,13 @@ const NavBar = () => {
           className={style.menuItem}
           onClick={handleClose}
         >
-          LIKES
+          LIKED
         </MenuItem>
         <MenuItem
           className={style.menuItem}
           onClick={handleClose}
         >
-          COMMENTS
+          COMMENTED
         </MenuItem>
         {isEditor && (
           <MenuItem

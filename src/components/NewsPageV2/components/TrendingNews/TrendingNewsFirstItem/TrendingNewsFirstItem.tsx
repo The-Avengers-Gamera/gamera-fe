@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { IArticle } from '@/interfaces/article';
 
@@ -66,16 +65,18 @@ interface Props {
 }
 
 const TrendingNewsFirstItem = ({ news }: Props) => {
+  const { title, coverImgUrl } = news;
+
   return (
     <Container>
       <span className="order">01</span>
       <img
-        src={news?.coverImgUrl}
+        src={coverImgUrl}
         alt="news cover"
         srcSet=""
       />
       <div className="news-title-background">
-        <p className="news-title-text">{news?.title}</p>
+        <p className="news-title-text">{title}</p>
       </div>
     </Container>
   );

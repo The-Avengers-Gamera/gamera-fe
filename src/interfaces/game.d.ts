@@ -13,9 +13,17 @@ export interface IGame {
   description: string;
   createdTime: string;
   updatedTime: string;
+  imgUrl: string;
   genreList: Array<IGenre>;
 }
 
 export interface IGamePost extends Omit<IGame, 'createdTime' | 'updatedTime'> {}
 
 export interface IGamePut extends Omit<IGame, 'createdTime'> {}
+
+export interface ICurrentGame {
+  name: string;
+  genre: string;
+  platform: string[];
+  img: string;
+}

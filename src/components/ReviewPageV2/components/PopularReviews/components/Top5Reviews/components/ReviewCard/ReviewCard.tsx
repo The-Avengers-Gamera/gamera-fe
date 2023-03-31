@@ -34,28 +34,31 @@ const CardContainer = styled.div`
 
   & .cardBody {
     & .reviewTitle {
-      font-family: Roboto;
+      font-family: Montserrat;
 
       margin-bottom: 5px;
 
-      font-family: Roboto;
+      font-family: Montserrat;
       font-size: 16px;
       font-weight: bold;
       text-transform: capitalize;
       letter-spacing: 0em;
     }
     & .comment {
-      font-family: Roboto;
+      font-family: Montserrat;
 
       width: 70px;
       height: 20px;
       display: flex;
       align-items: center;
 
-      font-family: Roboto;
+      font-family: Montserrat;
       font-size: 14px;
       font-weight: bold;
       letter-spacing: 0em;
+    }
+    &:hover {
+      text-decoration: underline;
     }
   }
 `;

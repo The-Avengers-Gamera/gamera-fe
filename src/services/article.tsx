@@ -1,8 +1,9 @@
 import { AxiosResponse } from 'axios';
 import apiClient from '@/utils/apiClient';
 import { IArticle, IArticleCard, IArticlePost, IArticlePut } from '@/interfaces/article';
-import { ISearchArticle } from '@/interfaces/search';
+import { IArticleQuery } from '@/interfaces/search';
 import { IPage } from '@/interfaces/page';
+import { ArticleType, Platform, ReviewOrder, ReviewSort } from '@/constants/article';
 
 export const createArticle = async (article: IArticlePost): Promise<AxiosResponse<IArticle>> =>
   apiClient.post('/articles', article);
@@ -13,20 +14,33 @@ export const updateArticleById = async (
 ): Promise<AxiosResponse<IArticle>> => apiClient.put(`/articles/${id}`, articlePut);
 
 export const getArticleById = async (id: number): Promise<AxiosResponse<IArticle>> =>
-  apiClient.post(`/articles/${id}`);
+  apiClient.get(`/articles/${id}`);
 
 export const deleteArticleById = async (id: number): Promise<AxiosResponse<string>> =>
   apiClient.delete(`/articles/${id}`);
 
 export const getArticles = async (
-  queryType: 'news' | 'reviews',
-  { page = 1, size = 20, platform = 'all', genre = '' }: ISearchArticle
+  queryType: ArticleType,
+  {
+    page = 1,
+    size = 20,
+    platform = Platform.All,
+    genre = 'all',
+    sort = ReviewSort.CREATED_TIME,
+    order = ReviewOrder.DESC,
+  }: IArticleQuery
 ): Promise<IPage<IArticleCard[]>> => {
   const response = await apiClient.get(
-    `/articles/${queryType}?page=${page}&limit=${size}&platform=${platform}&genre=${genre}`
+    `/articles/${queryType}?platform=${platform}&genre=${genre}&page=${page}&size=${size}&sort=${sort}&order=${order}`
   );
   return response.data;
 };
 
 export const getNews = async (): Promise<AxiosResponse<IPage<IArticle[]>>> =>
   apiClient.get(`/articles/news`);
+
+export const getArticlesOrderByLike = async (): Promise<AxiosResponse<IPage<IArticleCard[]>>> =>
+  apiClient.get(`/articles/`);
+
+export const getPopularReviews = async (): Promise<AxiosResponse<IPage<IArticleCard[]>>> =>
+  apiClient.get('/articles/reviews/comment-num');

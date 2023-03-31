@@ -1,4 +1,3 @@
-import React from 'react';
 import { RouteObject } from 'react-router-dom';
 import Root from '@/layouts/Root';
 import Home from '@/pages/Home';
@@ -14,6 +13,7 @@ import Privacy from '@/pages/Privacy';
 import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
+import UserProfile from '@/pages/UserProfile';
 
 const routes: RouteObject[] = [
   {
@@ -25,16 +25,16 @@ const routes: RouteObject[] = [
       { path: '/news', element: <News /> },
       { path: '/reviews', element: <Review /> },
       { path: '/reviews/:platform', element: <Review /> },
+      { path: '/article/:id', element: <Article /> },
       { path: '/settings', element: <Settings /> },
       {
         path: '/post',
         element: <Post />,
         children: [{ path: ':type', element: <Post /> }],
       },
-
       {
         path: '/account',
-        element: <>user page</>,
+        element: <UserProfile />,
         children: [
           {
             path: 'my-articles',
@@ -52,15 +52,12 @@ const routes: RouteObject[] = [
           },
         ],
       },
-      {
-        path: '/article',
-        element: <Article />,
-      },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },
       { path: '/privacy', element: <Privacy /> },
       { path: '/term', element: <Term /> },
       { path: '/our-team', element: <OurTeam /> },
+      { path: '/404', element: <NoMatch /> },
       { path: '*', element: <NoMatch /> },
     ],
   },

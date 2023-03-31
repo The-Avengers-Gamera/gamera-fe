@@ -26,8 +26,12 @@ export interface IUserInfo {
   authorities: Set<IAuthority>;
   email: string;
 }
-
+export interface IUseDetailedInfo extends IUserInfo {
+  name: string;
+  updatedTime: string;
+}
 export interface IUserSlim {
+  profileImgUrl?: string;
   id: number;
   name: string;
 }

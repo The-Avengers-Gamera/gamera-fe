@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-
 import TrendingNewsFirstItem from './TrendingNewsFirstItem/TrendingNewsFirstItem';
 import TrendingNewsItem from './TrendingNewsItem/TrendingNewsItem';
 import { getNews } from '@/services/article';
@@ -73,8 +73,7 @@ const TrendingNews = () => {
     if (!hasMountedRef.current) {
       hasMountedRef.current = true;
       getNews()
-        .then((res) => {
-          const newsList = res.data;
+        .then(({ data: newsList }) => {
           setTrendingNews(newsList.data);
           setIsLoading(false);
         })
@@ -100,14 +99,20 @@ const TrendingNews = () => {
           {isError && <div>load failed</div>}
           {trendingNews && (
             <>
-              <TrendingNewsFirstItem news={trendingNews[0]} />
+              <Link to={`/article/${trendingNews[0].id}`}>
+                <TrendingNewsFirstItem news={trendingNews[0]} />
+              </Link>
               <ul className="trending-news-item-container">
                 {trendingNews.slice(1).map((item, index) => (
-                  <TrendingNewsItem
+                  <Link
+                    to={`/article/${item.id}`}
                     key={item.id}
-                    news={item}
-                    order={index + 2 === 10 ? `10` : `0${index + 2}`}
-                  />
+                  >
+                    <TrendingNewsItem
+                      news={item}
+                      order={index + 2 === 10 ? `10` : `0${index + 2}`}
+                    />
+                  </Link>
                 ))}
               </ul>
             </>

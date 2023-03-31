@@ -1,6 +1,8 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useRef } from 'react';
+import LinearProgress from '@mui/material/LinearProgress';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
 import Footer from '@/components/Footer/Footer';
@@ -8,11 +10,22 @@ import SignUpModal from '@/components/SignUpModal';
 import LoginForm from '@/components/Login/LoginForm';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
+import DropdownItem from '@/components/NavBar/components/DropdownItem';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
+import useAxiosLoading from '@/hooks/useAxiosLoading';
+import NotificationToast from '@/components/NotificationToast/NotificationToast';
 
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
-  z-index: 1000;
+`;
+
+const LoadingWrapper = styled.div`
+  width: 100%;
+  z-index: 1210;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const NavWrapper = styled.div`
@@ -47,9 +60,19 @@ const Main = styled.main`
 const RootLayout = () => {
   const { auth } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
+  const expendBtnRef = useRef<HTMLButtonElement>(null);
+  const [isMore, setIsMore] = useToggleWhenClickOutside(expendBtnRef, false);
+  const [isLoading] = useAxiosLoading();
 
   return (
     <PageWrapper>
+      {isLoading && (
+        <LoadingWrapper>
+          <LinearProgress />
+        </LoadingWrapper>
+      )}
+      <NotificationToast />
+      {isMore && <DropdownItem />}
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
@@ -62,8 +85,12 @@ const RootLayout = () => {
       >
         {displayLogInPopWindow ? <LoginForm /> : <SignUpModal />}
       </Modal>
+
       <NavWrapper>
-        <NavBar />
+        <NavBar
+          setIsMore={setIsMore}
+          expendBtnRef={expendBtnRef}
+        />
       </NavWrapper>
       <Main>
         <>

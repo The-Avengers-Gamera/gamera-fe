@@ -1,8 +1,8 @@
 import { useState, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-
-import { IDropdownFilterItem } from '@/interfaces/dropdown';
+import { SortItem, SortType } from '@/components/Shares/SortBars/SortBars';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 
 const DropdownWrapper = styled.div`
   position: relative;
@@ -66,20 +66,20 @@ const MenuItem = styled.li`
 `;
 
 interface FilterProps {
-  type: string;
-  items: IDropdownFilterItem[];
-  selected: IDropdownFilterItem;
-  setSelected: React.Dispatch<React.SetStateAction<any>>;
+  type: SortType;
+  items: SortItem[];
+  selected: SortItem;
+  onSelectChange: (type: SortType, item: SortItem) => void;
 }
-const Filter = ({ type, items, selected, setSelected }: FilterProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { name } = selected;
+
+const Filter = ({ type, items, selected, onSelectChange }: FilterProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [btnWidth, setBtnWidth] = useState<number | undefined>(100);
+  const [isMenuOpen, setIsMenuOpen] = useToggleWhenClickOutside(ref, false);
 
   useLayoutEffect(() => {
     setBtnWidth(ref.current?.offsetWidth);
-  }, [ref.current]);
+  }, []);
 
   const menuClose = () => {
     setIsMenuOpen(false);
@@ -89,8 +89,8 @@ const Filter = ({ type, items, selected, setSelected }: FilterProps) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleClickItem = (index: number) => () => {
-    setSelected((pre: { string: IDropdownFilterItem }) => ({ ...pre, [type]: items[index] }));
+  const handleClickItem = (item: SortItem) => () => {
+    onSelectChange(type, item);
     menuClose();
   };
 
@@ -100,17 +100,17 @@ const Filter = ({ type, items, selected, setSelected }: FilterProps) => {
         onClick={handleClick}
         ref={ref}
       >
-        {name}
+        {selected}
         <KeyboardArrowDownIcon />
       </Button>
       {isMenuOpen && (
         <Menu width={btnWidth}>
-          {items.map((e, index) => (
+          {items.map((e) => (
             <MenuItem
-              key={e.value}
-              onClick={handleClickItem(index)}
+              key={e}
+              onClick={handleClickItem(e)}
             >
-              {e.name}
+              {e}
             </MenuItem>
           ))}
         </Menu>

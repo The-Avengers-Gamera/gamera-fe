@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded'; // time icon
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded'; // author icon
-import { otherFont, titleFont } from '@/pages/Home/utils/useFont';
+import { titleOfCards } from '@/pages/Home/utils/useFont';
 
-// css ----------------------------------------
 const Container = styled.div`
   width: 100%;
   min-width: 150px;
@@ -11,7 +11,10 @@ const Container = styled.div`
 
 const Cover = styled.div`
   border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
   & img {
+    overflow: hidden;
     width: 100%;
     height: 260px;
     object-fit: cover;
@@ -19,8 +22,8 @@ const Cover = styled.div`
   }
 `;
 const Title = styled.div`
-  ${titleFont}
-  font-size: 18px;
+  ${titleOfCards}
+  width: 100%;
   padding-top: 9px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -35,7 +38,8 @@ const Footer = styled.div`
   justify-content: space-between;
   padding-top: 9px;
   min-width: fix-content;
-
+  text-overflow: ellipsis;
+  white-space: nowrap;
   & .authorName_container {
     display: flex;
     align-items: center;
@@ -45,7 +49,7 @@ const Footer = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -59,7 +63,7 @@ const Footer = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 `;
@@ -71,46 +75,42 @@ const FooterPublishTimeIcon = styled(AccessTimeFilledRoundedIcon)`
   color: ${({ theme }) => theme.color.primary};
 `;
 
-// types ---------------------------------------
 type ReviewCardProps = {
-  coverUrl: string;
-  title: string;
-  authorName: string;
-  publishTime: string;
+  meta: {
+    id: number;
+    coverUrl: string;
+    title: string;
+    author: string;
+    publishTime: string | undefined;
+  };
 };
 
-// components ----------------------------------
-const ReviewCard = ({ coverUrl, title, authorName, publishTime }: ReviewCardProps) => {
+const ReviewCard = ({ meta }: ReviewCardProps) => {
+  const { id, coverUrl, title, author, publishTime } = meta;
   return (
     <Container>
-      {/* TODO: router to be added when click on cover img or title */}
-      <Cover>
-        {/* fake href */}
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
+      <Link to={`/article/${id}`}>
+        {/* TODO: router to be added when click on cover img or title */}
+        <Cover>
           <img
             src={coverUrl}
             alt=""
           />
-        </a>
-      </Cover>
+        </Cover>
 
-      <Title>
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
-          {title}
-        </a>
-      </Title>
+        <Title>{title}</Title>
 
-      <Footer>
-        <div className="authorName_container">
-          <FooterAuthorIcon />
-          <span>{authorName}</span>
-        </div>
-
-        <div className="publishTime_container">
-          <FooterPublishTimeIcon />
-          <span>{publishTime}</span>
-        </div>
-      </Footer>
+        <Footer>
+          <div className="authorName_container">
+            <FooterAuthorIcon />
+            <span>{author}</span>
+          </div>
+          <div className="publishTime_container">
+            <FooterPublishTimeIcon />
+            <span>{publishTime}</span>
+          </div>
+        </Footer>
+      </Link>
     </Container>
   );
 };

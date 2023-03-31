@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import PlatformBars from './components/PlatformBars';
 import SortBars from '../../../Shares/SortBars';
-import { EArticleType } from '@/constants/article';
+import { ArticleType, Platform } from '@/constants/article';
+import { IArticleQuery } from '@/interfaces/search';
+import { SortBarDate, SortBarGenre } from '@/constants/dropdown';
+import { SortType } from '@/components/Shares/SortBars/SortBars';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -10,27 +13,39 @@ const Container = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 `;
 
 type SelectionBarsProps = {
-  articleType: EArticleType;
-  platformSelected: Platform;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
+  articleType: ArticleType;
+  barsSelected: IArticleQuery;
+  onPlatformSelected: (platform: Platform) => void;
+  onSortChange: (type: SortType, sort: SortBarDate | SortBarGenre) => void;
 };
 
 const SelectionBars = ({
   articleType,
-  platformSelected,
-  setPlatformSelected,
+  barsSelected,
+  onPlatformSelected,
+  onSortChange,
 }: SelectionBarsProps) => {
+  const platformSelected = barsSelected.platform;
+
   return (
     <Container>
       <PlatformBars
         platformSelected={platformSelected}
-        setPlatformSelected={setPlatformSelected}
+        onPlatformSelected={onPlatformSelected}
       />
-      {/* SortBars are only visible on Review page */}
-      {articleType === EArticleType.REVIEW ? <SortBars /> : null}
+      {articleType === ArticleType.REVIEWS && (
+        <SortBars
+          sort={barsSelected.sort}
+          order={barsSelected.order}
+          genre={barsSelected.genre}
+          onSortChange={onSortChange}
+        />
+      )}
     </Container>
   );
 };

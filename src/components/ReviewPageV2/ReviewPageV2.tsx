@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ArticlesShowCase from '../ArticlesShowCase';
 import PageTitle from './components/PageTitle';
 import PopularReviews from './components/PopularReviews';
-import { EArticleType } from '@/constants/article';
+import { ArticleType } from '@/constants/article';
 
 const PageContainer = styled.div`
   background-color: ${({ theme }) => theme.color.bg_primary};
@@ -10,16 +10,12 @@ const PageContainer = styled.div`
   padding-top: 100px;
 `;
 
-const articleType = EArticleType.REVIEW;
-
-const ReviewPageV2 = () => {
-  return (
-    <PageContainer>
-      <PageTitle />
-      <PopularReviews />
-      <ArticlesShowCase articleType={articleType} />
-    </PageContainer>
-  );
-};
+const ReviewPageV2 = () => (
+  <PageContainer>
+    <PageTitle />
+    <PopularReviews />
+    <ArticlesShowCase articleType={ArticleType.REVIEWS} />
+  </PageContainer>
+);
 
 export default ReviewPageV2;

@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';

@@ -1,22 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:wght@700&family=Montserrat&family=Poppins:wght@600&family=Russo+One&display=swap');
 
 .footer {
   text-align: center;
-  margin: 3%;
+  background-color: #13141f;
+  border-top: 1px solid rgba(61, 61, 61, 0.5);
 }
 
 .container {
   display: flex;
   text-align: left;
+  margin: 2% 2% 0;
 }
 
 .column_logo {
   font-family: 'Montserrat', sans-serif;
   padding-left: 6%;
-  padding-bottom: 130px;
+  padding-bottom: 70px;
   font-size: 18px;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  padding-top: 35px;
+}
+.copy {
+  margin-top: 35px;
 }
 
 .logo {
@@ -31,8 +37,8 @@
 }
 
 h3 {
-  font-family: 'Roboto Condensed';
-  font-size: 16px;
+  font-family: 'Alumni Sans', sans-serif;
+  font-size: 24px;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -51,18 +57,5 @@ ul {
 }
 
 li:hover {
-  color: #96f048;
-}
-
-hr {
-  border-top: 0.5px;
-  opacity: 0.2;
-}
-
-.copy {
-  font-family: 'Montserrat', sans-serif;
-  color: rgba(255, 255, 255, 0.85);
-  text-align: left;
-  font: 18px;
-  font-weight: 500;
+  color: #6ddb03;
 }

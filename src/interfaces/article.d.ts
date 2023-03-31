@@ -1,17 +1,20 @@
 import { EArticleType } from '@/constants/article';
 import { IGame } from './game';
 import { IUser } from './user';
+import { ITagSlim } from './tag';
 
 export interface IArticle {
   id: number;
   game?: IGame;
   user?: IUser;
   coverImgUrl: string;
+  tagList: ITagSlim[];
   title: string;
   text: string;
   type: EArticleType;
   createdTime: string;
   updatedTime: string;
+  commentList: IComment[];
 }
 
 export interface IArticlePut {
@@ -36,7 +39,7 @@ export interface IArticleCard {
     name: string;
   };
   likeCount: number;
-  commentCount: number;
+  commentNum: number;
   date?: string;
   createdTime: string;
 }

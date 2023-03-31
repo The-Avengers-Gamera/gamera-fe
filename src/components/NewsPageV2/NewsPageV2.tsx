@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import TrendingNews from './components/TrendingNews/TrendingNews';
 import ArticlesShowCase from '../ArticlesShowCase';
-import { EArticleType } from '@/constants/article';
-
-const articleType = EArticleType.NEWS;
+import { ArticleType } from '@/constants/article';
 
 const PageContainer = styled.div`
   /* TODO: use theme */
@@ -13,13 +10,11 @@ const PageContainer = styled.div`
   padding-top: 100px;
 `;
 
-const NewsPageV2 = () => {
-  return (
-    <PageContainer>
-      <TrendingNews />
-      <ArticlesShowCase articleType={articleType} />
-    </PageContainer>
-  );
-};
+const NewsPageV2 = () => (
+  <PageContainer>
+    <TrendingNews />
+    <ArticlesShowCase articleType={ArticleType.NEWS} />
+  </PageContainer>
+);
 
 export default NewsPageV2;

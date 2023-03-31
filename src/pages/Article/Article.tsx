@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import mockArticle from './mockArticle';
+import { useParams, useNavigate } from 'react-router-dom';
 import ArticleContent from './ArticleContent/ArticleContent';
 import Comments from './Comments';
-import { ICommentItem } from './comment';
+import { getArticleById } from '../../services/article';
+import { IArticle } from '../../interfaces/article';
+import { ArticleType } from '../../constants/article';
+import { IComment } from '../../interfaces/comment';
 
 const Container = styled.div`
   margin-left: 100px;
@@ -11,56 +14,55 @@ const Container = styled.div`
   margin-right: 200px;
 `;
 
-interface ArticleContentType {
-  title: string;
-  subtitle: string;
-  author: {
-    id: number;
-    name: string;
-    avatar: string;
-  };
-  likeCount: number;
-  updateTime: string;
-  postTime: string;
-  mainContent: string;
-  game: { id: number; name: string; cover: string };
-  tagList: { id: number; name: string }[] | [];
-}
-
-interface GetArticleApiType extends ArticleContentType {
-  commentList: ICommentItem[];
-}
-
-const initArticleContent: ArticleContentType = {
+const initArticleContent: IArticle = {
+  id: 0,
+  type: ArticleType.NEWS,
   title: '',
-  subtitle: '',
-  author: {
-    id: 0,
-    name: '',
-    avatar: '',
-  },
-  likeCount: 0,
-  updateTime: '',
-  postTime: '',
-  mainContent: '',
-  game: { id: 0, name: '', cover: '' },
+  updatedTime: '',
+  createdTime: '',
+  text: '',
   tagList: [],
+  coverImgUrl: '',
+  commentList: [],
 };
 
 const Article = () => {
-  const [articleContent, setArticleContent] = useState<ArticleContentType>(initArticleContent);
-  const [commentList, setCommentList] = useState<ICommentItem[]>([]);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const articleId = Number(id);
+
+  const [articleContent, setArticleContent] = useState<IArticle>(initArticleContent);
+  const [commentList, setCommentList] = useState<IComment[]>([]);
 
   useEffect(() => {
-    const { commentList: commentListTemp, ...articleContentTemp }: GetArticleApiType = mockArticle;
-    setArticleContent({ ...articleContentTemp });
-    setCommentList(commentListTemp);
+    async function fetchArticle(): Promise<void> {
+      try {
+        const { data: article, status } = await getArticleById(articleId);
+        if (status === 200) {
+          setArticleContent({ ...article });
+          setCommentList(article.commentList);
+        }
+      } catch ({ response }) {
+        // TODO: error information can be pop up
+      }
+    }
+
+    if (!articleId) {
+      navigate('/404');
+      return;
+    }
+
+    fetchArticle();
   }, []);
 
   return (
     <Container>
       <ArticleContent articleContent={articleContent} />
-      <Comments commentList={commentList} />
+      <Comments
+        commentList={commentList}
+        setCommentList={setCommentList}
+        articleId={articleContent.id}
+      />
     </Container>
   );
 };

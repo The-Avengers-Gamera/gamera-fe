@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import ShowCaseBody from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
-import { ISearchArticle, SearchPlatform } from '@/interfaces/search';
-import { EArticleType } from '@/constants/article';
-import { getArticles } from '@/services/article';
+import LoadMore from '@/components/LoadMore';
+import { IArticleQuery, SearchGenre } from '@/interfaces/search';
 import { IArticleCard } from '@/interfaces/article';
+import { ArticleType, Platform, ReviewOrder, ReviewSort } from '@/constants/article';
+import { getArticles } from '@/services/article';
+import { SortBarDate, SortBarGenre } from '@/constants/dropdown';
+import { SortItem, SortType } from '../Shares/SortBars/SortBars';
 
 const Container = styled.div`
   // border: 1px solid #fff;
@@ -20,41 +23,101 @@ const Container = styled.div`
     text-transform: uppercase;
     letter-spacing: 0em;
   }
+  & .loadMore-container {
+    display: flex;
+    justify-content: center;
+
+    width: 960px;
+
+    padding-bottom: 25px;
+
+    & .loadMore-btn {
+      margin-top: 30px;
+
+      width: 130px;
+      height: 45px;
+      //padding: 8px 16px;
+      border-radius: 8px;
+
+      font-family: Poppins;
+      font-size: 18px;
+      font-weight: 600;
+
+      border: none;
+
+      background-color: ${({ theme }) => theme.color.primary};
+      color: #3d3d3d; // TODO: manage the color using theme instead
+
+      cursor: pointer;
+    }
+  }
 `;
 
 type ArticleShowCaseProps = {
-  articleType: EArticleType;
+  articleType: ArticleType;
 };
 
-const initFilters: ISearchArticle = { page: 1, size: 20, platform: 'all' };
+const initFilters: IArticleQuery = {
+  page: 1,
+  size: 20,
+  platform: Platform.All,
+  genre: SortBarGenre.All.toLowerCase() as SearchGenre,
+  sort: ReviewSort.CREATED_TIME,
+  order: ReviewOrder.DESC,
+};
 
-const ArticlesShowCase = ({
-  articleType, // "News" or "Reviews"
-}: ArticleShowCaseProps) => {
-  const queryType = articleType === EArticleType.NEWS ? 'news' : 'reviews';
-
-  // TODO click filter button to setFilters
+const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
   const [filters, setFilters] = useState(initFilters);
-  const [platformSelected, setPlatformSelected] = useState<Platform>('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredArticle, setFilteredArticle] = useState<IArticleCard[]>([]);
-  // const [pageArticle, setPageArticle] = useState<IArticleCard[]>([]);
+  const [filteredArticleList, setFilteredArticleList] = useState<IArticleCard[]>([]);
 
-  // TODO implement infiniteQuery next step
-  const { isLoading, error, data } = useQuery({
-    queryKey: [queryType, filters],
-    queryFn: async () => getArticles(queryType, filters),
-    onSuccess: (pageArticleData) =>
-      setFilteredArticle((preState) => [...preState, ...pageArticleData.data]),
+  const { isLoading, data } = useQuery({
+    queryKey: [articleType, filters],
+    queryFn: async () => getArticles(articleType, filters),
   });
+
+  const filteredArticle = data?.data;
 
   useEffect(() => {
     setFilters((pre) => ({
       ...pre,
       page: currentPage,
-      platform: platformSelected.toLowerCase() as SearchPlatform,
     }));
-  }, [platformSelected, currentPage]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    setFilteredArticleList((preState) => [...preState, ...(filteredArticle ?? [])]);
+  }, [filteredArticle]);
+
+  const getSortFromSelected = {
+    [SortBarDate.Latest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.DESC },
+    [SortBarDate.Oldest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.ASC },
+    [SortBarDate.Score]: { sort: ReviewSort.SCORES, order: ReviewOrder.DESC },
+    [SortBarDate.Title]: { sort: ReviewSort.TITLE, order: ReviewOrder.ASC },
+  };
+
+  const clearArticleListAndReSetCurrentPage = () => {
+    setFilteredArticleList([]);
+    setCurrentPage(1);
+  };
+
+  const handlePlatformChange = (value: Platform) => {
+    clearArticleListAndReSetCurrentPage();
+    setFilters((pre) => ({ ...pre, platform: value }));
+  };
+
+  const handleSortChange = (type: SortType, item: SortItem) => {
+    clearArticleListAndReSetCurrentPage();
+    if (type === 'sort') {
+      const { sort, order } = getSortFromSelected[item as SortBarDate];
+      setFilters((pre) => ({ ...pre, sort, order }));
+    }
+
+    if (type === 'genre') {
+      const genre = item.toLowerCase() as SearchGenre;
+      setFilters((pre) => ({ ...pre, genre }));
+    }
+  };
 
   // TODO implement loading component
   if (isLoading) {
@@ -63,17 +126,20 @@ const ArticlesShowCase = ({
 
   return (
     <Container>
-      <h2>{articleType === EArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
+      <h2>{articleType === ArticleType.NEWS ? 'Latest News' : 'All Reviews'}</h2>
       <SelectionBars
         articleType={articleType}
-        platformSelected={platformSelected}
-        setPlatformSelected={setPlatformSelected}
+        barsSelected={filters}
+        onPlatformSelected={handlePlatformChange}
+        onSortChange={handleSortChange}
       />
       <ShowCaseBody
         articleType={articleType}
-        filteredArticle={filteredArticle}
-        setCurrentPage={setCurrentPage}
+        filteredArticle={filteredArticleList}
       />
+      <div className="loadMore-container">
+        <LoadMore setCurrentPage={setCurrentPage} />
+      </div>
     </Container>
   );
 };

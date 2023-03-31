@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ArticleMainContent from './ArticleMainContent/ArticleMainContent';
+import { IArticle } from '../../../interfaces/article';
 
 const Container = styled.div`
   margin-bottom: 0px;
@@ -142,26 +143,11 @@ const Container = styled.div`
 `;
 
 interface Props {
-  articleContent: {
-    title: string;
-    subtitle: string;
-    author: {
-      id: number;
-      name: string;
-      avatar: string;
-    };
-    updateTime: string;
-    postTime: string;
-    likeCount: number;
-    mainContent: string;
-    game: { id: number; name: string; cover: string };
-    tagList: { id: number; name: string }[] | [];
-  };
+  articleContent: IArticle;
 }
 
 const ArticleContent = ({ articleContent }: Props) => {
-  const { title, subtitle, author, updateTime, postTime, likeCount, mainContent, game, tagList } =
-    articleContent;
+  const { title, user, updatedTime, createdTime, text, game, tagList } = articleContent;
 
   // TODO: initial value should be based on user object
   const [likedThisArticle, setLikedThisArticle] = useState<boolean>(false);
@@ -173,34 +159,34 @@ const ArticleContent = ({ articleContent }: Props) => {
   return (
     <Container>
       <ul className="game-list-top">
-        <li>{game.name}</li>
+        <li>{game?.name}</li>
       </ul>
       <h1>{title}</h1>
-      <h2>{subtitle}</h2>
+      {/* <h2>{subtitle}</h2> */}
       <div className="article-info">
         <div className="author">
           <img
-            src={author.avatar}
+            src={user?.profileImgUrl} // TODO: backend needs to add the user image
             alt="author-avatar"
           />
           <p>
-            BY <Link to={`/user/${author.id}`}>{author.name}</Link>
+            BY <Link to={`/user/${user?.id}`}>{user?.name}</Link>
           </p>
         </div>
-        <div className="date">UPDATED: {updateTime}</div>
-        <div className="date">POSTED: {postTime}</div>
+        <div className="date">UPDATED: {updatedTime}</div>
+        <div className="date">POSTED: {createdTime}</div>
       </div>
-      <ArticleMainContent mainContent={mainContent} />
+      <ArticleMainContent mainContent={text} />
       <hr />
       <div className="in-this-article">
         <h3>In This Article</h3>
         <ul className="game-list">
-          <li key={game.id}>
+          <li key={game?.id}>
             <img
-              src={game.cover}
+              src={game?.imgUrl} // TODO: backend needs to add the game image url
               alt="game-cover"
             />
-            <p>{game.name}</p>
+            <p>{game?.name}</p>
           </li>
         </ul>
       </div>
@@ -226,7 +212,8 @@ const ArticleContent = ({ articleContent }: Props) => {
               <ThumbUpOffAltIcon className="like-icon" />
             )}
           </button>
-          <span>{likeCount}</span>
+          {/* TODO: ask backend developers to add likes count to the response */}
+          <span>89</span>
         </h3>
       </div>
     </Container>

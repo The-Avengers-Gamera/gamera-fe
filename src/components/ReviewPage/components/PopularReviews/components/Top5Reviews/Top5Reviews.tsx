@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 import ReviewCard from './components/ReviewCard';
 
@@ -31,22 +29,20 @@ const mockTop5Reivews: Props[] = [
 // TODO: -----------------------------------------------------------------------------------
 
 const Top5Reviews = () => {
-  const [top5Reviews, setTop5Reviews] = useState(mockTop5Reivews);
+  const top5Reviews = mockTop5Reivews;
 
   return (
     <Container>
-      {/* a list of review info */}
-      {top5Reviews.map(({ title, commentNum }, cardIndex) => {
-        return (
-          <li>
-            <ReviewCard
-              title={title}
-              commentNum={commentNum}
-              cardIndex={cardIndex}
-            />
-          </li>
-        );
-      })}
+      {top5Reviews.map(({ title, commentNum }, cardIndex) => (
+        <li>
+          <ReviewCard
+            key={title}
+            title={title}
+            commentNum={commentNum}
+            cardIndex={cardIndex}
+          />
+        </li>
+      ))}
     </Container>
   );
 };

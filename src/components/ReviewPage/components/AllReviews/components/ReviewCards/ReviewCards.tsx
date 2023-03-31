@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import styled from 'styled-components';
 import { useState } from 'react';
 import LoadMore from './components/LoadMore';
@@ -38,14 +37,6 @@ for (let i = 0; i < 4; ) {
   mockReviewItem.title = `The Last Of Us Part Review ${i + 1}`; // mock data: make title unique
   i += 1;
 }
-
-const Card = styled.div`
-  width: 100%;
-  height: 170px;
-
-  margin-bottom: 25px;
-  border-bottom: 1px solid #5d5d5d;
-`;
 
 const ReviewCards = () => {
   // TODO: replace your card here

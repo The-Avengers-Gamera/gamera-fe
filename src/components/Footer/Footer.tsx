@@ -6,6 +6,7 @@ const Footer = () => {
   return (
     <div className={styles.footer}>
       <div className={styles.container}>
+        <br />
         <div className={styles.column_logo}>
           <img
             className={styles.logo}
@@ -14,6 +15,7 @@ const Footer = () => {
             id="logo"
           />
           <p>A one-stop destination for gaming.</p>
+          <p className={styles.copy}>© The Avengers</p>
         </div>
         <div className={styles.column_about}>
           <h3>ABOUT</h3>
@@ -42,9 +44,6 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <hr />
-      <br />
-      <p className={styles.copy}>&copy; The Avengers</p>
     </div>
   );
 };

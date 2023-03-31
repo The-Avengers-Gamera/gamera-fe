@@ -73,7 +73,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
   useEffect(() => {
     setRegularExpression(regularExpressionController(name));
     setFormatPrompt(forMatPromptController(name));
-  }, []);
+  }, [name]);
 
   const showAlarm = (alarmMes: string) => {
     setAlarmMessage(alarmMes);
@@ -124,6 +124,7 @@ const ValidationInputs: React.FC<Props> = (props: Props) => {
         onChange={inputChangeHandler}
         onBlur={inputValue === '' ? nullInputHandler : notNullInputHandler}
         autoComplete="off"
+        type={name}
       />
       <> {labelVisibility && <AlarmLabel> {alarmMessage} </AlarmLabel>}</>
     </ValidatedInputsContainer>

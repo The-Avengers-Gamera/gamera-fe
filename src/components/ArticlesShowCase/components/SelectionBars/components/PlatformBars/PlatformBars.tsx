@@ -1,34 +1,30 @@
 import styled from 'styled-components';
 import SelectionButton from '../../../../../Shares/SelectionButton';
-import { PLATFORMS } from '@/constants/platforms';
+import { Platform } from '@/constants/article';
 
 const Container = styled.div`
-  width: 50%;
-
+  min-width: 50%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
+  padding-top: 5px;
 `;
 
 interface PlatformBarsProps {
   platformSelected: Platform;
-  setPlatformSelected: React.Dispatch<React.SetStateAction<Platform>>;
+  onPlatformSelected: (platform: Platform) => void;
 }
 
-const PlatformBars = ({ platformSelected, setPlatformSelected }: PlatformBarsProps) => {
-  // hooks and states
-
-  // function
-
-  // jsx
+const PlatformBars = ({ platformSelected, onPlatformSelected }: PlatformBarsProps) => {
   return (
     <Container>
-      {PLATFORMS.map((platform) => {
+      {Object.values(Platform).map((platform: Platform) => {
         return (
           <SelectionButton
             key={platform}
             platformSelected={platformSelected}
-            setPlatformSelected={setPlatformSelected}
-            platformName={platform}
+            onPlatformChange={onPlatformSelected}
+            currentPlatform={platform}
           />
         );
       })}
