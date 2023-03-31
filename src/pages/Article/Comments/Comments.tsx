@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Link, TextField } from '@mui/material';
 import { useState } from 'react';
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
@@ -6,7 +6,10 @@ import FilterSelector from './SortSelector/SortSelector';
 import { IComment, ICommentPost } from '../../../interfaces/comment';
 import { createComment } from '@/services/comment';
 import useToast from '@/context/notificationToast';
-import { ToastType } from '@/constants/notification';
+import { EToastType } from '@/constants/notification';
+import logo from '@/assets/images/logo.png';
+import useAuth from '@/context/auth';
+import useModal from '@/context/loginModal';
 
 const Container = styled.div`
   width: 80%;
@@ -68,8 +71,33 @@ const Container = styled.div`
     }
   }
 
+  .no-comment {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    font-size: 18px;
+    color: #979797;
+    font-weight: bold;
+    font-style: italic;
+    margin-left: 40px;
+  }
+
   .comments {
     margin-top: 30px;
+  }
+
+  .no-login-comment-input {
+    margin-top: 30px;
+    button {
+      background-color: transparent;
+      border: 0;
+      color: ${({ theme }) => theme.color.primary};
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    button:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -80,12 +108,14 @@ interface Props {
 }
 
 const Comments = ({ commentList, articleId, setCommentList }: Props) => {
-  const currentUser = {
-    id: 1,
-    username: 'Alice.Bob',
-    avatar:
-      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
-  };
+  // const currentUser = {
+  //   id: 1,
+  //   username: 'Alice.Bob',
+  //   avatar:
+  //     'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
+  // };
+
+  const { auth: isLoggedIn } = useAuth();
 
   const [commentInput, setCommentInput] = useState<string>('');
   // const [commentListState, setCommentListState] = useState<IComment[]>([]);
@@ -93,10 +123,31 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
   // useToast hook is used to show a toast notification
   const { setToastIsOpen, setToastContent } = useToast();
 
+  const { setModalIsOpen } = useModal();
+
+  // TODO: delete this dummy data
+  const currentUser = {
+    id: 1,
+    username: 'Alice.Bob',
+    avatar:
+      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
+  };
+
   const postComment = async (comment: ICommentPost) => {
-    const response = await createComment(comment);
-    if (response) {
-      setCommentList([response.data, ...commentList]);
+    try {
+      const response = await createComment(comment);
+      if (response) {
+        setCommentList([response.data, ...commentList]);
+      }
+    } catch (error) {
+      console.log(error);
+      const errorMessage = error.response.data;
+      setToastIsOpen(true);
+      setToastContent({
+        type: EToastType.ERROR,
+        message: errorMessage,
+        duration: 3000,
+      });
     }
   };
 
@@ -108,7 +159,6 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         articleId,
       };
       postComment(newComment);
-
       // set the toast notification
       setToastIsOpen(true);
       setToastContent({
@@ -127,41 +177,60 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         Conversation <span>{commentList.length} Comments</span>
       </h3>
       <hr />
-      <div className="post-comment-input">
-        <p className="username">{currentUser.username}</p>
-        <div className="second-row">
-          <div className="avatar-input">
-            <img
-              src={currentUser.avatar}
-              alt="avatar"
-              className="avatar"
-            />
-            <TextField
-              id="outlined-basic"
-              label="What do you think?"
-              variant="filled"
-              multiline
-              maxRows={40}
-              className="comment-input"
-              value={commentInput}
-              onChange={(e) => setCommentInput(e.target.value)}
-            />
-          </div>
-          <div className="send-btn-container">
-            <Button
-              className="send-btn"
-              variant="contained"
-              onClick={handleSendCommentClick}
-            >
-              Send
-            </Button>
+      {isLoggedIn && (
+        <div className="post-comment-input">
+          <p className="username">{currentUser.username}</p>
+          <div className="second-row">
+            <div className="avatar-input">
+              <img
+                src={currentUser.avatar || logo}
+                alt="avatar"
+                className="avatar"
+              />
+              <TextField
+                id="outlined-basic"
+                label="What do you think?"
+                variant="filled"
+                multiline
+                maxRows={40}
+                className="comment-input"
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+              />
+            </div>
+            <div className="send-btn-container">
+              <Button
+                className="send-btn"
+                variant="contained"
+                onClick={handleSendCommentClick}
+              >
+                Send
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="filter">
-        <p>Sort by</p>
-        <FilterSelector />
-      </div>
+      )}
+      {!isLoggedIn && (
+        <div className="no-login-comment-input">
+          <p className="login-to-comment">
+            Please{' '}
+            <button
+              type="button"
+              onClick={() => setModalIsOpen(true)}
+            >
+              login
+            </button>{' '}
+            to comment
+          </p>
+        </div>
+      )}
+      {commentList.length === 0 && <p className="no-comment">No comments yet</p>}
+      {commentList.length > 0 && (
+        <div className="filter">
+          <p>Sort by</p>
+          <FilterSelector />
+        </div>
+      )}
       <div className="comments">
         {commentList.map((comment) => (
           <CommentItem
