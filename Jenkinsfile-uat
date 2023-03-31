@@ -9,7 +9,7 @@ pipeline {
                 //Get source code from project"s repository
                 echo "Getting the source code..."
 
-                git branch: "devops-richard-jenkins",
+                git branch: "develop",
                 url: "https://github.com/The-Avengers-Gamera/gamera-fe.git"
             }
         }
