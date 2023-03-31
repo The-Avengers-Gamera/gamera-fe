@@ -7,10 +7,19 @@ const apiClient = axios.create({
   timeout: 10000,
 });
 
+const NON_TOKEN_URL_LIST = ['/users/login', '/users/register'];
+const WITH_TOKEN_URL_LIST = ['/users/info'];
+
 apiClient.interceptors.request.use(
   (config) => {
-    if (localStorage.getItem('token')) {
-      config.headers.token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    if (token) {
+      if (
+        WITH_TOKEN_URL_LIST.includes(config.url as string) ||
+        (config.method !== 'get' && !NON_TOKEN_URL_LIST.includes(config.url as string))
+      ) {
+        config.headers.Authorization = token;
+      }
     }
     return config;
   },
@@ -22,10 +31,6 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
-      // TODO handle 200
-      return Promise.resolve(response);
-    }
     return Promise.resolve(response);
   },
   (error) => {

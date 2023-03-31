@@ -33,5 +33,5 @@ export const login = async (user: IUserLogin): Promise<AxiosResponse<undefined>>
 export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =>
   apiClient.get(`/users/verification?email=${email}`);
 
-export const getUserInfo = (): Promise<AxiosResponse<IUseDetailedInfo>> =>
+export const getUserInfo = async (): Promise<AxiosResponse<IUseDetailedInfo>> =>
   apiClient.get(`/users/info`);
