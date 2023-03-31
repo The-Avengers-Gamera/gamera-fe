@@ -1,12 +1,47 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import apiClient from '@/utils/apiClient';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '@/context/auth/useAuth';
+import apiClients from '@/utils/apiClient';
+import useToast from '@/context/notificationToast';
+import { EToastType } from '@/constants/notification';
+
+export const apiClient = apiClients;
 
 const useAxiosLoading = () => {
   const [counter, setCounter] = useState(0);
-
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const { setToastIsOpen, setToastContent } = useToast();
   const inc = useCallback(() => setCounter((preCounter) => preCounter + 1), [setCounter]);
   const dec = useCallback(() => setCounter((preCounter) => preCounter - 1), [setCounter]);
+
+  const handleError = (status: number | undefined) => {
+    if (status === undefined) {
+      return;
+    }
+
+    if (status === 401) {
+      logout();
+      navigate('/', { replace: true });
+      setToastIsOpen(true);
+      setToastContent({
+        type: EToastType.WARNING,
+        message: 'Your session has expired. Please login again.',
+        duration: 3000,
+      });
+    }
+
+    if (status === 403) {
+      navigate('/', { replace: true });
+      setToastIsOpen(true);
+      setToastContent({
+        type: EToastType.WARNING,
+        message: 'You are not authorized to access this page.',
+        duration: 3000,
+      });
+    }
+  };
 
   const interceptors = useMemo(
     () => ({
@@ -22,6 +57,12 @@ const useAxiosLoading = () => {
         dec();
         return Promise.reject(error);
       },
+      responseError: (error: AxiosError) => {
+        dec();
+        const { status } = error.response || {};
+        handleError(status);
+        return Promise.reject(error);
+      },
     }),
     [inc, dec]
   );
@@ -33,7 +74,7 @@ const useAxiosLoading = () => {
     );
     const responseInterceptor = apiClient.interceptors.response.use(
       interceptors.response,
-      interceptors.error
+      interceptors.responseError
     );
     return () => {
       apiClient.interceptors.request.eject(requestInterceptor);
