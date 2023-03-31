@@ -27,3 +27,12 @@ export interface ICurrentGame {
   platform: string[];
   img: string;
 }
+
+export interface IGameCard {
+  id: number;
+  imgUrl: string;
+  name: string;
+  scores: number;
+  platform: string[];
+  publishers: string;
+}
