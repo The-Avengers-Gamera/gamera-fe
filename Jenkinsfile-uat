@@ -1,47 +1,73 @@
 pipeline {
     agent {
-        label 'gcp_node'
-    }
-
-    environment {
-        CLOUDFRONT_ID = credentials('RICHARD_UAT_CLOUDFRONT_ID')
+        label "gcp_node"
     }
 
     stages {
-        stage('Git checkout') {
+        stage("Git checkout") {
             steps {
-                //Get source code from project's repository
-                git branch: 'devops-richard-jenkins',
-                url: 'https://github.com/The-Avengers-Gamera/gamera-fe.git'
+                //Get source code from project"s repository
+                echo "Getting the source code..."
+
+                git branch: "devops-richard-jenkins",
+                url: "https://github.com/The-Avengers-Gamera/gamera-fe.git"
             }
         }
 
-        stage('Build') {
+        stage("Get credentials") {
             steps {
-                echo 'Building'
+                //Get credentials from AWS secrets manager and store as environment variables
+                echo "Getting frontend's credentials"
 
-                //Add project's dependencies
-                sh 'yarn install'
+                script {
+                    def secretJson = sh(
+                        script: """
+                            aws secretsmanager get-secret-value \
+                                --secret-id dev-gamera-frontend-credentials \
+                                --query SecretString \
+                                --output text
+                            """,
+                        returnStdout: true
+                    ).trim()
+
+                    def secretMap = readJSON text: secretJson
+
+                    env.bucket_name = secretMap["bucket-name"]
+                    env.cloudfront_id = secretMap["cloudfront-id"]
+                }
+            }
+        }
+
+        stage("Build") {
+            steps {
+                echo "Building"
+
+                //Add project"s dependencies
+                sh "yarn install"
 
                 //Generate build folder for deployment
-                sh 'yarn run build'
+                sh "yarn run build"
             }
         }
 
-        stage('Test') {
+        stage("Test") {
             steps {
-                echo 'Testing'
+                echo "Testing"
 
                 //Test project
-                sh 'yarn test'
+                sh "yarn test"
             }
         }
 
-        stage('Deploy') {
+        stage("Deploy") {
             steps {
+                echo "Deploying"
+
                 //Deploy build folder to S3 bucket
-                sh 'aws s3 sync build/ s3://richard.uat.gamera.com.au --delete'
-                sh 'aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_ID} --paths /*'
+                sh "aws s3 sync build/ s3://'${env.bucket_name}' --delete"
+
+                //Invalidate the caches
+                sh "aws cloudfront create-invalidation --distribution-id ${env.cloudfront_id} --paths /*"
             }
         }
     }
@@ -49,15 +75,15 @@ pipeline {
     post {
         always {
             //Clean the workspace after every pipeline build process
-            echo 'Cleaning workspace'
+            echo "Cleaning workspace"
             cleanWs()
         }
 
         failure {
-            echo 'Build fail, sending error message for debuging'
+            echo "Build fail, sending error message for debuging"
 
             // Send error messages to DevOps engineer for debuging
-            mail to: 'yyaug99@gmail.com',
+            mail to: "yyaug99@gmail.com",
             subject: "Pipeline build fails in: ${currentBuild.fullDisplayName}",
             body: "Build failed in ${env.BUILD_URL}"
         }
