@@ -6,7 +6,7 @@ import FilterSelector from './SortSelector/SortSelector';
 import { IComment, ICommentPost } from '../../../interfaces/comment';
 import { createComment } from '@/services/comment';
 import useToast from '@/context/notificationToast';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 import logo from '@/assets/images/logo.png';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
@@ -144,7 +144,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
       const errorMessage = error.response.data;
       setToastIsOpen(true);
       setToastContent({
-        type: EToastType.ERROR,
+        type: ToastType.ERROR,
         message: errorMessage,
         duration: 3000,
       });
