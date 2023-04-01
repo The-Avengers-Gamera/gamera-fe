@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 import { INotificationToastContent } from '@/interfaces/notifacationToast';
 
 interface ToastContextType {
@@ -16,7 +16,7 @@ const ToastContext = createContext<ToastContextType>({
   },
   toastContent: {
     message: '',
-    type: EToastType.SUCCESS,
+    type: ToastType.SUCCESS,
     duration: 3000,
   },
   setToastContent: () => {
