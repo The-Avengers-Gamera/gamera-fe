@@ -8,7 +8,7 @@ import {
   IUseDetailedInfo,
 } from '@/interfaces/user';
 
-export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<undefined>> =>
+export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<IUser>> =>
   apiClient.post('/users/signup', user);
 
 export const addAuthorityToUser = async (
@@ -35,3 +35,9 @@ export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =
 
 export const getUserInfo = (): Promise<AxiosResponse<IUseDetailedInfo>> =>
   apiClient.get(`/users/info`);
+
+export const updateUserVerify = async (token: string): Promise<AxiosResponse<void>> =>
+  apiClient.put(`/users/verify-account/${token}`);
+
+export const sendActivateLink = async (id: number): Promise<AxiosResponse<void>> =>
+  apiClient.put(`/users/send-active-link/${id}`);

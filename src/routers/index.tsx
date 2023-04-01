@@ -14,6 +14,7 @@ import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
 import UserProfile from '@/pages/UserProfile';
+import EmailActivatePage from '@/pages/Verification/Verification';
 
 const routes: RouteObject[] = [
   {
@@ -27,6 +28,7 @@ const routes: RouteObject[] = [
       { path: '/reviews/:platform', element: <Review /> },
       { path: '/article/:id', element: <Article /> },
       { path: '/settings', element: <Settings /> },
+      { path: '/verification', element: <EmailActivatePage /> },
       {
         path: '/post',
         element: <Post />,

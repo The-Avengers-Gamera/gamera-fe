@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ValidationInputs from '../ValidationInputs';
 import useModal from '@/context/loginModal';
-import { createUser } from '@/services/user';
+import { createUser, sendActivateLink } from '@/services/user';
 import { IUserSignUp } from '@/interfaces/user';
 
 const RegisterFormContainer = styled.form`
@@ -36,7 +36,7 @@ const ResisterButton = styled.button`
   font-weight: 700;
 `;
 
-const RegisterForm = () => {
+const RegisterForm = ({ setEmailVerifyIsOpen }: any) => {
   const { changeModalToOpen } = useModal();
   const [usernameInputValue, setUserNameInputValue] = useState({
     value: '',
@@ -61,7 +61,12 @@ const RegisterForm = () => {
       };
       createUser(user).then((res) => {
         if (res.status === 200) {
-          changeModalToOpen(false);
+          sendActivateLink(res.data.id).then((response) => {
+            if (response.status === 200) {
+              changeModalToOpen(false);
+              setEmailVerifyIsOpen(true);
+            }
+          });
         }
       });
     }
