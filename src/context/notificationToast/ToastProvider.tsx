@@ -1,12 +1,12 @@
 import { ReactNode, useMemo, useState } from 'react';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 import ToastContext from './ToastContext';
 
 const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [toastIsOpen, setToastIsOpen] = useState(false);
   const [toastContent, setToastContent] = useState({
     message: '',
-    type: EToastType.SUCCESS,
+    type: ToastType.SUCCESS,
     duration: 3000,
   });
 

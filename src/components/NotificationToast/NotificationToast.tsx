@@ -6,7 +6,7 @@ import DangerousIcon from '@mui/icons-material/Dangerous';
 import WarningIcon from '@mui/icons-material/Warning';
 import InfoIcon from '@mui/icons-material/Info';
 import useToast from '@/context/notificationToast';
-import { EToastType } from '../../constants/notification';
+import { ToastType } from '../../constants/notification';
 
 const Container = styled.div`
   // if the prop toastIsOpen is true, then the container is shown
@@ -30,15 +30,15 @@ const Container = styled.div`
   padding-right: 40px;
 
   .notification-icon {
-    color: ${({ toastType }: { toastType: EToastType }) => {
+    color: ${({ toastType }: { toastType: ToastType }) => {
       switch (toastType) {
-        case EToastType.SUCCESS:
+        case ToastType.SUCCESS:
           return '#6DDB03';
-        case EToastType.ERROR:
+        case ToastType.ERROR:
           return '#DE4344';
-        case EToastType.WARNING:
+        case ToastType.WARNING:
           return '#DE4344';
-        case EToastType.INFO:
+        case ToastType.INFO:
           return '#D8D8D8';
         default:
           return '#00b894';
@@ -96,10 +96,10 @@ const NotificationToast = () => {
       >
         <CloseIcon />
       </button>
-      {type === EToastType.SUCCESS && <CheckCircleIcon className="notification-icon" />}
-      {type === EToastType.ERROR && <DangerousIcon className="notification-icon" />}
-      {type === EToastType.WARNING && <WarningIcon className="notification-icon" />}
-      {type === EToastType.INFO && <InfoIcon className="notification-icon" />}
+      {type === ToastType.SUCCESS && <CheckCircleIcon className="notification-icon" />}
+      {type === ToastType.ERROR && <DangerousIcon className="notification-icon" />}
+      {type === ToastType.WARNING && <WarningIcon className="notification-icon" />}
+      {type === ToastType.INFO && <InfoIcon className="notification-icon" />}
       <span className="notification-text">{message}</span>
     </Container>
   );

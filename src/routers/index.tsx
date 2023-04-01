@@ -1,4 +1,5 @@
 import { RouteObject } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
 import Root from '@/layouts/Root';
 import Home from '@/pages/Home';
 import Game from '@/pages/Game';
@@ -26,7 +27,14 @@ const routes: RouteObject[] = [
       { path: '/reviews', element: <Review /> },
       { path: '/reviews/:platform', element: <Review /> },
       { path: '/article/:id', element: <Article /> },
-      { path: '/settings', element: <Settings /> },
+      {
+        path: '/settings',
+        element: (
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: '/post',
         element: <Post />,
