@@ -1,16 +1,18 @@
 import { createContext } from 'react';
-import { IUserLogin } from '@/interfaces/user';
+import { AuthInfo, IUserLogin } from '@/interfaces/user';
 
 type AuthContextType = {
-  auth: unknown | null;
+  auth: AuthInfo;
   login({ email, password }: IUserLogin): Promise<void>;
   logout(): void;
   loading: boolean;
-  error: string | null;
+  error: string;
 };
 
+export const initAuthInfo: AuthInfo = { user: undefined, isLogin: false, isEditor: false };
+
 const AuthContext = createContext<AuthContextType>({
-  auth: null,
+  auth: initAuthInfo,
   login: async () => {
     //
   },
@@ -18,7 +20,7 @@ const AuthContext = createContext<AuthContextType>({
     //
   },
   loading: false,
-  error: null,
+  error: '',
 });
 
 export default AuthContext;

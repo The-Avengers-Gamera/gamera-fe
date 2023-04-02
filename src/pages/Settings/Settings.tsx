@@ -17,6 +17,7 @@ const SettingsPage = () => {
     nameInput: '',
     pwdInput: '',
   });
+
   useEffect(() => {
     setLoading(true);
     getUserInfo()
