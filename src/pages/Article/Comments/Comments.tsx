@@ -1,4 +1,4 @@
-import { Button, Link, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import styled from 'styled-components';
 import CommentItem from './CommentItem';
@@ -108,30 +108,13 @@ interface Props {
 }
 
 const Comments = ({ commentList, articleId, setCommentList }: Props) => {
-  // const currentUser = {
-  //   id: 1,
-  //   username: 'Alice.Bob',
-  //   avatar:
-  //     'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
-  // };
-
-  const { auth: isLoggedIn } = useAuth();
+  const { auth: currentUser } = useAuth();
 
   const [commentInput, setCommentInput] = useState<string>('');
-  // const [commentListState, setCommentListState] = useState<IComment[]>([]);
 
-  // useToast hook is used to show a toast notification
   const { setToastIsOpen, setToastContent } = useToast();
 
   const { setModalIsOpen } = useModal();
-
-  // TODO: delete this dummy data
-  const currentUser = {
-    id: 1,
-    username: 'Alice.Bob',
-    avatar:
-      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
-  };
 
   const postComment = async (comment: ICommentPost) => {
     try {
@@ -140,7 +123,6 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         setCommentList([response.data, ...commentList]);
       }
     } catch (error) {
-      console.log(error);
       const errorMessage = error.response.data;
       setToastIsOpen(true);
       setToastContent({
@@ -148,6 +130,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         message: errorMessage,
         duration: 3000,
       });
+      setCommentInput('');
     }
   };
 
@@ -177,13 +160,13 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         Conversation <span>{commentList.length} Comments</span>
       </h3>
       <hr />
-      {isLoggedIn && (
+      {currentUser && (
         <div className="post-comment-input">
-          <p className="username">{currentUser.username}</p>
+          <p className="username">{currentUser.name}</p>
           <div className="second-row">
             <div className="avatar-input">
               <img
-                src={currentUser.avatar || logo}
+                src={currentUser.avatar || 'https://i.pravatar.cc/300'}
                 alt="avatar"
                 className="avatar"
               />
@@ -210,7 +193,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
           </div>
         </div>
       )}
-      {!isLoggedIn && (
+      {!currentUser && (
         <div className="no-login-comment-input">
           <p className="login-to-comment">
             Please{' '}

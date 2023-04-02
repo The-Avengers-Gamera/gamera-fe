@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Button, TextField } from '@mui/material';
 import { IComment, ICommentPost } from '@/interfaces/comment';
 import { createComment } from '@/services/comment';
+import useAuth from '@/context/auth';
+import useModal from '@/context/loginModal';
+import useToast from '@/context/notificationToast/useToast';
+import { ToastType } from '@/constants/notification';
+import { nowToCreated } from '../../../../utils/time';
 
 const childCommentIndent = '80px';
 const Container = styled.div`
@@ -72,6 +77,22 @@ const Container = styled.div`
       .reply-input-box {
         &.active {
           display: block;
+        }
+
+        &.no-login {
+          .login-to-comment {
+            margin-top: 10px;
+            margin-left: 10px;
+            font-style: italic;
+            button {
+              background-color: transparent;
+              border: 0;
+              color: ${({ theme }) => theme.color.primary};
+              cursor: pointer;
+              font-size: 18px;
+              font-weight: bold;
+            }
+          }
         }
         display: none;
         width: 60%;
@@ -149,17 +170,17 @@ const CommentItem = ({
   const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
   const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
   const [commentInput, setCommentInput] = useState<string>('');
+  const { auth: currentUser } = useAuth();
+  const { setModalIsOpen } = useModal();
+  const { setToastIsOpen, setToastContent } = useToast();
+
+  if (currentUser) {
+    const dummyProfileImgUrl =
+      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2';
+    currentUser.profileImgUrl = currentUser.profileImgUrl || dummyProfileImgUrl;
+  }
 
   const layerClass = LayerClass[layer];
-  // TODO: get the user that is using
-  const currentUser = {
-    id: 1,
-    avatar:
-      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2',
-  };
-
-  // TODO: add the backend user avatar
-  user.profileImgUrl = user.profileImgUrl || currentUser.avatar;
 
   useEffect(() => {
     if (activeReplyInputCommentId === id) {
@@ -179,20 +200,31 @@ const CommentItem = ({
   };
 
   const postComment = async (newComment: ICommentPost) => {
-    const response = await createComment(newComment);
-    if (response) {
-      const respondedComment = response.data;
-      // iterate the comment list to find the parent comment
-      const newCommentList = commentList.map((commentElement) => {
-        if (commentElement.id === respondedComment.parentComment?.id) {
-          // eslint-disable-next-line no-param-reassign
-          if (!commentElement.childComment) commentElement.childComment = [];
-          // eslint-disable-next-line no-param-reassign
-          commentElement.childComment = [...commentElement.childComment, respondedComment];
-        }
-        return commentElement;
+    try {
+      const response = await createComment(newComment);
+      if (response) {
+        const respondedComment = response.data;
+        // iterate the comment list to find the parent comment
+        const newCommentList = commentList.map((commentElement) => {
+          if (commentElement.id === respondedComment.parentComment?.id) {
+            // eslint-disable-next-line no-param-reassign
+            if (!commentElement.childComment) commentElement.childComment = [];
+            // eslint-disable-next-line no-param-reassign
+            commentElement.childComment = [...commentElement.childComment, respondedComment];
+          }
+          return commentElement;
+        });
+        setCommentList([...newCommentList]);
+      }
+    } catch (error) {
+      const errorMessage = error.response.data;
+      setToastIsOpen(true);
+      setToastContent({
+        type: ToastType.ERROR,
+        message: errorMessage,
+        duration: 3000,
       });
-      setCommentList([...newCommentList]);
+      setCommentInput('');
     }
   };
 
@@ -206,6 +238,12 @@ const CommentItem = ({
       };
       postComment(newComment);
       setCommentInput('');
+      setToastIsOpen(true);
+      setToastContent({
+        type: ToastType.SUCCESS,
+        message: 'Comment posted successfully',
+        duration: 3000,
+      });
     }
   };
 
@@ -218,73 +256,99 @@ const CommentItem = ({
       <div className="this-comment">
         <img
           className="comment-avatar"
-          src={user.profileImgUrl}
+          src={
+            user.profileImgUrl ||
+            'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2'
+          }
           alt="avatar"
         />
         <div className="comment-right">
           <p className="username">{user.name}</p>
           <p className="post-time">
             {parent?.user.name ? `reply to ${parent?.user.name} - ` : ''}
-            {updatedTime}
+            {nowToCreated(updatedTime)}
           </p>
           <p className="comment-text">{text}</p>
-          <div className="operation">
-            <button
-              className="reply-btn"
-              type="button"
-              onClick={handleReplyClick}
-            >
-              Reply
-            </button>
-            {/* <button
+          {layer === 0 && (
+            <div className="operation">
+              <button
+                className="reply-btn"
+                type="button"
+                onClick={handleReplyClick}
+              >
+                Reply
+              </button>
+              {/* <button
               className="like-btn"
               type="button"
             >
               <ThumbUpOffAltIcon />
               <span>{like}</span>
             </button> */}
-            {childComment?.length === 0 ? null : (
-              <button
-                type="button"
-                className="show-more-btn"
-                onClick={handleShowChildClick}
-              >
-                {!childCommentsShown ? 'Show more replies...' : 'Show less replies'}
-              </button>
-            )}
-          </div>
-          <div
-            className={`reply-input-box ${
-              replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
-            }`}
-          >
-            <div className="avatar-input">
-              <img
-                src={currentUser.avatar}
-                alt="avatar"
-                className="avatar"
-              />
-              <TextField
-                id="outlined-basic"
-                label={`Reply to ${user.name}...`}
-                variant="filled"
-                multiline
-                maxRows={10}
-                className="comment-input"
-                value={commentInput}
-                onChange={(e) => setCommentInput(e.target.value)}
-              />
+              {childComment?.length === 0 ? null : (
+                <button
+                  type="button"
+                  className="show-more-btn"
+                  onClick={handleShowChildClick}
+                >
+                  {!childCommentsShown ? 'Show more replies...' : 'Show less replies'}
+                </button>
+              )}
             </div>
-            <div className="send-btn-container">
-              <Button
-                className="send-btn"
-                variant="contained"
-                onClick={handleSendCommentClick}
-              >
-                Send
-              </Button>
+          )}
+          {currentUser && (
+            <div
+              className={`reply-input-box ${
+                replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
+              }`}
+            >
+              <div className="avatar-input">
+                <img
+                  src={currentUser.profileImgUrl}
+                  alt="avatar"
+                  className="avatar"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label={`Reply to ${user.name}...`}
+                  variant="filled"
+                  multiline
+                  maxRows={10}
+                  className="comment-input"
+                  value={commentInput}
+                  onChange={(e) => setCommentInput(e.target.value)}
+                />
+              </div>
+              <div className="send-btn-container">
+                <Button
+                  className="send-btn"
+                  variant="contained"
+                  onClick={handleSendCommentClick}
+                >
+                  Send
+                </Button>
+              </div>
             </div>
-          </div>
+          )}
+          {/* Please login to comment */}
+          {!currentUser && (
+            <div
+              className={`reply-input-box no-login ${
+                replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
+              }`}
+            >
+              <p className="login-to-comment">
+                Please{' '}
+                <button
+                  type="button"
+                  onClick={() => setModalIsOpen(true)}
+                >
+                  login
+                </button>{' '}
+                to comment
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className={`child-container ${childCommentsShown ? 'active' : ''}`}>
