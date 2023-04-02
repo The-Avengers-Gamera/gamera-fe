@@ -1,4 +1,5 @@
 import { IAuthoritySlim } from './authority';
+import { IArticleCard } from '@/interfaces/article';
 
 export interface IUser {
   id: number;
@@ -40,4 +41,17 @@ export interface AuthInfo {
   user: IUseDetailedInfo | undefined;
   isLogin: boolean;
   isEditor: boolean;
+}
+
+export interface IUserProfile {
+  id: number;
+  // authorities: Set<IAuthority>;
+  name: string;
+  likesCount: number;
+  commentsCount: number;
+  postsCount?: number;
+  likesArticlesDto: Set<IArticleCard>;
+  commentsArticlesDto: Set<IArticleCard>;
+  postsArticlesDto?: Set<IArticleCard>;
+  updatedTime: string;
 }

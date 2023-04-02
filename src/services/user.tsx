@@ -6,6 +6,7 @@ import {
   IUserLogin,
   IUserAuthority,
   IUseDetailedInfo,
+  IUserProfile,
 } from '@/interfaces/user';
 
 export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<undefined>> =>
@@ -35,3 +36,7 @@ export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =
 
 export const getUserInfo = async (): Promise<AxiosResponse<IUseDetailedInfo>> =>
   apiClient.get(`/users/info`);
+
+export const getUserProfile = async (
+  id: number | undefined
+): Promise<AxiosResponse<IUserProfile>> => apiClient.get(`/users/${id}/profile`);

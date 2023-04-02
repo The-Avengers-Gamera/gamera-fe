@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './index.module.css';
 import RecentlyCard from './RecentlyCard/RecentlyCard';
+import { IArticleCard } from '@/interfaces/article';
 
 type ItemType = {
   coverUrl: string;
@@ -12,6 +13,7 @@ type ItemType = {
 type Props = {
   columnName: string;
   isEditor: boolean;
+  articles?: Set<IArticleCard>;
 };
 
 const initialState: ItemType[] = [];
@@ -29,8 +31,8 @@ for (let i = 0; i < 3; ) {
   i += 1;
 }
 
-const RecentlyCards = ({ columnName, isEditor }: Props) => {
-  const [cards] = useState(initialState);
+const RecentlyCards = ({ columnName, isEditor, articles }: Props) => {
+  const [cards] = useState(Array.from(articles || []));
   const getContainerClass = () => {
     if (isEditor) {
       return styles.editorContainer;
@@ -45,16 +47,12 @@ const RecentlyCards = ({ columnName, isEditor }: Props) => {
           <span className={styles.viewMore}>VIEW MORE</span>
         </a>
       </div>
-      {cards.map(({ coverUrl, title, commNum, likeNum }) => {
-        return (
-          <RecentlyCard
-            coverUrl={coverUrl}
-            title={title}
-            commNum={commNum}
-            likeNum={likeNum}
-          />
-        );
-      })}
+      {cards.map((article) => (
+        <RecentlyCard
+          key={article.id}
+          article={article}
+        />
+      ))}
     </div>
   );
 };
