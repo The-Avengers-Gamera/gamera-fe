@@ -1,5 +1,6 @@
 import { RouteObject } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+import { Role } from '@/constants/role';
 import Root from '@/layouts/Root';
 import Home from '@/pages/Home';
 import Game from '@/pages/Game';
@@ -30,14 +31,18 @@ const routes: RouteObject[] = [
       {
         path: '/settings',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute allowedRoles={[Role.USER]}>
             <Settings />
           </ProtectedRoute>
         ),
       },
       {
         path: '/post',
-        element: <Post />,
+        element: (
+          <ProtectedRoute allowedRoles={[Role.EDITOR_NEWS, Role.EDITOR_REVIEW]}>
+            <Post />
+          </ProtectedRoute>
+        ),
         children: [{ path: ':type', element: <Post /> }],
       },
       {

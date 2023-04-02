@@ -2,16 +2,33 @@ import { Navigate } from 'react-router-dom';
 import useAuth from '@/context/auth';
 import useToast from '@/context/notificationToast/';
 import { ToastType } from '@/constants/notification';
+import { Role } from '@/constants/role';
 
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const { auth } = useAuth();
+interface ProtectedRouteProps {
+  allowedRoles: Role[];
+  children: JSX.Element;
+}
+
+const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
   const { setToastIsOpen, setToastContent } = useToast();
+  const {
+    auth: { user },
+    loading,
+  } = useAuth();
 
-  if (!auth) {
+  const hasPermission = allowedRoles.some((role) =>
+    user?.authorities.some((userRole) => userRole.name === role)
+  );
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (!hasPermission) {
     setToastIsOpen(true);
     setToastContent({
       type: ToastType.ERROR,
-      message: 'Please Login First',
+      message: 'No permission to access this page',
       duration: 3000,
     });
     return (

@@ -58,7 +58,9 @@ const Main = styled.main`
 `;
 
 const RootLayout = () => {
-  const { auth } = useAuth();
+  const {
+    auth: { isLogin },
+  } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
   const expendBtnRef = useRef<HTMLButtonElement>(null);
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendBtnRef, false);
@@ -94,7 +96,7 @@ const RootLayout = () => {
       </NavWrapper>
       <Main>
         <>
-          {!auth && (
+          {!isLogin && (
             <LoginButtonWrapper>
               <LoginButton />
             </LoginButtonWrapper>
