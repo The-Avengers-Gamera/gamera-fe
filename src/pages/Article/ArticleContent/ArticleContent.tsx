@@ -198,7 +198,7 @@ const ArticleContent = ({ articleContent }: Props) => {
         )
       }
 
-      {tagList && tagList.length > 0 && (
+      {tagList?.length > 0 && (
         <div className="topics">
           <h3>Topics</h3>
           <ul className="tag-list">
@@ -222,7 +222,6 @@ const ArticleContent = ({ articleContent }: Props) => {
               <ThumbUpOffAltIcon className="like-icon" />
             )}
           </button>
-          {/* TODO: ask backend developers to add likes count to the response */}
           <span>{likeNum}</span>
         </h3>
       </div>
