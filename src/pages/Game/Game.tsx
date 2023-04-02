@@ -19,7 +19,8 @@ const Container = styled.div`
   margin-top: 20px;
   margin-left: 7%;
   background-color: rgb(30, 33, 38);
-  max-width: 1300px;
+  max-width: 1350px;
+  padding-bottom: 5%;
 `;
 
 const Header2 = styled.div`

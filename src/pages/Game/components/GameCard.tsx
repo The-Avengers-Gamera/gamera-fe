@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-
-const GameCard = styled.div`
-  padding-top: 4%;
-  margin-right: 67px;
-  width: 235px;
-`;
+import bgImg from '../assets/hexagon.png';
 
 const GameImg = styled.img`
   overflow: hidden;
@@ -15,29 +10,63 @@ const GameImg = styled.img`
 
 const Wrapper1 = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   justify-content: space-between;
-  align-items: center;
-  height: 100px;
+  /* align-items: center; */
+  /* height: 100px; */
 `;
 
 const Wrapper2 = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
 `;
 
 const Title = styled.div`
   font-size: 18px;
   font-weight: 900;
-  width: 210px;
+  width: 205px;
+`;
+
+const GameCard = styled.div`
+  margin-top: 3%;
+  padding: 10px 13px 3px 10px;
+  margin-right: 67px;
+  width: 250px;
+  height: 480px;
+  &:focus,
+  &:hover {
+    background-color: rgb(50, 53, 58);
+    ${Title} {
+      color: #6ddb03;
+    }
+    ${GameImg} {
+      transform: scale(1.05);
+      transform-origin: center;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+`;
+
+const ScoreCover = styled.div`
+  display: flex;
+  width: 30px;
+  height: 35px;
+  background: url(${bgImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
 
 const Score = styled.div`
-  width: 15px;
+  width: 30px;
   color: #3d3d3d;
   font-size: 18px;
   font-weight: 800;
+  /* line-height: 30px; */
+  padding-top: 4px;
+  height: 35px;
 `;
 
 const Platform = styled.div`
@@ -74,7 +103,9 @@ const ReviewCard = ({ gameData }: GameCardProps) => {
       <Wrapper1>
         <Wrapper2>
           <Title>{name}</Title>
-          <Score>{scores}</Score>
+          <ScoreCover>
+            <Score>{scores}</Score>
+          </ScoreCover>
         </Wrapper2>
         <Platform>{platform}</Platform>
         <Publisher>{publishers}</Publisher>
