@@ -88,6 +88,7 @@ const Container = styled.div`
         margin-right: 40px;
         img {
           height: 160px;
+          width: 160px;
           margin-bottom: 5px;
           border-radius: 5px;
         }
@@ -148,8 +149,7 @@ interface Props {
 }
 
 const ArticleContent = ({ articleContent }: Props) => {
-  const { title, author, updatedTime, createdTime, text, game, tagList, commentNum, likeNum } =
-    articleContent;
+  const { title, author, updatedTime, createdTime, text, game, tagList, likeNum } = articleContent;
 
   // TODO: initial value should be based on user object
   const [likedThisArticle, setLikedThisArticle] = useState<boolean>(false);
@@ -168,9 +168,7 @@ const ArticleContent = ({ articleContent }: Props) => {
       <div className="article-info">
         <div className="author">
           <img
-            src={
-              author?.profileImgUrl || 'http://localhost:3000/src/components/NavBar/assets/logo.png'
-            } // TODO: backend needs to add the user image
+            src={author?.profileImgUrl || 'https://i.imgur.com/0y0t0Xy.png'} // TODO: backend needs to add the user image
             alt="author-avatar"
           />
           <p>
@@ -190,9 +188,7 @@ const ArticleContent = ({ articleContent }: Props) => {
             <ul className="game-list">
               <li key={game?.id}>
                 <img
-                  src={
-                    game?.imgUrl || 'http://localhost:3000/src/components/NavBar/assets/logo.png'
-                  } // TODO: backend needs to add the game image url
+                  src={game?.imgUrl || 'https://i.imgur.com/0y0t0Xy.png'} // TODO: backend needs to add the game image url
                   alt="game-cover"
                 />
                 <p>{game?.name}</p>
