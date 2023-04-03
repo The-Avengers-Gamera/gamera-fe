@@ -6,7 +6,7 @@ import FilterSelector from './SortSelector/SortSelector';
 import { IComment, ICommentPost } from '../../../interfaces/comment';
 import { createComment } from '@/services/comment';
 import useToast from '@/context/notificationToast';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 
 const Container = styled.div`
   width: 80%;
@@ -112,7 +112,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
       // set the toast notification
       setToastIsOpen(true);
       setToastContent({
-        type: EToastType.SUCCESS,
+        type: ToastType.SUCCESS,
         message: 'Comment posted successfully',
         duration: 3000,
       });

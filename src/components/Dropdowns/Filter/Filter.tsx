@@ -2,6 +2,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { SortItem, SortType } from '@/components/Shares/SortBars/SortBars';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 
 const DropdownWrapper = styled.div`
   position: relative;
@@ -70,10 +71,11 @@ interface FilterProps {
   selected: SortItem;
   onSelectChange: (type: SortType, item: SortItem) => void;
 }
+
 const Filter = ({ type, items, selected, onSelectChange }: FilterProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const ref = useRef<HTMLButtonElement>(null);
   const [btnWidth, setBtnWidth] = useState<number | undefined>(100);
+  const [isMenuOpen, setIsMenuOpen] = useToggleWhenClickOutside(ref, false);
 
   useLayoutEffect(() => {
     setBtnWidth(ref.current?.offsetWidth);

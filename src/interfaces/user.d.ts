@@ -1,4 +1,4 @@
-import { IAuthority } from './authority';
+import { IAuthoritySlim } from './authority';
 
 export interface IUser {
   id: number;
@@ -23,7 +23,7 @@ export interface IUserAuthority extends Omit<IUserSignUp, 'password'> {}
 
 export interface IUserInfo {
   id: number;
-  authorities: Set<IAuthority>;
+  authorities: IAuthoritySlim[];
   email: string;
 }
 export interface IUseDetailedInfo extends IUserInfo {
@@ -34,4 +34,10 @@ export interface IUserSlim {
   profileImgUrl?: string;
   id: number;
   name: string;
+}
+
+export interface AuthInfo {
+  user: IUseDetailedInfo | undefined;
+  isLogin: boolean;
+  isEditor: boolean;
 }

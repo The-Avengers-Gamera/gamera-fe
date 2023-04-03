@@ -1,6 +1,6 @@
-import { AxiosPromise } from 'axios';
+import { AxiosPromise, AxiosResponse } from 'axios';
 import apiClient from '@/utils/apiClient';
-import { IGame, IGamePost, IGamePut } from '@/interfaces/game';
+import { IGame, IGameCard, IGamePost, IGamePut } from '@/interfaces/game';
 
 export const createGame = async (gamePost: IGamePost): Promise<AxiosPromise<IGame>> =>
   apiClient.post('/games', gamePost);
@@ -13,3 +13,5 @@ export const updateGame = async (id: number, gamePut: IGamePut): Promise<AxiosPr
 
 export const deleteGame = async (id: number): Promise<AxiosPromise<string>> =>
   apiClient.delete(`/games/${id}`);
+
+export const getGames = async (): Promise<AxiosResponse<IGameCard[]>> => apiClient.get(`/games`);

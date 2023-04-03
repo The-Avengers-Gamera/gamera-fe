@@ -1,7 +1,8 @@
 export enum SortBarDate {
   Latest = 'Sort by Latest',
   Oldest = 'Sort by Oldest',
-  Score = 'Sort by Score',
+  // TODO: temporarily disable this sort option, waiting for backend to implement
+  // Score = 'Sort by Score',
   Title = 'Sort by Title',
 }
 

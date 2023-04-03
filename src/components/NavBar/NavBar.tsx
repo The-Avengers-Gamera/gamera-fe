@@ -20,8 +20,13 @@ export const navItemStyle = {
   textAlign: 'center',
   fontFamily: 'Russo One',
 };
+
 const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
-  const { auth: isLoggedIn, logout } = useAuth();
+  const {
+    auth: { isLogin },
+    logout,
+  } = useAuth();
+
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [navBtnSelected, setNavBtnSelected] = React.useState<string | null>();
@@ -115,7 +120,7 @@ const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
                 </Button>
               </NavListItem>
             </Box>
-            {isLoggedIn && (
+            {isLogin && (
               <Box className={style.navBarBottomGroup}>
                 <NavListItem
                   navBtnSelected={navBtnSelected}

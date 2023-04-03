@@ -1,4 +1,6 @@
 import { RouteObject } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import { Role } from '@/constants/role';
 import Root from '@/layouts/Root';
 import Home from '@/pages/Home';
 import Game from '@/pages/Game';
@@ -28,12 +30,23 @@ const routes: RouteObject[] = [
       { path: '/reviews', element: <Review /> },
       { path: '/reviews/:platform', element: <Review /> },
       { path: '/article/:id', element: <Article /> },
-      { path: '/settings', element: <Settings /> },
       { path: '/verification', element: <EmailActivate /> },
       { path: '/activate-email', element: <Verification /> },
       {
+        path: '/settings',
+        element: (
+          <ProtectedRoute allowedRoles={[Role.USER]}>
+            <Settings />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/post',
-        element: <Post />,
+        element: (
+          <ProtectedRoute allowedRoles={[Role.EDITOR_NEWS, Role.EDITOR_REVIEW]}>
+            <Post />
+          </ProtectedRoute>
+        ),
         children: [{ path: ':type', element: <Post /> }],
       },
       {

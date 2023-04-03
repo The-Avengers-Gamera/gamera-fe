@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import ShowCaseBody from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
+import LoadMore from '@/components/LoadMore';
 import { IArticleQuery, SearchGenre } from '@/interfaces/search';
+import { IArticleCard } from '@/interfaces/article';
 import { ArticleType, Platform, ReviewOrder, ReviewSort } from '@/constants/article';
 import { getArticles } from '@/services/article';
 import { SortBarDate, SortBarGenre } from '@/constants/dropdown';
@@ -20,6 +22,34 @@ const Container = styled.div`
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0em;
+  }
+  & .loadMore-container {
+    display: flex;
+    justify-content: center;
+
+    width: 960px;
+
+    padding-bottom: 25px;
+
+    & .loadMore-btn {
+      margin-top: 30px;
+
+      width: 130px;
+      height: 45px;
+      //padding: 8px 16px;
+      border-radius: 8px;
+
+      font-family: Poppins;
+      font-size: 18px;
+      font-weight: 600;
+
+      border: none;
+
+      background-color: ${({ theme }) => theme.color.primary};
+      color: #3d3d3d; // TODO: manage the color using theme instead
+
+      cursor: pointer;
+    }
   }
 `;
 
@@ -39,6 +69,7 @@ const initFilters: IArticleQuery = {
 const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
   const [filters, setFilters] = useState(initFilters);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredArticleList, setFilteredArticleList] = useState<IArticleCard[]>([]);
 
   const { isLoading, data } = useQuery({
     queryKey: [articleType, filters],
@@ -54,6 +85,10 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
     }));
   }, [currentPage]);
 
+  useEffect(() => {
+    setFilteredArticleList((preState) => [...preState, ...(filteredArticle ?? [])]);
+  }, [filteredArticle]);
+
   const getSortFromSelected = {
     [SortBarDate.Latest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.DESC },
     [SortBarDate.Oldest]: { sort: ReviewSort.CREATED_TIME, order: ReviewOrder.ASC },
@@ -61,11 +96,18 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
     [SortBarDate.Title]: { sort: ReviewSort.TITLE, order: ReviewOrder.ASC },
   };
 
+  const clearArticleListAndReSetCurrentPage = () => {
+    setFilteredArticleList([]);
+    setCurrentPage(1);
+  };
+
   const handlePlatformChange = (value: Platform) => {
+    clearArticleListAndReSetCurrentPage();
     setFilters((pre) => ({ ...pre, platform: value }));
   };
 
   const handleSortChange = (type: SortType, item: SortItem) => {
+    clearArticleListAndReSetCurrentPage();
     if (type === 'sort') {
       const { sort, order } = getSortFromSelected[item as SortBarDate];
       setFilters((pre) => ({ ...pre, sort, order }));
@@ -93,9 +135,11 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
       />
       <ShowCaseBody
         articleType={articleType}
-        filteredArticle={filteredArticle}
-        setCurrentPage={setCurrentPage}
+        filteredArticle={filteredArticleList}
       />
+      <div className="loadMore-container">
+        <LoadMore setCurrentPage={setCurrentPage} />
+      </div>
     </Container>
   );
 };
