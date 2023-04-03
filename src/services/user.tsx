@@ -36,8 +36,5 @@ export const getEmailExists = (email: string): Promise<AxiosResponse<boolean>> =
 export const getUserInfo = (): Promise<AxiosResponse<IUseDetailedInfo>> =>
   apiClient.get(`/users/info`);
 
-export const updateUserVerify = async (token: string): Promise<AxiosResponse<void>> =>
+export const updateUserVerify = async (token: string): Promise<AxiosResponse<string>> =>
   apiClient.put(`/users/verify-account/${token}`);
-
-export const sendActivateLink = async (id: number): Promise<AxiosResponse<void>> =>
-  apiClient.put(`/users/send-active-link/${id}`);

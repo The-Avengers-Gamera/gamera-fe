@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import ValidationInputs from '../ValidationInputs';
 import useModal from '@/context/loginModal';
-import { createUser, sendActivateLink } from '@/services/user';
+import { createUser } from '@/services/user';
 import { IUserSignUp } from '@/interfaces/user';
 
 const RegisterFormContainer = styled.form`
@@ -36,7 +37,7 @@ const ResisterButton = styled.button`
   font-weight: 700;
 `;
 
-const RegisterForm = ({ setEmailVerifyIsOpen }: any) => {
+const RegisterForm = () => {
   const { changeModalToOpen } = useModal();
   const [usernameInputValue, setUserNameInputValue] = useState({
     value: '',
@@ -50,6 +51,7 @@ const RegisterForm = ({ setEmailVerifyIsOpen }: any) => {
     value: '',
     valid: false,
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,12 +63,8 @@ const RegisterForm = ({ setEmailVerifyIsOpen }: any) => {
       };
       createUser(user).then((res) => {
         if (res.status === 200) {
-          sendActivateLink(res.data.id).then((response) => {
-            if (response.status === 200) {
-              changeModalToOpen(false);
-              setEmailVerifyIsOpen(true);
-            }
-          });
+          changeModalToOpen(false);
+          navigate('/activate-email', { replace: true });
         }
       });
     }

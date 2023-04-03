@@ -1,7 +1,7 @@
-import EmailActivate from '@/components/EmailActivate';
+import EmailVerify from '@/components/EmailVerify';
 
 const Verification = () => {
-  return <EmailActivate />;
+  return <EmailVerify />;
 };
 
 export default Verification;
