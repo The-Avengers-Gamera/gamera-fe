@@ -170,9 +170,11 @@ const CommentItem = ({
   const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
   const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
   const [commentInput, setCommentInput] = useState<string>('');
-  const { auth: currentUser } = useAuth();
+  const { auth } = useAuth();
   const { setModalIsOpen } = useModal();
   const { setToastIsOpen, setToastContent } = useToast();
+
+  const { user: currentUser, isLogin } = auth;
 
   if (currentUser) {
     const dummyProfileImgUrl =
@@ -296,7 +298,7 @@ const CommentItem = ({
               )}
             </div>
           )}
-          {currentUser && (
+          {isLogin && (
             <div
               className={`reply-input-box ${
                 replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
@@ -331,7 +333,7 @@ const CommentItem = ({
             </div>
           )}
           {/* Please login to comment */}
-          {!currentUser && (
+          {!isLogin && (
             <div
               className={`reply-input-box no-login ${
                 replyInputShown && activeReplyInputCommentId === id ? 'active' : ''

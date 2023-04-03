@@ -7,7 +7,6 @@ import { IComment, ICommentPost } from '../../../interfaces/comment';
 import { createComment } from '@/services/comment';
 import useToast from '@/context/notificationToast';
 import { ToastType } from '@/constants/notification';
-import logo from '@/assets/images/logo.png';
 import useAuth from '@/context/auth';
 import useModal from '@/context/loginModal';
 
@@ -108,13 +107,23 @@ interface Props {
 }
 
 const Comments = ({ commentList, articleId, setCommentList }: Props) => {
-  const { auth: currentUser } = useAuth();
+  const { auth } = useAuth();
+
+  const { user: currentUser, isLogin } = auth;
+
+  if (currentUser) {
+    const dummyProfileImgUrl =
+      'https://oystatic.ignimgs.com/src/core/img/social/avatars/male2.jpg?crop=1%3A1&width=36&dpr=2';
+    currentUser.profileImgUrl = currentUser.profileImgUrl || dummyProfileImgUrl;
+  }
 
   const [commentInput, setCommentInput] = useState<string>('');
 
   const { setToastIsOpen, setToastContent } = useToast();
 
   const { setModalIsOpen } = useModal();
+
+  const [activeReplyInputCommentId, setActiveReplyInputCommentId] = useState<number | null>(null);
 
   const postComment = async (comment: ICommentPost) => {
     try {
@@ -152,21 +161,19 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
     }
   };
 
-  const [activeReplyInputCommentId, setActiveReplyInputCommentId] = useState<number | null>(null);
-
   return (
     <Container>
       <h3>
         Conversation <span>{commentList.length} Comments</span>
       </h3>
       <hr />
-      {currentUser && (
+      {isLogin && (
         <div className="post-comment-input">
           <p className="username">{currentUser.name}</p>
           <div className="second-row">
             <div className="avatar-input">
               <img
-                src={currentUser.avatar || 'https://i.pravatar.cc/300'}
+                src={currentUser.profileImgUrl}
                 alt="avatar"
                 className="avatar"
               />
@@ -193,7 +200,7 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
           </div>
         </div>
       )}
-      {!currentUser && (
+      {!isLogin && (
         <div className="no-login-comment-input">
           <p className="login-to-comment">
             Please{' '}
