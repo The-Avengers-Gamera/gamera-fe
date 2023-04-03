@@ -16,6 +16,9 @@ import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
 import UserProfile from '@/pages/UserProfile';
+import MyLikes from '@/pages/MyLikes';
+import MyComments from '@/pages/MyComments';
+import MyArticles from '@/pages/MyArticles';
 
 const routes: RouteObject[] = [
   {
@@ -45,25 +48,21 @@ const routes: RouteObject[] = [
         ),
         children: [{ path: ':type', element: <Post /> }],
       },
+      { path: '/profile/', element: <UserProfile /> },
       {
-        path: '/account',
-        element: <UserProfile />,
-        children: [
-          {
-            path: 'my-articles',
-            element: <>remember to replace...</>,
-            children: [{ path: ':id', element: <>remember to replace...</> }],
-          },
-          {
-            path: 'liked',
-            element: <>remember to replace...</>,
-          },
-          {
-            path: 'commented',
-            element: <>remember to replace...</>,
-            children: [{ path: ':id', element: <>remember to replace...</> }],
-          },
-        ],
+        path: '/profile/my-likes',
+        element: <MyLikes />,
+        children: [{ path: ':id', element: <>remember to replace...</> }],
+      },
+      {
+        path: '/profile/my-comments',
+        element: <MyComments />,
+        children: [{ path: ':id', element: <>remember to replace...</> }],
+      },
+      {
+        path: '/profile/my-articles',
+        element: <MyArticles />,
+        children: [{ path: ':id', element: <>remember to replace...</> }],
       },
       { path: '/about-us', element: <AboutUs /> },
       { path: '/contact-us', element: <ContactUs /> },
