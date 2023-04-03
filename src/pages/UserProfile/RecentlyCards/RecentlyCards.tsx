@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 import RecentlyCard from './RecentlyCard/RecentlyCard';
 
@@ -11,6 +12,7 @@ type ItemType = {
 
 type Props = {
   columnName: string;
+  columnLink: string;
   isEditor: boolean;
 };
 
@@ -29,21 +31,24 @@ for (let i = 0; i < 3; ) {
   i += 1;
 }
 
-const RecentlyCards = ({ columnName, isEditor }: Props) => {
+const RecentlyCards = ({ columnName, columnLink, isEditor }: Props) => {
   const [cards] = useState(initialState);
+  const navigate = useNavigate();
+
   const getContainerClass = () => {
     if (isEditor) {
       return styles.editorContainer;
     }
     return styles.normalContainer;
   };
+
   return (
     <div className={`${getContainerClass()}`}>
       <div className={styles.columnTitle}>
         <span className={styles.columnName}>{columnName}</span>
-        <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
-          <span className={styles.viewMore}>VIEW MORE</span>
-        </a>
+        <span className={styles.viewMore}>
+          <Link to={columnLink}>VIEW MORE</Link>
+        </span>
       </div>
       {cards.map(({ coverUrl, title, commNum, likeNum }) => {
         return (

@@ -44,7 +44,7 @@ const UserProfile = () => {
           {isEditor && (
             <div className={styles.userDetails}>
               <p className={styles.detailNumber}>{userProps.numPosts}</p>
-              <p className={styles.detailCategory}>POSTS</p>
+              <p className={styles.detailCategory}>ARTICLES</p>
             </div>
           )}
         </div>
@@ -54,15 +54,18 @@ const UserProfile = () => {
         <RecentlyCards
           columnName="Likes"
           isEditor={isEditor}
+          columnLink="/profile/my-likes"
         />
         <RecentlyCards
           columnName="Comments"
           isEditor={isEditor}
+          columnLink="/profile/my-comments"
         />
         {isEditor && (
           <RecentlyCards
-            columnName="Posts"
+            columnName="Articles"
             isEditor={isEditor}
+            columnLink="/profile/my-articles"
           />
         )}
       </div>
