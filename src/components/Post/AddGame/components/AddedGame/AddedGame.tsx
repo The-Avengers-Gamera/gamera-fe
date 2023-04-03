@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICurrentGame, IGame } from '@/interfaces/game';
+import { IGame } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`
   border-radius: 15px;
@@ -58,14 +58,16 @@ const GenreContainer = styled.div`
 `;
 
 const PlatformContainer = styled.div`
-  width: 100%;
-  max-width: 100px;
-  max-height: 1rem;
-  overflow: hidden;
-  height: 30%;
-  font-size: 0.3rem;
+  width: 150px;
+  max-width: 150px;
+  max-height: 20px;
+  font-size: 15px;
   color: #6ddb03;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: scroll;
 `;
 
 const CloseContainer = styled.div`
@@ -100,22 +102,26 @@ export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: P
     backgroundColor: '#2C2F3B',
   };
 
+  const { imgUrl, name, publishers, platform } = CurrentGame;
+  const removeSpaces = (str: string) => {
+    return str.replace(/\s+/g, '');
+  };
+
   return (
     <AddedGameContainer style={useWindowStyle ? AddedGameWindowStyle : AddedGameButtonStyle}>
       <GameImageContainer>
         <Img
           alt="game"
-          src={CurrentGame.imgUrl}
+          src={imgUrl}
         />
       </GameImageContainer>
       <GameContentContainer>
         <GameNameAndGenreContainer>
-          <GameNameContainer>{CurrentGame.name}</GameNameContainer>
-          <GenreContainer>{CurrentGame.publishers}</GenreContainer>
+          <GameNameContainer>{name}</GameNameContainer>
+          <GenreContainer>{publishers}</GenreContainer>
         </GameNameAndGenreContainer>
-        <PlatformContainer>{CurrentGame.platform}</PlatformContainer>
+        <PlatformContainer id="scroll-container">{removeSpaces(platform)}</PlatformContainer>
       </GameContentContainer>
-
       <CloseContainer>
         {!useWindowStyle && <CloseButton onClick={changeIsAddAsClose}>X</CloseButton>}
       </CloseContainer>
