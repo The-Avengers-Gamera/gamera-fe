@@ -6,7 +6,7 @@ import { ITagSlim } from './tag';
 export interface IArticle {
   id: number;
   game?: IGame;
-  user?: IUser;
+  author?: IUser;
   coverImgUrl: string;
   tagList: ITagSlim[];
   title: string;
@@ -15,6 +15,8 @@ export interface IArticle {
   createdTime: string;
   updatedTime: string;
   commentList: IComment[];
+  likeNum: number;
+  commentNum: number;
 }
 
 export interface IArticlePut {
