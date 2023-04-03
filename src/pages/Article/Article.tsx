@@ -8,7 +8,7 @@ import { IArticle } from '../../interfaces/article';
 import { ArticleType } from '../../constants/article';
 import { IComment } from '../../interfaces/comment';
 import useToast from '../../context/notificationToast/useToast';
-import { EToastType } from '@/constants/notification';
+import { ToastType } from '@/constants/notification';
 
 const Container = styled.div`
   margin-left: 100px;
@@ -51,7 +51,7 @@ const Article = () => {
       } catch ({ response }) {
         // TODO: error information can be pop up
         setToastContent({
-          type: EToastType.ERROR,
+          type: ToastType.ERROR,
           message: "It seems like there's something wrong...",
           duration: 3000,
         });
