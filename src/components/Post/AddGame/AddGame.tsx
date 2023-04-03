@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { IGame } from '@/interfaces/game';
+import { IGame, IGameCard } from '@/interfaces/game';
 import AddedGame from './components/AddedGame';
 import AddGameWindow from './components/AddGameWindow';
 import EmptyGame from './components/EmptyGame';
@@ -27,7 +27,7 @@ const AddedGameContainer = styled.div`
 export const AddGame = () => {
   const [isAdd, setIsAdd] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentGame, setCurrentGame] = useState<IGame>({} as IGame);
+  const [currentGame, setCurrentGame] = useState<IGameCard>({} as IGameCard);
 
   const changeIsAddAsTrue = () => {
     setIsAdd(true);

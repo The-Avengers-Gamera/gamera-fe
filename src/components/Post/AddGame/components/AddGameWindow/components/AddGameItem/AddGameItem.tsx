@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICurrentGame, IGame } from '@/interfaces/game';
+import { ICurrentGame, IGame, IGameCard } from '@/interfaces/game';
 import AddedGame from '../../../AddedGame';
 
 const AddGameItemContainer = styled.div`
@@ -40,9 +40,9 @@ const AddedGameContainer = styled.div`
 `;
 
 type Props = {
-  game: IGame;
+  game: IGameCard;
   changeIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<IGame>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<IGameCard>>;
   closeModal: () => void;
 };
 

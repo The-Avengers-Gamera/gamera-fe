@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ICurrentGame, IGame } from '@/interfaces/game';
+import { ICurrentGame, IGame, IGameCard } from '@/interfaces/game';
 import AddGameItem from './components/AddGameItem';
 import { getGames } from '@/services/game';
 
@@ -40,12 +40,12 @@ const AddGameItemContainer = styled.div`
 
 type Props = {
   changeIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<IGame>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<IGameCard>>;
   closeModal: () => void;
 };
 
 export const AddGameWindow = ({ changeIsAdd, closeModal, setCurrentGame }: Props) => {
-  const [gameList, setGameList] = useState<IGame[]>([] as IGame[]);
+  const [gameList, setGameList] = useState<IGameCard[]>([] as IGameCard[]);
 
   useEffect(() => {
     getGames().then(({ data }) => {

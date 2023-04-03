@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IGame } from '@/interfaces/game';
+import { IGame, IGameCard } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`
   border-radius: 15px;
@@ -89,7 +89,7 @@ const CloseButton = styled.button`
 
 type Props = {
   useWindowStyle: boolean;
-  CurrentGame: IGame;
+  CurrentGame: IGameCard;
   changeIsAddAsClose: () => void;
 };
 
@@ -103,9 +103,6 @@ export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: P
   };
 
   const { imgUrl, name, publishers, platform } = CurrentGame;
-  const removeSpaces = (str: string) => {
-    return str.replace(/\s+/g, '');
-  };
 
   return (
     <AddedGameContainer style={useWindowStyle ? AddedGameWindowStyle : AddedGameButtonStyle}>
@@ -120,7 +117,7 @@ export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: P
           <GameNameContainer>{name}</GameNameContainer>
           <GenreContainer>{publishers}</GenreContainer>
         </GameNameAndGenreContainer>
-        <PlatformContainer id="scroll-container">{removeSpaces(platform)}</PlatformContainer>
+        <PlatformContainer id="scroll-container">{platform}</PlatformContainer>
       </GameContentContainer>
       <CloseContainer>
         {!useWindowStyle && <CloseButton onClick={changeIsAddAsClose}>X</CloseButton>}
