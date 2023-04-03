@@ -6,6 +6,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ArticleMainContent from './ArticleMainContent/ArticleMainContent';
 import { IArticle } from '../../../interfaces/article';
 import { nowToCreated } from '../../../utils/time';
+import randomImgUrl from '../../../utils/randomImgUrl';
 
 const Container = styled.div`
   margin-bottom: 0px;
@@ -168,7 +169,7 @@ const ArticleContent = ({ articleContent }: Props) => {
       <div className="article-info">
         <div className="author">
           <img
-            src={author?.profileImgUrl || 'https://i.imgur.com/0y0t0Xy.png'} // TODO: backend needs to add the user image
+            src={author?.profileImgUrl || randomImgUrl(27, 27)} // TODO: backend needs to add the user image
             alt="author-avatar"
           />
           <p>
@@ -188,7 +189,7 @@ const ArticleContent = ({ articleContent }: Props) => {
             <ul className="game-list">
               <li key={game?.id}>
                 <img
-                  src={game?.imgUrl || 'https://i.imgur.com/0y0t0Xy.png'} // TODO: backend needs to add the game image url
+                  src={game?.imgUrl || randomImgUrl(160, 160)} // TODO: backend needs to add the game image url
                   alt="game-cover"
                 />
                 <p>{game?.name}</p>
