@@ -12,13 +12,13 @@ const secTitleFont = {
 };
 
 const titleOfCards = {
-  fontFamily: 'Inter',
+  fontFamily: 'Roboto',
   fontWeight: 'Bold',
   fontSize: '16px',
 };
 
 const otherFont = {
-  fontFamily: 'Inter',
+  fontFamily: 'Roboto',
   fontWeight: 'Regular',
   fontSize: '14px',
 };
