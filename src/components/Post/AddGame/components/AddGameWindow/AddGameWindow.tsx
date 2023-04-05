@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ICurrentGame } from '@/interfaces/game';
+import { ICurrentGame, IGame, IGameCard } from '@/interfaces/game';
 import AddGameItem from './components/AddGameItem';
+import { getGames } from '@/services/game';
 
 const AddGameWindowContainer = styled.div`
   height: 100%;
@@ -34,46 +35,33 @@ const AddGameItemContainer = styled.div`
   margin-top: 1.4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 
 type Props = {
   changeIsAdd: React.Dispatch<React.SetStateAction<boolean>>;
-  setCurrentGame: React.Dispatch<React.SetStateAction<ICurrentGame>>;
+  setCurrentGame: React.Dispatch<React.SetStateAction<IGameCard>>;
   closeModal: () => void;
 };
 
 export const AddGameWindow = ({ changeIsAdd, closeModal, setCurrentGame }: Props) => {
-  const MockGameArr = [
-    {
-      name: 'Elden Ring',
-      genre: 'FROMSOFTWARE',
-      platform: ['PC,', 'XBOX,', 'PS4,', 'PS5'],
-      img: 'https://assets1.ignimgs.com/2023/03/21/atlasfallen-preview-deck-663300-1679407499860.jpg',
-    },
-    {
-      name: 'RStar Wars',
-      genre: 'WARE',
-      platform: ['XBOX,'],
-      img: 'https://assets-prd.ignimgs.com/2023/02/28/star-wars-the-deckbuilding-game-button-1677620694999.jpg',
-    },
-    {
-      name: 'Wo Long',
-      genre: 'ENDNIGHT',
-      platform: ['PS4,', 'PS5'],
-      img: 'https://assets-prd.ignimgs.com/2022/06/12/wo-long-button-1-1655066531634.jpg',
-    },
-  ];
+  const [gameList, setGameList] = useState<IGameCard[]>([] as IGameCard[]);
+
+  useEffect(() => {
+    getGames().then(({ data }) => {
+      setGameList(data);
+    });
+  }, []);
 
   return (
     <AddGameWindowContainer>
       <Header>ADD GAME</Header>
       <Input />
       <AddGameItemContainer>
-        {MockGameArr.map((mockGame) => (
+        {gameList.map((game) => (
           <AddGameItem
-            MockGame={mockGame}
+            key={game.id}
+            game={game}
             changeIsAdd={changeIsAdd}
             closeModal={closeModal}
             setCurrentGame={setCurrentGame}
