@@ -115,7 +115,6 @@ const Post = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (article, { setSubmitting }) => {
-      console.log(article);
       setSubmitting(true);
       try {
         const {
