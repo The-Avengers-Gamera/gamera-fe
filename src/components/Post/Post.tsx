@@ -115,6 +115,7 @@ const Post = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (article, { setSubmitting }) => {
+      console.log(article);
       setSubmitting(true);
       try {
         const {
@@ -126,6 +127,10 @@ const Post = () => {
       }
     },
   });
+
+  const setFormTagList = (tagList) => {
+    formik.setFieldValue('tagList', tagList);
+  };
 
   return (
     <PageWrapper>
@@ -145,7 +150,7 @@ const Post = () => {
                 onChange={formik.handleChange}
                 value={formik.values.title}
               />
-              <TagPicker />
+              <TagPicker setFormTagList={setFormTagList} />
             </Header>
             <TextEditor
               value={formik.values.text}
