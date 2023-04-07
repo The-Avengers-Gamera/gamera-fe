@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import style from './DropdownItem.module.css';
 
-const items = [
+export const moreMenuItems = [
   { label: 'ABOUT US', url: '/about-us' },
   { label: 'SUPPORT', url: '/support' },
   { label: 'TERMS', url: '/term' },
@@ -12,7 +12,7 @@ const DropdownItem = () => {
   return (
     <div className={style.container}>
       <ul className={style.items}>
-        {items.map(({ label, url }) => (
+        {moreMenuItems.map(({ label, url }) => (
           <li
             key={url}
             className={style.item}

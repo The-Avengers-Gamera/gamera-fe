@@ -1,6 +1,6 @@
+import React, { useEffect } from 'react';
 import { Box, Drawer, List, ListItem, Button, Typography, Menu, MenuItem } from '@mui/material';
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
 import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
 import RateReviewRoundedIcon from '@mui/icons-material/RateReviewRounded';
@@ -13,6 +13,7 @@ import style from './index.module.scss';
 import logo from './assets/logo.png';
 import useAuth from '@/context/auth';
 import NavListItem from './components/NavListItem';
+import { moreMenuItems } from './components/DropdownItem/DropdownItem';
 
 export const navItemStyle = {
   fontWeight: 'regular',
@@ -21,16 +22,62 @@ export const navItemStyle = {
   fontFamily: 'Russo One',
 };
 
-const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
+const generalLinks = [
+  { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
+  { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
+  { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
+];
+
+// TODO: user links router
+const userLinks = [
+  { route: '/profile', title: 'MY PROFILE' },
+  { route: '/liked', title: 'LIKED' },
+  { route: '/commented', title: 'COMMENTED' },
+  { route: '/my-post', title: 'MY POSTS' },
+];
+
+interface NavBarProps {
+  setIsMore: React.Dispatch<React.SetStateAction<boolean>>;
+  expendNavMoreRef: React.RefObject<HTMLButtonElement>;
+}
+
+const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
   const {
-    auth: { isLogin },
+    auth: { isLogin, isEditor },
     logout,
   } = useAuth();
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [navBtnSelected, setNavBtnSelected] = React.useState<string | null>();
   const open = Boolean(anchorEl);
+
+  const moreMenuPath = moreMenuItems.map((item) => item.url);
+
+  useEffect(() => {
+    if (generalLinks.some((item) => item.route === pathname)) {
+      generalLinks.forEach((item) => {
+        if (item.route === pathname) {
+          setNavBtnSelected(item.title);
+        }
+      });
+      return;
+    }
+
+    if (moreMenuPath.includes(pathname)) {
+      setNavBtnSelected('MORE');
+      return;
+    }
+
+    if (pathname.includes('settings')) {
+      setNavBtnSelected('SETTINGS');
+    }
+
+    if (userLinks.some((item) => item.route === pathname)) {
+      // TODO: handle user links
+    }
+  }, [pathname]);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -42,16 +89,9 @@ const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
     logout();
     navigate('/');
   };
-  const isEditor = true;
   const handleMoreClick = () => {
     setIsMore((prev: boolean) => !prev);
   };
-
-  const generalLinks = [
-    { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
-    { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
-    { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
-  ];
 
   return (
     <>
@@ -113,7 +153,7 @@ const NavBar = ({ setIsMore, expendBtnRef }: unknown) => {
                 <Button
                   className={style.navBtn}
                   sx={{ color: 'inherit' }}
-                  ref={expendBtnRef}
+                  ref={expendNavMoreRef}
                 >
                   <MoreHorizRoundedIcon />
                   <Typography sx={navItemStyle}>MORE</Typography>
