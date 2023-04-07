@@ -1,18 +1,19 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './index.module.css';
 import userIcon from './assets/icon.svg';
 import RecentlyCards from './RecentlyCards/RecentlyCards';
 import { IUserProfile } from '@/interfaces/user';
 import { getUserProfile } from '@/services/user';
-import AuthContext from '@/context/auth/AuthContext';
+import useAuth from '@/context/auth';
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-  const [isEditor, setIsEditor] = useState<boolean>(false);
-  const { auth } = useContext(AuthContext);
-  const userId = auth.user?.id;
+  const {
+    auth: { isEditor, user },
+  } = useAuth();
+  const userId = user?.id;
 
   useEffect(() => {
     let isCancelled = false;
@@ -23,11 +24,10 @@ const UserProfile = () => {
         if (!isCancelled) {
           setUserProfile(response.data);
           setIsLoading(false);
-          setIsEditor(response.data.postsCount !== null && response.data.postsCount !== undefined);
+          setError(null);
         }
       } catch (err) {
         if (!isCancelled) {
-          console.error('Error fetching user profile:', err);
           setError(
             err instanceof Error ? err : new Error('An error occurred while fetching user profile')
           );
@@ -85,19 +85,16 @@ const UserProfile = () => {
       <div className={styles.recentlyContainer}>
         <RecentlyCards
           columnName="Likes"
-          isEditor={isEditor}
-          articles={userProfile.likesArticlesDto}
+          articles={userProfile.likesArticles}
         />
         <RecentlyCards
           columnName="Comments"
-          isEditor={isEditor}
-          articles={userProfile.commentsArticlesDto}
+          articles={userProfile.commentsArticles}
         />
         {isEditor && (
           <RecentlyCards
             columnName="Posts"
-            isEditor={isEditor}
-            articles={userProfile.postsArticlesDto}
+            articles={userProfile.postsArticles}
           />
         )}
       </div>

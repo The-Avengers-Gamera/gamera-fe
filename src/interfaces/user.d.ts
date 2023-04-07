@@ -50,8 +50,8 @@ export interface IUserProfile {
   likesCount: number;
   commentsCount: number;
   postsCount?: number;
-  likesArticlesDto: Set<IArticleCard>;
-  commentsArticlesDto: Set<IArticleCard>;
-  postsArticlesDto?: Set<IArticleCard>;
+  likesArticles: IArticleCard[];
+  commentsArticles: IArticleCard[];
+  postsArticles?: IArticleCard[];
   updatedTime: string;
 }

@@ -3,40 +3,42 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import styles from './index.module.css';
 import { IArticleCard } from '@/interfaces/article';
 
-type CardProps = {
+interface RecentlyCardProps {
   article: IArticleCard;
-};
+}
 
-const RecentlyCard = ({ article }: CardProps) => {
+const RecentlyCard = ({
+  article: { id, coverImgUrl, title, commentNum, likeNum },
+}: RecentlyCardProps) => {
   const articleCard = (
     <div
-      key={article.id}
+      key={id}
       className={styles.cardBox}
     >
       <div className={styles.cover}>
         <a href="https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md">
           <img
-            src={article.coverImgUrl}
+            src={coverImgUrl}
             alt=""
           />
         </a>
       </div>
       <div className={styles.articleInfo}>
         <div className={styles.titleContainer}>
-          <span>{article.title}</span>
+          <span>{title}</span>
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.commentsContainer}>
             <div className={styles.commentsIcon}>
               <ChatRoundedIcon style={{ fontSize: '14px' }} />
             </div>
-            <span>{article.commentNum}</span>
+            <span>{commentNum}</span>
           </div>
           <div className={styles.likesContainer}>
             <div className={styles.likesIcon}>
               <FavoriteRoundedIcon style={{ fontSize: '14px' }} />
             </div>
-            <span>{article.likeCount}</span>
+            <span>{likeNum}</span>
           </div>
         </div>
       </div>
