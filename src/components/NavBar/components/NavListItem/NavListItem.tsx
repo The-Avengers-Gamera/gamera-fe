@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './NavListItem.module.scss';
 import { navItemStyle } from '../../NavBar';
 
-type Props = {
+type NavListItemProps = {
   route?: string;
   title: string;
   icon?: JSX.Element;
@@ -22,7 +22,7 @@ const NavListItem = ({
   setNavBtnSelected,
   navBtnSelected,
   ref,
-}: Props) => {
+}: NavListItemProps) => {
   const handleNavBtnClick = () => {
     setNavBtnSelected(title);
   };

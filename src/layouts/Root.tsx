@@ -61,8 +61,8 @@ const RootLayout = () => {
     auth: { isLogin },
   } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
-  const expendBtnRef = useRef<HTMLButtonElement>(null);
-  const [isMore, setIsMore] = useToggleWhenClickOutside(expendBtnRef, false);
+  const expendNavMoreRef = useRef<HTMLButtonElement>(null);
+  const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
 
   return (
@@ -90,7 +90,7 @@ const RootLayout = () => {
       <NavWrapper>
         <NavBar
           setIsMore={setIsMore}
-          expendBtnRef={expendBtnRef}
+          expendNavMoreRef={expendNavMoreRef}
         />
       </NavWrapper>
       <Main>
