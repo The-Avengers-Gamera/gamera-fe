@@ -14,7 +14,7 @@ import { SortItem, SortType } from '../Shares/SortBars/SortBars';
 const Container = styled.div`
   // border: 1px solid #fff;
 
-  padding: 45px 80px;
+  padding: 45px 45px;
 
   & h2 {
     font-family: 'Alumni Sans';

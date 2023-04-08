@@ -12,6 +12,8 @@ const cardIndexesImgs = [one, two, three, four, five];
 const CardContainer = styled.div`
   max-width: 360px;
   min-height: 50px;
+  @media screen and (max-width: 768px) {
+  }
 
   // border: 1px solid #fff;
 
@@ -33,6 +35,7 @@ const CardContainer = styled.div`
   }
 
   & .cardBody {
+    padding-right: 5px;
     & .reviewTitle {
       font-family: Montserrat;
 
@@ -43,6 +46,9 @@ const CardContainer = styled.div`
       font-weight: bold;
       text-transform: capitalize;
       letter-spacing: 0em;
+      @media screen and (max-width: 568px) {
+        font-size: 12px;
+      }
     }
     & .comment {
       font-family: Montserrat;
@@ -56,6 +62,9 @@ const CardContainer = styled.div`
       font-size: 14px;
       font-weight: bold;
       letter-spacing: 0em;
+      @media screen and (max-width: 568px) {
+        font-size: 8px;
+      }
     }
     &:hover {
       text-decoration: underline;

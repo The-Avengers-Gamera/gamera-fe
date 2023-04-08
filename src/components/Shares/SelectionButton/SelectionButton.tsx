@@ -3,7 +3,6 @@ import { Platform } from '@/constants/article';
 
 const ButtonContainer = styled.div`
   margin-right: 10px;
-
   & .btn {
     width: 130px;
     height: 45px;
@@ -38,6 +37,13 @@ const ButtonContainer = styled.div`
       height: 30px;
       font-size: 14px;
     }
+    @media screen and (max-width: 568px) {
+      & .btn {
+        margin-bottom:5px;
+        height: 20px;
+        width: 50vw;
+
+      }
   }
 `;
 

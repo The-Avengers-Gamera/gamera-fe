@@ -40,14 +40,22 @@ const GeneralContainer = styled.div`
     align-items: center;
   }
   @media screen and (max-width: 768px) {
-    /* Add your responsive styles here */
-    height: 800px;
+    height: 750px;
     padding: 0px 20px 60px;
 
     & .titleContainer h2 {
       width: 100%;
       font-size: 24px;
     }
+
+    & .bodyContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media screen and (max-width: 568px) {
+    height: 650px;
+    padding: 0px 20px 60px;
 
     & .bodyContainer {
       flex-direction: column;

@@ -58,6 +58,7 @@ const OuterContainer = styled.div`
       }
       .author-like-comment {
         display: flex;
+
         span {
           display: flex;
           justify-content: center;
@@ -82,8 +83,8 @@ const OuterContainer = styled.div`
   @media screen and (max-width: 768px) {
     .news-card {
       .left {
-        width: 200px;
-        height: 110px;
+        width: 140px;
+        height: 95px;
       }
       .right {
         .title {
@@ -95,6 +96,26 @@ const OuterContainer = styled.div`
         .game-author-like-comment {
           flex-direction: column;
           font-size: 12px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 568px) {
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .left {
+        margin-bottom: 10px;
+        width: 300px;
+        height: 160px;
+      }
+      .right {
+        .title {
+          font-size: 14px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
