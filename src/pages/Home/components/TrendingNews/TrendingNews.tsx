@@ -45,7 +45,7 @@ const TrendingNews = () => {
             <Typography sx={titleFont}>TRENDING NEWS</Typography>
           </Box>
         }
-        sx={{ padding: '2rem 3rem 3rem' }}
+        sx={{ padding: '2rem 7% 3rem' }}
         laptop={3.7}
         mobile={5.7}
         rowGapPx="30px"

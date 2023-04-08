@@ -10,7 +10,7 @@ import Header from './components/Header';
 import { otherFont } from './utils/useFont';
 
 const HomePage = () => (
-  <Box sx={{ minWidth: '768px', ...otherFont }}>
+  <Box sx={{ ...otherFont }}>
     <Box sx={{ bgcolor: theme.color.bg_primary }}>
       <Header />
       <Carousel />
