@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
@@ -14,10 +14,12 @@ import DropdownItem from '@/components/NavBar/components/DropdownItem';
 import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 import useAxiosLoading from '@/hooks/useAxiosLoading';
 import NotificationToast from '@/components/NotificationToast/NotificationToast';
+import NavExpandButton from '@/components/NavExpandButton/NavExpandButton';
 
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
+  overflow-y: scroll;
 `;
 
 const LoadingWrapper = styled.div`
@@ -31,6 +33,29 @@ const LoadingWrapper = styled.div`
 const NavWrapper = styled.div`
   width: 100px;
   flex: none;
+  transition: 0.3s;
+
+  @media (max-width: 850px) {
+    position: absolute;
+    height: 100%;
+    // move left by 100px and hide
+    transform: translateX(-100px);
+    width: 0;
+    z-index: 1200;
+    // if isExpanded, show
+    ${({ isNavExpanded }) => isNavExpanded && 'width: 100px; transform: translateX(0px);'}
+  }
+`;
+
+const NavExpandButtonWrapper = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+  transition: 0.3s;
+
+  // if isExpanded, move right
+  ${({ isNavExpanded }) => isNavExpanded && 'left: 120px;'}
 `;
 
 const LoginButtonWrapper = styled.div`
@@ -65,6 +90,22 @@ const RootLayout = () => {
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isNavExpanded, setIsNavExpanded] = useState(false); // for mobile
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup function to remove the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <PageWrapper>
       {isLoading && (
@@ -87,12 +128,22 @@ const RootLayout = () => {
         {displayLogInPopWindow ? <LoginForm /> : <SignUpModal />}
       </Modal>
 
-      <NavWrapper>
+      {windowWidth < 850 && (
+        <NavExpandButtonWrapper isNavExpanded={isNavExpanded}>
+          <NavExpandButton
+            isNavExpanded={isNavExpanded}
+            setIsNavExpanded={setIsNavExpanded}
+          />
+        </NavExpandButtonWrapper>
+      )}
+
+      <NavWrapper isNavExpanded={isNavExpanded}>
         <NavBar
           setIsMore={setIsMore}
           expendNavMoreRef={expendNavMoreRef}
         />
       </NavWrapper>
+
       <Main>
         <>
           {!isLogin && (
