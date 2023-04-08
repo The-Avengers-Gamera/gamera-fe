@@ -9,8 +9,8 @@ import { nowToCreated } from '@/utils/time';
 const Container = styled.div`
   //border: 1px solid #fff;
   margin-top: 45px;
-
   max-width: 960px;
+  padding-right: 100px;
 `;
 
 type ShowCaseBodyProps = {

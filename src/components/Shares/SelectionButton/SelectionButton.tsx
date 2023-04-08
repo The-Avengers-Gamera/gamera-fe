@@ -32,6 +32,13 @@ const ButtonContainer = styled.div`
     background-color: ${({ theme }) => theme.color.primary};
     color: #3d3d3d; // TODO: manage the color using theme
   }
+  @media screen and (max-width: 768px) {
+    & .btn {
+      width: 95px;
+      height: 30px;
+      font-size: 14px;
+    }
+  }
 `;
 
 interface SelectionButtonProps {

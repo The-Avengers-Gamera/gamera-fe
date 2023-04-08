@@ -30,6 +30,11 @@ const Button = styled.button`
   :hover {
     background-color: ${({ theme }) => theme.color.primary}80;
   }
+  @media screen and (max-width: 768px) {
+    height: 30px;
+    width: 180px;
+    font-size: 14px;
+  }
 `;
 
 interface MenuProps {

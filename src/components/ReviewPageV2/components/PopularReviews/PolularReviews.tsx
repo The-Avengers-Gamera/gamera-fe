@@ -9,7 +9,7 @@ import TopReviewCover from './components/TopReviewCover';
 const GeneralContainer = styled.div`
   background-color: #000000;
   height: 575px;
-  padding: 0px 85px 95px;
+  padding: 0px 95px 95px;
   position: relative;
   clip-path: polygon(0% 0%, 35% 0%, 37% 5%, 63% 5%, 65% 0%, 100% 0%, 100% 100%, 0% 100%);
 
@@ -38,6 +38,21 @@ const GeneralContainer = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    /* Add your responsive styles here */
+    height: 800px;
+    padding: 0px 20px 60px;
+
+    & .titleContainer h2 {
+      width: 100%;
+      font-size: 24px;
+    }
+
+    & .bodyContainer {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `;
 
@@ -71,6 +86,7 @@ const PopularReviews = () => {
             <Link to={`/article/${popularReviews[0].id}`}>
               <TopReviewCover coverImgUrl={popularReviews[0].coverImgUrl} />
             </Link>
+
             <Top5Reviews
               isLoading={isLoading}
               isError={isError}

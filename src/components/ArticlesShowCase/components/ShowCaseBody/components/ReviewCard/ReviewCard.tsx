@@ -26,6 +26,7 @@ const OuterContainer = styled.div`
       border-radius: 10px;
       transition: 0.3s;
     }
+
     .right {
       margin-left: 25px;
       display: flex;
@@ -37,6 +38,7 @@ const OuterContainer = styled.div`
         font-weight: bold;
         font-family: Montserrat;
       }
+
       .icon {
         margin-right: 7px;
       }
@@ -73,6 +75,26 @@ const OuterContainer = styled.div`
         }
         .comment-count .icon {
           color: ${({ theme }) => theme.color.primary};
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .news-card {
+      .left {
+        width: 200px;
+        height: 110px;
+      }
+      .right {
+        .title {
+          width: 250px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .game-author-like-comment {
+          flex-direction: column;
+          font-size: 12px;
         }
       }
     }
