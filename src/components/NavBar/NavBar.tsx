@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Drawer, List, ListItem, Button, Typography, Menu, MenuItem } from '@mui/material';
+import styled from 'styled-components';
+import ReactModal from 'react-modal';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import VideogameAssetRoundedIcon from '@mui/icons-material/VideogameAssetRounded';
 import FeedRoundedIcon from '@mui/icons-material/FeedRounded';
@@ -8,12 +10,25 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import MoreHorizRoundedIcon from '@mui/icons-material/MoreHorizRounded';
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import theme from '@/styles/theme';
+import globalTheme from '@/styles/theme';
 import style from './index.module.scss';
 import logo from './assets/logo.png';
+import searchIcon from '@/assets/nav-search.png';
 import useAuth from '@/context/auth';
 import NavListItem from './components/NavListItem';
 import { moreMenuItems } from './components/DropdownItem/DropdownItem';
+import SearchDialog from '../SearchDialog/SearchDialog';
+
+const SearchIcon = styled.img`
+  width: 1.5rem;
+`;
+
+const SearchModal = styled(ReactModal)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 export const navItemStyle = {
   fontWeight: 'regular',
@@ -22,18 +37,44 @@ export const navItemStyle = {
   fontFamily: 'Russo One',
 };
 
-const generalLinks = [
-  { route: '/games', title: 'GAME', icon: <VideogameAssetRoundedIcon /> },
-  { route: '/news', title: 'NEWS', icon: <FeedRoundedIcon /> },
-  { route: '/reviews', title: 'REVIEW', icon: <RateReviewRoundedIcon /> },
-];
+interface NavLink {
+  route?: string;
+  title: string;
+  icon?: JSX.Element;
+  isLink?: boolean;
+  handleNavClick: (title: string) => void;
+}
 
-// TODO: user links router
-const userLinks = [
-  { route: '/profile', title: 'MY PROFILE' },
-  { route: '/liked', title: 'LIKED' },
-  { route: '/commented', title: 'COMMENTED' },
-  { route: '/my-post', title: 'MY POSTS' },
+// TODO: user links list
+const userLinks: NavLink[] = [
+  {
+    route: '/profile',
+    title: 'MY PROFILE',
+    handleNavClick: () => {
+      // implement later
+    },
+  },
+  {
+    route: '/liked',
+    title: 'LIKED',
+    handleNavClick: () => {
+      // implement later
+    },
+  },
+  {
+    route: '/commented',
+    title: 'COMMENTED',
+    handleNavClick: () => {
+      // implement later
+    },
+  },
+  {
+    route: '/my-post',
+    title: 'MY POSTS',
+    handleNavClick: () => {
+      // implement later
+    },
+  },
 ];
 
 interface NavBarProps {
@@ -49,11 +90,48 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [navBtnSelected, setNavBtnSelected] = React.useState<string | null>();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+
   const open = Boolean(anchorEl);
 
   const moreMenuPath = moreMenuItems.map((item) => item.url);
+
+  const handleNavBtnSelected = (title: string) => {
+    setNavBtnSelected(title);
+  };
+
+  const handleSearchClick = () => {
+    setModalIsOpen(true);
+  };
+
+  const generalLinks: NavLink[] = [
+    {
+      route: '/games',
+      title: 'GAME',
+      icon: <VideogameAssetRoundedIcon />,
+      handleNavClick: handleNavBtnSelected,
+    },
+    {
+      title: 'Search',
+      isLink: false,
+      icon: <SearchIcon src={searchIcon} />,
+      handleNavClick: handleSearchClick,
+    },
+    {
+      route: '/news',
+      title: 'NEWS',
+      icon: <FeedRoundedIcon />,
+      handleNavClick: handleNavBtnSelected,
+    },
+    {
+      route: '/reviews',
+      title: 'REVIEW',
+      icon: <RateReviewRoundedIcon />,
+      handleNavClick: handleNavBtnSelected,
+    },
+  ];
 
   useEffect(() => {
     if (generalLinks.some((item) => item.route === pathname)) {
@@ -93,13 +171,32 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
     setIsMore((prev: boolean) => !prev);
   };
 
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <>
+      <SearchModal
+        isOpen={modalIsOpen}
+        onRequestClose={handleCloseModal}
+        shouldCloseOnOverlayClick
+        shouldCloseOnEsc
+        style={{
+          overlay: {
+            zIndex: 1500,
+            backgroundColor: 'rgba(65, 73, 90, 0.8)',
+            backdropFilter: 'blur(26px)',
+          },
+        }}
+      >
+        <SearchDialog onModalClose={handleCloseModal} />
+      </SearchModal>
       <Drawer
         sx={{
           width: '101px',
           '& .MuiDrawer-paper': {
-            bgcolor: theme.color.bg_nav,
+            bgcolor: globalTheme.color.bg_nav,
             minHeight: '340px',
             width: '101px',
             boxSizing: 'border-box',
@@ -129,10 +226,10 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
                   />
                 </Link>
               </ListItem>
-              {generalLinks.map(({ route, title, icon }) => (
+              {generalLinks.map(({ route, title, icon, handleNavClick }) => (
                 <NavListItem
                   navBtnSelected={navBtnSelected}
-                  setNavBtnSelected={setNavBtnSelected}
+                  onNavBtnSelected={handleNavClick}
                   route={route}
                   title={title}
                   icon={icon}
@@ -141,7 +238,7 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
               ))}
               <NavListItem
                 navBtnSelected={navBtnSelected}
-                setNavBtnSelected={() => {
+                onNavBtnSelected={() => {
                   handleMoreClick();
                   setNavBtnSelected('MORE');
                 }}
@@ -164,7 +261,7 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
               <Box className={style.navBarBottomGroup}>
                 <NavListItem
                   navBtnSelected={navBtnSelected}
-                  setNavBtnSelected={setNavBtnSelected}
+                  onNavBtnSelected={setNavBtnSelected}
                   route="/settings"
                   title="SETTINGS"
                   icon={<SettingsRoundedIcon />}
@@ -172,7 +269,7 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
                 <NavListItem
                   title="LOGOUT"
                   navBtnSelected={navBtnSelected}
-                  setNavBtnSelected={setNavBtnSelected}
+                  onNavBtnSelected={setNavBtnSelected}
                 >
                   <Button
                     className={style.navBtn}
@@ -186,7 +283,7 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
                 <NavListItem
                   title="USER"
                   navBtnSelected={navBtnSelected}
-                  setNavBtnSelected={setNavBtnSelected}
+                  onNavBtnSelected={setNavBtnSelected}
                 >
                   <Button
                     className={style.navBtn}

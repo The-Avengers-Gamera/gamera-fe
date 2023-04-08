@@ -17,7 +17,7 @@ import NotificationToast from '@/components/NotificationToast/NotificationToast'
 
 const PageWrapper = styled.div`
   display: flex;
-  height: 100%;
+  /* height: 100%; */
 `;
 
 const LoadingWrapper = styled.div`
@@ -64,6 +64,7 @@ const RootLayout = () => {
   const expendNavMoreRef = useRef<HTMLButtonElement>(null);
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
+  ReactModal.setAppElement('#root');
 
   return (
     <PageWrapper>
