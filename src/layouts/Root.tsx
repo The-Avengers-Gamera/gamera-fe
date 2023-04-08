@@ -133,6 +133,7 @@ const RootLayout = () => {
           <NavExpandButton
             isNavExpanded={isNavExpanded}
             setIsNavExpanded={setIsNavExpanded}
+            expendNavMoreRef={expendNavMoreRef}
           />
         </NavExpandButtonWrapper>
       )}

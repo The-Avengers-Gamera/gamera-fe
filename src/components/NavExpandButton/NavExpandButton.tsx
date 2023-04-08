@@ -19,11 +19,18 @@ const Button = styled.button`
 interface NavExpandButtonProps {
   isNavExpanded: boolean;
   setIsNavExpanded: (isNavExpanded: boolean) => void;
+  expendNavMoreRef: React.RefObject<HTMLDivElement>;
 }
 
-const NavExpandButton = ({ isNavExpanded, setIsNavExpanded }: NavExpandButtonProps) => {
+const NavExpandButton = ({
+  isNavExpanded,
+  setIsNavExpanded,
+  expendNavMoreRef,
+}: NavExpandButtonProps) => {
   const expendNavRef = useRef<HTMLButtonElement>(null);
-  const [isExpanded, setIsExpanded] = useToggleWhenClickOutside(expendNavRef, false);
+  const [isExpanded, setIsExpanded] = useToggleWhenClickOutside(expendNavRef, false, [
+    expendNavMoreRef,
+  ]);
 
   useEffect(() => {
     setIsNavExpanded(isExpanded);
