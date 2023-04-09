@@ -139,8 +139,8 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         message: errorMessage,
         duration: 3000,
       });
-      setCommentInput('');
     }
+    setCommentInput('');
   };
 
   const handleSendCommentClick = () => {
