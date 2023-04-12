@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { updateUserVerify } from '@/services/user';
 
 const EmailVerifyContainer = styled.form`
@@ -23,35 +24,44 @@ const InfoContainer = styled.div`
   padding: 10%;
 `;
 
-const EmailActivate = () => {
-  const [result, setResult] = useState('failed');
-  const [res, setRes] = useState('');
-  const queryParameters = new URLSearchParams(window.location.search);
+const VerifyResult = () => {
+  const navigate = useNavigate();
+  const [result, setResult] = useState('');
+  const [message, setMessage] = useState('');
+  const [queryParameters] = useSearchParams();
   const code = queryParameters.get('code');
   const token = String(code);
+
   useEffect(() => {
     async function verifyUser(): Promise<void> {
       try {
-        const { data, status } = await updateUserVerify(token);
+        const { status } = await updateUserVerify(token);
         if (status === 200) {
           setResult('succeed');
-          setRes(data);
+          setMessage(
+            'Congratulation, you already activate your account and can explore Gamera now'
+          );
         }
-      } catch ({ response }) {
-        setRes('Account already registered or link expired, please try again');
+      } catch {
+        setResult('failed');
+        setMessage('Account already registered or link expired, please try again');
       }
     }
     verifyUser();
   }, []);
 
+  if (!token) {
+    return navigate('/', { replace: true });
+  }
+
   return (
     <EmailVerifyContainer>
       <InfoContainer>
         <h2> Activate Account {result}</h2>
-        <p>{res}</p>
+        <p>{message}</p>
       </InfoContainer>
     </EmailVerifyContainer>
   );
 };
 
-export default EmailActivate;
+export default VerifyResult;

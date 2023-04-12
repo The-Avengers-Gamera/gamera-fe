@@ -16,8 +16,8 @@ import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
 import UserProfile from '@/pages/UserProfile';
-import EmailActivate from '@/components/EmailActivate';
-import Verification from '@/pages/Verification/Verification';
+import EmailActivate from '@/components/VerifyResult';
+import Verification from '@/pages/VerificationResult/VerificationResult';
 
 const routes: RouteObject[] = [
   {

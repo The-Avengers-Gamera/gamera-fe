@@ -1,4 +1,4 @@
-import EmailActivate from '@/components/EmailActivate';
+import EmailActivate from '@/components/VerifyResult';
 
 const EmailActivatePage = () => <EmailActivate />;
 

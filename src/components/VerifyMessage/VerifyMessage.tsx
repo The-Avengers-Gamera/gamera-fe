@@ -21,7 +21,7 @@ const InfoContainer = styled.div`
   padding: 10%;
 `;
 
-const EmailVerify = () => {
+const VerifyMessage = () => {
   return (
     <EmailVerifyContainer>
       <InfoContainer>
@@ -32,4 +32,4 @@ const EmailVerify = () => {
   );
 };
 
-export default EmailVerify;
+export default VerifyMessage;

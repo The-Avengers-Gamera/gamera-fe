@@ -64,7 +64,7 @@ const RegisterForm = () => {
       createUser(user).then((res) => {
         if (res.status === 200) {
           changeModalToOpen(false);
-          navigate('/activate-email', { replace: true });
+          navigate('/activate-email');
         }
       });
     }

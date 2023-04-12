@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import RegisterForm from './component/RegisterForm';
 import useModal from '@/context/loginModal';
-import EmailVerify from '../EmailVerify';
+import EmailVerify from '../VerifyMessage';
 
 const ModalContainer = styled.div`
   width: 30rem;
@@ -83,7 +83,6 @@ const FooterLink = styled.a`
 
 const RegisterModal = () => {
   const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
-  const [emailVerifyIsOpen, setEmailVerifyIsOpen] = useState(false);
 
   return (
     <ModalContainer>
@@ -96,17 +95,12 @@ const RegisterModal = () => {
         <HeaderContainer>
           <Header>SIGN UP</Header>
         </HeaderContainer>
-        <RegisterForm setEmailVerifyIsOpen={setEmailVerifyIsOpen} />
+        <RegisterForm />
         <TermAndPrivacyContainer>
           <FooterLink href="/term">Terms of User</FooterLink>
           <FooterLink href="/privacy">privacy policy</FooterLink>
         </TermAndPrivacyContainer>
       </RegisterModalContainer>
-      {emailVerifyIsOpen && (
-        <RegisterModalContainer>
-          <EmailVerify />
-        </RegisterModalContainer>
-      )}
     </ModalContainer>
   );
 };
