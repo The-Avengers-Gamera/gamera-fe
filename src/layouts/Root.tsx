@@ -30,7 +30,7 @@ const LoadingWrapper = styled.div`
   left: 0;
 `;
 
-interface NavSomethingProps {
+interface NavExpandProps {
   isNavExpanded: boolean;
 }
 const NavWrapper = styled.div`
@@ -46,7 +46,7 @@ const NavWrapper = styled.div`
     width: 0;
     z-index: 1200;
     // if isExpanded, show
-    ${({ isNavExpanded }: NavSomethingProps) =>
+    ${({ isNavExpanded }: NavExpandProps) =>
       isNavExpanded && 'width: 100px; transform: translateX(0px);'}
   }
 `;
@@ -59,7 +59,7 @@ const NavExpandButtonWrapper = styled.div`
   transition: 0.3s;
 
   // if isExpanded, move right
-  ${({ isNavExpanded }: NavSomethingProps) => isNavExpanded && 'left: 120px;'}
+  ${({ isNavExpanded }: NavExpandProps) => isNavExpanded && 'left: 120px;'}
 
   @media (min-width: 850px) {
     display: none;
