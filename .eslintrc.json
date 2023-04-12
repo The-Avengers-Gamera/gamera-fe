@@ -36,6 +36,7 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-max-props-per-line": [1, { "maximum": 1, "when": "multiline" }],
+    "react/jsx-props-no-spreading": [1, { "html": "enforce", "custom": "ignore" }],
     "import/prefer-default-export": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",

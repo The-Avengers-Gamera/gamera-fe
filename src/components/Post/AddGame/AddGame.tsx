@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { IGame, IGameCard } from '@/interfaces/game';
+import { IGameCard } from '@/interfaces/game';
 import AddedGame from './components/AddedGame';
 import AddGameWindow from './components/AddGameWindow';
 import EmptyGame from './components/EmptyGame';
