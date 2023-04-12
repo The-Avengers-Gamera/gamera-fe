@@ -30,6 +30,17 @@ const Button = styled.button`
   :hover {
     background-color: ${({ theme }) => theme.color.primary}80;
   }
+  @media screen and (max-width: 768px) {
+    height: 30px;
+    width: 180px;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 568px) {
+    margin-top: 5px;
+    height: 25px;
+    width: 28vw;
+    font-size: 12px;
+  }
 `;
 
 interface MenuProps {
@@ -39,7 +50,6 @@ const Menu = styled.ul<MenuProps>`
   position: absolute;
   top: 48px;
   border-radius: 8px;
-
   padding: 8px 4px;
   width: ${(props) => props.width}px;
   background-color: ${({ theme }) => theme.color.bg_secondary};
@@ -52,7 +62,6 @@ const MenuItem = styled.li`
   line-height: 32px;
   letter-spacing: 0;
   opacity: 0.6;
-
   color: #fff;
   padding: 0 16px;
   height: 32px;
@@ -62,6 +71,12 @@ const MenuItem = styled.li`
     background-color: ${({ theme }) => theme.color.primary}40;
     border-radius: 4px;
     opacity: 1;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
+  @media screen and (max-width: 568px) {
+    font-size: 12px;
   }
 `;
 

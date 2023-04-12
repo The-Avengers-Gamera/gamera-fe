@@ -3,7 +3,6 @@ import { Platform } from '@/constants/article';
 
 const ButtonContainer = styled.div`
   margin-right: 10px;
-
   & .btn {
     width: 130px;
     height: 45px;
@@ -31,6 +30,20 @@ const ButtonContainer = styled.div`
     // light up button
     background-color: ${({ theme }) => theme.color.primary};
     color: #3d3d3d; // TODO: manage the color using theme
+  }
+  @media screen and (max-width: 768px) {
+    & .btn {
+      width: 95px;
+      height: 30px;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 568px) {
+      & .btn {
+        margin-bottom:5px;
+        height: 20px;
+        width: 50vw;
+
+      }
   }
 `;
 

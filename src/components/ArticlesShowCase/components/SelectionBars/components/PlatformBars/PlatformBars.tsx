@@ -8,6 +8,13 @@ const Container = styled.div`
   justify-content: space-between;
   margin-bottom: 5px;
   padding-top: 5px;
+  @media screen and (max-width: 568px) {
+    display: flex;
+    margin-bottom: 5px;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+  }
 `;
 
 interface PlatformBarsProps {
