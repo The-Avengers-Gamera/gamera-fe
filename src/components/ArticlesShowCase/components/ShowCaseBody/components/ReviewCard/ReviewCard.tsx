@@ -87,7 +87,7 @@ interface IReviewCardPros {
 }
 
 const ReviewCard = ({
-  article: { coverImgUrl, title, date, description, author, likeCount, commentNum, game },
+  article: { coverImgUrl, title, date, description, author, likeNum: likeCount, commentNum, game },
 }: IReviewCardPros) => {
   return (
     <OuterContainer>

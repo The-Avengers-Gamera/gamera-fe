@@ -6,6 +6,7 @@ import {
   IUserLogin,
   IUserAuthority,
   IUseDetailedInfo,
+  IUserProfile,
 } from '@/interfaces/user';
 
 export const createUser = async (user: IUserSignUp): Promise<AxiosResponse<IUser>> =>
@@ -38,3 +39,7 @@ export const getUserInfo = async (): Promise<AxiosResponse<IUseDetailedInfo>> =>
 
 export const updateUserVerify = async (token: string): Promise<AxiosResponse<string>> =>
   apiClient.put(`/users/verify-account/${token}`);
+
+export const getUserProfile = async (
+  id: number | undefined
+): Promise<AxiosResponse<IUserProfile>> => apiClient.get(`/users/${id}/profile`);

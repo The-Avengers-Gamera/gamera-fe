@@ -49,7 +49,7 @@ const MostLikes = () => {
                 coverUrl={card.coverImgUrl}
                 title={card.title}
                 commNum={card.commentCount}
-                likeNum={card.likeCount}
+                likeNum={card.likeNum}
               />
             );
           })}

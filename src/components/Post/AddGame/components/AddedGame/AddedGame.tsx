@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICurrentGame } from '@/interfaces/game';
+import { IGame, IGameCard } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`
   border-radius: 15px;
@@ -11,7 +11,7 @@ const AddedGameContainer = styled.div`
 `;
 
 const GameImageContainer = styled.div`
-  width: 25%;
+  width: 40%;
   height: 80%;
   border-radius: 10px;
   margin-left: 1rem;
@@ -23,7 +23,7 @@ const Img = styled.img`
 `;
 
 const GameContentContainer = styled.div`
-  width: 50%;
+  width: 60%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -33,29 +33,41 @@ const GameContentContainer = styled.div`
 `;
 
 const GameNameAndGenreContainer = styled.div`
-  width: 100;
-  height: 30%;
+  width: 100%;
+  height: 80%;
 `;
 
 const GameNameContainer = styled.div`
   width: 100%;
-  font-size: 1.5rem;
+  height: 40%;
+  font-size: 1.2rem;
   color: #cbcbcb;
   font-weight: 700;
+  overflow: hidden;
 `;
 
 const GenreContainer = styled.div`
   width: 100%;
-  font-size: 0.3rem;
+  height: 50%;
+  max-height: 1rem;
+  init-height: 0.9rem;
+  font-size: 0.9rem;
   color: #cbcbcb;
   font-weight: 700;
+  overflow: hidden;
 `;
 
 const PlatformContainer = styled.div`
-  width: 100%;
-  font-size: 0.3rem;
+  width: 150px;
+  max-width: 150px;
+  max-height: 20px;
+  font-size: 15px;
   color: #6ddb03;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: scroll;
 `;
 
 const CloseContainer = styled.div`
@@ -77,7 +89,7 @@ const CloseButton = styled.button`
 
 type Props = {
   useWindowStyle: boolean;
-  CurrentGame: ICurrentGame;
+  CurrentGame: IGameCard;
   changeIsAddAsClose: () => void;
 };
 
@@ -90,22 +102,23 @@ export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: P
     backgroundColor: '#2C2F3B',
   };
 
+  const { imgUrl, name, publishers, platform } = CurrentGame;
+
   return (
     <AddedGameContainer style={useWindowStyle ? AddedGameWindowStyle : AddedGameButtonStyle}>
       <GameImageContainer>
         <Img
           alt="game"
-          src={CurrentGame.img}
+          src={imgUrl}
         />
       </GameImageContainer>
       <GameContentContainer>
         <GameNameAndGenreContainer>
-          <GameNameContainer>{CurrentGame.name}</GameNameContainer>
-          <GenreContainer>{CurrentGame.genre}</GenreContainer>
+          <GameNameContainer>{name}</GameNameContainer>
+          <GenreContainer>{publishers}</GenreContainer>
         </GameNameAndGenreContainer>
-        <PlatformContainer>{CurrentGame.platform}</PlatformContainer>
+        <PlatformContainer id="scroll-container">{platform}</PlatformContainer>
       </GameContentContainer>
-
       <CloseContainer>
         {!useWindowStyle && <CloseButton onClick={changeIsAddAsClose}>X</CloseButton>}
       </CloseContainer>

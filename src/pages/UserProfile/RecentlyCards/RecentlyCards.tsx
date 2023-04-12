@@ -1,36 +1,18 @@
-import { useState } from 'react';
+import useAuth from '@/context/auth';
 import styles from './index.module.css';
 import RecentlyCard from './RecentlyCard/RecentlyCard';
+import { IArticleCard } from '@/interfaces/article';
 
-type ItemType = {
-  coverUrl: string;
-  title: string;
-  commNum: string;
-  likeNum: string;
-};
-
-type Props = {
+interface RecentlyCardsProps {
   columnName: string;
-  isEditor: boolean;
-};
-
-const initialState: ItemType[] = [];
-
-const mockLikeItem = {
-  coverUrl:
-    'https://image.api.playstation.com/vulcan/ap/rnd/202206/0720/eEczyEMDd2BLa3dtkGJVE9Id.png',
-  title: 'The Last Of Us Part 1 Review',
-  commNum: '2.6K',
-  likeNum: '10,311',
-};
-for (let i = 0; i < 3; ) {
-  initialState.push(structuredClone(mockLikeItem));
-  mockLikeItem.title = `The Last Of Us Part 1 Review ${i}`; // mock data: make title unique
-  i += 1;
+  articles?: IArticleCard[];
 }
 
-const RecentlyCards = ({ columnName, isEditor }: Props) => {
-  const [cards] = useState(initialState);
+const RecentlyCards = ({ columnName, articles }: RecentlyCardsProps) => {
+  const {
+    auth: { isEditor },
+  } = useAuth();
+
   const getContainerClass = () => {
     if (isEditor) {
       return styles.editorContainer;
@@ -45,16 +27,12 @@ const RecentlyCards = ({ columnName, isEditor }: Props) => {
           <span className={styles.viewMore}>VIEW MORE</span>
         </a>
       </div>
-      {cards.map(({ coverUrl, title, commNum, likeNum }) => {
-        return (
-          <RecentlyCard
-            coverUrl={coverUrl}
-            title={title}
-            commNum={commNum}
-            likeNum={likeNum}
-          />
-        );
-      })}
+      {articles?.map((article) => (
+        <RecentlyCard
+          key={article.id}
+          article={article}
+        />
+      ))}
     </div>
   );
 };

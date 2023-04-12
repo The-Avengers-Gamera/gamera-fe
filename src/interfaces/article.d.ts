@@ -40,7 +40,7 @@ export interface IArticleCard {
     id: string;
     name: string;
   };
-  likeCount: number;
+  likeNum: number;
   commentNum: number;
   date?: string;
   createdTime: string;
