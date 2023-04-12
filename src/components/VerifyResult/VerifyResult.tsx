@@ -39,7 +39,7 @@ const VerifyResult = () => {
         if (status === 200) {
           setResult('succeed');
           setMessage(
-            'Congratulation, you already activate your account and can explore Gamera now'
+            'Congratulation, you already activated your account and feel free to explore Gamera now'
           );
         }
       } catch {
