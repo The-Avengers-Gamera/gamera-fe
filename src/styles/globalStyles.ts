@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  body.lock-scroll {
+    height: 100vh;
+    overflow: hidden;
+  }
+
   a {
     color: inherit;
     cursor: pointer;
@@ -32,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
   ul,
   li {
     list-style: none;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
 

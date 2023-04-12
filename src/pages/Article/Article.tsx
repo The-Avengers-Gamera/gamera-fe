@@ -24,6 +24,8 @@ const initArticleContent: IArticle = {
   createdTime: '',
   text: '',
   tagList: [],
+  likeNum: 0,
+  commentNum: 0,
   coverImgUrl: '',
   commentList: [],
 };
@@ -46,7 +48,6 @@ const Article = () => {
         if (status === 200) {
           setArticleContent({ ...article });
           setCommentList(article.commentList);
-          console.log(article);
         }
       } catch ({ response }) {
         // TODO: error information can be pop up

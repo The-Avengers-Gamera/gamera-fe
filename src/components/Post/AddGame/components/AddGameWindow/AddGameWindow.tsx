@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ICurrentGame, IGame, IGameCard } from '@/interfaces/game';
+import { IGameCard } from '@/interfaces/game';
 import AddGameItem from './components/AddGameItem';
 import { getGames } from '@/services/game';
+import useLockScroll from '@/hooks/useLockScroll';
 
 const AddGameWindowContainer = styled.div`
   height: 100%;
@@ -13,7 +14,7 @@ const AddGameWindowContainer = styled.div`
 `;
 
 const Header = styled.div`
-  color: #6ddb03;
+  color: ${({ theme }) => theme.color.primary};
   font-size: 25px;
   font-weight: 700;
   margin-top: 2rem;
@@ -23,7 +24,7 @@ const Input = styled.input`
   width: 90%;
   height: 3rem;
   background: #2c2f3b;
-  border: 2px solid #6ddb03;
+  border: 2px solid ${({ theme }) => theme.color.primary};
   border-radius: 10px;
   margin-top: 2rem;
 `;
@@ -46,6 +47,7 @@ type Props = {
 
 export const AddGameWindow = ({ changeIsAdd, closeModal, setCurrentGame }: Props) => {
   const [gameList, setGameList] = useState<IGameCard[]>([] as IGameCard[]);
+  useLockScroll();
 
   useEffect(() => {
     getGames().then(({ data }) => {
