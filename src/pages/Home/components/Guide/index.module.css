@@ -70,4 +70,17 @@
   height: 2px;
   width: 60px;
   margin-top: 30px;
+  flex: 0 0 1;
+}
+
+@media (max-width: 960px) {
+  /* set 3 modules per row */
+  .moduleContainer {
+    flex-wrap: wrap;
+    /* width: 80vw; */
+  }
+
+  .divider {
+    width: 0;
+  }
 }

@@ -68,6 +68,13 @@ const NewsCardTimeAuthor = styled.div`
       text-transform: uppercase;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    height: 80px;
+    align-items: center;
+    justify-content: space-around;
+  }
 `;
 type Props = {
   meta: {

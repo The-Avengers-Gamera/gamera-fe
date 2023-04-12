@@ -4,12 +4,14 @@
   text-align: center;
   background-color: #13141f;
   border-top: 1px solid rgba(61, 61, 61, 0.5);
+  width: 100%;
 }
 
 .container {
   display: flex;
   text-align: left;
   margin: 2% 2% 0;
+  padding-right: 10%;
 }
 
 .column_logo {
@@ -20,6 +22,8 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   padding-top: 35px;
+
+  flex: 1 1 0;
 }
 .copy {
   margin-top: 35px;
@@ -32,7 +36,7 @@
 .column_about {
   line-height: 30px;
   padding-top: 40px;
-  padding-left: 36%;
+  /* padding-left: 36%; */
   padding-right: 10%;
 }
 
@@ -58,4 +62,38 @@ ul {
 
 li:hover {
   color: #6ddb03;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding-right: 0;
+    align-items: center;
+
+    padding-bottom: 50px;
+  }
+
+  .container > * {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .column_logo {
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    display: flex;
+  }
+
+  .column_about {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .column_team {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

@@ -31,10 +31,10 @@ const PopularReviews = () => {
 
   return (
     <GeneralContainer
-      sx={{ padding: '0.5rem 7rem 3rem' }}
+      sx={{ padding: '0.5rem 7% 3rem' }}
       header={
         <ContainerHeader
-          padding="3rem 7rem 0rem"
+          padding="3rem 7% 0rem"
           title="POPULAR REVIEWS"
         />
       }

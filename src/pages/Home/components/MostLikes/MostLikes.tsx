@@ -28,10 +28,10 @@ const MostLikes = () => {
   }
   return (
     <GeneralContainer
-      sx={{ padding: '0.5rem 7rem 1rem' }}
+      sx={{ padding: '0.5rem 7% 1rem' }}
       header={
         <ContainerHeader
-          padding="5rem 7rem 0rem"
+          padding="5rem 7% 0rem"
           title="MOST LIKED"
         />
       }

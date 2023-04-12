@@ -8,6 +8,7 @@ import useModal from '@/context/loginModal';
 import useToast from '@/context/notificationToast/useToast';
 import { ToastType } from '@/constants/notification';
 import { nowToCreated } from '../../../../utils/time';
+import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 
 const childCommentIndent = '80px';
 const Container = styled.div`
@@ -76,7 +77,15 @@ const Container = styled.div`
 
       .reply-input-box {
         &.active {
-          display: block;
+          /* display: block; */
+          max-height: 500px;
+
+          .avatar-input {
+            top: 0;
+          }
+          .send-btn-container {
+            top: 0;
+          }
         }
 
         &.no-login {
@@ -94,12 +103,19 @@ const Container = styled.div`
             }
           }
         }
-        display: none;
+
+        /* display: none; */
+        transition: 0.3s;
+        max-height: 0;
+        overflow: hidden;
         width: 60%;
         .avatar-input {
           margin-top: 20px;
           display: flex;
           align-items: center;
+          transition: 0.3s;
+          position: relative;
+          top: -200px;
           img {
             width: 40px;
             height: 40px;
@@ -114,6 +130,9 @@ const Container = styled.div`
           display: flex;
           flex-direction: row-reverse;
           margin-top: 10px;
+          position: relative;
+          top: -200px;
+          transition: 0.3s;
           .send-btn {
             right: 0;
             font-weight: bold;
@@ -167,7 +186,15 @@ const CommentItem = ({
 }: Props) => {
   const { id, user, updatedTime, text, childComment } = comment;
   const { activeReplyInputCommentId, setActiveReplyInputCommentId } = activeReplyState;
-  const [replyInputShown, setReplyInputShown] = useState<boolean>(false);
+  const replyBtnRef = React.useRef<HTMLButtonElement>(null);
+  const replyInputRef = React.useRef<HTMLDivElement>(null);
+  const showChildCommentsBtnRef = React.useRef<HTMLButtonElement>(null);
+  const sendCommentBtnRef = React.useRef<HTMLButtonElement>(null);
+  const [replyInputShown, setReplyInputShown] = useToggleWhenClickOutside(replyBtnRef, false, [
+    replyInputRef,
+    showChildCommentsBtnRef,
+    sendCommentBtnRef,
+  ]);
   const [childCommentsShown, setChildCommentsShown] = useState<boolean>(false);
   const [commentInput, setCommentInput] = useState<string>('');
   const { auth } = useAuth();
@@ -226,8 +253,8 @@ const CommentItem = ({
         message: errorMessage,
         duration: 3000,
       });
-      setCommentInput('');
     }
+    setCommentInput('');
   };
 
   const handleSendCommentClick = () => {
@@ -244,6 +271,15 @@ const CommentItem = ({
       setToastContent({
         type: ToastType.SUCCESS,
         message: 'Comment posted successfully',
+        duration: 3000,
+      });
+      setChildCommentsShown(true);
+      setReplyInputShown(false);
+    } else {
+      setToastIsOpen(true);
+      setToastContent({
+        type: ToastType.INFO,
+        message: 'Comment cannot be empty',
         duration: 3000,
       });
     }
@@ -277,6 +313,7 @@ const CommentItem = ({
                 className="reply-btn"
                 type="button"
                 onClick={handleReplyClick}
+                ref={replyBtnRef}
               >
                 Reply
               </button>
@@ -292,6 +329,7 @@ const CommentItem = ({
                   type="button"
                   className="show-more-btn"
                   onClick={handleShowChildClick}
+                  ref={showChildCommentsBtnRef}
                 >
                   {!childCommentsShown ? 'Show more replies...' : 'Show less replies'}
                 </button>
@@ -304,7 +342,10 @@ const CommentItem = ({
                 replyInputShown && activeReplyInputCommentId === id ? 'active' : ''
               }`}
             >
-              <div className="avatar-input">
+              <div
+                className="avatar-input"
+                ref={replyInputRef}
+              >
                 <img
                   src={currentUser.profileImgUrl}
                   alt="avatar"
@@ -326,6 +367,7 @@ const CommentItem = ({
                   className="send-btn"
                   variant="contained"
                   onClick={handleSendCommentClick}
+                  ref={sendCommentBtnRef}
                 >
                   Send
                 </Button>

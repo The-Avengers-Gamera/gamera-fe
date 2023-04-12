@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const Container = styled.div`
-  //width: 565px;
   position: relative;
   width: 100%;
   height: 65px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: ${(cardBgColor) => cardBgColor.theme.color.bg_secondary};
 `;
 
@@ -18,6 +18,7 @@ const Cover = styled.div`
   width: 50px;
   margin-left: 7.5px;
   display: inline-block;
+  background-color: yellow;
 
   & img {
     width: 50px;
@@ -26,17 +27,20 @@ const Cover = styled.div`
 `;
 
 const ArticleOverview = styled.div`
+  flex: 1;
+  flex-shrink: 1;
   margin-left: 7.5px;
   margin-right: 7.5px;
   display: inline-block;
-  width: 400px;
+  width: 200px;
 
-  & .Tile_container {
-    & span {
-      ${titleOfCards}
-      margin-left: 5px;
-      font-size: 14px;
-    }
+  .Tile_container {
+    margin-left: 5px;
+    font-size: 14px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   & .Comment_container {
     margin-top: 15px;
@@ -49,8 +53,8 @@ const ArticleOverview = styled.div`
 `;
 
 const Like = styled.div`
-  position: absolute;
-  right: 10px;
+  /* position: absolute; */
+  margin-right: 10px;
   display: flex;
   align-items: center;
   display: inline-block;
@@ -97,9 +101,7 @@ const LikeCard = ({ coverUrl, title, commNum, likeNum }: LikeCardProps) => {
         </a>
       </Cover>
       <ArticleOverview>
-        <div className="Tile_container">
-          <span>{title}</span>
-        </div>
+        <div className="Tile_container">{title}</div>
         <div className="Comment_container">
           <CommentIcon />
           <span>{commNum}</span>
