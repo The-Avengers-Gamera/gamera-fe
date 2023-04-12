@@ -1,15 +1,16 @@
-import React from 'react';
 import { Box, ListItem, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import style from './NavListItem.module.scss';
 import { navItemStyle } from '../../NavBar';
+import ConditionalWrapper from '@/components/Shares/ConditionalWrapper/ConditionalWrapper';
 
 type NavListItemProps = {
   route?: string;
   title: string;
   icon?: JSX.Element;
+  isLink?: boolean;
   children?: JSX.Element;
-  setNavBtnSelected: React.Dispatch<React.SetStateAction<string | null | undefined>>;
+  onNavBtnSelected: (title: string) => void;
   navBtnSelected: string | null | undefined;
   ref?: undefined;
 };
@@ -18,13 +19,14 @@ const NavListItem = ({
   route,
   title,
   icon,
+  isLink,
   children,
-  setNavBtnSelected,
+  onNavBtnSelected,
   navBtnSelected,
   ref,
 }: NavListItemProps) => {
   const handleNavBtnClick = () => {
-    setNavBtnSelected(title);
+    onNavBtnSelected(title);
   };
 
   return (
@@ -39,9 +41,16 @@ const NavListItem = ({
         ref={ref || null}
       >
         {children || (
-          <Link
-            style={{ width: 100 }}
-            to={route || ''}
+          <ConditionalWrapper
+            condition={isLink || true}
+            renderWrapper={(wrapperChildren) => (
+              <Link
+                style={{ width: 100 }}
+                to={route || ''}
+              >
+                {wrapperChildren}
+              </Link>
+            )}
           >
             <Button
               className={style.navBtn}
@@ -50,7 +59,7 @@ const NavListItem = ({
               {icon}
               <Typography sx={navItemStyle}>{title}</Typography>
             </Button>
-          </Link>
+          </ConditionalWrapper>
         )}
       </Box>
     </ListItem>

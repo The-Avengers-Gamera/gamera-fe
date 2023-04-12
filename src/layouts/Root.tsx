@@ -89,6 +89,7 @@ const RootLayout = () => {
   const expendNavMoreRef = useRef<HTMLButtonElement>(null);
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
+  ReactModal.setAppElement('#root');
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isNavExpanded, setIsNavExpanded] = useState(false); // for mobile

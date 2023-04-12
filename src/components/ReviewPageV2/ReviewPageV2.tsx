@@ -6,7 +6,6 @@ import { ArticleType } from '@/constants/article';
 
 const PageContainer = styled.div`
   background-color: ${({ theme }) => theme.color.bg_primary};
-
   padding-top: 100px;
 `;
 
