@@ -5,6 +5,7 @@ import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { Container } from '@mui/material';
 import { ITagSlim } from '../../../interfaces/tag';
+import { getTags } from '@/services/tag';
 
 const Div = styled.div`
   padding-bottom: 1.4rem;
@@ -13,14 +14,15 @@ const Div = styled.div`
   margin-top: 20px;
 `;
 
+interface ITagPickerProps {
+  setFormTagList: (tagList: ITagSlim[]) => void;
+}
+
 const filter = createFilterOptions();
 
-const TagPicker = ({ setFormTagList }) => {
-  const options = tagList;
-  // const value = [];
-  // const setValue = (a: string[]) => {};
-
+const TagPicker = ({ setFormTagList }: ITagPickerProps) => {
   const [value, setValue] = React.useState<ITagSlim[]>([]);
+  const [options, setOptions] = React.useState<ITagSlim[]>([]);
 
   useEffect(() => {
     if (value.length > 4) {
@@ -28,6 +30,12 @@ const TagPicker = ({ setFormTagList }) => {
     }
     setFormTagList(value);
   }, [value]);
+
+  useEffect(() => {
+    getTags().then((res) => {
+      setOptions(res.data);
+    });
+  }, []);
 
   return (
     <Div>
@@ -72,7 +80,7 @@ const TagPicker = ({ setFormTagList }) => {
         clearOnBlur
         handleHomeEndKeys
         id="tag-picker"
-        options={tagList}
+        options={options}
         getOptionLabel={(option) => {
           // Value selected with enter, right from the input
           if (typeof option === 'string') {
@@ -100,18 +108,3 @@ const TagPicker = ({ setFormTagList }) => {
 };
 
 export default TagPicker;
-
-const tagList = [
-  { name: 'xbox', id: 1 },
-  { name: 'ps5', id: 2 },
-  { name: 'pc', id: 3 },
-  { name: 'nintendo', id: 4 },
-  { name: 'mobile', id: 5 },
-  { name: 'ios', id: 6 },
-  { name: 'android', id: 7 },
-  { name: 'mac', id: 8 },
-  { name: 'linux', id: 9 },
-  { name: 'windows', id: 10 },
-  { name: 'gaming', id: 11 },
-  { name: 'gamer', id: 12 },
-];
