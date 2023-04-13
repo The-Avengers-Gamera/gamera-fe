@@ -27,7 +27,7 @@ const Title = styled.div`
   width: 205px;
 `;
 
-const GameCard = styled.div`
+const Card = styled.div`
   margin-top: 3%;
   padding: 10px 13px 3px 10px;
   margin-right: 67px;
@@ -92,10 +92,10 @@ type GameCardProps = {
   };
 };
 
-const ReviewCard = ({ gameData }: GameCardProps) => {
+const GameCard = ({ gameData }: GameCardProps) => {
   const { imgUrl, name, scores, platform, publishers } = gameData;
   return (
-    <GameCard>
+    <Card>
       <GameImg
         src={imgUrl}
         alt="game image"
@@ -110,8 +110,8 @@ const ReviewCard = ({ gameData }: GameCardProps) => {
         <Platform>{platform}</Platform>
         <Publisher>{publishers}</Publisher>
       </Wrapper1>
-    </GameCard>
+    </Card>
   );
 };
 
-export default ReviewCard;
+export default GameCard;

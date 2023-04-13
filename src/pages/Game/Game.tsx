@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { IGameCard } from '@/interfaces/game';
 import GameCard from './components/GameCard';
 import { getGames } from '@/services/game';
+import GameLoading from './components/GameLoading';
 
 const TopContainer = styled.div`
   margin: 5% auto;
@@ -37,10 +38,12 @@ const Wrapper = styled.div`
   margin-left: 6%;
 `;
 
+const inLoading = [1, 2, 3, 4, 5, 6, 7, 8];
+
 const GamePage = () => {
   const [gameCards, setGameCards] = useState<IGameCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [msg, setMsg] = useState<string>('Loading...');
+  // const [msg, setMsg] = useState<string>('Loading...');
 
   useEffect(() => {
     getGames()
@@ -49,8 +52,9 @@ const GamePage = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        setMsg(err.error);
-        setMsg('Fail to load');
+        // setMsg(err.error);
+        // setMsg('');
+        return `Fail to load${err}`;
       });
   }, []);
 
@@ -61,7 +65,7 @@ const GamePage = () => {
         <Header2>GAMES</Header2>
         <Wrapper>
           {isLoading
-            ? [msg]
+            ? inLoading.map((index) => <GameLoading key={index} />)
             : gameCards?.map((gameCard) => (
                 <GameCard
                   gameData={{
