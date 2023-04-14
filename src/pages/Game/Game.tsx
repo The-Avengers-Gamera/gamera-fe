@@ -43,7 +43,6 @@ const inLoading = [1, 2, 3, 4, 5, 6, 7, 8];
 const GamePage = () => {
   const [gameCards, setGameCards] = useState<IGameCard[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [msg, setMsg] = useState<string>('Loading...');
 
   useEffect(() => {
     getGames()
@@ -52,8 +51,6 @@ const GamePage = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        // setMsg(err.error);
-        // setMsg('');
         return `Fail to load${err}`;
       });
   }, []);

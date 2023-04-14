@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Skeleton from '@mui/material/Skeleton';
 import { IArticleCard } from '@/interfaces/article';
 import { getPopularReviews } from '@/services/article';
 import Top5Reviews from './components/Top5Reviews';
@@ -64,9 +65,20 @@ const GeneralContainer = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+  margin-top: 20px;
+`;
+
+const TopReviews = styled.div`
+  margin-left: 40px;
+`;
+
 const PopularReviews = () => {
   const [popularReviews, setPopularReviews] = useState<IArticleCard[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
@@ -82,6 +94,32 @@ const PopularReviews = () => {
         setIsError(true);
       });
   }, []);
+
+  if (isLoading) {
+    return (
+      <GeneralContainer>
+        <div className="titleContainer">
+          <h2>Popular Reviews</h2>
+        </div>
+        <div className="bodyContainer">
+          <Container>
+            <Skeleton
+              variant="rounded"
+              width={600}
+              height={390}
+            />
+            <TopReviews>
+              <Skeleton
+                variant="rounded"
+                width={385}
+                height={390}
+              />
+            </TopReviews>
+          </Container>
+        </div>
+      </GeneralContainer>
+    );
+  }
 
   return (
     <GeneralContainer>
