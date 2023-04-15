@@ -14,7 +14,7 @@ import { SortItem, SortType } from '../Shares/SortBars/SortBars';
 const Container = styled.div`
   // border: 1px solid #fff;
 
-  padding: 45px 84px 0%;
+  padding: 45px 45px;
 
   & h2 {
     font-family: 'Alumni Sans';
@@ -49,6 +49,11 @@ const Container = styled.div`
       color: #3d3d3d; // TODO: manage the color using theme instead
 
       cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    & .loadMore-container {
+      width: 100%;
     }
   }
 `;

@@ -8,7 +8,6 @@ import { SortType } from '@/components/Shares/SortBars/SortBars';
 
 const Container = styled.div`
   // border: 1px solid #fff;
-
   margin-top: 45px;
 
   display: flex;

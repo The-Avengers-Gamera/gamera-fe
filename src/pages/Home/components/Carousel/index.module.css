@@ -86,3 +86,24 @@
 .carouselBtnNext {
   right: 0px;
 } */
+
+@media (max-width: 1200px) {
+  .container {
+    width: 700px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 760px) {
+  .container {
+    width: 600px;
+    height: 380px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 500px;
+    height: 350px;
+  }
+}

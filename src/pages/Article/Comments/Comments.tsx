@@ -139,8 +139,8 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
         message: errorMessage,
         duration: 3000,
       });
-      setCommentInput('');
     }
+    setCommentInput('');
   };
 
   const handleSendCommentClick = () => {
@@ -156,6 +156,13 @@ const Comments = ({ commentList, articleId, setCommentList }: Props) => {
       setToastContent({
         type: ToastType.SUCCESS,
         message: 'Comment posted successfully',
+        duration: 3000,
+      });
+    } else {
+      setToastIsOpen(true);
+      setToastContent({
+        type: ToastType.INFO,
+        message: 'Comment cannot be empty',
         duration: 3000,
       });
     }
