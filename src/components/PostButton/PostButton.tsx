@@ -1,6 +1,13 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import useAuth from '@/context/auth';
 
+const Container = styled.div`
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+`;
 const Button = styled.button`
   border: 1px solid black;
   height: 100%;
@@ -14,14 +21,25 @@ const Button = styled.button`
 `;
 
 const PostButton = () => {
-  const {
-    auth: { isLogin, isEditor },
-    logout,
-  } = useAuth();
-  console.log(isEditor);
-  console.log(isLogin);
+  const [isPost, setIsPost] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/post', { replace: true });
+    setIsPost((prev) => !prev);
+  };
 
-  return <Button type="button">POST {isLogin}</Button>;
+  return (
+    <Container>
+      {!isPost && (
+        <Button
+          type="button"
+          onClick={() => handleClick()}
+        >
+          POST
+        </Button>
+      )}
+    </Container>
+  );
 };
 
 export default PostButton;
