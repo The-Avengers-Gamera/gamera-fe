@@ -16,6 +16,8 @@ import ContactUs from '@/pages/ContactUs';
 import AboutUs from '@/pages/AboutUs';
 import Article from '@/pages/Article';
 import UserProfile from '@/pages/UserProfile';
+import EmailActivate from '@/components/VerifyResult';
+import Verification from '@/pages/VerificationResult/VerificationResult';
 
 const routes: RouteObject[] = [
   {
@@ -28,6 +30,8 @@ const routes: RouteObject[] = [
       { path: '/reviews', element: <Review /> },
       { path: '/reviews/:platform', element: <Review /> },
       { path: '/article/:id', element: <Article /> },
+      { path: '/verification', element: <EmailActivate /> },
+      { path: '/activate-email', element: <Verification /> },
       {
         path: '/settings',
         element: (

@@ -1,6 +1,16 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import RegisterForm from './component/RegisterForm';
 import useModal from '@/context/loginModal';
+import EmailVerify from '../VerifyMessage';
+
+const ModalContainer = styled.div`
+  width: 30rem;
+  height: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: evenly;
+`;
 
 const RegisterModalContainer = styled.div`
   width: 30rem;
@@ -75,21 +85,23 @@ const RegisterModal = () => {
   const { setModalIsOpen, changeDisplayLogInPopWindow } = useModal();
 
   return (
-    <RegisterModalContainer>
-      <BackAndCloseButtonContainer>
-        <BackButton onClick={() => changeDisplayLogInPopWindow(true)}>{'<'} Back</BackButton>
+    <ModalContainer>
+      <RegisterModalContainer>
+        <BackAndCloseButtonContainer>
+          <BackButton onClick={() => changeDisplayLogInPopWindow(true)}>{'<'} Back</BackButton>
 
-        <CloseButton onClick={() => setModalIsOpen(false)}>&times;</CloseButton>
-      </BackAndCloseButtonContainer>
-      <HeaderContainer>
-        <Header>SIGN UP</Header>
-      </HeaderContainer>
-      <RegisterForm />
-      <TermAndPrivacyContainer>
-        <FooterLink href="/term">Terms of User</FooterLink>
-        <FooterLink href="/privacy">privacy policy</FooterLink>
-      </TermAndPrivacyContainer>
-    </RegisterModalContainer>
+          <CloseButton onClick={() => setModalIsOpen(false)}>&times;</CloseButton>
+        </BackAndCloseButtonContainer>
+        <HeaderContainer>
+          <Header>SIGN UP</Header>
+        </HeaderContainer>
+        <RegisterForm />
+        <TermAndPrivacyContainer>
+          <FooterLink href="/term">Terms of User</FooterLink>
+          <FooterLink href="/privacy">privacy policy</FooterLink>
+        </TermAndPrivacyContainer>
+      </RegisterModalContainer>
+    </ModalContainer>
   );
 };
 

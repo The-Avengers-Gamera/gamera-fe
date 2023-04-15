@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import ValidationInputs from '../ValidationInputs';
 import useModal from '@/context/loginModal';
 import { createUser } from '@/services/user';
@@ -50,6 +51,7 @@ const RegisterForm = () => {
     value: '',
     valid: false,
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,6 +64,7 @@ const RegisterForm = () => {
       createUser(user).then((res) => {
         if (res.status === 200) {
           changeModalToOpen(false);
+          navigate('/activate-email');
         }
       });
     }
