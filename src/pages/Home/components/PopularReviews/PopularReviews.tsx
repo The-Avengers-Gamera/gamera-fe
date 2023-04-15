@@ -6,6 +6,9 @@ import { getArticles } from '@/services/article';
 import { IArticleCard } from '@/interfaces/article';
 import { nowToCreated } from '@/utils/time';
 import { ArticleType, Platform } from '@/constants/article';
+import ReviewCardLoading from './components/ReviewCard/ReviewCardLoading';
+
+const inLoading = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const PopularReviews = () => {
   const [reviewCards, setReviewCards] = useState<IArticleCard[]>([]);
@@ -43,7 +46,7 @@ const PopularReviews = () => {
       divider
     >
       {isLoading
-        ? [msg]
+        ? inLoading.map((index) => <ReviewCardLoading key={index} />)
         : reviewCards?.map((reviewCard) => (
             <ReviewCard
               key={reviewCard.id}

@@ -10,6 +10,9 @@ import { getArticles } from '@/services/article';
 import { IArticleCard } from '@/interfaces/article';
 import { nowToCreated } from '@/utils/time';
 import { ArticleType, Platform } from '@/constants/article';
+import TrendingNewsLoading from './HomeNewsCard/TrendingNewsLoading';
+
+const inLoading = [1, 2, 3, 4, 5, 6];
 
 const TrendingNews = () => {
   const [newsCards, setNewsCards] = useState<IArticleCard[]>([]);
@@ -51,7 +54,7 @@ const TrendingNews = () => {
         rowGapPx="30px"
       >
         {isLoading
-          ? [msg]
+          ? inLoading.map((index) => <TrendingNewsLoading key={index} />)
           : newsCards?.map((newsCard) => (
               <HomeNewsCard
                 key={newsCard.id}

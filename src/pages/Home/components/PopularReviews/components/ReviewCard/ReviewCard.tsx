@@ -6,7 +6,6 @@ import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const Container = styled.div`
   width: 100%;
-  min-width: 150px;
 `;
 
 const Cover = styled.div`
