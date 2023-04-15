@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import Skeleton from '@mui/material/Skeleton';
 import TrendingNewsFirstItem from './TrendingNewsFirstItem/TrendingNewsFirstItem';
 import TrendingNewsItem from './TrendingNewsItem/TrendingNewsItem';
 import { getNews } from '@/services/article';
@@ -62,6 +63,76 @@ const NewsContainer = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 40px;
+  margin-bottom: 20px;
+  width: 1800px;
+  height: auto;
+`;
+
+const SubContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: s;
+  width: 1200px;
+  height: auto;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  flex: 33%;
+  margin-bottom: 20px;
+  height: 90px;
+`;
+
+const inLoading = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const SmallNews = () => {
+  return (
+    <TextContainer>
+      <Skeleton
+        variant="rectangular"
+        width={20}
+        height={15}
+      />
+      <Skeleton
+        variant="rectangular"
+        width={280}
+        height={15}
+      />
+      <Skeleton
+        variant="rectangular"
+        width={200}
+        height={15}
+      />
+    </TextContainer>
+  );
+};
+
+const Loading = () => {
+  return (
+    <Container>
+      <Skeleton
+        variant="rectangular"
+        width={350}
+        height={370}
+      />
+      <SubContainer>
+        {inLoading.map((index) => (
+          <SmallNews key={index} />
+        ))}
+      </SubContainer>
+    </Container>
+  );
+};
+
 const TrendingNews = () => {
   const [trendingNews, setTrendingNews] = useState<IArticle[]>();
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +166,7 @@ const TrendingNews = () => {
       </TrendingNewsTitle>
       <NewsContainer>
         <>
-          {isLoading && <div>loading...</div>}
+          {isLoading && <Loading />}
           {isError && <div>load failed</div>}
           {trendingNews && (
             <>
