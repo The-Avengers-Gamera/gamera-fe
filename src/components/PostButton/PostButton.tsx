@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import useAuth from '@/context/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   border: 1px solid black;
@@ -21,16 +19,21 @@ const Button = styled.button`
 `;
 
 const PostButton = () => {
-  const [isPost, setIsPost] = useState<boolean>(false);
+  const location = useLocation();
+  const isPost = () => {
+    if (location.pathname === '/post') {
+      return true;
+    }
+    return false;
+  };
   const navigate = useNavigate();
   const handleClick = () => {
     navigate('/post', { replace: true });
-    setIsPost((prev) => !prev);
   };
 
   return (
     <Container>
-      {!isPost && (
+      {!isPost() && (
         <Button
           type="button"
           onClick={() => handleClick()}
