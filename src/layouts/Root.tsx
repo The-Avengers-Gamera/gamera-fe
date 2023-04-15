@@ -15,6 +15,7 @@ import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 import useAxiosLoading from '@/hooks/useAxiosLoading';
 import NotificationToast from '@/components/NotificationToast/NotificationToast';
 import NavExpandButton from '@/components/NavExpandButton/NavExpandButton';
+import PostButton from '@/components/PostButton/PostButton';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ const Main = styled.main`
 
 const RootLayout = () => {
   const {
-    auth: { isLogin },
+    auth: { isLogin, isEditor },
   } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
   const expendNavMoreRef = useRef<HTMLButtonElement>(null);
@@ -151,6 +152,11 @@ const RootLayout = () => {
           {!isLogin && (
             <LoginButtonWrapper>
               <LoginButton />
+            </LoginButtonWrapper>
+          )}
+          {isEditor && (
+            <LoginButtonWrapper>
+              <PostButton />
             </LoginButtonWrapper>
           )}
           <Outlet />
