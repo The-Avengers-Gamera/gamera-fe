@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { Outlet } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import NavBar from '@/components/NavBar/NavBar';
 import LoginButton from '@/components/LoginButton';
@@ -14,6 +14,7 @@ import DropdownItem from '@/components/NavBar/components/DropdownItem';
 import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 import useAxiosLoading from '@/hooks/useAxiosLoading';
 import NotificationToast from '@/components/NotificationToast/NotificationToast';
+import PostButton from '@/components/PostButton';
 import NavExpandButton from '@/components/NavExpandButton/NavExpandButton';
 
 const PageWrapper = styled.div`
@@ -91,12 +92,20 @@ const Main = styled.main`
 
 const RootLayout = () => {
   const {
-    auth: { isLogin },
+    auth: { isLogin, isEditor },
   } = useAuth();
   const { modalIsOpen, displayLogInPopWindow } = useModal();
   const expendNavMoreRef = useRef<HTMLButtonElement>(null);
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
+  const [postButtonDisplay, setPostButtonDisplay] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setPostButtonDisplay(true);
+    }
+  }, [location]);
   ReactModal.setAppElement('#root');
 
   const [isNavExpanded, setIsNavExpanded] = useState(false); // for mobile
@@ -137,12 +146,16 @@ const RootLayout = () => {
           expendNavMoreRef={expendNavMoreRef}
         />
       </NavWrapper>
-
       <Main>
         <>
           {!isLogin && (
             <LoginButtonWrapper>
               <LoginButton />
+            </LoginButtonWrapper>
+          )}
+          {isLogin && isEditor && postButtonDisplay && (
+            <LoginButtonWrapper>
+              <PostButton setPostButtonDisplay={setPostButtonDisplay} />
             </LoginButtonWrapper>
           )}
           <Outlet />
