@@ -19,9 +19,11 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  margin-bottom: 20px;
 `;
 
 const Main = styled.main`
+  display: inline-block;
   width: 800px;
 `;
 
