@@ -8,6 +8,7 @@ const AddedGameContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 `;
 
 const GameImageContainer = styled.div`
@@ -24,6 +25,7 @@ const Img = styled.img`
 
 const GameContentContainer = styled.div`
   width: 60%;
+  max-width: 60%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -33,28 +35,32 @@ const GameContentContainer = styled.div`
 `;
 
 const GameNameAndGenreContainer = styled.div`
-  width: 100%;
+  max-width: 100%;
   height: 80%;
 `;
 
 const GameNameContainer = styled.div`
-  width: 100%;
-  height: 40%;
+  width: 150px;
+  max-height: 20px;
   font-size: 1.2rem;
   color: #cbcbcb;
   font-weight: 700;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
 `;
 
 const GenreContainer = styled.div`
-  width: 100%;
-  height: 50%;
-  max-height: 1rem;
-  init-height: 0.9rem;
-  font-size: 0.9rem;
+  width: 150px;
+  max-height: 20px;
+  font-size: 15px;
   color: #cbcbcb;
   font-weight: 700;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow-x: auto;
 `;
 
 const PlatformContainer = styled.div`
@@ -67,7 +73,7 @@ const PlatformContainer = styled.div`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
 
 const CloseContainer = styled.div`
