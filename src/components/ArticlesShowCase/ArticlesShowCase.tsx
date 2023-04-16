@@ -75,6 +75,7 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
   const [filters, setFilters] = useState(initFilters);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredArticleList, setFilteredArticleList] = useState<IArticleCard[]>([]);
+  const [isAtTheEnd, setIsAtTheEnd] = useState(false);
 
   const { isLoading, data } = useQuery({
     queryKey: [articleType, filters],
@@ -143,7 +144,14 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
         filteredArticle={filteredArticleList}
       />
       <div className="loadMore-container">
-        <LoadMore setCurrentPage={setCurrentPage} />
+        {!isAtTheEnd && (
+          <LoadMore
+            setCurrentPage={setCurrentPage}
+            currentPage={data?.currentPage ?? 0}
+            totalPages={data?.totalPages ?? 0}
+            setIsAtTheEnd={setIsAtTheEnd}
+          />
+        )}
       </div>
     </Container>
   );
