@@ -1,6 +1,6 @@
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import NavBar from '@/components/NavBar/NavBar';
@@ -90,6 +90,14 @@ const RootLayout = () => {
   const expendNavMoreRef = useRef<HTMLButtonElement>(null);
   const [isMore, setIsMore] = useToggleWhenClickOutside(expendNavMoreRef, false);
   const [isLoading] = useAxiosLoading();
+  const [postButtonDisplay, setPostButtonDisplay] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setPostButtonDisplay(true);
+    }
+  }, [location]);
   ReactModal.setAppElement('#root');
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -146,7 +154,6 @@ const RootLayout = () => {
           expendNavMoreRef={expendNavMoreRef}
         />
       </NavWrapper>
-
       <Main>
         <>
           {!isLogin && (

@@ -25,6 +25,7 @@ const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
   }
 
   if (!hasPermission) {
+    console.log(user?.authorities);
     setToastIsOpen(true);
     setToastContent({
       type: ToastType.ERROR,
