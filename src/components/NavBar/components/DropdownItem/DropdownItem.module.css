@@ -1,6 +1,7 @@
 .container {
   cursor: pointer;
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: 0px;
   margin: 0px;
   z-index: 100;
@@ -9,7 +10,7 @@
 .items {
   position: absolute;
   left: 100px;
-  top: 42.5%;
+  top: 42.5vh;
   padding-top: 5px;
   background-color: #1a1c25;
   width: 125px;
