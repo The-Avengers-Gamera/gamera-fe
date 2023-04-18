@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
+import Skeleton from '@mui/material/Skeleton';
 import ShowCaseBody from './components/ShowCaseBody';
 import SelectionBars from './components/SelectionBars';
 import LoadMore from '@/components/LoadMore';
@@ -71,6 +72,40 @@ const initFilters: IArticleQuery = {
   order: ReviewOrder.DESC,
 };
 
+const FilterBar = styled.div`
+  margin-top: 45px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const SortBy = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+`;
+
+const CardContainer = styled.div`
+  margin-top: 45px;
+  display: flex;
+  flex-wrap: row;
+  padding: 25px 0;
+`;
+
+const ImgContainer = styled.div`
+  width: 250px;
+`;
+
+const SubContainer = styled.div`
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 50%;
+`;
+
+const inLoading = [1, 2, 3, 4, 5, 6, 7, 8];
+
 const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
   const [filters, setFilters] = useState(initFilters);
   const [currentPage, setCurrentPage] = useState(1);
@@ -125,9 +160,59 @@ const ArticlesShowCase = ({ articleType }: ArticleShowCaseProps) => {
     }
   };
 
-  // TODO implement loading component
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Container>
+        <h2>Loading </h2>
+        <FilterBar>
+          <Skeleton
+            variant="rounded"
+            width="50%"
+            height={50}
+          />
+          <SortBy>
+            <Skeleton
+              variant="rounded"
+              width={190}
+              height={50}
+            />
+            <Skeleton
+              variant="rounded"
+              width={190}
+              height={50}
+            />
+          </SortBy>
+        </FilterBar>
+        {inLoading.map(() => (
+          <CardContainer>
+            <ImgContainer>
+              <Skeleton
+                variant="rounded"
+                width={245}
+                height={145}
+              />
+            </ImgContainer>
+            <SubContainer>
+              <Skeleton
+                variant="rectangular"
+                width="50%"
+                height={20}
+              />
+              <Skeleton
+                variant="rectangular"
+                width="15%"
+                height={15}
+              />
+              <Skeleton
+                variant="rectangular"
+                width="70%"
+                height={20}
+              />
+            </SubContainer>
+          </CardContainer>
+        ))}
+      </Container>
+    );
   }
 
   return (

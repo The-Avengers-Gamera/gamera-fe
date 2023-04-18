@@ -4,6 +4,7 @@ export enum SortBarDate {
   // TODO: temporarily disable this sort option, waiting for backend to implement
   // Score = 'Sort by Score',
   Title = 'Sort by Title',
+  Score = 'Score',
 }
 
 export enum SortBarGenre {
