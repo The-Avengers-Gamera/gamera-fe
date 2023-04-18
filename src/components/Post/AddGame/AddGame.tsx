@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 import { IGameCard } from '@/interfaces/game';
@@ -24,10 +24,17 @@ const AddedGameContainer = styled.div`
   margin: 1rem 0;
 `;
 
-export const AddGame = () => {
+interface AddGameProps {
+  setGameId: (id: number) => void;
+}
+export const AddGame = ({ setGameId }: AddGameProps) => {
   const [isAdd, setIsAdd] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentGame, setCurrentGame] = useState<IGameCard>({} as IGameCard);
+
+  useEffect(() => {
+    setGameId(currentGame.id);
+  }, [currentGame.id]);
 
   const changeIsAddAsTrue = () => {
     setIsAdd(true);
