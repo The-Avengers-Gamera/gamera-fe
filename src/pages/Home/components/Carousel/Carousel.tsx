@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import style from './index.module.css';
 import { getPopularReviews } from '@/services/article';
 import { IArticleCard } from '@/interfaces/article';
@@ -6,6 +8,11 @@ import { IArticleCard } from '@/interfaces/article';
 interface ICarouselProps {
   interval?: number;
 }
+
+const Container = styled.div`
+  hight: auto;
+  width: 75vw;
+`;
 
 const Carousel: React.FC<ICarouselProps> = ({ interval = 5000 }) => {
   const [images, setImages] = useState<IArticleCard[]>([]);
@@ -53,12 +60,12 @@ const Carousel: React.FC<ICarouselProps> = ({ interval = 5000 }) => {
   };
 
   return (
-    <div className={style.container}>
+    <Container className={style.container}>
       {isLoading
         ? [msg]
         : images.map((image) => (
-            <div key={image.id}>
-              <a href={image.coverImgUrl}>
+            <Container key={image.id}>
+              <Link to={`/article/${image.id}`}>
                 <img
                   src={image.coverImgUrl}
                   alt={image.title}
@@ -67,19 +74,19 @@ const Carousel: React.FC<ICarouselProps> = ({ interval = 5000 }) => {
                   }}
                   className={style.carouselImg}
                 />
-              </a>
-              <div className={style.contentBackground} />
-              <div
+              </Link>
+              <Container className={style.contentBackground} />
+              <Container
                 className={style.title}
                 style={{
                   opacity: image === currentSlide ? 1 : 0,
                 }}
               >
                 <a href={image.coverImgUrl}>{image.title}</a>
-              </div>
-            </div>
+              </Container>
+            </Container>
           ))}
-      <div className={style.carouselBtnContainer}>
+      <Container className={style.carouselBtnContainer}>
         <button
           type="button"
           className={`${style.carouselBtn} ${style.carouselBtnPrev}`}
@@ -94,8 +101,8 @@ const Carousel: React.FC<ICarouselProps> = ({ interval = 5000 }) => {
         >
           {'>'}
         </button>
-      </div>
-    </div>
+      </Container>
+    </Container>
   );
 };
 
