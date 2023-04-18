@@ -1,7 +1,6 @@
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import styled from 'styled-components';
-import { titleOfCards } from '@/pages/Home/utils/useFont';
 
 const Container = styled.div`
   position: relative;

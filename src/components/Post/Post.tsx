@@ -10,10 +10,11 @@ import TagPicker from './TagPicker';
 import TextEditor from '../TextEditor';
 import ButtonBack from './ButtonBack';
 import { IArticlePost } from '@/interfaces/article';
-import { ArticleType } from '@/constants/article';
+import { ArticlePostType, ArticleType } from '@/constants/article';
 import { createArticle } from '@/services/article';
 import randomImgUrl from '@/utils/randomImgUrl';
-import AddGameButton from './AddGame';
+import AddGame from './AddGame';
+import { ITagSlim } from '@/interfaces/tag';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -100,17 +101,11 @@ const PublishButton = styled(MuiLoadingButton)`
 const Post = () => {
   const navigate = useNavigate();
 
-  const navToArticlePage = (id: number, articleType: ArticleType) => {
-    const type = articleType.toLocaleLowerCase();
-    navigate(`/${type}/${id}`, { replace: true });
-  };
-
   const initialValues: IArticlePost = {
     coverImgUrl: randomImgUrl(800, 400),
     title: '',
     text: '',
-    type: ArticleType.REVIEWS,
-    commentList: [],
+    type: ArticlePostType.REVIEW,
     tagList: [],
   };
 
@@ -120,24 +115,28 @@ const Post = () => {
       setSubmitting(true);
       try {
         const {
-          data: { id, type },
-        } = await createArticle(article);
-        navToArticlePage(id, type);
+          data: { id },
+        } = await createArticle(ArticleType.REVIEWS, article);
+        navigate(`/article/${id}`, { replace: true });
       } catch (error) {
         // TODO error notification
       }
     },
   });
 
-  const setFormTagList = (tagList) => {
+  const setFormTagList = (tagList: ITagSlim[]) => {
     formik.setFieldValue('tagList', tagList);
+  };
+
+  const handleGameSelect = (gameId: number) => {
+    formik.setFieldValue('gameId', gameId);
   };
 
   return (
     <PageWrapper>
       <Main>
         <ButtonBack />
-        <AddGameButton />
+        <AddGame setGameId={handleGameSelect} />
         <FormWrapper>
           <form onSubmit={formik.handleSubmit}>
             <Header>
