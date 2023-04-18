@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import RegisterForm from './component/RegisterForm';
 import useModal from '@/context/loginModal';
-import EmailVerify from '../VerifyMessage';
 
 const ModalContainer = styled.div`
   width: 30rem;

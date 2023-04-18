@@ -5,8 +5,10 @@ import { IArticleQuery } from '@/interfaces/search';
 import { IPage } from '@/interfaces/page';
 import { ArticleType, Platform, ReviewOrder, ReviewSort } from '@/constants/article';
 
-export const createArticle = async (article: IArticlePost): Promise<AxiosResponse<IArticle>> =>
-  apiClient.post('/articles', article);
+export const createArticle = async (
+  articleType: ArticleType,
+  article: IArticlePost
+): Promise<AxiosResponse<IArticle>> => apiClient.post(`/${articleType}`, article);
 
 export const updateArticleById = async (
   articlePut: IArticlePut,

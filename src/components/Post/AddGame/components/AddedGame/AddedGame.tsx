@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { IGame, IGameCard } from '@/interfaces/game';
+import { IGameCard } from '@/interfaces/game';
 
 const AddedGameContainer = styled.div`
   border-radius: 15px;
@@ -96,7 +96,7 @@ const CloseButton = styled.button`
 type Props = {
   useWindowStyle: boolean;
   CurrentGame: IGameCard;
-  changeIsAddAsClose: () => void;
+  changeIsAddAsClose?: () => void;
 };
 
 export const AddedGame = ({ useWindowStyle, CurrentGame, changeIsAddAsClose }: Props) => {

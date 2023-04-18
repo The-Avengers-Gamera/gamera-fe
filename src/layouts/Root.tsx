@@ -20,7 +20,6 @@ import PostButton from '@/components/PostButton/PostButton';
 const PageWrapper = styled.div`
   display: flex;
   height: 100%;
-  overflow-y: scroll;
 `;
 
 const LoadingWrapper = styled.div`
