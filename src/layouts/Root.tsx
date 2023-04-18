@@ -14,8 +14,8 @@ import DropdownItem from '@/components/NavBar/components/DropdownItem';
 import { useToggleWhenClickOutside } from '@/hooks/useToggleWhenClickOutside';
 import useAxiosLoading from '@/hooks/useAxiosLoading';
 import NotificationToast from '@/components/NotificationToast/NotificationToast';
-import PostButton from '@/components/PostButton';
 import NavExpandButton from '@/components/NavExpandButton/NavExpandButton';
+import PostButton from '@/components/PostButton/PostButton';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -153,9 +153,9 @@ const RootLayout = () => {
               <LoginButton />
             </LoginButtonWrapper>
           )}
-          {isLogin && isEditor && postButtonDisplay && (
+          {isEditor && (
             <LoginButtonWrapper>
-              <PostButton setPostButtonDisplay={setPostButtonDisplay} />
+              <PostButton />
             </LoginButtonWrapper>
           )}
           <Outlet />
