@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ICurrentGame, IGame, IGameCard } from '@/interfaces/game';
+import { IGameCard } from '@/interfaces/game';
 import AddedGame from '../../../AddedGame';
 
 const AddGameItemContainer = styled.div`

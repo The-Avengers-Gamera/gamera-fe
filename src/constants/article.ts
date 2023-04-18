@@ -3,6 +3,11 @@ export enum ArticleType {
   REVIEWS = 'reviews',
 }
 
+export enum ArticlePostType {
+  NEWS = 'NEWS',
+  REVIEW = 'REVIEW',
+}
+
 export enum Platform {
   All = 'all',
   PlayStation = 'playstation',

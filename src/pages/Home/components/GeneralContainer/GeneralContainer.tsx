@@ -1,5 +1,4 @@
 import { Divider, Box, Grid } from '@mui/material';
-
 import React from 'react';
 import style from './index.module.css';
 import theme from '@/styles/theme';
