@@ -129,6 +129,10 @@ const Post = () => {
     },
   });
 
+  const setFormTagList = (tagList) => {
+    formik.setFieldValue('tagList', tagList);
+  };
+
   return (
     <PageWrapper>
       <Main>
@@ -147,7 +151,7 @@ const Post = () => {
                 onChange={formik.handleChange}
                 value={formik.values.title}
               />
-              <TagPicker />
+              <TagPicker setFormTagList={setFormTagList} />
             </Header>
             <TextEditor
               value={formik.values.text}
