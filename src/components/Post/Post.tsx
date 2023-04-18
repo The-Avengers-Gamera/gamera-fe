@@ -19,9 +19,11 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  margin-bottom: 20px;
 `;
 
 const Main = styled.main`
+  display: inline-block;
   width: 800px;
 `;
 
@@ -127,6 +129,10 @@ const Post = () => {
     },
   });
 
+  const setFormTagList = (tagList) => {
+    formik.setFieldValue('tagList', tagList);
+  };
+
   return (
     <PageWrapper>
       <Main>
@@ -145,7 +151,7 @@ const Post = () => {
                 onChange={formik.handleChange}
                 value={formik.values.title}
               />
-              <TagPicker />
+              <TagPicker setFormTagList={setFormTagList} />
             </Header>
             <TextEditor
               value={formik.values.text}
