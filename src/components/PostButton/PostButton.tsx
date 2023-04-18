@@ -1,10 +1,13 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import React from 'react';
-import useModal from '@/context/loginModal';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+const Container = styled.div`
+  border: 1px solid black;
+  height: 100%;
+  width: 100%;
+`;
 const Button = styled.button`
-  border: none;
+  border: 1px solid black;
   height: 100%;
   width: 100%;
   display: block;
@@ -13,25 +16,32 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
   font-family: Poppins;
-  font-size: 1rem;
 `;
 
-const PostButton = ({
-  setPostButtonDisplay,
-}: {
-  setPostButtonDisplay: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const PostButton = () => {
+  const location = useLocation();
+  const isPost = () => {
+    if (location.pathname === '/post') {
+      return true;
+    }
+    return false;
+  };
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/post', { replace: true });
+  };
+
   return (
-    <Link to="/post">
-      <Button
-        type="button"
-        onClick={() => {
-          setPostButtonDisplay(false);
-        }}
-      >
-        Post
-      </Button>
-    </Link>
+    <Container>
+      {!isPost() && (
+        <Button
+          type="button"
+          onClick={() => handleClick()}
+        >
+          POST
+        </Button>
+      )}
+    </Container>
   );
 };
 

@@ -19,7 +19,7 @@ const Button = styled.button`
 interface NavExpandButtonProps {
   isNavExpanded: boolean;
   setIsNavExpanded: (isNavExpanded: boolean) => void;
-  expendNavMoreRef: React.RefObject<HTMLDivElement>;
+  expendNavMoreRef: React.RefObject<HTMLButtonElement>;
 }
 
 const NavExpandButton = ({
