@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import { IArticleCard } from '@/interfaces/article';
-import { IPage } from '@/interfaces/page';
 
 const Container = styled.div`
   margin-top: 1rem;

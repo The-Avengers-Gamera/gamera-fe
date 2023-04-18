@@ -1,4 +1,4 @@
-import { EArticleType } from '@/constants/article';
+import { EArticleType, EArticlePostType } from '@/constants/article';
 import { IGame } from './game';
 import { IUser } from './user';
 import { ITagSlim } from './tag';
@@ -26,7 +26,15 @@ export interface IArticlePut {
 
 export interface IArticleMini extends Omit<IArticle, 'game' | 'user'> {}
 
-export interface IArticlePost extends Omit<IArticle, 'id' | 'createdTime' | 'updatedTime'> {}
+export interface IArticlePost
+  extends Omit<
+    IArticle,
+    'id' | 'game' | 'likeNum' | 'commentNum' | 'commentList' | 'createdTime' | 'updatedTime'
+  > {
+  gameId?: number;
+  type: EArticlePostType;
+  coverImgUrl?: string;
+}
 
 export interface IArticleCard {
   id: number;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, Navigate } from 'react-router-dom';
 import { updateUserVerify } from '@/services/user';
 
 const EmailVerifyContainer = styled.form`
@@ -25,7 +25,6 @@ const InfoContainer = styled.div`
 `;
 
 const VerifyResult = () => {
-  const navigate = useNavigate();
   const [result, setResult] = useState('');
   const [message, setMessage] = useState('');
   const [queryParameters] = useSearchParams();
@@ -51,7 +50,12 @@ const VerifyResult = () => {
   }, []);
 
   if (!token) {
-    return navigate('/', { replace: true });
+    return (
+      <Navigate
+        to="/"
+        replace
+      />
+    );
   }
 
   return (
