@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { convertToYYYYMMDD } from '@/utils/time';
+import { ArticleESearchResult } from '@/interfaces/search';
 
 const Item = styled.div`
   display: flex;
@@ -40,12 +42,11 @@ const Divider = styled.div`
 `;
 
 interface ListItemProps {
-  id: number;
-  title: string;
-  date: string;
+  article: ArticleESearchResult;
   onModalClose: () => void;
 }
-const ListItem = ({ id, title, date, onModalClose }: ListItemProps) => {
+const ListItem = ({ article, onModalClose }: ListItemProps) => {
+  const { id, title, coverImgUrl, updatedTime } = article;
   const [isHoverCard, setIsHoverCard] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -61,10 +62,10 @@ const ListItem = ({ id, title, date, onModalClose }: ListItemProps) => {
         onClick={handleClick}
       >
         <Item>
-          <Img src="https://assets-prd.ignimgs.com/2022/12/29/framingreal-1672331744686.jpg?width=96&crop=1%3A1%2Csmart" />
+          <Img src={coverImgUrl} />
           <Content isHoverCard={isHoverCard}>
             <h2>{title}</h2>
-            <Date>{date}</Date>
+            <Date>{convertToYYYYMMDD(updatedTime)}</Date>
           </Content>
         </Item>
       </Link>

@@ -11,3 +11,14 @@ export interface IArticleQuery {
   sort?: ReviewSort;
   order?: ReviewOrder;
 }
+
+export interface ArticleESearchResult {
+  id: string;
+  gameName: string;
+  authorName: string;
+  coverImgUrl: string;
+  title: string;
+  subtitle: string;
+  type: string;
+  updatedTime: string;
+}

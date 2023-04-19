@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import debounce from 'lodash/debounce';
 import SearchRoundedIcon from '@mui/icons-material/SearchOutlined';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import useLockScroll from '@/hooks/useLockScroll';
 import Input from './components/Input';
 import ResultDropDown from './components/ResultDropDown';
+import { searchArticleByKeyword } from '@/services/search';
+import { ArticleESearchResult } from '@/interfaces/search';
 
 const SearchWindow = styled.div`
   width: 500px;
@@ -24,7 +27,7 @@ const SearchTitle = styled.div`
   align-items: center;
 
   h2 {
-    font-size: 12px;
+    font-size: 18px;
   }
 `;
 
@@ -69,11 +72,19 @@ interface SearchDialogProps {
 const SearchDialog = ({ onModalClose }: SearchDialogProps) => {
   useLockScroll();
 
-  const [search, setSearch] = useState<string>('');
+  const [searchText, setSearchText] = useState<string>('');
+  const [articleResults, setArticleResults] = useState<ArticleESearchResult[]>([]);
+
+  const fetchData = async (keyword: string) => {
+    const { data } = await searchArticleByKeyword(keyword);
+    setArticleResults(data || []);
+  };
+
+  const debouncedFetchData = useCallback(debounce(fetchData, 800), []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // TODO: use debounce later to prevent too many requests
-    setSearch(e.target.value);
+    setSearchText(e.target.value);
+    debouncedFetchData(e.target.value);
   };
 
   return (
@@ -93,12 +104,15 @@ const SearchDialog = ({ onModalClose }: SearchDialogProps) => {
         <Input
           type="text"
           placeholder="Search Articles"
-          value={search}
+          value={searchText}
           onChange={handleChange}
         />
       </SearchWrapper>
       <ResultWrapper>
-        <ResultDropDown onModalClose={onModalClose} />
+        <ResultDropDown
+          articleResult={articleResults}
+          onModalClose={onModalClose}
+        />
       </ResultWrapper>
     </SearchWindow>
   );
