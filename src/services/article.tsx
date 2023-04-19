@@ -10,6 +10,9 @@ export const createArticle = async (
   article: IArticlePost
 ): Promise<AxiosResponse<IArticle>> => apiClient.post(`/${articleType}`, article);
 
+export const createReviewByChatGPT = async (gameId: number): Promise<AxiosResponse> =>
+  apiClient.post(`/reviews/chat-gpt/${gameId}`);
+
 export const updateArticleById = async (
   articlePut: IArticlePut,
   id: number

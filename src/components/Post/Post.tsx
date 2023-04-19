@@ -105,6 +105,7 @@ const Post = () => {
     coverImgUrl: randomImgUrl(800, 400),
     title: '',
     text: '',
+    gameId: 0,
     type: ArticlePostType.REVIEW,
     tagList: [],
   };
@@ -174,7 +175,7 @@ const Post = () => {
         </FormWrapper>
       </Main>
       <Side>
-        <SideInfo />
+        <SideInfo gameId={formik.values.gameId} />
       </Side>
     </PageWrapper>
   );

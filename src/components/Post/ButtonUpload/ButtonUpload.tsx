@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const MainContainer = styled.div`
   width: 100%;
-  hight: 100%;
+  height: 100%;
 `;
 
 const Container = styled.div`

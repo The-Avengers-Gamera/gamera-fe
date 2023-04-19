@@ -50,7 +50,7 @@ const routes: RouteObject[] = [
         children: [{ path: ':type', element: <Post /> }],
       },
       {
-        path: '/account',
+        path: '/profile',
         element: <UserProfile />,
         children: [
           {
