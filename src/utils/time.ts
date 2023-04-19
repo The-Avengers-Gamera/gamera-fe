@@ -9,3 +9,7 @@ export const nowToCreated = (createdTime: string | undefined) => {
   }
   return dayjs().to(createdTime);
 };
+
+export const convertToYYYYMMDD = (date: string) => {
+  return dayjs(date).format('YYYY-MM-DD');
+};

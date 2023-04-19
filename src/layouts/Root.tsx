@@ -24,7 +24,7 @@ const PageWrapper = styled.div`
 
 const LoadingWrapper = styled.div`
   width: 100%;
-  z-index: 1210;
+  z-index: 99999;
   position: absolute;
   top: 0;
   left: 0;
