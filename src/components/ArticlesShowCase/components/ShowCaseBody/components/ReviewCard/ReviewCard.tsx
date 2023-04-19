@@ -135,11 +135,13 @@ const ReviewCard = ({
   return (
     <OuterContainer>
       <div className="news-card">
-        <img
-          src={coverImgUrl}
-          alt="news cover"
-          className="left"
-        />
+        <div>
+          <img
+            src={coverImgUrl}
+            alt="news cover"
+            className="left"
+          />
+        </div>
         <div className="right">
           <h3 className="title">{title}</h3>
           <p className="date-description">

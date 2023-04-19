@@ -175,6 +175,11 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
     setModalIsOpen(false);
   };
 
+  const handleClickMyProfile = () => {
+    setAnchorEl(null);
+    navigate('/profile');
+  };
+
   return (
     <>
       <SearchModal
@@ -324,7 +329,7 @@ const NavBar = ({ setIsMore, expendNavMoreRef }: NavBarProps) => {
       >
         <MenuItem
           className={style.menuItem}
-          onClick={handleClose}
+          onClick={handleClickMyProfile}
         >
           MY PROFILE
         </MenuItem>
