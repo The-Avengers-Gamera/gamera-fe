@@ -128,8 +128,9 @@ const Post = () => {
     formik.setFieldValue('tagList', tagList);
   };
 
-  const handleGameSelect = (gameId: number) => {
+  const handleGameSelect = (gameId: number, gameImgUrl: string) => {
     formik.setFieldValue('gameId', gameId);
+    formik.setFieldValue('coverImgUrl', gameImgUrl);
   };
 
   return (
