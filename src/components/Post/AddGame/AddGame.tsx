@@ -25,7 +25,7 @@ const AddedGameContainer = styled.div`
 `;
 
 interface AddGameProps {
-  setGameId: (id: number) => void;
+  setGameId: (id: number, gameImgUrl: string) => void;
 }
 export const AddGame = ({ setGameId }: AddGameProps) => {
   const [isAdd, setIsAdd] = useState(false);
@@ -33,7 +33,7 @@ export const AddGame = ({ setGameId }: AddGameProps) => {
   const [currentGame, setCurrentGame] = useState<IGameCard>({} as IGameCard);
 
   useEffect(() => {
-    setGameId(currentGame.id);
+    setGameId(currentGame.id, currentGame.imgUrl);
   }, [currentGame.id]);
 
   const changeIsAddAsTrue = () => {
