@@ -13,9 +13,8 @@ jobs:
     env: 
        REGION: 'ap-southeast-2'
        CI: ${{ false }}
-       CLOUDFRONT_DISTRIBUTION_ID: 'E305T72Z83UKVA'
-
-        
+       VITE_BASE_URL: ${{ vars.VITE_BASE_URL }}
+   
 
     steps:
       - name: Checkout code
@@ -23,7 +22,11 @@ jobs:
       
       - name: variable test
         run: |
-          echo "env Vit is: ${{vars.VITE_BASE_URL}}"
+          echo "env Vit is: ${{env.VITE_BASE_URL}}"
+          echo "vars Vit is: ${{vars.VITE_BASE_URL}}"
+          echo "vars Vit is: ${{vars.CLOUDFRONT_DISTRIBUTION_ID}}"
+          
+          
           
 #       - name: Install dependencies
 #         run: yarn install
@@ -45,5 +48,5 @@ jobs:
 #         run: aws s3 sync build/ s3://gamera-fe --delete
         
 #       - name: Validate CDN
-#         run: aws cloudfront create-invalidation --distribution-id ${{env.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
+#         run: aws cloudfront create-invalidation --distribution-id ${{vars.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
  
