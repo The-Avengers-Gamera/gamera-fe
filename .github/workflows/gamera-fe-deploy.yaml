@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
        REGION: 'ap-southeast-2'
+       CI: ${{ false }}
         
 
     steps:
