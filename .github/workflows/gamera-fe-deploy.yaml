@@ -14,7 +14,7 @@ jobs:
        REGION: 'ap-southeast-2'
        CI: ${{ false }}
        CLOUDFRONT_DISTRIBUTION_ID: 'E305T72Z83UKVA'
-       VITE_BASE_URL: ${{ param.VITE_BASE_URL }}
+
         
 
     steps:
@@ -23,7 +23,6 @@ jobs:
       
       - name: variable test
         run: |
-          echo "VITE_BASE_URL is: ${{ param.VITE_BASE_URL }}"
           echo "env Vit is: ${{env.VITE_BASE_URL}}"
           
 #       - name: Install dependencies
