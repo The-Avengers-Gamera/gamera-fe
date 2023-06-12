@@ -23,7 +23,7 @@ jobs:
       
       - name: variable test
         run: |
-          echo "env Vit is: ${{env.VITE_BASE_URL}}"
+          echo "env Vit is: ${{vars.VITE_BASE_URL}}"
           
 #       - name: Install dependencies
 #         run: yarn install
