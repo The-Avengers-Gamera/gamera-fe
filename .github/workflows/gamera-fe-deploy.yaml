@@ -3,6 +3,9 @@ name: gamera-fe Build and Deploy
 on:
   push:
     branches: ['main']
+    
+  pull_request:
+    branches: ['main']
 
 jobs:
   Build_and_Deploy:
@@ -11,31 +14,37 @@ jobs:
        REGION: 'ap-southeast-2'
        CI: ${{ false }}
        CLOUDFRONT_DISTRIBUTION_ID: 'E305T72Z83UKVA'
+       VITE_BASE_URL: ${{ param.VITE_BASE_URL }}
         
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
+      - name: variable test
+        run: |
+          echo "VITE_BASE_URL is: ${{ param.VITE_BASE_URL }}"
+          echo "env Vit is: ${{env.VITE_BASE_URL}}"
+          
+#       - name: Install dependencies
+#         run: yarn install
 
-      - name: Install dependencies
-        run: yarn install
+#       - name: Build
+#         run: yarn run build
 
-      - name: Build
-        run: yarn run build
+#       - name: Configure AWS Credentials For GitHub Actions
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           # AWS Access Key ID. 
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           # AWS Secret Access Key.
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           # AWS Region
+#           aws-region: ${{ env.REGION }}
 
-      - name: Configure AWS Credentials For GitHub Actions
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          # AWS Access Key ID. 
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          # AWS Secret Access Key.
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # AWS Region
-          aws-region: ${{ env.REGION }}
-
-      - name: Deploy to S3
-        run: aws s3 sync build/ s3://gamera-fe --delete
+#       - name: Deploy to S3
+#         run: aws s3 sync build/ s3://gamera-fe --delete
         
-      - name: Validate CDN
-        run: aws cloudfront create-invalidation --distribution-id ${{env.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
+#       - name: Validate CDN
+#         run: aws cloudfront create-invalidation --distribution-id ${{env.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
  
