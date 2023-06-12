@@ -5,11 +5,12 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  Build_and_Deploy:
     runs-on: ubuntu-latest
     env: 
        REGION: 'ap-southeast-2'
        CI: ${{ false }}
+       CLOUDFRONT_DISTRIBUTION_ID: 'E305T72Z83UKVA'
         
 
     steps:
@@ -34,3 +35,7 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync build/ s3://gamera-fe --delete
+        
+      - name: Validate CDN
+        run: aws cloudfront create-invalidation --distribution-id ${{env.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
+ 
