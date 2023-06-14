@@ -41,7 +41,7 @@ jobs:
           aws-region: ${{ env.REGION }}
 
       - name: Deploy to S3
-        run: aws s3 sync build/ s3://gamera-fe --delete
+        run: aws s3 sync build/ s3://${{ vars.S3_STATIC_WEB_HOST }} --delete
         
       - name: Validate CDN
         run: aws cloudfront create-invalidation --distribution-id ${{vars.CLOUDFRONT_DISTRIBUTION_ID}} --paths '/*'
